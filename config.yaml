@@ -25,3 +25,69 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: world-models
+      description: 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: world model tokenizer
+          keyword_cn: ''
+          query: world model tokenizer
+        - keyword: motion tokenization
+          keyword_cn: ''
+          query: motion tokenization
+        - keyword: driving world model
+          keyword_cn: ''
+          query: driving world model
+        - keyword: world model
+          keyword_cn: 世界模型
+          query: world model for autonomous driving and traffic simulation
+        - keyword: latent dynamics model
+          keyword_cn: 潜在动力学模型
+          query: latent dynamics models for predicting future states
+        - keyword: discrete representation
+          keyword_cn: 离散表示
+          query: discrete latent representations using VQ-VAE and related methods
+      intent_queries:
+        - query: >-
+            Predicting future driving scene states in discrete token or latent space using autoregressive transformers
+            or latent dynamics models
+          query_cn: ''
+          enabled: true
+          source: manual
+          note: ''
+        - query: Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling
+          query_cn: ''
+          enabled: true
+          source: manual
+          note: ''
+        - query: learning compact latent or token representations for predicting future driving scenes
+          query_cn: 学习用于预测未来驾驶场景的紧凑潜在或标记表示
+          enabled: true
+          source: manual
+          note: ''
+        - query: >-
+            representation learning for traffic agents that supports multiple downstream tasks like forecasting and
+            planning
+          query_cn: 支持预测和规划等多个下游任务的交通智能体表示学习
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-09-09T04:07:09.552Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
