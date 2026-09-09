@@ -32,15 +32,6 @@ subscriptions:
       paper_sources:
         - arxiv
       keywords:
-        - keyword: world model tokenizer
-          keyword_cn: ''
-          query: world model tokenizer
-        - keyword: motion tokenization
-          keyword_cn: ''
-          query: motion tokenization
-        - keyword: driving world model
-          keyword_cn: ''
-          query: driving world model
         - keyword: world model
           keyword_cn: 世界模型
           query: world model for autonomous driving and traffic simulation
@@ -51,18 +42,6 @@ subscriptions:
           keyword_cn: 离散表示
           query: discrete latent representations using VQ-VAE and related methods
       intent_queries:
-        - query: >-
-            Predicting future driving scene states in discrete token or latent space using autoregressive transformers
-            or latent dynamics models
-          query_cn: ''
-          enabled: true
-          source: manual
-          note: ''
-        - query: Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling
-          query_cn: ''
-          enabled: true
-          source: manual
-          note: ''
         - query: learning compact latent or token representations for predicting future driving scenes
           query_cn: 学习用于预测未来驾驶场景的紧凑潜在或标记表示
           enabled: true
@@ -75,7 +54,7 @@ subscriptions:
           enabled: true
           source: manual
           note: ''
-      updated_at: '2026-09-09T04:07:09.552Z'
+      updated_at: '2026-09-09T04:08:24.084Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
