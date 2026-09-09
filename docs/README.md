@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-11 ~ 2026-09-09</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-09</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 26 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>26</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 04:31:24 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 21:46:23 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日速读26篇论文，覆盖自动驾驶、4D占用预测与3D高斯世界模型，暂无精读。</p>
-<p>最值得关注的是《BrainWAM》与《Geometry-Aware Spatio-Temporal》两篇，分别在驾驶决策协同和时空上下文建模上获得9.0高分。</p>
-<p>若想快速入门，建议先看《GaussianDWM++》——它用语言引导3D场景理解与生成，直观展示多模态驾驶世界模型能力。</p>
+<p>今日共筛选17篇论文，精读6篇、速读11篇，重点聚焦世界模型与多模态生成。</p>
+<p>最值得关注的是精读高分《PV-WM》与《Hi-FLoop》，分别解决行人-车辆协同推演和跨时间尺度状态反馈建模，速读中《SeRV》的手语生成与《WorldAgen》的测试时训练也具启发性。</p>
+<p>建议普通读者优先浏览《PV-WM》和《Hi-FLoop》，若对视觉语言交叉感兴趣可补充《SeRV》。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -80,12 +80,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">0 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="PV-WM: A Heterogeneous Micro-Macro World Model for Articulated Pedestrian-Vehicle Co-Rollout">PV-WM: A Heterogeneous Micro-Macro World Model for Articulated Pedestrian-Vehicle Co-Rollout</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling">Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers">AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers</span></li></ul>
   </div>
-
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -93,12 +93,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">26 篇</strong>
+    <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="BrainWAM: Action-Space Coordination of Semantic Priors and Predictive Dynamics for Autonomous Driving">BrainWAM: Action-Space Coordination of Semantic Priors and Predictive Dynamics for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Geometry-Aware Spatio-Temporal Context Modeling for 4D Occupancy Forecasting">Geometry-Aware Spatio-Temporal Context Modeling for 4D Occupancy Forecasting</span></li><li><span class="dpr-home-dashboard-paper-title" title="GaussianDWM++: Language-Grounded 3D Gaussian Driving World Model for Unified Scene Understanding, Editing, and Multi-Modal Generation">GaussianDWM++: Language-Grounded 3D Gaussian Driving World Model for Unified Scene Understanding, Editing, and Multi-Modal Generation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SeRV: Semantic-Aligned Residual Vector Quantization for American Sign Language Generation">SeRV: Semantic-Aligned Residual Vector Quantization for American Sign Language Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="WorldAgen: Unified State-Action Prediction with Test-Time World Model Training">WorldAgen: Unified State-Action Prediction with Test-Time World Model Training</span></li><li><span class="dpr-home-dashboard-paper-title" title="Towards a Belief-Based World Model for LLM Agents">Towards a Belief-Based World Model for LLM Agents</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>26</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span></div>
 </section>
 </div>
 

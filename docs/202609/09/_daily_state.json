@@ -1,0 +1,281 @@
+{
+  "date": "20260909",
+  "date_label": "",
+  "generated_at": "2026-09-09 21:46:23 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.07328v1",
+      "route": "202609/09/2609.07328v1-pv-wm-a-heterogeneous-micro-macro-world-model-for-articulated-pedestrian-vehicle-co-rollout",
+      "title": "PV-WM: A Heterogeneous Micro-Macro World Model for Articulated Pedestrian-Vehicle Co-Rollout",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向行人与车辆联合演进的世界模型，属自动驾驶交通场景预测性世界建模",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.08796v1",
+      "route": "202609/09/2609.08796v1-hi-floop-hierarchical-state-feedback-loops-for-multi-timescale-world-modeling",
+      "title": "Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长时程多智能体交通仿真的层级状态反馈世界建模框架",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.02339v1",
+      "route": "202609/09/2609.02339v1-agi-maze-prediction-datasets-a-compact-benchmark-for-learning-world-dynamics-with-transformers",
+      "title": "AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提供基于Transformer学习动作条件世界动力学与未来状态预测的受控基准，直接服务于世界模型未来状态学习",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.02531v1",
+      "route": "202609/09/2609.02531v1-spatially-aware-world-action-model-via-geometric-latent-diffusion",
+      "title": "Spatially Aware World Action Model via Geometric Latent Diffusion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向机器人的视频世界动作模型，用几何潜在扩散联合预测未来观测与动作",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.04264v2",
+      "route": "202609/09/2609.04264v2-spectral-target-physical-latent-structuring-for-jepa-style-world-models",
+      "title": "Spectral-Target Physical Latent Structuring for JEPA-Style World Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "潜世界模型中的物理潜结构引导，支持未来规划",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.04348v1",
+      "route": "202609/09/2609.04348v1-object-concepts-emerge-from-motion",
+      "title": "Object Concepts Emerge from Motion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用7千小时驾驶与网页视频中的运动分组自监督学习目标级实例表示，可用于交通参与者和场景表示学习",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.05742v1",
+      "route": "202609/09/2609.05742v1-serv-semantic-aligned-residual-vector-quantization-for-american-sign-language-generation",
+      "title": "SeRV: Semantic-Aligned Residual Vector Quantization for American Sign Language Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向语言到动作生成的语义对齐残差量化运动tokenizer",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.08162v1",
+      "route": "202609/09/2609.08162v1-worldagen-unified-state-action-prediction-with-test-time-world-model-training",
+      "title": "WorldAgen: Unified State-Action Prediction with Test-Time World Model Training",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "可学习的未来状态预测世界模型头并带测试时训练",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.00455v1",
+      "route": "202609/09/2609.00455v1-towards-a-belief-based-world-model-for-llm-agents",
+      "title": "Towards a Belief-Based World Model for LLM Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出面向LLM智能体的信念型世界模型，建模部分可观测下的状态不确定性；属于世界模型方法",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.02811v1",
+      "route": "202609/09/2609.02811v1-do-better-imagined-rollouts-mean-better-robot-control-a-controlled-study-of-world-model-evaluation-under-feedback",
+      "title": "Do Better Imagined Rollouts Mean Better Robot Control? A Controlled Study of World-Model Evaluation Under Feedback",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "预测性世界模型在机器人闭环控制下的评估方法研究，属于世界模型相邻工作",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.03774v1",
+      "route": "202609/09/2609.03774v1-rethinking-world-models-for-safety-critical-embodied-systems",
+      "title": "Rethinking World Models for Safety-Critical Embodied Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向安全关键具身系统的世界模型反思并提出风险知情世界模型，与驾驶世界模型设计相关",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.06578v1",
+      "route": "202609/09/2609.06578v1-learning-to-use-imagination-progress-conditioned-future-utilization-for-world-action-models",
+      "title": "Learning to Use Imagination: Progress-Conditioned Future Utilization for World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在世界动作模型中按进度自适应利用想象未来潜变量，改进未来状态对动作生成的引导",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.07206v1",
+      "route": "202609/09/2609.07206v1-refine-trajectory-representation-learning-via-closed-loop-transcription----extended-version",
+      "title": "REFINE: Trajectory Representation Learning via Closed-Loop Transcription -- Extended Version",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "感知道路网络的闭环轨迹表示学习",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.02159v1",
+      "route": "202609/09/2609.02159v1-world-coherent-decoding-self-verifying-test-time-planning-for-world-action-models",
+      "title": "World-Coherent Decoding: Self-Verifying Test-Time Planning for World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "世界动作模型的自验证测试时规划",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.02270v1",
+      "route": "202609/09/2609.02270v1-crashdiffuser-vlm-guided-collision-intent-reasoning-for-fine-grained-safety-critical-traffic-scenario-generation",
+      "title": "CrashDiffuser: VLM-Guided Collision Intent Reasoning for Fine-Grained Safety-Critical Traffic Scenario Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶评估的安全关键交通场景生成",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.04364v1",
+      "route": "202609/09/2609.04364v1-scalable-edge-assisted-fusion-and-path-prediction-for-connected-autonomous-vehicles",
+      "title": "Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "边缘构建统一世界模型并预测AV未来路径，契合车路自动驾驶世界模型",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    },
+    {
+      "paper_id": "2609.04383v1",
+      "route": "202609/09/2609.04383v1-what-moves-localized-motion-representations-for-compositional-scene-control",
+      "title": "What Moves? Localized Motion Representations for Compositional Scene Control",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向指定空间区域的局部运动表征，可支持实体级运动建模，与运动 token 化目标相关。",
+      "first_seen_at": "2026-09-09 21:46:23 UTC",
+      "updated_at": "2026-09-09 21:46:23 UTC"
+    }
+  ]
+}
