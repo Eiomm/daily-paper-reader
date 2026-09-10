@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-01 ~ 2026-09-10</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-10</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 12 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-10 03:05:42 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-10 22:12:43 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>9月1日至10日共筛出17篇自动驾驶论文，其中6篇精读、11篇速读，重点集中在世界模型与扩散模型两条线。最值得看的是两篇9.0分世界模型工作（多风格端到端驾驶、动态潜变量分层引导），以及8.0分的扩散模型同时做轨迹规划与安全场景生成。普通读者可先读精读两篇建立世界模型直觉，再按兴趣挑速读里的评估框架或因果数据集。</p>
+<p>2026-09-10 日报：今天速读 12 篇论文，精读 0 篇，重点集中在世界动作模型与自动驾驶规划评估。</p>
+<p>最值得看的是世界动作模型方向的两篇同分（7.0/10）工作，分别聚焦自验证测试时规划与几何潜扩散的空间感知；另有一篇 7.0/10 的迁移式评估框架，关注未来感知自动驾驶规划器。</p>
+<p>普通读者可先从这两篇世界动作模型论文入手，理解“规划+空间建模”如何结合，再借助那篇评估框架了解自动驾驶规划器怎么被更真实地检验。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +80,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Long-Horizon Consistent and Interaction-Aware World Models for Multi-Style End-to-End Driving">Long-Horizon Consistent and Interaction-Aware World Models for Multi-Style End-to-End Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Drive-HWM: Hierarchical World Models for Dynamic-Latent Guided Autonomous Driving">Drive-HWM: Hierarchical World Models for Dynamic-Latent Guided Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving">SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>4</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>2</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -91,12 +93,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">11 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners">From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners</span></li><li><span class="dpr-home-dashboard-paper-title" title="One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation">One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving">CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="World-Coherent Decoding: Self-Verifying Test-Time Planning for World Action Models">World-Coherent Decoding: Self-Verifying Test-Time Planning for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Spatially Aware World Action Model via Geometric Latent Diffusion">Spatially Aware World Action Model via Geometric Latent Diffusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners">From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>1</strong></span></div>
 </section>
 </div>
 

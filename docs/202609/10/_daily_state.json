@@ -1,0 +1,201 @@
+{
+  "date": "20260910",
+  "date_label": "",
+  "generated_at": "2026-09-10 22:12:43 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.02159v1",
+      "route": "202609/10/2609.02159v1-world-coherent-decoding-self-verifying-test-time-planning-for-world-action-models",
+      "title": "World-Coherent Decoding: Self-Verifying Test-Time Planning for World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于世界模型随机推演的自验证测试时规划",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.02531v1",
+      "route": "202609/10/2609.02531v1-spatially-aware-world-action-model-via-geometric-latent-diffusion",
+      "title": "Spatially Aware World Action Model via Geometric Latent Diffusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "联合预测未来观测与动作的三维感知世界动作模型",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.02688v1",
+      "route": "202609/10/2609.02688v1-from-proxy-learning-to-driving-decisions-a-transfer-based-framework-for-evaluating-future-aware-autonomous-driving-planners",
+      "title": "From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "评估驾驶规划器中的未来感知表征与世界模型",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.03927v1",
+      "route": "202609/10/2609.03927v1-toward-unified-robot-learning-bridging-representation-vision-language-action-and-world-models",
+      "title": "Toward Unified Robot Learning: Bridging Representation, Vision-Language-Action, and World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "统一表示学习、VLA与世界模型的机器人学习综述",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.05834v1",
+      "route": "202609/10/2609.05834v1-learning-counterfactual-world-models-for-embodied-reasoning-under-partial-observability",
+      "title": "Learning Counterfactual World Models for Embodied Reasoning under Partial Observability",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "学习可操作表示的预测性动力学世界模型",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.02811v1",
+      "route": "202609/10/2609.02811v1-do-better-imagined-rollouts-mean-better-robot-control-a-controlled-study-of-world-model-evaluation-under-feedback",
+      "title": "Do Better Imagined Rollouts Mean Better Robot Control? A Controlled Study of World-Model Evaluation Under Feedback",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "闭环反馈下的世界模型评估",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.03067v1",
+      "route": "202609/10/2609.03067v1-gpu-accelerated-astrodynamics-world-models-for-spacecraft-rendezvous-and-proximity-operations",
+      "title": "GPU-Accelerated Astrodynamics World Models for Spacecraft Rendezvous and Proximity Operations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "世界模型联合学习状态-动作动力学与观测模型用于预测与规划",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.05212v1",
+      "route": "202609/10/2609.05212v1-pac-bayesian-reconstruction-guarantees-for-time-series-variational-autoencoders",
+      "title": "PAC-Bayesian Reconstruction Guarantees for Time Series Variational Autoencoders",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向马尔可夫潜变量时序模型的PAC-贝叶斯泛化保证",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.06961v1",
+      "route": "202609/10/2609.06961v1-ssp-dmgtimenet-physics-constrained-learning-for-spatiotemporal-trajectory-prediction-of-vehicle-platoons",
+      "title": "SSP-DMGTimeNet: Physics-Constrained Learning for Spatiotemporal Trajectory Prediction of Vehicle Platoons",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向车辆队列智能体的时空轨迹预测与交互特征建模",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.07094v1",
+      "route": "202609/10/2609.07094v1-cascade-a-spatio-temporal-causal-reasoning-representation-and-dataset-for-driving",
+      "title": "CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "驾驶场景的时空因果结构化表示",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.07316v2",
+      "route": "202609/10/2609.07316v2-dgcpath-distribution-aware-generative-contrastive-framework-for-self-supervised-path-representation-learning----extended-version",
+      "title": "DGCPath: Distribution-Aware Generative Contrastive Framework for Self-supervised Path Representation Learning -- Extended Version",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向交通轨迹数据的自监督路径表示学习",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    },
+    {
+      "paper_id": "2609.10377v1",
+      "route": "202609/10/2609.10377v1-data-driven-risk-fields-for-safer-end-to-end-autonomous-driving",
+      "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向端到端自动驾驶的共享BEV特征学习与规划框架",
+      "first_seen_at": "2026-09-10 22:12:43 UTC",
+      "updated_at": "2026-09-10 22:12:43 UTC"
+    }
+  ]
+}

@@ -1,0 +1,1371 @@
+Title: DGCPath: Distribution-Aware Generative Contrastive Framework for Self-supervised Path Representation Learning – Extended Version
+
+URL Source: https://arxiv.org/pdf/2609.07316v2
+
+Published Time: Thu, 10 Sep 2026 00:48:50 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+# DGCP ATH : Distribution-Aware Generative Contrastive Framework for Self-supervised Path Representation Learning – Extended Version 
+
+## Sean Bin Yang 1 , Hao Miao 2 , Zongyi Xu 3 , Jilin Hu 4 ,
+
+## Xiangmeng Wang 2 , Hua Lu 1 , Bin Yang 1,4 , Christian S. Jensen 11Aalborg University, Denmark 
+
+> 2
+
+## The Hong Kong Polytechnic University, Hong Kong 
+
+> 3
+
+## Chongqing Univeristy of Posts and Telecommunications, China 
+
+> 4
+
+## East China Normal University, China 
+
+## {seany, luhua, csj }@cs.aau.dk, {hao.miao, xiangmengpoly.wang }@polyu.edu.hk, xuzy@cqupt.edu.cn, {jlhu, byang }@dase.ecnu.edu.cn 
+
+## Abstract 
+
+Due to proliferation of vehicle trajectory data from advanced sensing technologies, path representa-tion learning has become a pivotal task in in-telligent transportation systems. Although exist-ing self-supervised approaches work to some ex-tent, their dependence on deterministic contrastive learning paradigms and handcrafted view augmen-tation strategies inherently restricts cross-scenario generalization capabilities. To address these lim-itations, we present DGCP ATH – an innovative 
+
+Distribution-aware Generative Contrastive learning framework for Path representation. This architec-ture establishes a synergistic connection between generative modeling and distributional contrastive learning, enabling the acquisition of robust and transferable feature embeddings. Specifically, our framework incorporates: (1) a diffusion-based view generator that autonomously produces semanti-cally coherent yet diversified trajectory views from Gaussian noise distributions; (2) a variational con-trastive mechanism enforcing latent feature align-ment at the distribution level, transcending conven-tional instance-wise consistency; and (3) a novel generative cross-supervision module that reinforces view-level consistency through cross-view recon-struction learning. Comprehensive evaluations on three real-world trajectory datasets demonstrate DGCP ATH ’s superior performance over state-of-the-art baselines in two distinct downstream tasks, validating its enhanced generalization capacity and representation effectiveness. 
+
+This is an extended version of ” DGC-PATH : Distribution-Aware Generative Con-trastive Framework for Self-supervised Path Representation Learning” [Yang et al. , 2026], to appear in IJCAI 2026. Input Path Pre-defined Augumentation  
+
+> Instance Contrast
+> (a) Traditional Contrastive Pipeline Input Path
+> Distribution Contrast
+> (b) DGCPath
+> Path Views Path Views
+> Automatic View Generator
+
+Figure 1: Traditional Contrastive Pipeline vs. DGCP ATH .
+
+## 1 Introduction 
+
+Increasingly large volumes of vehicle path data are being accumulated that hold the potential to enable an expanding range of analyses in intelligent transportation systems [Jensen 
+
+et al. , 2024; Zhao et al. , 2025; Yang et al. , 2023; Yang et al. , 2021a; Han et al. , 2025; Li et al. , 2015; Li et al. , 2018; Li et al. , 2016; Li et al. , 2017; Xu et al. , 2024; Xu et al. ,2024]. Representation learning for such data is a key en-abler of such analyses, as it represents raw paths by compact and informative low-dimensional vectors [Yang et al. , 2023; Yang et al. , 2021a; Yang et al. , 2022a; Yang et al. , 2025; Yang et al. , 2021b; Yang et al. , 2022b]. These representa-tions facilitate intelligent transportation applications, such as traffic analysis [Zhao et al. , 2025; Zhou et al. , 2025; Jiang et al. , 2023; Wu et al. , 2024; Lin et al. , 2023; Mao et al. , 2025; Yu et al. , 2024; Pan et al. , 2023], path recommendation [Yang 
+
+et al. , 2022c; Xu et al. , 2025], and traffic prediction [Wei et al. , 2025; Yang et al. , 2023; Fang et al. , 2021]. Thus, substantial efforts have been devoted to learning generic path representations capable of supporting a wide range of downstream applications [Yang et al. , 2023; Wei 
+
+et al. , 2025; Yang et al. , 2021a; Xu et al. , 2025; Yang et al. , 2022a]. However, the reliance of existing proposals on deterministic contrastive loss functions is a core limitation. As illustrated in Figure 1(a), most existing proposals adopt arXiv:2609.07316v2 [cs.AI] 9 Sep 2026 a traditional contrastive learning pipeline that contrasts two deterministic path samples (i.e., Instance Contrast) to learn generic path representations. For example, PIM [Yang et al. ,2021a] employs an InfoNCE-based loss to align determinis-tic positive samples and separate negative ones. In contrast, as shown in Figure 1(b), the contrastive formulation in Figure 1(a) is a special case of the more general distribution-based contrastive training. The former’s rigid, deterministic regime limits the expressiveness of learned representations and re-duces their ability to generalize in dynamic, real-world sce-narios. A further key limitation of existing proposals is their use of pre-defined view augmentation strategies. For instance, methods like START [Jiang et al. , 2023] generate different path views through node dropping (e.g., as shown in Figure 1(a)) to obtain augmented path views and optimize them us-ing deterministic contrastive objectives. Although this gen-eral approach enables strong empirical performance, it relies heavily on the use of carefully chosen augmentations, of-ten requiring extensive trial-and-error tuning. This static and inflexible design constrains the adaptability of learned rep-resentations, particularly when transferred across difference tasks. To overcome these limitations, we introduce DGCP ATH ,a novel Distribution-aware Generative Contrastive learning framework for Path representation learning. Rather than en-forcing consistency on deterministic feature vectors, DGC-PATH models each path representation as a latent probabil-ity distribution, enabling the learning of continuous, smooth, and uncertainty-aware embeddings. By aligning distribu-tions rather than fixed instances, DGCP ATH relaxes the rigid constraints inherent to deterministic proposals and mitigates overfitting to specific samples [Kingma and Welling, 2014]. The probabilistic formulation and the resulting enhanced flex-ibility of the encoder improves the generalization capabilities of the learned representations markedly across different tasks. DGCP ATH consists of three main components: a path encoder, a path view generator, and a generative varia-tional–contrastive component. First, the path encoder maps each path into a latent representation by jointly capturing its spatial structure and temporal dynamics. Second, we intro-duce a diffusion-based path view generator that automatically synthesizes diverse yet semantically consistent path views from random Gaussian noise. This generative mechanism facilitates the construction of informative contrastive pairs without relying on manually designed augmentation heuris-tics. Next, we leverage contrastive learning to constrain the distribution of latent features such that samples originating from the same path are encouraged to share similar distri-butions, while those from different paths are separated in the latent space. Specifically, we unify generative model-ing with contrastive learning by proposing a generative vari-ational contrastive model that integrates the strengths of both paradigms: capturing path-invariant characteristics via gen-erative learning, and emphasizing inter-path discriminability through contrastive objectives. We also propose a genera-tive cross-supervision module that replaces traditional self-supervision with a cross-view alignment mechanism. This design promotes consistency in the learned feature distribu-tions across different views of the same path, thereby en-hancing the robustness and semantic fidelity of the represen-tations. The main contributions are as follows: • We propose DGCP ATH that integrates generative mod-eling and distribution-based contrastive learning to learn robust and generalizable path representations. • We propose a diffusion-based path view generator that automatically produces semantically consistent yet di-verse path views from noise, eliminating the need for handcrafted augmentation. • We propose a generative cross-supervision module and distributional contrastive loss to enforce consistency among views of the same path while promoting sepa-ration across different paths at the distribution level. • We report on extensive experiments on three real-world datasets and considering two downstream tasks, show-ing that DGCP ATH can consistently outperform state-of-the-art methods in terms of both representation qual-ity and downstream performance. 
+
+## 2 Related Work 
+
+Path Representation Learning Path representation learn-ing has been studied widely due to its key role in facilitating intelligent transportation system analyses [Xu et al. , 2025; Wei et al. , 2025; Yang et al. , 2021a; Yang et al. , 2022a; Yang et al. , 2023; Zhao et al. , 2025; Zhou et al. , 2024; Zhou et al. , 2025; Jiang et al. , 2023]. Most existing meth-ods focus on single-modality data (i.e., path sequences). For instance, PIM [Yang et al. , 2021a] utilizes curriculum-based negative sampling for contrastive learning on graph-based path embedding, and TPR [Yang et al. , 2022a] en-hances temporal path representations through temporally-informed view construction, while L IGHT PATH [Yang et al. ,2023] introduces a lightweight and scalable framework us-ing mask-ratio-based path view generation. From a mul-timodal perspective, MM-P ATH [Xu et al. , 2025] incorpo-rates path–image pairs and learns general representations via path–image contrastive learning, whereas P ATH -LLM [Wei 
+
+et al. , 2025] leverages path textual descriptions and large lan-guage models (LLMs) to enrich path semantics. We do not include these methods as baselines, as our study focuses ex-clusively on the path modality. However, two key limitations remain. First, except for multimodal approaches, existing methods generally rely on manually designed or fixed path view generation strategies. Second, both generative and con-trastive objectives are typically deterministic, which can limit the diversity and generalizability of learned path representa-tions. 
+
+## 3 Preliminaries 
+
+Definition 1. (Road Network) A road network is modeled as a directed graph G = ( V , E ), where V denotes a set of N
+
+nodes representing road intersections, and E denotes a set of directed M edges representing road segments. Definition 2. (Path) A path p = ⟨v1, v 2, v 3, . . . , v |p|⟩
+
+is an ordered sequence of connected nodes. Consecutive nodes in the sequence are connected by directed edges, i.e., 
+
+(vi, v i+1 ) ∈ E for all 1 ≤ i < |p|, ensuring the topological continuity of the path. 
+
+Problem Statement Given a road network G and a set of paths P = {pi}N
+
+> i=1
+
+, the objective is to learn a mapping func-tion fθ : P → Rd, such that fθ maps each path pi ∈ P to a 
+
+d-dimensional representation vector in a latent space, with θ
+
+denoting the learnable parameters of the function. 
+
+## 4 Methodology 
+
+The DGCP ATH framework is illustrated in Figure 2. The core idea is to integrate the path encoder, the diffusion-based path view generator, and the generative variational contrastive component to enable more generic path represenation learn-ing. 
+
+4.1 Path Encoder 
+
+Spatial Embedding The encoder aims to learn segment embeddings that preserve the topological structure of the road network, as such representations are fundamental to path modeling. Given a road network graph G = ( V , E ), we em-ploy the N ODE 2VEC algorithm [Grover and Leskovec, 2016] to initialize spatial embeddings for each node. These embed-dings capture the structural context of the network and serve as the basis for the subsequent path representation learning, which is formulated as follows: 
+
+zG = Node2vec (G(V , E )) , (1) where zG ∈ Rdn is a set of node embeddings for road net-work G and dn is the feature dimensionality. 
+
+Path Embedding The path embedding module aims to learn path representations by aggregating consecutive road segment embeddings through spatial embedding. As shown in Figure 2, for a given path pi = ⟨v1, v 2, v 3, v 4, v 5, v 6⟩, the spatial embedding module first transforms the sequence of nodes in a path to a sequence of node embeddings for the path, i.e., ⟨z1, z 2, . . . , z 6⟩ = zG (⟨v1, v 2, . . . , v t⟩). Next, we employ the Transformer architecture to process the spatial embeddings (i.e., the zi) and the positional embedding of the road segments within the path, computing the path embed-ding as follows: 
+
+hpi = ⟨zG (v1) + pe 1, . . . , zG (vi) + pe i⟩,
+
+zpi = σ
+
+ X Transformer (hpi )
+
+|pi|
+
+
+
+, (2) where the vi are the nodes in the path, zG is the spatial em-bedding function, the hpi captures the node embeddings after incorporating the position embedding pe i, |pi| is the number of nodes in a path, and zpi is the resulting path embedding. The function Transformer (·) refers to a Transformer archi-tecture based on the self-attention mechanism. 
+
+4.2 Path View Generator 
+
+To facilitate path encoder learning, we propose an automatic path view generation strategy based on a diffusion and de-noising process applied to the initial path embedding. 
+
+Forward Process Conditioned on the path embedding zpi
+
+generated by the path encoder, we aim to learn the underly-ing distribution of path embeddings to enable automatic path view generation. This distribution is modeled using a gener-ative diffusion process, where the values of the path embed-ding vector are diffused progressively and then denoised over discrete time steps. Specifically, given the initial path em-bedding zpi , we formulate the diffusion process as a Markov chain zpi = ( z 0 
+
+> pi
+
+, z 1 
+
+> pi
+
+, . . . , z Tpi ), where T denotes the total number of diffusion steps. Going from z 0 
+
+> pi
+
+to z Tpi (i.e., the for-ward process with noising), we iteratively add small amounts of Gaussian noise, gradually corrupting the original path em-bedding until it becomes pure Gaussian noise. This process has an analogy in the image domain, where noise is typically applied independently across dimensions [Yang et al. , 2024]. The corruption of path embeddings is governed by the fol-lowing transition probabilities: 
+
+q(z tpi |z t−1 
+
+> pi
+
+) := N
+
+
+
+ztpi ; p1 − βtztpi , β tI
+
+
+
+, (3) where βt = 1 − αt and ¯αt = Qts=1 αt.
+
+Reverse Process The view generation process for the path embedding zpi is formulated as a reverse denoising proce-dure, iteratively refining the embedding from z Tpi back to z 0 
+
+> pi
+
+.Specifically, starting from the fully noised embedding z Tpi , we progressively remove the noise step by step to ultimately re-cover a sample from the original data distribution. This pro-cess is defined as follows: 
+
+pθ (z t−1 
+
+> pi
+
+|z tpi ) := N  z t−1 
+
+> pi
+
+; μθ (z tpi , t ), Σθ (z tpi , t ) , (4) where Σθ is set to fixed, time-dependent constants to sim-plify the computation. To complete the reverse process, we incorporate a trainable rounding step pθ (zpi | z 0 
+
+> pi
+
+) that maps the denoised hidden states back to the final path view em-bedding. Specifically, we employ a learnable model fθ (z tpi , t )
+
+to parameterize this reverse mapping, effectively modeling 
+
+pθ (zpi | z 0 
+
+> pi
+
+).To train the diffusion model, we adopt a Kullback–Leibler (KL) divergence-based objective to enable more efficient op-timization. This approach compares the reverse transition dis-tribution pθ (z t−1 
+
+> pi
+
+| z tpi ) with the corresponding posterior of the forward process, which leads to a simplified mean squared error (MSE) training loss, denoted as Ldiff :
+
+Ldiff 
+
+ z 0
+
+> pi
+
+ =
+
+> T
+
+X
+
+> t=1
+
+E
+
+> q
+
+(z tpi |z 0 
+
+> pi
+
+) μθ
+
+ z tpi , t  − ˆμ  z tpi , z 0
+
+> pi
+
+ 2 ,
+
+(5) where μθ
+
+ z tpi , t  is the predicted mean of pθ (z t−1 
+
+> pi
+
+| z tpi )
+
+computed by a neural network, and ˆμ  z tpi , z 0
+
+> pi
+
+ denotes the mean of the posterior q(z t−1 
+
+> qi
+
+|z tqi , z 0 
+
+> qi
+
+), which is tractable when conditioned on z 0 
+
+> qi
+
+.
+
+Automatic View Generation In contrastive learning, the diffusion model is employed as a path view generator to ob-tain multiple diverse yet semantically consistent representa-tions of a given path embedding (i.e., z (1)  
+
+> pi
+
+and z (2)  
+
+> pi
+
+). These generated views serve to improve the quality and robustness of contrastive representation learning. Given a path embed-ding zpi , we begin by sampling a noise vector from a standard Figure 2: The DGCP ATH Framework. 
+
+Gaussian distribution, denoted as ˜z Tpi ∼ N (0 , I) , where I is the identity matrix. Starting from this noisy input, we itera-tively apply the reverse diffusion process to progressively de-noise the representation and recover a refined embedding z 0 
+
+> pi
+
+.In each reverse step, the process involves two key operations: 1) A rounding step that maps the intermediate state z tpi back into the path embedding space; 2) a replacement step in which certain components of the recovered embedding z t−1 
+
+> pi
+
+are sub-stituted with corresponding segments from the original path embedding zpi to retain critical semantic information. This iterative procedure yields a single generated path view. To obtain a pair of views for contrastive learning, the process is performed twice with independently sampled Gaussian noise, resulting in z (1)  
+
+> pi
+
+and z (2)  
+
+> pi
+
+(see Figure 2). While originating from the same input path embedding, the stochastic nature of the initial noise introduces meaningful variation, which is es-sential for learning robust and discriminative representations through contrastive objectives. 
+
+4.3 Generative Variational Contrastive Module 
+
+We further detail the design of our distribution-aware genera-tive contrastive module, which explicitly aligns distributions of positive samples while maximizing divergence from nega-tive ones in a generative latent space [Wang et al. , 2024]. 
+
+Distributional Contrastive Learning For each pair of path views, z (1)  
+
+> pi
+
+and z (2)  
+
+> pi
+
+, generated by the automatic view genera-tor, two independent fully connected layers, denoted as fμ(·)
+
+and fσ (·), are employed to project the features into a high-dimensional invariant space. As a result, each sample yields two sets of parameters: ( μ(1)  
+
+> pi
+
+, σ(1)  
+
+> pi
+
+), ( μ(2)  
+
+> pi
+
+, σ(2)  
+
+> pi
+
+), correspond-ing to the mean and standard deviation of each view. We assume that the latent features of the two path views follow Gaussian distributions parameterized by the respective mean and standard deviation vectors. 
+
+z (1)  
+
+> pi
+
+(x ) ∼ N (x ; μ(1)  
+
+> pi
+
+, σ (1)  
+
+> pi
+
+), z (2)  
+
+> pi
+
+(x ) ∼ N (x ; μ(2)  
+
+> pi
+
+, σ (2)  
+
+> pi
+
+) (6) The KL divergence can be employed as a regularization term to enforce that the latent representations of all samples approximate a standard normal distribution, with mean 0 and standard deviation 1.
+
+DKL (N (μ, σ ), N (0 , 1)) (7) In generative tasks, encouraging the model to produce sam-ples similar to the training set is often beneficial. However, in tasks such as path recommendation and traffic analysis, forc-ing all samples to follow a uniform distribution can weaken the discriminative capabilities of the feature extractor. To ad-dress this issue, our method aims to constrain samples from the same path (i.e., positive samples) to follow similar Gaus-sian distributions, while ensuring that samples from differ-ent paths (i.e., negative samples) are mapped to distributions that are as dissimilar as possible. Achieving this objective involves computing the distance between two distributions. A natural choice is to use the KL divergence, commonly used in Variational Autoencoders (VAEs) and defined as fol-lows: 
+
+DKL (z (1)  
+
+> pi
+
+(x )∥z (2)  
+
+> pi
+
+(x )) = 
+
+Z
+
+z (1)  
+
+> pi
+
+(x ) ln z (1)  
+
+> pi
+
+(x )
+
+z (2)  
+
+> pi
+
+(x ) dx . (8) However, the KL divergence is inherently asymmetric, meaning that it yields different values depending on the or-der of the input z (1)  
+
+> pi
+
+(x ) and z (2)  
+
+> pi
+
+(x ). In VAEs [Kingma and Welling, 2014], this asymmetry is not problematic, as all la-tent representations are explicitly regularized toward a fixed standard normal distribution with zero mean and unit vari-ance, yielding a unidirectional mapping. However, in con-trastive learning, the goal is to estimate the similarity between distributions of two augmented path views derived from the same input path. Thus, the similarity measure must be order-invariant to ensure that the positive pairs are treated symmet-rically, regardless of the order in which they occur as argu-ments.To achieve this, we adopt the Jensen–Shannon (JS) di-vergence, a symmetric variant of the KL divergence. The JS divergence computes the similarity between two distributions in an order-invariant manner, making it well-suited for con-trastive learning, where symmetric comparison of augmented views is essential. Formally, the JS divergence between two distributions z (1)  
+
+> pi
+
+(x ) and z (2)  
+
+> pi
+
+(x ) is defined as follows:                                   
+
+> DJS (z(1)
+> pi(x),z(2)
+> pi(x)) = 12DKL z(1)
+> pi(x)∥z(1)
+> pi(x) + z(2)
+> pi(x)2
+> !
+> + 12DKL z(2)
+> pi(x)∥z(1)
+> pi(x) + z(2)
+> pi(x)2
+> !
+> .
+> (9)
+
+Here, the distance between two distributions is normalized to be in the interval [0 , 1] , with a smaller value indicating higher similarity. Consequently, the objective Lvc of varia-tional contrastive learning is to minimize this divergence for positive pairs, encouraging consistency between their latent representations. 
+
+Lvc =
+
+n
+
+min 
+
+
+
+JS 
+
+
+
+z (1)  
+
+> pi
+
+(x ), z (2)  
+
+> pi
+
+(x )
+
+ 
+
+,
+
+max 
+
+> B
+
+X 
+
+> k=1 ,k ̸=i
+
+JS 
+
+
+
+z (1)  
+
+> pi
+
+(x ), z (1)  
+
+> pk
+
+(x )
+
+
+
++ JS 
+
+
+
+z (1)  
+
+> pi
+
+(x ), z (2)  
+
+> pk
+
+(x )
+
+ o 
+
+,
+
+(10) 
+
+where B denotes the number of samples in a batch. In addition, from the definition of KL divergence, we have the following: 
+
+DKL z (1)  
+
+> pi
+
+(x ) z (1)  
+
+> pi
+
+(x ) + z (2)  
+
+> pi
+
+(x )2
+
+!
+
+=
+
+Z
+
+z (1)  
+
+> pi
+
+(x ) ln z (1)  
+
+> pi
+
+(x ) d x −
+
+Z
+
+z (1)  
+
+> pi
+
+(x ) ln z (1)  
+
+> pi
+
+(x ) + z (2)  
+
+> pi
+
+(x )2 dx. 
+
+(11) 
+
+The JS divergence between two multivariate Gaussian distri-butions can now be formulated as follows: 
+
+DJS 
+
+
+
+z (1)  
+
+> pi
+
+(x ), z (2)  
+
+> pi
+
+(x )
+
+
+
+= − 14
+
+> N
+
+X
+
+> i=1
+
+In 
+
+ σ1 
+
+> pi
+
+σ2
+
+> pi
+
+2
+
+ (σ1  
+
+> pi)2+( σ2
+> pi)2
+> 2
+
+2
+
++ 14
+
+> N
+
+X
+
+> i=1
+
+(σ1 
+
+> pi
+
+)2 + ( σ2 
+
+> pi
+
+)2 + 2 
+
+ μ1 
+
+> pi−μ2
+> pi
+> 2
+
+2
+
+ (σ1  
+
+> pi)2+( σ2
+> pi)2
+> 2
+
+2 + 2 . (12) The JS divergence provides a convenient metric for quanti-fying the distance between two probability distributions. In-spired by the SimCLR framework [Chen and He, 2021], we reformulate the contrastive distribution loss in Eq. 10 as fol-lows: 
+
+Lvc =
+
+− In e −DJS (z (1)      
+
+> pi(x),z(2)
+> pi(x)
+
+)
+
+> t
+
+PNk=1 ,k ̸ =i e −DJS (z (1)      
+
+> pi(x),z(1)
+> pk(x)
+
+) 
+
+> t
+
++ e −DJS (z (1)      
+
+> pi(x),z(2)
+> pk(x)
+
+)
+
+> t
+
+,
+
+(13) where N is the batch size and t is the temperature parameter. 
+
+Generative Cross-Supervision Learning As illustrated in Figure 2, to encourage the encoder to capture invariant fea-tures, we incorporate a generative supervision signal into the framework. Specifically, latent embeddings g(1)  
+
+> pi
+
+and g(2)  
+
+> pi
+
+are sampled from the respective latent distributions z (1)  
+
+> pi
+
+(x ) and 
+
+z (2)  
+
+> pi
+
+(x ). However, direct sampling from these distributions is non-differentiable, which hinders end-to-end training via backpropagation. To address this limitation, we adopt the reparameterization trick [Kingma and Welling, 2014] that en-ables differentiable sampling by expressing a stochastic vari-able as a deterministic function of the distribution parameters and a noise term: 
+
+g = μ + σϵ, (14) where ϵ ∼ N (0 , 1) , so that g ∼ N (μ, σ ). The resulting sam-ples g(1)  
+
+> pi
+
+and g(2)  
+
+> pi
+
+are then passed to a decoder with shared parameters. The decoder, implemented as a three-layer fully connected network with batch normalization, transforms the latent samples into reconstructed path embeddings ˆz (1) 
+
+> pi
+
+and ˆz (2)  
+
+> pi
+
+. To guide this reconstruction, we employ a self-supervised objective. Conventional approaches typically use a direct supervision strategy, where the original embeddings 
+
+z (1)  
+
+> pi
+
+and z (2)  
+
+> pi
+
+are used to supervise their respective reconstruc-tions ˆz (1)  
+
+> pi
+
+and ˆz (2)  
+
+> pi
+
+. Instead, we introduce a cross-supervision mechanism, where z (1)  
+
+> pi
+
+is used to supervise ˆz (2)  
+
+> pi
+
+, and z (2)  
+
+> pi
+
+is used to supervise ˆz (1)  
+
+> pi
+
+. This design offers two key advantages: (1) it forces the model to focus on semantically invariant fea-tures rather than spatially anchored or coordinate-dependent cues; and (2) as g(1)  
+
+> pi
+
+and g(2)  
+
+> pi
+
+are sampled from two distinct distributions, the cross-supervision strategy facilitates align-ment between them, thereby reinforcing the core objective of variational contrastive learning. The optimization objective of this module is formally defined as follows: 
+
+Lcs = max 
+
+
+
+sim 
+
+
+
+ˆz (1)  
+
+> pi
+
+, z (2) 
+
+> pi
+
+
+
++ sim 
+
+
+
+ˆz (2)  
+
+> pi
+
+, z (1) 
+
+> pi
+
+ 
+
+, (15) where sim (·) denotes the similarity between two path embed-dings and is computed via MSE. As a result, the final objective is formulated as follows: 
+
+L = λ1Ldiff + λ2Lvc + λ3Lcs , (16) where λ1, λ2, and λ3 are weight hyper-parameters that are used for balancing the contributions of the individual losses. Specifically, we adopt an uncertainty-based weighting strat-egy to dynamically adjust each loss component during train-ing [Kendall et al. , 2018]. 
+
+4.4 Theoretical Analysis 
+
+We next provide theoretical justification for the proposed generative variational contrastive module. Let C denote the identity of the underlying path, V ∈ { 1, 2} denote the augmentation-view index, and G denote a latent random vari-able sampled from the corresponding path distribution. 
+
+View Invariance Induced by Distributional Alignment. Proposition 1. For a fixed path C = i, suppose that the two augmented views are sampled with equal probability, 
+
+Pr( V = 1) = Pr( V = 2) = 12 . (9) Then, 
+
+I(G; V | C = i) = DJS 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+. (10) 
+
+Proof. For a fixed path C = i, the marginal distribution of G
+
+is 
+
+Mi = 12 P (1)  
+
+> i
+
++ 12 P (2)  
+
+> i
+
+. (11) Using the definition of conditional mutual information, we obtain 
+
+I(G; V | C = i) = 12 DKL 
+
+
+
+P (1)  
+
+> i
+
+∥Mi
+
+
+
++ 12 DKL 
+
+
+
+P (2)  
+
+> i
+
+∥Mi
+
+
+
+= DJS 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+.
+
+(12) Therefore, 
+
+DJS 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+= 0 (13) implies 
+
+I(G; V | C = i) = 0 , (14) and hence 
+
+G ⊥ V | C = i. (15) Thus, minimizing the positive-pair JS divergence directly suppresses augmentation-specific information in the latent representation. □
+
+This proposition gives an information-theoretic interpreta-tion of distributional alignment. Rather than merely forcing two augmented representations to be numerically close, the proposed objective explicitly reduces the information that the latent representation contains about which augmentation gen-erated it. Moreover, the JS divergence also controls the discrepancy between the two view-dependent distributions. Let TV( P, Q )
+
+denote the total variation distance. Applying Pinsker’s in-equality to the two KL terms in the JS divergence yields 
+
+TV 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+≤
+
+r
+
+2DJS 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+. (16) Therefore, for any measurable function h satisfying 0 ≤
+
+h(G) ≤ 1,
+
+EP (1) 
+
+> i
+
+[h(G)] − EP (2) 
+
+> i
+
+[h(G)] 
+
+≤
+
+r
+
+2DJS 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+.
+
+(17) Hence, decreasing the JS divergence also reduces an upper bound on the prediction discrepancy between different views of the same path. 
+
+Distributional Margin and Path Discriminability. Proposition 2. Consider an anchor distribution P (1)  
+
+> i
+
+, its positive distribution P (2)  
+
+> i
+
+, and M negative distributions 
+
+{P − 
+
+> j
+
+}Mj=1 . Define 
+
+d+ 
+
+> i
+
+= DJS 
+
+
+
+P (1)  
+
+> i
+
+, P (2) 
+
+> i
+
+
+
+(18) and 
+
+d− 
+
+> ij
+
+= DJS 
+
+
+
+P (1)  
+
+> i
+
+, P −
+
+> j
+
+
+
+. (19) The corresponding contrastive objective is 
+
+ℓi = − log exp( −d+ 
+
+> i
+
+/t )exp( −d+ 
+
+> i
+
+/t ) + PMj=1 exp( −d− 
+
+> ij
+
+/t ) . (20) Suppose that 
+
+d+ 
+
+> i
+
+≤ ϵ (21) and 
+
+d− 
+
+> ij
+
+≥ δ, ∀j, (22) where δ > ϵ . Then, 
+
+ℓi ≤ log 
+
+
+
+1 + M exp 
+
+
+
+− δ − ϵt
+
+ 
+
+. (23) 
+
+Proof. Equation (20) can be rewritten as 
+
+ℓi = log 
+
+1 + 
+
+> M
+
+X
+
+> j=1
+
+exp − d− 
+
+> ij
+
+− d+
+
+> i
+
+t
+
+! . (24) Since 
+
+d− 
+
+> ij
+
+− d+ 
+
+> i
+
+≥ δ − ϵ, (25) we obtain 
+
+ℓi ≤ log 
+
+
+
+1 + M exp 
+
+
+
+− δ − ϵt
+
+ 
+
+. (26) 
+
+□
+
+Proposition 2 indicates that minimizing the contrastive ob-jective implicitly maximizes the distributional margin 
+
+∆ = δ − ϵ (27) between positive and negative pairs. As ∆ increases, the up-per bound in Eq. (23) decreases exponentially. Therefore, the proposed objective simultaneously promotes intra-path com-pactness and inter-path separation. The contrastive objective also admits an information-theoretic interpretation. Let 
+
+R(v) =
+
+
+
+μ(v), σ(v)
+
+(28) denote the distributional representation of the v-th view. Un-der the standard negative-sampling setting of InfoNCE, the mutual information between the two views satisfies 
+
+I
+
+
+
+R(1) ; R(2) 
+
+≥ log K − E [Lvc ] , (29) where K denotes the number of candidate samples in the con-trastive set. Furthermore, suppose that the two augmented represen-tations are conditionally independent given their underlying path identity C, i.e., 
+
+R(1) − C − R(2) (30) forms a Markov chain. By the data-processing inequality, 
+
+I
+
+
+
+R(1) ; R(2) 
+
+≤ I
+
+
+
+C; R(1) 
+
+(31) and similarly 
+
+I
+
+
+
+R(1) ; R(2) 
+
+≤ I
+
+
+
+C; R(2) 
+
+. (32) Consequently, minimizing Lvc increases a lower bound on the information shared between the two augmented represen-tations, thereby encouraging both views to retain information associated with the underlying path identity. 
+
+Invariant Feature Learning via Cross-Supervision. Proposition 3. Assume that the representations of two augmented path views can be decomposed as 
+
+Z(1) = S + N (1) , Z(2) = S + N (2) , (33) where S denotes the semantic information shared by the two views, and N (1) and N (2) denote view-specific nuisance components. Assume that 
+
+E
+
+h
+
+N (v) | S
+
+i
+
+= 0 , v ∈ { 1, 2}, (34) and that the nuisance components of different views are con-ditionally independent given S.Let G(1) denote a latent representation generated from the first view. Consider the cross-reconstruction risk 
+
+Rcross (D) = E
+
+
+
+D(G(1) ) − Z(2) 22
+
+
+
+. (35) Then, the optimal decoder under the squared-error criterion satisfies 
+
+D∗(G(1) ) = E
+
+h
+
+S | G(1) i
+
+. (36) 
+
+Proof. Under the mean squared error criterion, the optimal predictor is the conditional expectation: 
+
+D∗(G(1) ) = E
+
+h
+
+Z(2) | G(1) i
+
+. (37) Substituting Eq. (33), we obtain 
+
+D∗(G(1) ) = E
+
+h
+
+S + N (2) | G(1) i
+
+= E
+
+h
+
+S | G(1) i
+
++ E
+
+h
+
+N (2) | G(1) i
+
+. (38) Under the conditional-independence and zero-mean assump-tions, 
+
+E
+
+h
+
+N (2) | G(1) i
+
+= 0 . (39) Therefore, 
+
+D∗(G(1) ) = E
+
+h
+
+S | G(1) i
+
+. (40) 
+
+□
+
+The minimum cross-reconstruction risk can further be de-composed as 
+
+min  
+
+> D
+
+Rcross (D) = E
+
+
+
+S − E
+
+h
+
+S | G(1) i 22
+
+
+
++ E
+
+
+
+N (2) 22
+
+
+
+. (41) The second term is independent of the encoder and there-fore represents an irreducible component. Hence, reducing the trainable part of the cross-reconstruction loss requires im-proving the representation of the shared semantic component 
+
+S.In contrast, conventional self-reconstruction minimizes 
+
+Rself (D) = E
+
+
+
+D(G(1) ) − Z(1) 22
+
+
+
+. (42) Because Z(1) contains both S and N (1) , the encoder may re-duce the self-reconstruction error by preserving view-specific nuisance information. Cross-supervision removes this short-cut because the nuisance component of one view is not pre-dictive of the nuisance component of another view. 
+
+Overall Theoretical Interpretation. The above results re-veal the complementary roles of the proposed objectives. Proposition 1 shows that distributional alignment directly minimizes 
+
+I(G; V | C), (43) thereby suppressing augmentation-specific information. Proposition 2 shows that distributional contrast promotes a large inter-path distributional margin while preserving infor-mation shared across views of the same path. Proposition 3 demonstrates that generative cross-supervision preferentially preserves semantic information shared between augmented views while suppressing view-specific nuisance factors. Therefore, jointly optimizing 
+
+L = λ1Ldiff + λ2Lvc + λ3Lcs (44) encourages the learned path representations to be simultane-ously view-invariant, path-discriminative, and semantically informative. 
+
+## 5 Experiments 
+
+Datasets We conduct experiments on three real-world datasets: Aalborg (Denmark) [Yang et al. , 2022c], Chengdu (China) [Yuan et al. , 2022], and Harbin (China) [Li et al. ,2019]. Each dataset includes a road network extracted from OpenStreetMap and GPS trajectories. The Aalborg road net-work consists of 10,017 nodes and 11,597 edges; Chengdu comprises 6,632 nodes and 17,038 edges; and Harbin con-tains 8,497 nodes and 14,497 edges. After map-matching [Yang and Gid´ ofalvi, 2018; Han et al. , 2026a; Han et al. ,2026b], we obtain 33,264 paths for Aalborg, 54,491 for Chengdu, and 259,615 for Harbin. 
+
+Downstream Tasks Path Travel Time Estimation: Each path is associated with a travel time (seconds) obtained from trajectories. We aim to build a regression model to estimate the travel times of paths. We evaluate the accuracy of the estimations using Mean Absolute Error (MAE), Mean Abso-lute Percentage Error (MAPE), and Root Mean Square Error (RMSE). Smaller values indicate higher estimation accuracy. 
+
+Path Ranking: Given a set of candidate paths—typically sharing the same source and destination—each path is as-signed a ranking score within the range [0 , 1] , reflecting its relative preference based on historical trajectory data. Follow previous studies [Yang et al. , 2022c; Yang and Yang, 2020; Yang and Yang, 2019], we compute these scores using simi-larity measurements derived from real-world trajectories. To evaluate the performance of path ranking, we use three widely used metrics: Mean Absolute Error (MAE), the Kendall rank correlation coefficient ( τ ), and the Sperman rank correlation coefficient ( ρ). These metrics collectively assess both the ac-curacy of the predicted ranking scores and the consistency of the predicted orderings relative to the ground truth. 
+
+Baselines We consider 10 baseline methods, including 6 unsupervised and 4 supervised methods. The unsupervised methods include N ODE 2VEC [Grover and Leskovec, 2016], TOAST [Chen et al. , 2021], PIM [Yang et al. , 2021a], START [Jiang et al. , 2023], LIGHT PATH [Yang et al. ,2023], and RED [Zhou et al. , 2024]. Among them, PIM, START, and L IGHT PATH rely on pre-defined view augmen-tation strategies, such as random masking or node drop-ping. The supervised methods include PathRank [Yang et al. ,2022c], H IER ETA [Chen et al. , 2022], C OMPACT ETA [Fu 
+
+et al. , 2020], and HMTRL [Liu et al. , 2023]. These methods leverage task-specific labels to learn path representations. Method Aalborg Chengdu Harbin MAE ↓ MAPE (%) ↓ RMSE ↓ MAE ↓ MAPE (%) ↓ RMSE ↓ MAE ↓ MAPE (%) ↓ RMSE ↓                                                                                                                                                                                                                    
+
+> Supervised  PATH RANK 2.913 18.713 4.832 5.802 34.014 8.894 4.127 14.339 5.301 HIER ETA 3.097 18.620 5.058 5.060 28.820 7.921 4.897 16.506 5.961 COMPACT ETA 3.030 19.726 4.791 4.832 28.678 7.447 4.372 14.974 5.362 HMTRL 3.515 19.955 5.792 4.861 28.529 7.473 4.704 15.543 5.803 Unsupervised  NODE 2VEC 5.701 35.485 8.165 5.997 35.919 8.653 5.399 18.709 6.773 TOAST 3.439 21.311 5.555 4.918 28.567 7.513 4.627 16.101 5.803 PIM 3.471 21.314 5.640 4.924 28.553 7.493 4.538 15.713 5.682 START 2.965 18.432 4.979 5.174 30.769 7.726 4.402 15.262 5.503 LIGHT PATH 2.920 18.254 4.932 4.850 28.387 7.406 4.221 14.962 5.310 RED 2.457 14.907 3.809 4.845 28.380 7.296 4.097 14.214 5.153 DGCP ATH 2.131 13.654 3.725 4.659 27.488 7.064 4.016 13.905 5.042
+> Table 1: Overall Accuracy at Travel Time Estimation.
+> Method Aalborg Chengdu Harbin MAE ↓TAU (τ)↑RHO (ρ)↑MAE ↓TAU (τ)↑RHO (ρ)↑MAE ↓TAU (τ)↑RHO (ρ)↑
+> Supervised  PATH RANK 0.159 0.727 0.751 0.123 0.703 0.742 0.145 0.821 0.832 HIER ETA 0.152 0.757 0.767 0.178 0.735 0.774 0.133 0.846 0.879 COMPACT ETA 0.169 0.698 0.709 0.195 0.661 0.705 0.160 0.796 0.833 HMTRL 0.163 0.729 0.741 0.149 0.779 0.789 0.133 0.838 0.874 Unsupervised  NODE 2VEC 0.253 0.632 0.637 0.246 0.464 0.505 0.211 0.468 0.512 TOAST 0.138 0.768 0.779 0.131 0.734 0.752 0.161 0.840 0.878 PIM 0.141 0.764 0.777 0.125 0.725 0.745 0.119 0.879 0.911 START 0.178 0.839 0.859 0.228 0.638 0.679 0.151 0.859 0.890 LIGHT PATH 0.118 0.781 0.791 0.195 0.711 0.748 0.122 0.881 0.913 RED 0.109 0.819 0.823 0.129 0.797 0.833 0.127 0.858 0.865 DGCP ATH 0.107 0.846 0.870 0.114 0.819 0.859 0.112 0.898 0.925
+> Table 2: Overall Accuracy at Path Ranking.
+
+For all unsupervised methods, we first pre-train the path encoder on unlabeled trajectory data (i.e., 30/50/200K sam-ples from Aalborg/Chengdu/Harbin) to obtain path embed-dings. These embeddings are subsequently fed to a regres-sion model trained on a smaller labeled subset (e.g., 12K labeled paths from Aalborg) to predict travel time and path ranking scores. We adopt the Gradient Boosting Regressor (GBR) [Peter et al. , 2017] as the predictive model due to the regression nature of our tasks. In contrast, supervised meth-ods train the path encoder end-to-end using only the labeled data (e.g., 12K samples per city) without leveraging unla-beled paths. 
+
+Impementation Details We employ a Transformer archi-tecture and randomly initialize all learnable parameters with uniform distributions. We employ node2vec to embed each node to 128-dimensional vectors and set the dimension for path representation to 128. For a fair comparison, we set the path representation dimensionality of all baseline meth-ods as 128. We use the AdamW optimizer with a cosine de-cay learning rate schedule over 600 epochs, with a warm-up period of 50 epochs. We set the base learning rate to 1e-5 for Aalborg and Chengdu datasets, and 1e-6 for the Harbin dataset. The source code is available at https://github.com/ Sean-Bin-Yang/DGCPath. 
+
+5.1 Performance Findings 
+
+We first evaluate the accuracy of all methods on the down-stream tasks. Tables 1 and 2 show the performance of all methods at travel time estimation and path ranking tasks on the three datasets. The overall best performance is marked in bold, and the second-best performance is underlined. We make three main observations: 1) DGCP ATH achieves the best performance across all baselines at both tasks on all three datasets. Specifically, at the travel time estimation task on the Aalborg dataset, DGCP ATH reduces MAE and RMSE by up to 13.27% and 2.21%, respectively. At the path ranking task on the Harbin dataset, it increases Kendall’s τ and Spear-man’s ρ by up to 4.66% and 6.94%, respectively. These im-provements stem from the improved feature learning capabil-ities of the proposed diffusion-based view generator. Further-more, the use of a distribution-aware generative contrastive loss enables the model to learn more generalizable path rep-resentations, leading to enhanced overall performance. 2) The supervised methods, including P ATH RANK , H IER ETA, COMPACT ETA, and HMTRL, show relatively poor perfor-mance, primarily due to the limited size of the labeled train-ing data. Collecting task-specific labels is often expensive and labor-intensive. The experiments are thus performed in a realistic setting where labeled data is scarce. 3) All unsu-pervised methods are capable of learning generic path rep-resentations. Methods like T OAST , PIM, START, L IGHT -PATH , and RED consistently outperform N ODE 2VEC across Figure 3: Effects of Pre-training. 
+
+all three datasets. This is because N ODE 2VEC , originally de-signed for node-level representation, fails to capture the se-quential dependencies between nodes in a path. In contrast, the other unsupervised methods are designed specifically for path representation learning and recognize the importance of effectively modeling spatial dependencies. Among them, DGCP ATH achieves superior performance due to its integra-tion of a diffusion-based view generator and a distribution-aware contrastive learning framework, enabling it to better capture both spatial structure and representation diversity. 
+
+5.2 Ablation Study 
+
+We study three additional variations of our method to eval-uate the contribution of each key component: (1) w/o DVG 
+
+excludes the diffusion-based view generator, (2) w/o VCM ex-cludes the variational contrastive module, and (3) w/o GCSM 
+
+excludes the generative cross-supervision module. The re-sults, in Table ?? , show that all components contribute to the performance of DGCP ATH at both tasks, as removing any of the components yields a performance drop. However, the ex-tent of each component’s impact varies by task. Notably, the 
+
+VCM plays a more critical role than DVG and GCSM , indicat-ing its importance in learning generalizable path representa-tions. Removing DVG or GCSM also degrades performance, highlighting the complementary strengths of all modules. 
+
+5.3 Effects of Pre-training 
+
+To further assess the benefits of the proposed method, we use DGCP ATH to pre-train the Transformer-based path encoder for the supervised model PathRank. Specifically, DGC-PATH is first trained in an unsupervised manner, after which the learned parameters are transferred to initialize the Trans-former encoder in P ATH RANK . Figure 3 presents the perfor-mance of P ATH RANK with and without pre-training at travel time estimation and path ranking, under varying labeled data sizes: 2K, 4K, 6K, 8K, 10K, and 12K. We observe that with pre-training, P ATH RANK achieves comparable performance to its non-pretrained counterpart using significantly fewer la-beled training samples. For instance, at the travel time estima-tion task, P ATH RANK with pre-training requires only 8K, 9K, and 9K labeled samples on Aalborg, Chengdu, and Harbin, respectively, to match the performance of P ATH RANK trained from scratch with 12K labeled samples. When P ATH RANK is 
+
+Methods Aalborg Travel Time Estimation Path Ranking MAE/MAPE/RMSE MAE/ τ /ρ
+
+w/o DVG 2.33/14.23/3.89 0.12/0.80/0.81 
+
+w/o VCM 2.64/16.05/4.75 0.13/0.77/0.80 
+
+w/o GCSM 2.31/14.74/4.01 0.14/0.83/0.84 DGCP ATH 2.13/13.65/3.73 0.11/0.85/0.87 Methods Chengdu Travel Time Estimation Path Ranking MAE/MAPE/RMSE MAE/ τ /ρ
+
+w/o DVG 4.66/27.49/7.06 0.13/0.79/0.83 w/o VCM 4.84/28.44/7.28 0.15/0.77/0.80 w/o GCSM 4.74/27.85/7.21 0.14/0.81/0/84 DGCPath 4.66/27.49/7.06 0.11/0.82/0.86 Methods Harbin Travel Time Estimation Path Ranking MAE/MAPE/RMSE MAE/ τ /ρ
+
+w/o DVG 4.12/14.36/5.14 0.12/0.89/0.91 
+
+w/o VCM 4.43/15.92/5.52 0.13/0.86/0.89 
+
+w/o GCSM 4.24/14.94/5.29 0.13/0.88/0.90 DGCP ATH 4.02/13.91/5.04 0.11/0.90/0.93 
+
+> Table 3: Effects of DVG, VCM Loss, and GCSM Loss
+
+trained using the full 12K labeled samples with pre-training, it outperforms the non-pretrained counterpart. 
+
+5.4 Path Recommendation 
+
+To further verify the effectiveness and generality of DGC-PATH , we extend the experimental evaluation by incorporat-ing the Path Recommendation task. Following existing studies [Yang and Yang, 2019], the path taken by a user trajectory (e.g., path A) is labeled as 1, while alternative paths with the same origin and destination (e.g., paths B and C) are labeled as 0. The underlying intuition is that, given multiple candidate paths A, B, and C, the model should recommend the path actually chosen by the user (i.e., A). We conduct experiments on the Aalborg and Chengdu datasets and evaluate performance using Accuracy (Acc., ↑), 
+
+Precision (Pre., ↑), and F1-score (↑), where higher values indicate better recommendation quality. Table 4 reports the path recommendation results across all comparison methods. Overall, DGCP ATH consistently outperforms the unsuper-vised baselines, demonstrating its effectiveness in capturing user path preferences. 
+
+5.5 Parameter Sensitivity Analysis 
+
+We proceed to study three important hyper-parameter, includ-ing 1) temperature t, 2) diffusion step T , and embedding di-mension d.
+
+Effect of Temperature t of Distributional Contrastive Learning To study the effect of the temperature t, we con-duct a parameter study on Aalborg dataset, which is reported in Table 5. We observe that the performance of DGCP ATH 
+
+varies with different temperatures. In particular, the best per-formance is achieved when t = 0 .5. This suggests that a Table 4: Evaluation on Path Recommendation Task.                                              
+
+> Method Aalborg Chengdu Acc. Pre. F1 Acc. Pre. F1
+> TOAST 0.692 0.711 0.738 0.774 0.785 0.806 PIM 0.722 0.739 0.762 0.785 0.799 0.813 START 0.751 0.770 0.787 0.804 0.826 0.853 LIGHT PATH 0.752 0.768 0.790 0.817 0.832 0.849 RED 0.785 0.811 0.830 0.844 0.860 0.879 DGCP ATH 0.790 0.820 0.838 0.851 0.865 0.883
+> Table 5: Effect of Temperature tin Distributional Contrastive Learn-ing
+
+t
+
+Aalborg Travel Time Estimation Path Ranking MAE MAPE RMSE MAE τ ρ
+
+0.1 2.194 13.758 3.762 0.107 0.839 0.851 0.5 2.131 13.654 3.725 0.107 0.846 0.870 
+
+5 2.282 13.802 3.799 0.108 0.827 0.840 moderately warm temperature effectively balances the sharp-ness of the contrastive objective, mitigating overly confident similarity assignments and leading to more stable optimiza-tion and improved representation quality. 
+
+Effect of Embedding Dimensionality d To examine the impact of the path embedding dimensionality d, we conduct a parameter study on the Aalborg dataset. As reported in Ta-ble 6, the performance of our model varies across different values of d. In particular, the best performance is achieved when d = 128 , indicating that this dimensionality provides a favorable balance between representation capacity and over-fitting.  
+
+> Table 6: Effect of embedding dimensionality d
+
+d
+
+Aalborg Travel Time Estimation Path Ranking MAE MAPE RMSE MAE τ ρ
+
+64 2.234 13.826 3.922 0.109 0.833 0.851 128 2.131 13.654 3.725 0.107 0.846 0.870 
+
+256 2.212 13.799 3.879 0.107 0.838 0.855 
+
+Effect of Diffusion Step T To investigate the effect of the diffusion step T of the view generator, we conduct a param-eter study on the Aalborg dataset. The results are reported in Table 7. We observe that DGCP ATH achieves the best performance when T = 1000 , indicating that an appropri-ate diffusion depth is crucial for generating informative yet                                 
+
+> Table 7: Effect of diffusion step TT
+> Aalborg Travel Time Estimation Path Ranking MAE MAPE RMSE MAE τρ
+> 500 2.653 14.021 4.103 0.110 0.820 0.843 1000 2.131 13.654 3.725 0.107 0.846 0.870
+> 1500 2.354 13.873 3.913 0.108 0.837 0.858 Table 8: Effect of Dynamic Traffic State (DTS).
+> Aalborg Travel Time Estimation Path Ranking MAE/MAPE/RMSE MAE/ τ/ρ
+> DGCP ATH 2.131/13.654/3.725 0.107/0.846/0.870
+> w/ DTS 1.962/12.891/3.688 0.105/0.856/0.879
+
+diverse views. A smaller T may lead to insufficient perturba-tion, while an excessively large T can introduce unnecessary noise, both of which degrade representation quality. 
+
+5.6 Effect of Dynamic Traffic State 
+
+To verify the impact of dynamic traffic states, we conduct an additional experiment that incorporates temporal traffic infor-mation. Specifically, traffic flow sequences are constructed based on different time slots to capture time-varying traf-fic patterns. We denote DGCP ATH w/ DTS as the variant of DGCP ATH that explicitly considers dynamic traffic states. The results in Table 8 show that incorporating dynamic traffic states further improves the performance of DGCP ATH .
+
+5.7 Model Scalability 
+
+In this section, we investigate the scalability of DGCP ATH 
+
+with respect to the size of the training data using the Aal-borg dataset. Table 9 reports the results, where 20%, 40%, 60%, 80%, and 100% denote the proportions of the training set used for model training. The results show a consistent per-formance improvement as the training data size increases, in-dicating that DGCP ATH effectively leverages larger datasets to enhance its modeling capability.                                                                            
+
+> Table 9: Model Scalalability Analysis
+> Aalborg Travel Time Estimation Path Ranking MAE MAPE RMSE MAE τρ
+> 20% 2.541 14.537 4.312 0.125 0.793 0.811 40% 2.476 14.258 4.005 0.113 0.821 0.835 60% 2.334 13.902 3.922 0.109 0.836 0.847 80% 2.229 13.811 3.823 0.108 0.840 0.859 100% 2.131 13.654 3.725 0.107 0.846 0.870 Table 10: Evaluation on Travel Time Estimation (TTE) and Path Ranking (PR) under Noisy Representations.
+> Aalborg TTE PR MAE/MAPE/RMSE MAE/ τ/ρ
+> TOAST 3.439/21.311/5.555 0.138/0.768/0.779 TOAST w/ σ4.426/21.906/6.066 0.207/0.672/0.683 PIM 3.471/21.314/5.640 0.141/0.764/0.777 PIM w/ σ4.003/21.904/5.982 0.192/0.727/0.738 START 2.965/18.432/4.979 0.178/0.839/0.859 START w/ σ3.441/18.901/5.551 0.225/0.795/0.803 LIGHT PATH 2.920/18.254/4.932 0.118/0.781/0.791 LIGHT PATH w/ σ3.232/18.673/5.412 0.156/0.736/0.744 RED 2.457/14.907/3.809 0.109/0.819/0.823 RED w/ σ2.527/14.999/3.903 0.127/0.790/0.805 DGCP ATH 2.131/13.654/3.725 0.107/0.846/0.870 DGCP ATH w/ σ2.193/13.924/3.873 0.109/0.842/0.862
+
+5.8 Robustness Analysis 
+
+To approximate real-world scenarios with noisy trajectories, we injected Gaussian perturbations (e.g., σ = 0 .03 ) into each path representation and subsequently trained a regressor on the Aalborg and Chengdu datasets. The results, reported in Table 10, demonstrate that DGCP ATH exhibits strong robust-ness to noisy representations and consistently outperforms all comparison methods, as it has a smaller performance drop percentage ( PDP ). For example, the PDP of DGCP ATH for travel time estimation (MAE) on the Aalborg dataset is 2.9%, while the PDP of RED for travel time estimation on the Aal-borg dataset is 2.9%. In comparison, the PDP of DGCP ATH 
+
+for path ranking ( τ ) on the Aalborg dataset is 0.5%, whereas the PDP of RED for path ranking ( τ ) on the Aalborg dataset is 3.5%. 
+
+## 6 Conclusion 
+
+We propose DGCP ATH , a distribution-aware generative con-trastive framework for path representation learning. Rather than relying on hand-crafted augmentations, DGCP ATH em-ploys a learnable diffusion-based generator to produce two path views. It then uses a distribution-aware contrastive ob-jective to align positive-pair distributions while separating positive and negative pairs. A generative cross-supervision module further enhances encoder training, yielding more gen-eralizable path representations and improved performance across downstream tasks. 
+
+## References 
+
+[Chen and He, 2021] Xinlei Chen and Kaiming He. Explor-ing simple siamese representation learning. In CVPR ,pages 15750–15758, 2021. [Chen et al. , 2021] Yile Chen, Xiucheng Li, Gao Cong, Zhifeng Bao, Cheng Long, Yiding Liu, Arun Kumar Chan-dran, and Richard Ellison. Robust road network represen-tation learning: When traffic patterns meet traveling se-mantics. In CIKM , pages 211–220, 2021. [Chen et al. , 2022] Zebin Chen, Xiaolin Xiao, Yue-Jiao Gong, Jun Fang, Nan Ma, Hua Chai, and Zhiguang Cao. Interpreting trajectories from multiple views: A hierarchi-cal self-attention network for estimating the time of arrival. In KDD , pages 2771–2779, 2022. [Fang et al. , 2021] Ziquan Fang, Lu Pan, Lu Chen, Yuntao Du, and Yunjun Gao. MDTP: A multi-source deep traffic prediction framework over spatio-temporal trajectory data. 
+
+PVLDB , 14(8):1289–1297, 2021. [Fu et al. , 2020] Kun Fu, Fanlin Meng, Jieping Ye, and Zheng Wang. Compacteta: A fast inference system for travel time prediction. In KDD , pages 3337–3345, 2020. [Grover and Leskovec, 2016] Aditya Grover and Jure Leskovec. node2vec: Scalable feature learning for networks. In KDD , pages 855–864, 2016. [Han et al. , 2025] Chengkai Han, Jingyuan Wang, Yongyao Wang, Xie Yu, Hao Lin, Chao Li, and Junjie Wu. Bridging traffic state and trajectory for dynamic road network and trajectory representation learning. In AAAI , pages 11763– 11771, 2025. [Han et al. , 2026a] Chenxu Han, Sean Bin Yang, and Jilin Hu. Diffmm: Efficient method for accurate noisy and sparse trajectory map matching via one step diffusion. In 
+
+AAAI , pages 14783–14791, 2026. [Han et al. , 2026b] Chenxu Han, Sean Bin Yang, and Jilin Hu. Diffmm: Efficient method for accurate noisy and sparse trajectory map matching via one step diffusion. 
+
+CoRR , abs/2601.08482, 2026. [Jensen et al. , 2024] Christian S. Jensen, Bin Yang, Chen-juan Guo, Jilin Hu, and Kristian Torp. Routing with mas-sive trajectory data. In ICDE , pages 5542–5547, 2024. [Jiang et al. , 2023] Jiawei Jiang, Dayan Pan, Houxing Ren, Xiaohan Jiang, Chao Li, and Jingyuan Wang. Self-supervised trajectory representation learning with tempo-ral regularities and travel semantics. In ICDE , pages 843– 855, 2023. [Kendall et al. , 2018] Alex Kendall, Yarin Gal, and Roberto Cipolla. Multi-task learning using uncertainty to weigh losses for scene geometry and semantics. In CVPR , pages 7482–7491, 2018. [Kingma and Welling, 2014] Diederik P. Kingma and Max Welling. Auto-encoding variational bayes. In ICLR , 2014. [Li et al. , 2015] Yongfu Li, Bin Yang, Taixiong Zheng, Yin-guo Li, Mingyue Cui, and Srinivas Peeta. Extended-state-observer-based double-loop integral sliding-mode control of electronic throttle valve. IEEE Trans. Intell. Transp. Syst. , 16(5):2501–2510, 2015. [Li et al. , 2016] Yongfu Li, Yuhao Kang, Bin Yang, Srinivas Peeta, Li Zhang, Taixong Zheng, and Yinguo Li. A sliding mode controller for vehicular traffic flow. Phys. A: Stat. Mech. Appl. , 462:38–47, 2016. [Li et al. , 2017] Yongfu Li, Yu Song, Bin Yang, Taixiong Zheng, Huizong Feng, and Yinguo Li. A new lattice hy-drodynamic model considering the effects of bilateral gaps on vehicular traffic flow. Nonlinear Dyn. , 87(1):1–11, 2017. [Li et al. , 2018] Yongfu Li, Huan Yang, Bin Yang, Taixiong Zheng, and Chao Zhang. An extended continuum model incorporating the electronic throttle dynamics for traffic flow. Nonlinear Dyn. , 93(4):1923–1931, 2018. [Li et al. , 2019] Xiucheng Li, Gao Cong, Aixin Sun, and Yun Cheng. Learning travel time distributions with deep generative model. In WWW , pages 1017–1027, 2019. [Lin et al. , 2023] Yan Lin, Huaiyu Wan, Jilin Hu, Shengnan Guo, Bin Yang, Youfang Lin, and Christian S. Jensen. Origin-destination travel time oracle for map-based ser-vices. Proc. ACM Manag. Data , 1(3):217:1–217:27, 2023. [Liu et al. , 2023] Hao Liu, Jindong Han, Yanjie Fu, Yanyan Li, Kai Chen, and Hui Xiong. Unified route representation learning for multi-modal transportation recommendation with spatiotemporal pre-training. VLDB J. , 32(2):325– 342, 2023. [Mao et al. , 2025] Xiaowei Mao, Yan Lin, Shengnan Guo, Yubin Chen, Xingyu Xian, Haomin Wen, Qisen Xu, Youfang Lin, and Huaiyu Wan. Dutytte: Deciphering un-certainty in origin-destination travel time estimation. In 
+
+AAAI , pages 12390–12398, 2025. [Pan et al. , 2023] Zhicheng Pan, Yihang Wang, Yingying Zhang, Sean Bin Yang, Yunyao Cheng, Peng Chen, Chen-juan Guo, Qingsong Wen, Xiduo Tian, Yunliang Dou, Zhiqiang Zhou, Chengcheng Yang, Aoying Zhou, and Bin Yang. Magicscaler: Uncertainty-aware, predictive au-toscaling. Proc. VLDB Endow. , 16(12):3808–3821, 2023. [Peter et al. , 2017] Sven Peter, Ferran Diego, Fred A. Ham-precht, and Boaz Nadler. Cost efficient gradient boosting. In NeurIPS , pages 1551–1561, 2017. [Wang et al. , 2024] Bo-Hua Wang, Zhiqiang Tian, Aixue Ye, Feng Wen, Shaoyi Du, and Yue Gao. Generative variational-contrastive learning for self-supervised point cloud representation. IEEE Trans. Pattern Anal. Mach. Intell. , 46(9):6154–6166, 2024. [Wei et al. , 2025] Yongfu Wei, Yan Lin, Hongfan Gao, Ronghui Xu, Sean Bin Yang, and Jilin Hu. Path-llm: A multi-modal path representation learning by aligning and fusing with large language models. In WWW , pages 2289– 2298, 2025. [Wu et al. , 2024] Xinle Wu, Xingjian Wu, Bin Yang, Lekui Zhou, Chenjuan Guo, Xiangfei Qiu, Jilin Hu, Zhenli Sheng, and Christian S. Jensen. Autocts++: zero-shot joint neural architecture and hyperparameter search for corre-lated time series forecasting. VLDB J. , 33(5):1743–1770, 2024. [Xu et al. , 2024] Ronghui Xu, Hanyin Cheng, Chenjuan Guo, Hongfan Gao, Jilin Hu, Sean Bin Yang, and Bin Yang. Mm-path: Multi-modal, multi-granularity path representation learning - extended version. CoRR ,abs/2411.18428, 2024. [Xu et al. , 2025] Ronghui Xu, Hanyin Cheng, Chenjuan Guo, Hongfan Gao, Jilin Hu, Sean Bin Yang, and Bin Yang. Mm-path: Multi-modal, multi-granularity path rep-resentation learning. In KDD , pages 1703–1714, 2025. [Yang and Gid´ ofalvi, 2018] Can Yang and Gy¨ oz¨ o Gid´ ofalvi. Fast map matching, an algorithm integrating hidden markov model with precomputation. Int. J. Geogr. Inf. Sci. ,32(3):547–570, 2018. [Yang and Yang, 2019] Sean Bin Yang and Bin Yang. Pathrank: A multi-task learning framework to rank paths in spatial networks. CoRR , abs/1907.04028, 2019. [Yang and Yang, 2020] Sean Bin Yang and Bin Yang. Learn-ing to rank paths in spatial networks. In ICDE , pages 2006–2009, 2020. [Yang et al. , 2021a] Sean Bin Yang, Chenjuan Guo, Jilin Hu, Jian Tang, and Bin Yang. Unsupervised path representa-tion learning with curriculum negative sampling. In IJCAI ,pages 3286–3292, 2021. [Yang et al. , 2021b] Sean Bin Yang, Chenjuan Guo, Jilin Hu, Jian Tang, and Bin Yang. Unsupervised path representa-tion learning with curriculum negative sampling. CoRR ,abs/2106.09373, 2021. [Yang et al. , 2022a] Sean Bin Yang, Chenjuan Guo, Jilin Hu, Bin Yang, Jian Tang, and Christian S. Jensen. Weakly-supervised temporal path representation learning with con-trastive curriculum learning. In ICDE , pages 2873–2885, 2022. [Yang et al. , 2022b] Sean Bin Yang, Chenjuan Guo, Jilin Hu, Bin Yang, Jian Tang, and Christian S. Jensen. Weakly-supervised temporal path representation learning with con-trastive curriculum learning - extended version. CoRR ,abs/2203.16110, 2022. [Yang et al. , 2022c] Sean Bin Yang, Chenjuan Guo, and Bin Yang. Context-aware path ranking in road networks. 
+
+TKDE , 34(7):3153–3168, 2022. [Yang et al. , 2023] Sean Bin Yang, Jilin Hu, Chenjuan Guo, Bin Yang, and Christian S. Jensen. Lightpath: Lightweight and scalable path representation learning. In KDD , pages 2999–3010, 2023. [Yang et al. , 2024] Ling Yang, Zhilong Zhang, Yang Song, Shenda Hong, Runsheng Xu, Yue Zhao, Wentao Zhang, Bin Cui, and Ming-Hsuan Yang. Diffusion models: Acomprehensive survey of methods and applications. ACM Comput. Surv. , 56(4):105:1–105:39, 2024. [Yang et al. , 2025] Sean Bin Yang, Ying Sun, Yunyao Cheng, Yan Lin, Torp Kristian, and Jilin Hu. Spatio-temporal trajectory foundation model-recent advances and future directions. arXiv preprint arXiv:2511.20729 , 2025. [Yang et al. , 2026] Sean Bin Yang, Hao Miao, Zongyi Xu, Jilin Hu, Xiangmeng Wang, Hua Lu, Bin Yang, and Chris-tian S. Jensen. Dgcpath: Distribution-aware generative contrastive framework for self-supervised path represen-tation learning. In IJCAI , 2026. [Yu et al. , 2024] Chengqing Yu, Fei Wang, Zezhi Shao, Tangwen Qian, Zhao Zhang, Wei Wei, and Yongjun Xu. Ginar: An end-to-end multivariate time series forecasting model suitable for variable missing. In KDD , pages 3989– 4000, 2024. [Yuan et al. , 2022] Haitao Yuan, Guoliang Li, and Zhifeng Bao. Route travel time estimation on A road network re-visited: Heterogeneity, proximity, periodicity and dynam-icity. PVLDB , 16(3):393–405, 2022. [Zhao et al. , 2025] Jie Zhao, Chao Chen, Yuanshao Zhu, Mingyu Deng, and Yuxuan Liang. Unitr: A unified frame-work for joint representation learning of trajectories and road networks. In AAAI , pages 13348–13356, 2025. [Zhou et al. , 2024] Silin Zhou, Shuo Shang, Lisi Chen, Christian S. Jensen, and Panos Kalnis. RED: effective tra-jectory representation learning with comprehensive infor-mation. PVLDB , 18(2):80–92, 2024. [Zhou et al. , 2025] Silin Zhou, Shuo Shang, Lisi Chen, Peng Han, and Christian S. Jensen. Grid and road expressions are complementary for trajectory representation learning. In KDD , 2025.
