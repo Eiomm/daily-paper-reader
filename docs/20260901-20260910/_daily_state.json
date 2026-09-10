@@ -1,0 +1,281 @@
+{
+  "date": "20260901-20260910",
+  "date_label": "2026-09-01 ~ 2026-09-10",
+  "generated_at": "2026-09-10 03:05:42 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.03225v1",
+      "route": "20260901-20260910/2609.03225v1-long-horizon-consistent-and-interaction-aware-world-models-for-multi-style-end-to-end-driving",
+      "title": "Long-Horizon Consistent and Interaction-Aware World Models for Multi-Style End-to-End Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于世界模型的端到端驾驶强化学习，强调长时一致性与交互感知的想象推演",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.03572v1",
+      "route": "20260901-20260910/2609.03572v1-drive-hwm-hierarchical-world-models-for-dynamic-latent-guided-autonomous-driving",
+      "title": "Drive-HWM: Hierarchical World Models for Dynamic-Latent Guided Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向自动驾驶的分层慢-快世界模型",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.03602v1",
+      "route": "20260901-20260910/2609.03602v1-sv-wam-an-efficient-surround-view-world-action-model-for-end-to-end-autonomous-driving",
+      "title": "SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向端到端自动驾驶的环视世界-动作模型",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.04070v1",
+      "route": "20260901-20260910/2609.04070v1-continuous-actions-from-discrete-minds-latent-aligned-planning-for-end-to-end-autonomous-driving",
+      "title": "Continuous Actions from Discrete Minds: Latent-Aligned Planning for End-to-End Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于残差VQ-VAE的动作tokenizer将轨迹编码为结构化隐空间，作为端到端驾驶的物理先验",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.02341v1",
+      "route": "20260901-20260910/2609.02341v1-towards-zero-shot-transfer-across-embodiments-for-driving-vlas",
+      "title": "Towards Zero-Shot Transfer Across Embodiments For Driving VLAs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向自动驾驶的VLA模型与跨具身表示迁移",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.02688v1",
+      "route": "20260901-20260910/2609.02688v1-from-proxy-learning-to-driving-decisions-a-transfer-based-framework-for-evaluating-future-aware-autonomous-driving-planners",
+      "title": "From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "评估驾驶规划器中的未来感知表示与世界模型",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.04921v1",
+      "route": "20260901-20260910/2609.04921v1-one-diffusion-model-two-roles-guided-trajectory-planning-and-safety-critical-scenario-generation-in-closed-loop-simulation",
+      "title": "One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "扩散模型用于轨迹规划与安全关键场景生成",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.06055v1",
+      "route": "20260901-20260910/2609.06055v1-drivezero-end-to-end-driving-beyond-human-demonstrations",
+      "title": "DriveZero: End-to-End Driving Beyond Human Demonstrations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "结合感知与动作模型及混合智能体闭环强化学习的端到端自动驾驶系统",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.07094v1",
+      "route": "20260901-20260910/2609.07094v1-cascade-a-spatio-temporal-causal-reasoning-representation-and-dataset-for-driving",
+      "title": "CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向驾驶推理的时空因果结构化表示与数据集",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.00718v1",
+      "route": "20260901-20260910/2609.00718v1-a-closed-loop-evaluation-of-capability-loss-and-recovery-in-compressed-driving-policies",
+      "title": "A Closed-Loop Evaluation of Capability Loss and Recovery in Compressed Driving Policies",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "压缩学习驾驶策略的闭环评估与安全交互",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.01120v1",
+      "route": "20260901-20260910/2609.01120v1-dnc-imm-early-lane-change-intention-recognition-via-neural-calibration-based-on-driving-context-information",
+      "title": "DNC-IMM: Early Lane-Change Intention Recognition via Neural Calibration Based on Driving Context Information",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向自动驾驶决策的早期换道意图识别",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.02252v1",
+      "route": "20260901-20260910/2609.02252v1-diffusearch-how-hybrid-trajectory-planning-benefits-from-aligned-objectives-in-diffusion-and-action-space",
+      "title": "DiffuSearch: How Hybrid Trajectory Planning Benefits from Aligned Objectives in Diffusion and Action Space",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "扩散与动作空间目标对齐的混合轨迹规划",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.02270v1",
+      "route": "20260901-20260910/2609.02270v1-crashdiffuser-vlm-guided-collision-intent-reasoning-for-fine-grained-safety-critical-traffic-scenario-generation",
+      "title": "CrashDiffuser: VLM-Guided Collision Intent Reasoning for Fine-Grained Safety-Critical Traffic Scenario Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "VLM引导扩散生成细粒度安全关键交通场景",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.02462v1",
+      "route": "20260901-20260910/2609.02462v1-vips-vehicle-infrastructure-cooperative-planning-benchmark-via-pseudo-simulation",
+      "title": "VIPS: Vehicle-Infrastructure Cooperative Planning Benchmark via Pseudo-Simulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向端到端自动驾驶评测的基于伪仿真的车路协同规划基准",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.00682v1",
+      "route": "20260901-20260910/2609.00682v1-context-aware-intelligent-vehicles",
+      "title": "Context-Aware Intelligent Vehicles",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "上下文感知智能车辆与自动驾驶系统",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.02830v1",
+      "route": "20260901-20260910/2609.02830v1-toward-robust-lidar-semantic-segmentation-for-real-world-deployment-evaluation-under-coarse-labels-adverse-conditions-and-domain-shifts",
+      "title": "Toward Robust LiDAR Semantic Segmentation for Real-World Deployment: Evaluation under Coarse Labels, Adverse Conditions, and Domain Shifts",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶部署的鲁棒LiDAR语义分割评估",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    },
+    {
+      "paper_id": "2609.04147v1",
+      "route": "20260901-20260910/2609.04147v1-a-low-cost-open-platform-for-end-to-end-autonomous-driving-on-a-miniature-ackermann-vehicle",
+      "title": "A Low-Cost, Open Platform for End-to-End Autonomous Driving on a Miniature Ackermann Vehicle",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "端到端自动驾驶平台与行为克隆基线",
+      "first_seen_at": "2026-09-10 03:05:42 UTC",
+      "updated_at": "2026-09-10 03:05:42 UTC"
+    }
+  ]
+}

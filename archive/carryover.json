@@ -1,10 +1,15 @@
 {
-  "generated_at": "2026-09-09T21:35:29.423134+00:00",
-  "updated_date": "20260909",
+  "generated_at": "2026-09-10T02:57:07.514193+00:00",
+  "updated_date": "20260901-20260910",
   "carryover_days": 9,
   "tag_states": {
     "world-models": {
       "updated_date": "20260909",
+      "carryover_days": 9,
+      "items": []
+    },
+    "av-research": {
+      "updated_date": "20260901-20260910",
       "carryover_days": 9,
       "items": []
     }

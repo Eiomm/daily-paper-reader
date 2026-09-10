@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-09</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-01 ~ 2026-09-10</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 21:46:23 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-10 03:05:42 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共筛选17篇论文，精读6篇、速读11篇，重点聚焦世界模型与多模态生成。</p>
-<p>最值得关注的是精读高分《PV-WM》与《Hi-FLoop》，分别解决行人-车辆协同推演和跨时间尺度状态反馈建模，速读中《SeRV》的手语生成与《WorldAgen》的测试时训练也具启发性。</p>
-<p>建议普通读者优先浏览《PV-WM》和《Hi-FLoop》，若对视觉语言交叉感兴趣可补充《SeRV》。</p>
+<p>9月1日至10日共筛出17篇自动驾驶论文，其中6篇精读、11篇速读，重点集中在世界模型与扩散模型两条线。最值得看的是两篇9.0分世界模型工作（多风格端到端驾驶、动态潜变量分层引导），以及8.0分的扩散模型同时做轨迹规划与安全场景生成。普通读者可先读精读两篇建立世界模型直觉，再按兴趣挑速读里的评估框架或因果数据集。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -83,9 +81,9 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="PV-WM: A Heterogeneous Micro-Macro World Model for Articulated Pedestrian-Vehicle Co-Rollout">PV-WM: A Heterogeneous Micro-Macro World Model for Articulated Pedestrian-Vehicle Co-Rollout</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling">Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers">AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Long-Horizon Consistent and Interaction-Aware World Models for Multi-Style End-to-End Driving">Long-Horizon Consistent and Interaction-Aware World Models for Multi-Style End-to-End Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Drive-HWM: Hierarchical World Models for Dynamic-Latent Guided Autonomous Driving">Drive-HWM: Hierarchical World Models for Dynamic-Latent Guided Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving">SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>4</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -96,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SeRV: Semantic-Aligned Residual Vector Quantization for American Sign Language Generation">SeRV: Semantic-Aligned Residual Vector Quantization for American Sign Language Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="WorldAgen: Unified State-Action Prediction with Test-Time World Model Training">WorldAgen: Unified State-Action Prediction with Test-Time World Model Training</span></li><li><span class="dpr-home-dashboard-paper-title" title="Towards a Belief-Based World Model for LLM Agents">Towards a Belief-Based World Model for LLM Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners">From Proxy Learning to Driving Decisions: A Transfer-Based Framework for Evaluating Future-Aware Autonomous Driving Planners</span></li><li><span class="dpr-home-dashboard-paper-title" title="One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation">One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving">CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>5</strong></span></div>
 </section>
 </div>
 
