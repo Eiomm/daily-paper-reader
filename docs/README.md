@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-13 ~ 2026-09-11</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-11</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 40 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>29</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>8</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-11 04:18:05 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-11 21:47:14 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-08-13至09-11共筛读40篇LLM Agent记忆方向论文，精读29篇、速读11篇。最值得看的是《LycheeMemory V2》与《RippleMem》双双9.0分，前者用语义分段整合做高效长期记忆，后者把孤立检索升级为联想式回忆，代表Agent记忆正从&quot;存得下&quot;转向&quot;想得起&quot;。普通读者可先读这两篇，再结合速读中的记忆基底评测梳理选型思路。</p>
+<p>今日精读8篇、速读11篇共19篇AI Agent论文，聚焦长期记忆与终身学习。最值得看的是双双9.0分的SimSkill（交通仿真自主学习）和RuleMem（长对话主动规则记忆），速读中Agent记忆系统能否追踪状态变化也值得留意。普通读者可先读这两篇精读，再顺着&quot;遗忘管理&quot;和&quot;记忆追踪&quot;方向延伸了解。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">29 篇</strong>
+    <strong class="dpr-home-dashboard-count">8 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LycheeMemory V2: Efficient Long-Term Memory for LLM Agents via Semantic Segment-Level Consolidation">LycheeMemory V2: Efficient Long-Term Memory for LLM Agents via Semantic Segment-Level Consolidation</span></li><li><span class="dpr-home-dashboard-paper-title" title="RippleMem: From Isolated Retrieval to Associative Recollection for Long-Term Agent Memory">RippleMem: From Isolated Retrieval to Associative Recollection for Long-Term Agent Memory</span></li><li><span class="dpr-home-dashboard-paper-title" title="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation">HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SimSkill: A Lifelong Learning AI Agent for Autonomous Mastery of Traffic Simulation">SimSkill: A Lifelong Learning AI Agent for Autonomous Mastery of Traffic Simulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="RuleMem: Active Rule Memory for Long-Term Conversational Agents">RuleMem: Active Rule Memory for Long-Term Conversational Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Interaction Traces to Persistent Skills: Online Evolution for Computer-Use Agents">From Interaction Traces to Persistent Skills: Online Evolution for Computer-Use Agents</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>29</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>8</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,7 +94,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Latent On-Policy Self-Distillation">Latent On-Policy Self-Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents">Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Remember Smarter: Visual History Compressor and Hyperbolic Experience Space for Robotic Memory">Remember Smarter: Visual History Compressor and Hyperbolic Experience Space for Robotic Memory</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Towards Reversible Forgetting: Managing Obsolete Knowledge in Continual Enterprise AI Agents">Towards Reversible Forgetting: Managing Obsolete Knowledge in Continual Enterprise AI Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents">DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Can Agent Memory Systems Track Evolving State?">Can Agent Memory Systems Track Evolving State?</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>11</strong></span></div>
 </section>

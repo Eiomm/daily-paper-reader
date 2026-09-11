@@ -1,0 +1,313 @@
+{
+  "date": "20260911",
+  "date_label": "",
+  "generated_at": "2026-09-11 21:47:14 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.03753v1",
+      "route": "202609/11/2609.03753v1-simskill-a-lifelong-learning-ai-agent-for-autonomous-mastery-of-traffic-simulation",
+      "title": "SimSkill: A Lifelong Learning AI Agent for Autonomous Mastery of Traffic Simulation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "将经验固化为情景、程序与语义记忆",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.03915v1",
+      "route": "202609/11/2609.03915v1-rulemem-active-rule-memory-for-long-term-conversational-agents",
+      "title": "RuleMem: Active Rule Memory for Long-Term Conversational Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "从历史交互归纳可复用逻辑规则的规则记忆框架",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04869v1",
+      "route": "202609/11/2609.04869v1-from-interaction-traces-to-persistent-skills-online-evolution-for-computer-use-agents",
+      "title": "From Interaction Traces to Persistent Skills: Online Evolution for Computer-Use Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "将交互轨迹与反馈转化为持久可复用技能的在线进化框架",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04875v1",
+      "route": "202609/11/2609.04875v1-forgetting-without-restarting-execution-state-unlearning-for-stateful-llm-agents",
+      "title": "Forgetting Without Restarting: Execution-State Unlearning for Stateful LLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向有状态LLM智能体遗忘操作的状态卸载",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04915v1",
+      "route": "202609/11/2609.04915v1-compact-memory-llm-agents-via-online-max-member-clustering-and-atom-aware-packing",
+      "title": "Compact-Memory LLM Agents via Online Max-Member Clustering and Atom-Aware Packing",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在线聚类紧凑记忆与写入规则提升token效率",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.08258v1",
+      "route": "202609/11/2609.08258v1-revoked-but-still-authoritative-an-empirical-study-of-revocation-enforcement-in-agent-memory-systems",
+      "title": "Revoked but Still Authoritative: An Empirical Study of Revocation Enforcement in Agent-Memory Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "智能体记忆系统中撤销执行的实证研究",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.08919v1",
+      "route": "202609/11/2609.08919v1-experience-funnel-a-state-policy-alternating-loop-for-self-evolving-agents",
+      "title": "Experience Funnel: A State-Policy Alternating Loop for Self-Evolving Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "自演化智能体，耦合快速文本状态适应与参数化策略",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.11060v1",
+      "route": "202609/11/2609.11060v1-grounding-agent-memory-environment-probing-curation-for-enterprise-agents",
+      "title": "Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "跨会话的智能体持久记忆策展",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2608.18177v1",
+      "route": "202609/11/2608.18177v1-towards-reversible-forgetting-managing-obsolete-knowledge-in-continual-enterprise-ai-agents",
+      "title": "Towards Reversible Forgetting: Managing Obsolete Knowledge in Continual Enterprise AI Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "可逆遗忘框架，通过活跃、休眠与退役记忆状态管理过时知识",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2608.18524v1",
+      "route": "202609/11/2608.18524v1-dart-sd-diamond-topology-aware-retrieval-and-tuning-for-self-distillation-of-multi-turn-tool-calling-agents",
+      "title": "DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多轮工具调用智能体的自蒸馏",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2608.19652v1",
+      "route": "202609/11/2608.19652v1-can-agent-memory-systems-track-evolving-state",
+      "title": "Can Agent Memory Systems Track Evolving State?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向智能体记忆状态跟踪的基准",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2608.21690v1",
+      "route": "202609/11/2608.21690v1-context-as-an-environment-programmatic-context-management-for-long-horizon-agents",
+      "title": "Context as an Environment: Programmatic Context Management for Long-Horizon Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过持久状态复用历史而非扩展上下文",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.03340v1",
+      "route": "202609/11/2609.03340v1-fresh-memory-stale-plans-dependency-scoped-validation-for-distributed-llm-agent-memory",
+      "title": "Fresh Memory, Stale Plans: Dependency-Scoped Validation for Distributed LLM-Agent Memory",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "共享智能体记忆与计划更新的依赖范围校验",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.03619v1",
+      "route": "202609/11/2609.03619v1-remember-and-reweight-enhancing-multi-agent-debate-with-experience-memory-and-confidence-estimation",
+      "title": "Remember and Reweight: Enhancing Multi-Agent Debate with Experience Memory and Confidence Estimation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "为多智能体推理提供过往辩论经验记忆",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04298v2",
+      "route": "202609/11/2609.04298v2-harbor-adapters-and-harbor-index-infrastructure-and-a-curated-meta-dataset-for-large-scale-agentic-evaluation",
+      "title": "Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向大规模智能体评测的统一基础设施与元数据集",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04773v1",
+      "route": "202609/11/2609.04773v1-persistent-teacher-anchoring-for-tool-using-agents",
+      "title": "Persistent Teacher Anchoring for Tool-Using Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过在工具执行中锚定教师监督缓解工具型智能体的分布漂移",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.03727v1",
+      "route": "202609/11/2609.03727v1-proactive-service-agents-a-unified-decision-framework-methods-and-evaluation",
+      "title": "Proactive Service Agents: A Unified Decision Framework, Methods, and Evaluation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "综述主动式服务智能体的规划、工具调用与决策框架",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04280v1",
+      "route": "202609/11/2609.04280v1-evoharnessbench-can-your-agents-keep-pace-with-an-evolving-harness",
+      "title": "EVOHARNESSBENCH: Can Your Agents Keep Pace with an Evolving Harness?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "评测LLM智能体在工具、技能与代理harness演化下表现的基准",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    },
+    {
+      "paper_id": "2609.04894v1",
+      "route": "202609/11/2609.04894v1-from-language-models-to-world-acting-systems-progress-and-limits-of-agentic-ai-across-digital-social-virtual-and-physical-environments",
+      "title": "From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "覆盖工具调用、持久性与环境耦合的智能体AI综述",
+      "first_seen_at": "2026-09-11 21:47:14 UTC",
+      "updated_at": "2026-09-11 21:47:14 UTC"
+    }
+  ]
+}
