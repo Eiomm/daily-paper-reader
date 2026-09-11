@@ -1,0 +1,590 @@
+Title: Understanding Stage-Wise Utility-Risk Trade-offs in LLM Agent Memory
+
+URL Source: https://arxiv.org/pdf/2608.30177v1
+
+Published Time: Tue, 01 Sep 2026 02:23:44 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Understanding Stage-Wise Utility-Risk Trade-offs in LLM Agent Memory 
+
+Chuanchao Zang 1 Zijian Cao 1 Xiangtao Meng 1 Jianing Wang 1 Wenyu Chen 1
+
+Xinyu Gao 1 Li Wang 1 Zheng Li 1,2,3* Shanqing Guo 1,2,3* 1School of Cyber Science and Technology, Shandong University 
+
+2State Key Laboratory of Cryptography and Digital Economy Security, Shandong University 
+
+3Shandong Key Laboratory of Artificial Intelligence Security, Shandong University 
+
+Abstract 
+
+Long-term memory is becoming a core capability of LLM agents, enabling personalization and long-horizon interac-tion. However, memory mechanisms that retain, transform, or expose more information can affect both benign utility and susceptibility to memory poisoning. Existing evalua-tions typically measure memory utility or attack risk in iso-lation under fixed configurations, providing limited insight into how stage-specific design choices reshape their trade-off. We present M EM GAUGE , a controllable framework that separately varies writing admission, management pol-icy, and retrieval exposure under matched clean and poisoned conditions. Across 11 LLMs and two long-term memory benchmarks, controlled evaluations reveal three distinct pro-files: a threshold-like risk transition during writing, policy-dependent local decoupling during management, and cou-pled growth of utility and risk during retrieval. We further apply analogous stage-level measurements to four existing memory systems and observe diagnostic associations qualita-tively consistent with these profiles. These results show that targeted poisoning risk varies across memory operations and motivate stage-aware evaluation and control of LLM-agent memory. 
+
+1 Introduction 
+
+Long-term memory enables LLM agents to support person-alization, accumulate experience, and interact over long hori-zons by retaining information beyond the current context[11, 19]. Yet this persistence also creates security risks: once adversarially induced information enters memory, it can in-fluence decisions across queries and sessions[1, 3, 4]. For example, Microsoft documented attempts to use hidden “re-member” instructions to write promotional preferences into assistant memory, illustrating how a mechanism designed for personalization can also bias later recommendations [5]. Such utility–risk tensions may arise at different points in the memory lifecycle. We therefore organize memory opera-tions into three functional stages: writing determines what information is stored, management transforms or reconciles Memory System                
+
+> Begin Memory Poisoned Memory
+> Utility (U) Risk (R)
+> M1 M2 M3 M4
+> Why same U different R?
+> Why same R different U?
+> Points reveal what differs, not which stage produces it.
+> Begin Memory Poisoned Memory
+> 1.Controllable Memory System: sweep one stage at a time
+> Writing-Stage Retrival-Stage Management-Stage
+> 𝐀 𝐀 :Admission permissiveness 𝐀 𝐀 :Retrieval Sensitivity 𝐀 𝐀 :Management Strength
+> Writing-Stage Retrival-Stage Management-Stage
+> 2.Distinct stage-wise patterns
+> 𝐀 𝐀
+> UR
+> 𝐀 𝐀
+> UR
+> 𝐀 𝐀
+> RU
+> 3.Transfer to real memory systems
+> Mem0 A-Mem Hindsight LangMem
+> Stage-Wise Pattern Consistency
+
+Figure 1: Overview of stage-wise utility-risk evaluation. Unlike point estimates, M EM GAUGE reveals stage-level patterns across memory systems. 
+
+stored information, and retrieval selects which memories are exposed as decision context [8, 9, 16]. Each stage can im-prove benign memory utility, but it also governs a distinct pathway through which poisoned information is admitted, resurfaced, or suppressed. Existing evaluations report aggregate benign utility or poi-soning risk for end-to-end memory systems, but rarely exam-ine how these outcomes change with specific memory stages [1, 2, 4, 10, 12, 18]. Because each result combines the effects of writing, management, and retrieval, it identifies a system’s operating point but not how its utility–risk response changes within a stage. Changes at different stages may move util-ity and risk differently: one may increase both, whereas an-other may reduce risk with little utility loss. Without this stage-level view, a design intended to improve memory per-formance may yield only marginal utility gains while sharply increasing risk, while efforts to balance the two may rely on unguided trial and error across stages. We therefore ask: 
+
+How do controlled changes in writing admission, manage-ment policy, and retrieval exposure reshape memory utility and poisoning risk? 
+
+Directly evaluating existing memory systems cannot read-ily answer this question. These systems tightly couple writ-ing, management, and retrieval within end-to-end pipelines, expose only a small number of user-configurable interfaces, and differ in which controls they provide [2, 8]. Conse-1arXiv:2608.30177v1 [cs.CR] 31 Aug 2026 quently, their measurements correspond to sparse and non-aligned operating points: a control available in one sys-tem may be absent or defined differently in another, mak-ing stage-wise utility–risk responses difficult to compare sys-tematically. To address this challenge, we introduce M EM -GAUGE , which varies one stage at a time in a controlled en-vironment to construct stage-wise utility–risk response pro-files, and then applies analogous stage-level measurements to existing systems to examine whether their observed oper-ating points are consistent with these profiles. Concretely, M EM GAUGE defines three intervention axes corresponding to the memory lifecycle. At the writing stage, it divides each trace into atomic units, ranks them using the agent’s own LLM, and varies the ranked prefix passed to the writer to produce nested admission levels. At the manage-ment stage, it applies alternative conflict-handling policies to the same pre-management memory state. At the retrieval stage, it varies a shared exposure rate for helpful and risk-bearing records while keeping the retrieval budget fixed. At each operating point, paired clean and poisoned conditions hold the agent model, task, prompts, memory budget, and remaining memory operations fixed. Using M EM GAUGE , we conduct controlled evaluations of 11 LLMs across two long-term memory benchmarks. The resulting stage-wise utility–risk response profiles reveal three distinct patterns. (1) Writing stage exhibits a nonlin-ear transition: as admission coverage expands along each agent’s model-specific ranking, clean utility rises and grad-ually saturates, while attack success remains low at restric-tive levels before increasing sharply. (2) Management stage 
+
+exhibits policy-dependent local decoupling: changing the management policy can substantially shift attack success while leaving clean utility nearly unchanged, although the direction and magnitude of this shift depend on the policy. 
+
+(3) Retrieval stage exhibits a coupled response: increasing the exposure of helpful and risk-bearing memories improves clean utility while simultaneously increasing attack success. These patterns show that utility and risk respond differently to changes at different stages of the memory lifecycle. We further examine whether these patterns appear in four existing memory systems (e.g., Mem0 [2]) using analogous stage-level measurements. For writing, we measure the frac-tion of trace units retained in memory; for management, we compare each system’s native mechanism when enabled and disabled on the same pre-management state; and for retrieval, we measure decision-relevant exposure across top-K bud-gets. Because these systems couple multiple stages, we in-terpret their operating points as diagnostic correspondence rather than controlled stage effects. The measurements align with the controlled profiles: greater information retention is associated with higher risk without reliable utility gains, management shifts attack success more than clean utility, and larger retrieval budgets raise both clean utility and attack suc-cess. These stage-level measurements help interpret aggre-gate end-to-end results. Our contributions are threefold: • Stage-wise utility–risk perspective. We introduce a stage-wise utility-risk perspective spanning writing, management, and retrieval, complementing prior sep-arate or aggregate system-level evaluations. • Controllable evaluation framework. We develop MEM GAUGE , which varies writing admission, com-pares management policies, and controls shared re-trieval exposure under paired clean and poisoned condi-tions to construct stage-wise utility–risk response pro-files. • Empirical pattern discovery. Across 11 LLMs and two benchmarks, we observe a nonlinear transition in writing, policy-dependent local decoupling in manage-ment, and a coupled response in retrieval. Measure-ments on four existing memory systems exhibit patterns consistent with these profiles and help interpret their end-to-end behavior. 
+
+2 Related Work 
+
+Prior work studies agent memory from both utility and se-curity perspectives. LoCoMo [10], LongMemEval [16], and MemBench [15] evaluate long-term memory across multi-session recall, temporal and cross-session reasoning, and knowledge updating. Systems such as Mem0 [2] and A-MEM [17] further develop mechanisms for memory writ-ing, retrieval, consolidation, and updating, typically evalu-ating the complete pipeline through task performance, re-trieval quality, and efficiency. Meanwhile, AgentPoison [1], MINJA [4], MemoryGraft [14], Sleeper [13], and other stud-ies [12, 18] show that poisoned memories or interactions can persistently influence downstream behavior, while MPBench [20] systematizes memory-writing channels and structural vulnerabilities. However, existing work largely evaluates ei-ther end-to-end utility or attack effectiveness. Our work iso-lates writing, management, and retrieval to characterize their individual effects on the utility-risk tradeoff. 
+
+3 MEM GAUGE Framework 
+
+We present M EM GAUGE , a controlled framework for con-structing stage-wise utility–risk response profiles of memory. It separately varies writing admission, management policy, and retrieval exposure while holding the other stages fixed, then applies analogous measurements to existing systems. A summary of additional symbols, system prompts, and dia-grams of methods and algorithms can be found in Section A of the Supplementary Materials. 
+
+3.1 Problem Setting 
+
+Let i ∈ { 1, . . . , N} index an evaluation instance. Each in-stance contains a subsequent query xi, its correct answer y⋆ 
+
+> i
+
+,an attacker-predefined target yadv 
+
+> i
+
+̸ = y⋆ 
+
+> i
+
+, and a pre-existing memory bank Bi containing benign information irrelevant to the current query. We use s ∈ { c, p} to denote the clean and poisoned conditions, while the superscripts + and − denote helpful and risk-bearing information, respectively. The help-ful trace τ+ 
+
+> i
+
+contains information e+ 
+
+> i
+
+supporting y⋆ 
+
+> i
+
+, whereas 2the risk-bearing trace τ− 
+
+> i
+
+contains information e− 
+
+> i
+
+support-ing yadv  
+
+> i
+
+. The clean condition contains only the helpful trace, while the poisoned condition contains both traces. We con-sider interaction-based poisoning in which risk-bearing in-formation enters memory through user- or tool-side interac-tions rather than direct memory edits. The writer W con-verts the two traces into memory records: ∆M+ 
+
+> i
+
+= W (τ+ 
+
+> i
+
+)
+
+and ∆M− 
+
+> i
+
+= W (τ− 
+
+> i
+
+). The pre-management memory states are Mci = Bi ∪ ∆M+ 
+
+> i
+
+and Mpi = Bi ∪ ∆M+ 
+
+> i
+
+∪ ∆M− 
+
+> i
+
+. For either condition s ∈ { c, p}, management G transforms the mem-ory state eMsi = G(Msi ), retrieval R selects the context for the query Xsi = R(xi, eMsi ), and the agent F produces the final out-put: ysi = F(xi, Xsi ).At each operating point, M EM GAUGE changes one stage-specific intervention while keeping the agent model, query, prompts, background memory, and remaining memory oper-ations fixed. The paired outputs are used to compute clean utility, poisoned utility, and attack success rate, as defined in Section 3.3. Figure 2 summarizes this workflow: M EM -GAUGE first constructs controlled stage-wise response pro-files and then compares them with analogous stage-level measurements from existing memory systems. 
+
+3.2 Stage-Wise Interventions 
+
+MEM GAUGE constructs stage-wise response profiles within a controlled memory pipeline rather than by modifying exist-ing systems. Within this pipeline, it defines one intervention axis for each stage and varies one stage at a time under paired clean and poisoned conditions. We present the interventions in execution order: writing, management, and retrieval. 
+
+(1) Writing: Controlling Information Admission. Al-though memory systems implement writing differently, they share a common purpose: extracting helpful information from interaction traces that may support future decisions and storing it as persistent records. M EM GAUGE therefore rep-resents writing in the controlled pipeline as admission fol-lowed by transformation. An admission controller selects the source units available at each operating point, while a fixed writer W converts the selected units into memory records. Holding W fixed ensures that differences across admission levels reflect changes in the available source information rather than changes in the writing mechanism itself. Let q ∈ { +, −} denote the helpful or risk-bearing infor-mation role. We divide each trace τqi into a set of atomic source units Zqi . The same LLM used by the agent ranks the units within each trace by their estimated usefulness for fu-ture decisions, producing an ordering πqi . The helpful and risk-bearing traces are ranked independently. At writing ad-mission coverage θw ∈ [0, 1], the controller supplies the cor-responding ranked prefix to W :
+
+bqi (θw) = θw|Zqi | , Aqi (θw) = πqi (1), . . . , πqi
+
+ bqi (θw) .
+
+(1) where Aqi (0) = /0. Because these admitted sets are nested, increasing θw only adds lower-ranked units from the same trace. The writer converts the admitted units into memory records: ∆Mqi (θw) = S  
+
+> z∈Aqi(θw)
+
+W (z). The resulting clean and poisoned memory states are 
+
+Mci (θw) = Bi ∪ ∆M+ 
+
+> i
+
+(θw), (2) 
+
+Mpi (θw) = Bi ∪ ∆M+ 
+
+> i
+
+(θw) ∪ ∆M− 
+
+> i
+
+(θw). (3) Each source unit is processed by the writer once, and its re-sulting records are reused at every coverage level containing that unit. Thus, differences across θw arise from the admitted source units rather than repeated writer generation. 
+
+(2) Management: Controlling Memory-State Transfor-mation. Although memory systems implement manage-ment differently, these mechanisms share a common pur-pose: transforming stored information before retrieval by filtering, reconciling, or updating memory records. Un-like writing admission, these operations do not form a nat-ural continuous axis. MemGauge therefore represents man-agement using discrete policies applied to the same pre-management memory state. For each condition s ∈ { c, p},a policy g transforms the memory state as 
+
+eMsi (g) = Gg(Msi ), g ∈ G = {UM , PQ , NC , SC }. (4) Here, quarantining a record means excluding it from sub-sequent retrieval while leaving the remaining memory state unchanged. Unmanaged Memory (UM) leaves all records unchanged and serves as the no-management reference. 
+
+Provenance-Aware Quarantine (PQ) quarantines records written from sources marked as untrusted. Numeric-Conflict Resolution (NC) quarantines a newly written record when its numerical content conflicts with an existing trusted record. 
+
+Strict Conflict Resolution (SC) retains records consistent with verified interaction outcomes, such as explicit user confirma-tions or tool-execution results, and quarantines those that are not. It represents an idealized setting in which such feedback is complete and reliable, and serves as an upper bound. Within each condition, all policies receive the same pre-management state Msi , while the subsequent retrieval config-uration and agent remain fixed. The policies therefore rep-resent separate management operating points rather than or-dered levels of management capability. 
+
+(3) Retrieval: Controlling Decision-Relevant Exposure. 
+
+Retrieval determines which records from the memory are ex-posed to the agent for the current query. Although retrieval mechanisms differ in how they rank records, their decision-relevant outcome is whether helpful or risk-bearing infor-mation enters the retrieved context under a fixed retrieval budget. M EM GAUGE therefore intervenes directly on record exposure rather than modifying any particular ranking algo-rithm. For each instance, the retriever returns a context contain-ing exactly K records. At retrieval exposure probability 
+
+θr ∈ [0, 1], we sample 
+
+a+ 
+
+> i
+
+∼ Bernoulli (θr), a− 
+
+> i
+
+∼ Bernoulli (θr), (5) where a+ 
+
+> i
+
+and a− 
+
+> i
+
+indicate whether the helpful record e+ 
+
+> i
+
+and the risk-bearing record e− 
+
+> i
+
+are included in the retrieved con-text, respectively. In particular, Pr (a+ 
+
+> i
+
+= 1) = Pr (a− 
+
+> i
+
+= 1) = θr. (6) 3𝐀 𝐀 : ...         
+
+> 𝐀 𝐀 +:𝐀 𝐀 −:
+> Clean: 𝐀 𝐀 + 𝐀 𝐀 +, Poisoned: 𝐀 𝐀 + 𝐀 𝐀 ++ 𝐀 𝐀 −
+> Divide each trace 𝐀 𝐀 𝐀 into atomic source units 𝐀 𝐀 𝐀 :
+
+...  
+
+> 𝐀 𝐀 +:
+
+...  
+
+> 𝐀 𝐀 −:
+
+...            
+
+> Writing Coverage: 𝐀 𝐀
+> New Records: △𝐀 +,△𝐀 −
+> UM (Unmanaged)
+> Records unchanged. .
+> PQ (Provenance-Aware)
+> Quarantine records from .
+> NC (Numeric-Confict)
+> Quarantine records that values,e.g., 1 ≠ 2 .
+> SC(Strict Confict)
+> Quarantine records ;preserve correct decisions.
+> Managed State: 𝐀 𝐀 𝐀
+> Fixed Budge:
+> BBB+B
+> -
+
+... 𝐀 𝐀 𝐀 :    
+
+> BBB+BB
+
+... 𝐀 𝐀 𝐀 :      
+
+> Comon Exposure: 𝐀 𝐀
+> Retrived Records: 𝐀 𝐀 𝐀
+> Clean Utility Poisoned Utility Attack Success Rate
+> Mem0 A-Mem
+
+...   
+
+> Real Systems
+> Retained-Unit Ratio Mechanism Off/On Exposure Across Top-K
+
+Figure 2: Overview of M EM GAUGE . It varies one memory stage at a time under matched clean and poisoned conditions to construct utility-risk profiles and examine their diagnostic correspondence with existing memory systems. 
+
+The clean and poisoned conditions share the same helpful-record exposure decision a+ 
+
+> i
+
+, while the risk-bearing record is available only in the poisoned condition. The retrieved contexts are constructed as 
+
+Xci (θr) = a+ 
+
+> i
+
+{e+ 
+
+> i
+
+} ∪ Fill  Bi, K − a+
+
+> i
+
+ , (7) 
+
+X pi (θr) = a+ 
+
+> i
+
+{e+ 
+
+> i
+
+} ∪ a− 
+
+> i
+
+{e− 
+
+> i
+
+} ∪ Fill  Bi, K − a+ 
+
+> i
+
+− a−
+
+> i
+
+ . (8) Here, a{e} denotes {e} when a = 1 and the empty set other-wise. The function Fill (Bi, k) selects k task-irrelevant records from Bi according to a fixed ordering. When the risk-bearing record is exposed, it replaces an irrelevant background record rather than the helpful record. The two conditions use the same helpful-record exposure decision, background-record ordering, and record positions, and both always contain ex-actly K records. We use balanced sampling schedules so that the empirical exposure frequency at each operating point matches θr.
+
+3.3 Constructing Stage-Wise Utility-Risk Pro-files 
+
+At each operating point, we evaluate the same instances un-der matched clean and poisoned conditions while holding the model, queries, prompts, decoding settings, and remain-ing memory operations fixed. From the paired outputs, we compute clean utility, poisoned utility, and attack success rate (ASR). Clean utility measures correct decisions under the clean condition, poisoned utility measures correct deci-sions after risk-bearing information is introduced, and ASR measures decisions redirected to the attacker-predefined tar-get. Poisoned utility and ASR are not complementary be-cause an output may match neither target. Varying θw or θr
+
+produces the writing- and retrieval-stage response profiles, respectively. Because management policies do not form an ordered scale, each policy is represented as a separate utility-risk point. These profiles characterize responses along stage-specific intervention axes and do not place writing, manage-ment, and retrieval on a shared capability scale. 
+
+3.4 Applying M EM GAUGE to Memory Sys-tems 
+
+Existing memory systems couple writing, management, and retrieval and do not expose the same intervention parame-ters as M EM GAUGE . We therefore do not directly impose 
+
+θw, θr, or the controlled management policies on these sys-tems. Instead, we construct analogous stage-level measure-ments using the same helpful and risk-bearing traces, back-ground memory, and subsequent queries. For writing, we measure the proportion of source units whose information is retained in the resulting memory records. For manage-ment, we compare the system’s native mechanism when en-abled and disabled on the same pre-management state. For retrieval, we vary the top-K budget and measure the propor-tion of instances in which the risk-bearing record appears in the retrieved context. We then examine whether the result-ing utility and ASR patterns qualitatively correspond to the controlled profiles. Because these measurements come from coupled system pipelines, they are treated as diagnostic as-sociations rather than controlled stage effects. 
+
+4 Experiments 4.1 Experimental Setup 
+
+Agent and LLMs. We implement a common LangGraph agent (38.4K GitHub stars) with 11 LLMs, including GPT-5.4, GPT-5.4-Mini, Gemini 3.1 Flash, Gemini 2.5 Flash, Grok 4.3 High, Grok 4.2 Fast, DeepSeek-V4-Flash, GLM-5.1, Qwen 3.5 397B, MiniMax-M3, and Doubao Seed 2.0 Pro. For each configuration, the same LLM serves as the agent’s reasoning model and the writing-stage ranker. 
+
+Datasets and trace construction. We construct evaluation instances from LongMemEval [16] and LoCoMo [10], se-lecting 100 test questions from each dataset and identify-ing the information required to answer them. This informa-tion is introduced through a benign agent interaction, pro-ducing the helpful trace τ+ 
+
+> i
+
+. The background memory bank 
+
+Bi is constructed from analogous interactions generated us-ing information from the corresponding dataset that is unre-lated to the subsequent query. For the poisoned condition, MINJA [4] and Sleeper [13] generate user-side and tool-side risk-bearing interactions, respectively, producing τ− 
+
+> i
+
+. The attacker can influence the corresponding interaction content but cannot directly edit the memory bank. Helpful and risk-bearing traces are generated in separate sessions, and the test query is issued in a subsequent session. In the controlled ex-periments, traces are processed by the fixed writer W ; in the existing-system evaluation, they are processed by each sys-tem’s native writing mechanism. 4Existing memory systems. We consider four existing mem-ory system: Mem0 (61.8K GitHub stars) [2], Hindsight (18.8K GitHub stars) [8], LangMem (1.6K GitHub stars) [7], and A-Mem (1.1K GitHub stars) [17]. 
+
+Metrics. We report clean utility, poisoned utility, and ASR as defined in Section 3.3. AgentEvals [6] judges whether each trajectory supports the correct answer or the attacker-predefined target. Its agreement with human annotations is evaluated in Section 4.5. 
+
+Parameters. Unless otherwise specified, we set the retrieval budget to K = 5, and the background memory size |Bi| = 100. Matched clean and poisoned evaluations use the same config-uration (e.g., model, system prompt, query). When evaluat-ing one stage, the other stages are fixed at θw = 0.6, UM, and 
+
+θr = 0.8, respectively. 
+
+Research questions. Our experiments address the following research questions. RQ1 : What utility–risk profiles emerge under controlled writing, management, and retrieval inter-ventions? RQ2 : How stable are the observed stage-wise profiles across evaluation conditions? RQ3 : Do analogous stage-level measurements on existing memory systems ex-hibit qualitative correspondence with the controlled profiles? 
+
+4.2 RQ1: Stage-Wise Utility-Risk Profiles 
+
+Figure 3 presents the controlled stage-wise profiles across 11 LLMs. Each column varies one memory stage while holding the remaining operations fixed, and each row represents a dataset–attack combination. Lines report the median across models, with shaded regions and box plots showing the in-terquartile range. Per-model results are in Supplementary Material Section B.1. 
+
+Writing-Stage Profile. At low coverage ( θw < 0.3), clean and poisoned utility increase almost synchronously to ap-proximately 15%-20%, while ASR remains near zero. Be-tween θw = 0.3 and 0 .5, both utility measures continue to rise, reaching roughly 20%-42%, but ASR generally remains below 10%. Beyond this range, the profiles diverge sharply: clean utility continues increasing, whereas poisoned utility reverses its trend and declines from its peak to 3%-34% at full coverage. Meanwhile, ASR rises rapidly to 37%-64%. This delayed but sharp divergence reveals a threshold-like nonlinearity: additional risk-bearing information has little downstream effect at low coverage but becomes increasingly influential once sufficient content is retained. 
+
+Management-Stage Profile. Management can effectively mitigate memory risks, but its effectiveness differs substan-tially across attack types. Across the evaluated policies, clean utility varies by only 3%-5%, whereas ASR changes by up to 62%, indicating that management can locally decouple risk from clean performance. However, the extent of this de-coupling is mechanism-specific. PQ reduces Sleeper ASR to nearly zero with little utility change but provides limited pro-tection against MINJA, whereas SC achieves more consistent risk reductions across both attacks. 
+
+Retrieval-Stage Profile. Retrieval exhibits a coupled utility-risk response. As retrieval exposure increases, clean util-ity rises from approximately 10%–25% to 43%-70%, while ASR simultaneously increases from about 5%-18% to 34%-64%. At high exposure, clean utility begins to saturate, whereas ASR remains high and poisoned utility falls to ap-proximately 4%-31%. This coupling is expected because re-trieval ranks records by their relevance to the query rather than determining whether their content is benign or risk-bearing; a sufficiently relevant risk-bearing record can there-fore receive exposure comparable to a helpful record. 
+
+Key Finding 1. Writing exhibits a threshold-like risk transition , management enables mechanism-dependent local decoupling , and retrieval couples utility with risk . Effective control therefore requires calibrating writing coverage to avoid the high-risk region, adopt-ing mechanism-matched management policies, and constraining retrieval exposure rather than expecting relevance-based ranking to distinguish helpful from risk-bearing records. 
+
+4.3 RQ2: Profile Stability 
+
+We examine how selected workload and implementation fac-tors affect the stage-wise profiles. Unless otherwise speci-fied, all experiments in this section use DeepSeek-V4-Flash, LongMemEval, and MINJA. 
+
+Trace-Load stability. As shown in Figure 4, we vary the number of source units in each trace to 0 .75 ×, 1 .0×, and 1.25 × the default size while preserving the core helpful or risk-bearing information. Across all three settings, ASR re-mains near zero at low writing coverage and increases more sharply at higher coverage. At full coverage, ASR reaches 58%-63%, while poisoned utility falls to 1%-4%. Larger trace loads shift the rise in risk toward lower coverage lev-els but preserve the overall writing-stage response. 
+
+Ranker stability. As shown in Figure 5, we compare four source-unit orderings: the agent’s own LLM, an external LLM, random ordering, and chronological ordering. At 
+
+θw = 0.5, the self-LLM and external-LLM rankers achieve 43%–47% clean utility with 2%-8% ASR, whereas random ordering reaches only 16% clean utility. Chronological or-dering achieves 33% clean utility but raises ASR to 27%. All orderings converge at θw = 1 because full coverage includes the same source units by construction. Thus, ranker choice shifts the utility-risk trajectory and the onset of risk without changing the full-coverage endpoint. 
+
+Retrieval-budget stability. Because K directly controls the amount of memory returned to the agent, we evaluate its ef-fect primarily at the retrieval stage. As shown in Figure 6, across all budgets, increasing θr raises both clean utility and ASR under matched helpful and risk-bearing exposure. The differences are most visible at low and intermediate exposure levels, while the profiles converge at high exposure. Thus, K
+
+shifts the utility-risk operating points but does not remove the coupled response induced by matched exposure. 
+
+Distractor-fill stability. Under a fixed retrieval budget of 
+
+K = 5, we replace random background filling with similarity-based filling. After excluding records that support either the correct answer or the attacker-predefined target, we use the most query-similar remaining records to fill unused retrieval 50% 20% 40% 60% 80% 
+
+> Rate
+
+(a) Writing 
+
+0% 20% 40% 60% 80% 
+
+> Rate
+
+(b) Management 
+
+0% 20% 40% 60% 80% 
+
+> Rate
+
+(c) Retrieval 
+
+0% 20% 40% 60% 80% 
+
+> Rate
+
+(d) Writing 
+
+0% 20% 40% 60% 80% 
+
+> Rate
+
+(e) Management 
+
+0% 20% 40% 60% 80% 
+
+> Rate
+
+(f) Retrieval 
+
+0% 20% 40% 
+
+> Rate
+
+(g) Writing 
+
+0% 20% 40% 
+
+> Rate
+
+(h) Management 
+
+0% 20% 40% 
+
+> Rate
+
+(i) Retrieval 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Writing coverage θw
+
+0% 20% 40% 
+
+> Rate
+
+(j) Writing 
+
+UM PQ NC SC 
+
+Memory policy 
+
+0% 20% 40% 
+
+> Rate
+
+(k) Management 
+
+0.25 0.4 0.6 0.75 1.0 
+
+Exposure strength θr (low → high) 
+
+0% 20% 40% 
+
+> Rate
+
+(l) Retrieval 
+
+LongMemEval MINJA LongMemEval Sleeper LoCoMo MINJA LoCoMo Sleeper 
+
+Clean utility Poisoned utility ASR IQR Figure 3: Stage-wise utility-risk profiles across 11 LLMs. Blue, green, and red denote clean utility, poisoned utility, and ASR; lines show the median, while shaded bands and box plots indicate the IQR. 0 0.25 0.50 0.75 1.00            
+
+> 0% 20% 40% 60%
+> Rate
+> (a) Clean Utility
+> 00.25 0.50 0.75 1.00
+> 0% 20% 40% 60%
+> Rate
+> (b) Poisoned Utility
+> 00.25 0.50 0.75 1.00
+> 0% 20% 40% 60%
+> Rate
+> (c) Attack Success Rate
+> Writing Coverage θw
+> Trace Units
+> 0.75 × 1.0 × 1.25 ×
+
+Figure 4: Writing-stage profiles across different trace loads. 0 0.25 0.50 0.75 1.00            
+
+> 0% 20% 40% 60%
+> Rate
+> (a) Clean Utility
+> 00.25 0.50 0.75 1.00
+> 0% 20% 40% 60%
+> Rate
+> (b) Poisoned Utility
+> 00.25 0.50 0.75 1.00
+> 0% 20% 40% 60%
+> Rate
+> (c) Attack Success Rate
+> Writing Coverage
+> Admission Ranker
+> Other LLM Self-LLM Random Chronological
+
+Figure 5: Writing-stage profiles under different unit rankers. 
+
+slots. As shown in Figure 6, the composition of background memories shifts the utility-risk operating point but does not remove the coupled retrieval-stage response. 
+
+Asymmetric-exposure stability. We fix the helpful-record exposure probability at θ+
+
+r = 0.8 and vary the risk-bearing exposure probability θ−
+
+r from 0 .2 to 1 .0. ASR increases steadily from 0 .13 to 0 .63, indicating that greater risk-bearing exposure consistently amplifies attack risk even when helpful-record exposure remains fixed. Detailed results are provided in Section B.2 of the supplementary material. 
+
+Memory-scale stability. Changing the memory-bank size primarily affects management and retrieval. Increasing |B|
+
+intensifies retrieval competition, resembling a tighter effec-tive budget. Since retrieval sensitivity is examined above, we focus here on management and vary |B| from 50 to 500. As shown in Figure 7, when the memory bank grows, re-trieval competition reduces both clean utility and ASR under 0.2 0.4 0.6 0.8 1.0                 
+
+> 0% 20% 40% 60% 80%
+> Rate
+> (a) Clean Utility
+> 0.2 0.4 0.6 0.8 1.0
+> 0% 20% 40% 60% 80%
+> Rate
+> (b) Poisoned Utility
+> 0.2 0.4 0.6 0.8 1.0
+> 0% 20% 40% 60% 80%
+> Rate
+> (c) ASR
+> Retrieval Exposure θr
+> K= 3 , Random K= 5 , Random K= 7 , Random K= 5 , Similarity
+
+Figure 6: Retrieval-stage profiles across retrieval budgets and distractor-filling strategies. 50 100 300 500           
+
+> 0% 20% 40% 60%
+> Rate
+> (a) Clean Utility
+> 50 100 300 500
+> 0% 20% 40% 60%
+> Rate
+> (b) Poisoned Utility
+> 50 100 300 500
+> 0% 20% 40% 60%
+> Rate
+> (c) Attack Success Rate
+> Background Memory Size ||
+> Management Policy
+> UM PQ NC SC
+
+Figure 7: Management-stage profiles across memory sizes. 
+
+UM. Nevertheless, management continues to produce dis-tinct utility–risk shifts. At |Bi| = 500, PQ reduces ASR from 52% to 37% without changing clean utility, while NC and SC achieve larger ASR reductions with clean-utility decreases of 8 and 6 percentage points, respectively. 
+
+Key Finding 2. Within the evaluated model-dataset-attack setting, the selected trace, ranking, retrieval, dis-tractor, and memory-scale factors shift the onset and magnitude of the responses while preserving broadly similar qualitative stage-wise patterns. 64.4 RQ3: Correspondence in Existing Sys-tems 
+
+We examine whether analogous stage-level measurements on Mem0, Hindsight, LangMem, and A-MEM exhibit qualita-tive correspondence with the controlled profiles. Table 1 re-ports the writing and management results. WR denotes the proportion of source units retained by the system’s writer, U0
+
+denotes utility without memory, and M0 and M1 denote na-tive management disabled and enabled, respectively. Unless otherwise specified, we use |Bi| = 100 and K = 5. 
+
+Table 1: Writing and management results on real-world mem-ory systems. WR is reported as mean ± standard deviation over 500 writing trials.                                                   
+
+> System WR (%) U0Mode Clean U Poisoned U ASR Mem0 36 .5±6.10.008 M00.533 0.213 0.326
+> M10.541 0.343 0.176 Hindsight 69 .4±5.40.015 M00.563 0.165 0.475
+> M10.524 0.240 0.293 LangMem 74 .5±8.70.011 M00.528 0.158 0.473
+> M10.523 0.325 0.225 A-MEM 55 .7±7.70.008 M00.483 0.130 0.403
+> M10.460 0.218 0.297
+
+Writing-stage correspondence. Writing exposure varies substantially across the four systems, from 36 .5% in Mem0 to 74 .5% in LangMem. Meanwhile, U0 remains only 0 .8%-1.5%, confirming that the evaluated tasks largely depend on information supplied through memory. Under M0, higher writing exposure broadly coincides with greater risk. Mem0 has both the lowest WR and ASR (36 .5% and 32 .6%), whereas Hindsight and LangMem exhibit high WR (69 .4%-74 .5%) and ASR (47 .3%-47 .5%). However, clean utility does not increase correspondingly: Mem0 achieves 53 .3% clean utility despite its substantially lower WR, comparable to LangMem at 52 .8%. These results suggest that greater writing exposure expands risk exposure without guarantee-ing additional clean utility. 
+
+Management-stage correspondence. Enabling native man-agement reduces observed ASR in all four systems by 10 .6-24 .8 percentage points and increases poisoned utility by 7.5-16 .7 percentage points. The corresponding clean-utility changes range from a 0 .8-percentage-point increase to a 3 .9-percentage-point decrease. LangMem shows the largest ASR reduction, from 47 .3% to 22 .5%, with only a 0 .5-percentage-point decrease in clean utility. These results qualitatively cor-respond to the policy-dependent utility–risk shifts observed in the controlled management profiles. To evaluate retrieval, we vary the retrieval budget K as a proxy for increasing memory exposure; all experiments are conducted under M0 with |Bi| = 100, and RSR denotes the proportion of instances in which the target record (helpful or risk) appears in the top-K retrieved context. 
+
+Retrieval-stage correspondence. Increasing the retrieval budget produces a consistent coupled utility-risk response across all four systems. As K increases from 1 to 7, RSR rises from 42%-51% to 86%-97%, while clean utility in-creases from 24 .6%-29 .3% to 52 .7%-64 .2%. This utility 
+
+Table 2: Retrieval results under different retrieval budgets.                                                                              
+
+> System Metric K=1K=3K=5K=7Mem0 RSR 0.510 0.790 0.920 0.970 Clean U 0.287 0.417 0.533 0.586 Poisoned U 0.246 0.245 0.213 0.194 ASR 0.047 0.249 0.326 0.361 Hindsight RSR 0.460 0.730 0.880 0.930 Clean U 0.293 0.472 0.563 0.642 Poisoned U 0.241 0.224 0.165 0.134 ASR 0.086 0.359 0.475 0.537 LangMem RSR 0.470 0.720 0.840 0.910 Clean U 0.287 0.463 0.528 0.613 Poisoned U 0.225 0.193 0.158 0.147 ASR 0.094 0.328 0.473 0.526 A-MEM RSR 0.420 0.650 0.790 0.860 Clean U 0.246 0.395 0.483 0.527 Poisoned U 0.213 0.176 0.130 0.095 ASR 0.122 0.313 0.403 0.478
+
+gain is accompanied by a substantial increase in ASR, from 4.7%-12 .2% to 36 .1%-53 .7%, and a decrease in poisoned utility from 21 .3%-24 .6% to 9 .5%-19 .4%. The strength of this response varies across systems: Hindsight gains 34 .9% in clean utility but also increases ASR by 45 .1%, whereas Mem0 shows a smaller ASR increase of 31 .4% alongside a 29 .9% utility gain. Nevertheless, the direction is consis-tent across implementations. This behavior is expected be-cause retrieval ranks records by query relevance rather than distinguishing benign from risk-bearing content; increasing 
+
+K therefore raises the exposure of both helpful and well-matched risk-bearing records. 
+
+Key Finding 3. The four existing systems exhibit quali-tative correspondence with the controlled profiles: writ-ing exposure raises risk without reliable utility gains, native management shifts the observed operating points toward lower ASR, and larger retrieval budgets are ac-companied by increases in both clean utility and ASR. These results are diagnostic associations rather than controlled stage effects. 
+
+4.5 Human Evaluation 
+
+We validate AgentEval using 200 clean and 200 poisoned trajectories annotated independently by five human experts. Annotators judge whether each output is correct or, for poi-soned trajectories, matches the attacker-predefined target; the final label is determined by majority vote. AgentEval achieves 91% agreement with the human labels, while inter-annotator agreement is κ = 0.78, supporting its use for eval-uation. 
+
+5 Conclusion 
+
+This paper introduced M EM GAUGE , a paired, stage-wise framework for evaluating utility and risk in long-term memory systems. Across the evaluated settings, writing shows a threshold-like risk transition, management enables mechanism-dependent local decoupling, and retrieval cou-7ples utility gains with increased risk. These profiles persist across configurations and four existing memory systems, al-though their onset and magnitude vary. The results show that end-to-end metrics alone are insufficient and motivate stage-specific controls. 
+
+References 
+
+[1] Zhaorun Chen, Zhen Xiang, Chaowei Xiao, Dawn Song, and Bo Li. Agentpoison: Red-teaming llm agents via poisoning memory or knowledge bases. Advances in Neural Information Processing Systems , 37:130185– 130213, 2024. 1, 2 [2] P Chhikara, D Khant, S Aryan, T Singh, and D Ya-dav. Mem0: Building production-ready ai agents with scalable long-term memory. arxiv 2025. arXiv preprint arXiv:2504.19413 , 2025. 1, 2, 5 [3] Pritam Dash, Tongyu Ge, Aditi Jain, Tanmay Shah, and Zhiwei Shang. From untrusted input to trusted memory: A systematic study of memory poisoning attacks in llm agents. arXiv preprint arXiv:2606.04329 , 2026. 1 [4] Shen Dong, Shaochen Xu, Pengfei He, Yige Li, Jiliang Tang, Tianming Liu, Hui Liu, and Zhen Xiang. Mem-ory injection attacks on llm agents via query-only in-teraction. Advances in Neural Information Processing Systems , 38:46697–46731, 2026. 1, 2, 4 [5] Noam Kochavi, Shaked Ilan, Sarah Wolstencroft, and Microsoft Defender Security Research Team. Manipu-lating AI memory for profit: The rise of AI recommen-dation poisoning. Microsoft Security Blog, February 2026. Accessed: July 28, 2026. 1 [6] LangChain AI. Agentevals: Readymade evaluators for agent trajectories, 2025. Software repository, accessed 2026-07-28. 5 [7] LangChain AI. LangMem: Tools for building long-term memory in llm applications, 2025. Software repository, accessed July 28, 2026. 5 [8] Chris Latimer, Nicoló Boschi, Andrew Neeser, Chris Bartholomew, Gaurav Srivastava, Xuan Wang, and Naren Ramakrishnan. Hindsight is 20/20: Building agent memory that retains, recalls, and reflects. arXiv preprint arXiv:2512.12818 , 2025. 1, 5 [9] Zehao Lin, Xixuan Hao, Renyu Fu, Shaobo Cui, Kai Chen, Chunyu Li, Zhiyu Li, and Feiyu Xiong. A survey on long-term memory security in llm agents: Attacks, defenses, and governance across the memory lifecycle. 
+
+arXiv preprint arXiv:2604.16548 , 2026. 1 [10] Adyasha Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal, Francesco Barbieri, and Yuwei Fang. Evaluating very long-term conversational memory of llm agents. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Vol-ume 1: Long Papers) , pages 13851–13870, 2024. 1, 2, 4[11] Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy Liang, and Michael S Bernstein. Generative agents: Interactive simulacra of human behavior. In Proceedings of the 36th annual acm symposium on user interface software and technology ,pages 1–22, 2023. 1 [12] Mitchell Piehl, Zhaohan Xi, Zuobin Xiong, Pan He, and Muchao Ye. Er-mia: Black-box adversarial memory in-jection attacks on long-term memory-augmented large language models. arXiv preprint arXiv:2602.15344 ,2026. 1, 2 [13] Sidharth Pulipaka, Stanislau Hlebik, Leonidas Raghav, Sahar Abdelnabi, Vyas Raina, Ivaxi Sheth, and Mario Fritz. Hidden in memory: Sleeper memory poisoning in llm agents. 2026. 2, 4 [14] Saksham Sahai Srivastava and Haoyu He. Memory-graft: Persistent compromise of llm agents via poisoned experience retrieval. arXiv preprint arXiv:2512.16962 ,2025. 2 [15] Haoran Tan, Zeyu Zhang, Chen Ma, Xu Chen, Quanyu Dai, and Zhenhua Dong. Membench: Towards more comprehensive evaluation on the memory of llm-based agents. In Findings of the Association for Compu-tational Linguistics: ACL 2025 , pages 19336–19352, 2025. 2 [16] Di Wu, Hongwei Wang, Wenhao Yu, Yuwei Zhang, Kai-Wei Chang, and Dong Yu. Longmemeval: Bench-marking chat assistants on long-term interactive mem-ory. arXiv preprint arXiv:2410.10813 , 2024. 1, 2, 4 [17] Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, and Yongfeng Zhang. A-mem: Agentic memory for llm agents. Advances in Neural Information Pro-cessing Systems , 38:17577–17604, 2026. 2, 5 [18] Xianglin Yang, Yufei He, Shuo Ji, Bryan Hooi, and Jin Song Dong. Zombie agents: Persistent control of self-evolving llm agents via self-reinforcing injections. 
+
+arXiv preprint arXiv:2602.15654 , 2026. 1, 2 [19] Wanjun Zhong, Lianghong Guo, Qiqi Gao, He Ye, and Yanlin Wang. Memorybank: Enhancing large language models with long-term memory. In Proceedings of the AAAI conference on artificial intelligence , volume 38, pages 19724–19731, 2024. 1 [20] Pengfei Zhou, Jiaxin Ai, Wangbo Zhao, Kai Wang, Xiaojiang Peng, Wenqi Shao, Hongxun Yao, Kaipeng Zhang, et al. Mpbench: A comprehensive multimodal reasoning benchmark for process errors identification. In Findings of the Association for Computational Lin-guistics: ACL 2025 , pages 21586–21606, 2025. 2 8
