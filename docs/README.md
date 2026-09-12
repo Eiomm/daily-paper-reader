@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-11</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-12</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>8</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-11 21:47:14 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-12 21:12:40 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读8篇、速读11篇共19篇AI Agent论文，聚焦长期记忆与终身学习。最值得看的是双双9.0分的SimSkill（交通仿真自主学习）和RuleMem（长对话主动规则记忆），速读中Agent记忆系统能否追踪状态变化也值得留意。普通读者可先读这两篇精读，再顺着&quot;遗忘管理&quot;和&quot;记忆追踪&quot;方向延伸了解。</p>
+<p>今天精读6篇、速读11篇共17篇，聚焦具身智能体长时任务规划与移动端规划基准。最值得看的是《Safe Task Planning with Long-Term Graph Memory for Embodied Agents》（9.0分）提出的图记忆安全规划思路，以及《MobilePA-Bench》为真实复杂任务提供的评测标尺。普通读者可先读这两篇精读，再顺带浏览SKILL.state等三篇速读，把握智能体长时程技能与记忆管理的整体脉络。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">8 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SimSkill: A Lifelong Learning AI Agent for Autonomous Mastery of Traffic Simulation">SimSkill: A Lifelong Learning AI Agent for Autonomous Mastery of Traffic Simulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="RuleMem: Active Rule Memory for Long-Term Conversational Agents">RuleMem: Active Rule Memory for Long-Term Conversational Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Interaction Traces to Persistent Skills: Online Evolution for Computer-Use Agents">From Interaction Traces to Persistent Skills: Online Evolution for Computer-Use Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Safe Task Planning with Long-Term Graph Memory for Embodied Agents">Safe Task Planning with Long-Term Graph Memory for Embodied Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks">MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks</span></li><li><span class="dpr-home-dashboard-paper-title" title="PolyMemDB: A Polyglot Database System for AI Memory Management">PolyMemDB: A Polyglot Database System for AI Memory Management</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>8</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>6</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,7 +94,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Towards Reversible Forgetting: Managing Obsolete Knowledge in Continual Enterprise AI Agents">Towards Reversible Forgetting: Managing Obsolete Knowledge in Continual Enterprise AI Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents">DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Can Agent Memory Systems Track Evolving State?">Can Agent Memory Systems Track Evolving State?</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SKILL.state: Scalable Long-Horizon Agent Skills">SKILL.state: Scalable Long-Horizon Agent Skills</span></li><li><span class="dpr-home-dashboard-paper-title" title="When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems">When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution">WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>11</strong></span></div>
 </section>
