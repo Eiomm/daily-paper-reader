@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-12</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-13</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-12 21:12:40 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-13 22:05:46 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今天精读6篇、速读11篇共17篇，聚焦具身智能体长时任务规划与移动端规划基准。最值得看的是《Safe Task Planning with Long-Term Graph Memory for Embodied Agents》（9.0分）提出的图记忆安全规划思路，以及《MobilePA-Bench》为真实复杂任务提供的评测标尺。普通读者可先读这两篇精读，再顺带浏览SKILL.state等三篇速读，把握智能体长时程技能与记忆管理的整体脉络。</p>
+<p>2026-09-13日报：共收17篇，精读6篇、速读11篇，焦点集中在LLM Agent的记忆个性化、多智能体记忆编排与记忆评估/安全。最值得看的是9.0分的《Personalizing LLM Agent Memory Using Biometrics》和8.0分的《Diachronic Hypergraphs for Orchestrated Multi-Agent Multimodal Memory Curation》，前者指向生物特征驱动的记忆个性化，后者</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -81,7 +81,7 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Safe Task Planning with Long-Term Graph Memory for Embodied Agents">Safe Task Planning with Long-Term Graph Memory for Embodied Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks">MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks</span></li><li><span class="dpr-home-dashboard-paper-title" title="PolyMemDB: A Polyglot Database System for AI Memory Management">PolyMemDB: A Polyglot Database System for AI Memory Management</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Personalizing LLM Agent Memory Using Biometrics">Personalizing LLM Agent Memory Using Biometrics</span></li><li><span class="dpr-home-dashboard-paper-title" title="Diachronic Hypergraphs for Orchestrated Multi-Agent Multimodal Memory Curation">Diachronic Hypergraphs for Orchestrated Multi-Agent Multimodal Memory Curation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agents in the Large: Perception-Centered Architecture for Persistent Agents">Agents in the Large: Perception-Centered Architecture for Persistent Agents</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>6</strong></span></div>
 </section>
@@ -94,7 +94,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SKILL.state: Scalable Long-Horizon Agent Skills">SKILL.state: Scalable Long-Horizon Agent Skills</span></li><li><span class="dpr-home-dashboard-paper-title" title="When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems">When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution">WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Measure Before You Manage: Evaluating Agent Working Memory in Coding Agents">Measure Before You Manage: Evaluating Agent Working Memory in Coding Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Learning What to Retain: Gated-Memory Routing for Efficient Collaboration in Multi-Agent LLM Systems">Learning What to Retain: Gated-Memory Routing for Efficient Collaboration in Multi-Agent LLM Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents">CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>11</strong></span></div>
 </section>
