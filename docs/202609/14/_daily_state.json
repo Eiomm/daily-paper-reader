@@ -1,0 +1,281 @@
+{
+  "date": "20260914",
+  "date_label": "",
+  "generated_at": "2026-09-14 22:23:49 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.12320v1",
+      "route": "202609/14/2609.12320v1-aim-a-privacy-aware-interoperable-memory-framework-for-multi-agent-multi-user-llm-systems",
+      "title": "AIM: A Privacy-Aware Interoperable Memory Framework for Multi-Agent Multi-User LLM Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多智能体多用户LLM系统的隐私感知可互操作记忆框架",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.12436v1",
+      "route": "202609/14/2609.12436v1-lifefuse-mem-lifecycle-aware-state-fusion-against-temporary-overwriting-for-long-term-memory",
+      "title": "LifeFuse-Mem: Lifecycle-Aware State Fusion Against Temporary Overwriting for Long-Term Memory",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长期记忆的生命周期感知写入与阶段感知读出",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.12655v1",
+      "route": "202609/14/2609.12655v1-lifemem-enabling-lifelong-experience-reuse-for-llm-agents",
+      "title": "LifeMem: Enabling Lifelong Experience Reuse for LLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向LLM智能体的跨回合终身经验复用",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.03467v1",
+      "route": "202609/14/2609.03467v1-when-users-dont-ask-benchmarking-context-driven-memory-retrieval-in-conversational-agents",
+      "title": "When Users Don't Ask: Benchmarking Context-Driven Memory Retrieval in Conversational Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向长程对话智能体的上下文驱动记忆检索基准",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.08404v1",
+      "route": "202609/14/2609.08404v1-environments-as-scaffold-enriching-feedback-to-bootstrap-self-evolving-agents-in-long-horizon-tasks",
+      "title": "Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过反馈增强环境用RL自举自进化智能体",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.09985v1",
+      "route": "202609/14/2609.09985v1-vlx-vr-an-agentic-aware-video-reasoning-model",
+      "title": "VLX-VR: An Agentic-Aware Video Reasoning Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "带有显式read_memory与write_memory操作的思考-记忆-观察循环",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.10036v1",
+      "route": "202609/14/2609.10036v1-belief-state-engine-augmenting-llms-for-principled-planning-under-partial-observability",
+      "title": "Belief-State Engine: Augmenting LLMs for Principled Planning Under Partial Observability",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过显式信念状态实现部分可观测下的原则性规划",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.10144v1",
+      "route": "202609/14/2609.10144v1-kernel-managed-shared-memory-for-system-wide-personalization",
+      "title": "Kernel-Managed Shared Memory for System-Wide Personalization",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "系统级共享记忆，由内核统一治理检索以服务多智能体个性化",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.11308v1",
+      "route": "202609/14/2609.11308v1-2am-grounding-agent-side-memory-as-guidance-for-steerable-action-models-in-long-horizon-manipulation",
+      "title": "2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "代理侧任务记忆用于长时程操作",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.11561v1",
+      "route": "202609/14/2609.11561v1-memory-as-plans-world-action-modeling-with-memory-grounded-planning",
+      "title": "Memory as Plans: World-Action Modeling with Memory-Grounded Planning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向长程具身任务的基于记忆的世界-动作建模",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.07782v1",
+      "route": "202609/14/2609.07782v1-trajectorydb-a-new-database-for-agent-trajectories",
+      "title": "TrajectoryDB: A New Database for Agent Trajectories",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "支持记忆抽取的轨迹持久化管理",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.07925v2",
+      "route": "202609/14/2609.07925v2-frognano-training-a-4b-coding-agent-via-online-task-synthesis",
+      "title": "FrogNano: Training a 4B Coding Agent via Online Task Synthesis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "仅用RL与在线任务合成训练小型代码智能体",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.08183v1",
+      "route": "202609/14/2609.08183v1-neohorse-1-towards-recursive-self-improvement-via-agentic-post-training-with-routing-harness",
+      "title": "NeoHorse-1: Towards Recursive Self-Improvement via Agentic Post-Training with Routing Harness",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "代理式后训练实现递归自我改进",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.08228v1",
+      "route": "202609/14/2609.08228v1-se-gos-self-evolving-graph-of-skills-for-skill-library-at-scale",
+      "title": "SE-GoS: Self-Evolving Graph-of-Skills for Skill Library at Scale",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "从执行轨迹蒸馏的自演化技能图",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.06366v1",
+      "route": "202609/14/2609.06366v1-autokd-autonomous-knowledge-discovery",
+      "title": "AutoKD: Autonomous Knowledge Discovery",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多智能体LLM框架，验证过的发现可持久保存并引导后续探究",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.06530v1",
+      "route": "202609/14/2609.06530v1-selective-knowledge-control-for-continual-gui-agent-learning-over-application-streams",
+      "title": "Selective Knowledge Control for Continual GUI Agent Learning over Application Streams",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向应用流的持续GUI智能体学习与选择性知识保留",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    },
+    {
+      "paper_id": "2609.06783v1",
+      "route": "202609/14/2609.06783v1-aura-eval-evaluation-framework-for-acting-under-risk-awareness-in-llm-agent-trajectories",
+      "title": "AURA-Eval: Evaluation Framework for Acting Under Risk Awareness in LLM Agent Trajectories",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对LLM智能体工具使用轨迹的风险细粒度评估",
+      "first_seen_at": "2026-09-14 22:23:49 UTC",
+      "updated_at": "2026-09-14 22:23:49 UTC"
+    }
+  ]
+}

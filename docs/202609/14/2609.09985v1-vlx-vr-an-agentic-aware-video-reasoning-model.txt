@@ -1,0 +1,287 @@
+Title: VLX-VR: An Agentic-Aware Video Reasoning Model
+
+URL Source: https://arxiv.org/pdf/2609.09985v1
+
+Published Time: Thu, 10 Sep 2026 00:52:17 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# VLX-VR: An Agentic-Aware Video Reasoning Model 
+
+# Sheng Li Peng Liu Qianqian Zhang Tiancheng Zhao Om AI Research 
+
+> tianchez@zju-bj.com
+> Correspondence: Tiancheng Zhao
+
+# Abstract 
+
+Real-world video understanding requires integrating visual, audio, textual, and temporal evidence distributed across a video. Yet many pipelines use a fixed video context and single-pass inference, limiting adaptive evidence ac-quisition when observations are incomplete, ambiguous, or conflicting. We present VLX-VR , an agentic-aware video reasoning model trained within a video reasoning frame-work defined by a Think–Memory–Observation loop. At each step, VLX-VR determines the needed evidence, invokes 
+
+read memory or write memory , incorporates the re-turned Observation, and decides whether to continue or produce the task output. We train VLX-VR with multimodal data, including videos and agent trajectories, using rein-forcement learning to learn evidence acquisition, memory use, and termination. On MINERVA, VLX-VR achieves state-of-the-art performance among the models included in our comparison, with 78.79% accuracy. Under the original three duration groups, its accuracies are 76.70%, 78.73%, and 80.92%, with a cross-duration accuracy variance of 2.97 pp 2. On correctly answered samples, 96.20% of VLX-VR’s reasoning traces are consistent with the MINERVA reference reasoning traces and the evidence described by them, while approximately 75.80% of all evaluated samples satisfy both answer correctness and this evidence-grounded trace criterion. These results show strong performance and broadly stable behavior across durations, while counting, state changes, causal reasoning, and spatial perception re-main challenging. 
+
+# 1. Introduction 
+
+In everyday scenarios, people understand videos by com-bining visual, audio, textual, and temporal evidence to an-alyze events and make judgments. Determining what hap-pened, why it happened, or how a situation changed may require locating relevant moments, comparing states before and after an event, reading text in a scene, and relating spo-ken content to visual actions. Supporting such real-world reasoning requires more than recognizing objects or iso-lated frames: a model must identify, integrate, and reassess evidence distributed across the video before reaching a reli-able conclusion. In many standard video-analysis and VideoQA pipelines, video large language models such as Video-LLaVA [8], Qwen3-VL [16], and VideoLLaMA 3 [26] typically receive sampled frames or video clips as a fixed input and pro-duce an output in a single inference pass. This fixed-input, single-pass pattern cannot fully satisfy the real-world event-analysis requirements described above. In such scenarios, a model may need to revisit an earlier event, seek additional evidence after an initial observation, or compare informa-tion distributed across time and modalities before making a judgment. Because the evidence is determined before rea-soning begins, the model cannot adaptively acquire new evidence after detecting missing, ambiguous, or conflict-ing information. As a result, insufficient observation may omit a decisive event, whereas indiscriminate observation increases context length and inference cost. Existing video agents move closer to these real-world re-quirements through iterative information gathering, tempo-ral localization, and memory queries [4, 18, 31]. However, they may still fall short when a general-purpose VLM is merely placed inside an external agent loop without being trained for its role in that loop. In this setting, the model has not necessarily learned to treat evidence acquisition, mem-ory use, and termination as parts of its reasoning policy. It may request redundant evidence, fail to retain important in-termediate states, or produce a result before the available evidence is sufficient. Therefore, reliably analyzing events and making judgments in real-world videos still requires stronger temporal localization, multimodal evidence selec-tion, state maintenance, and consistency between reasoning and actual observations [11]. These limitations motivate the following question: Can a video reasoning model be trained not merely to partici-pate in an agentic pipeline, but to learn evidence acquisi-tion, memory use, and termination as integral parts of its 
+
+1arXiv:2609.09985v1 [cs.CL] 9 Sep 2026 reasoning process? 
+
+To address this question, we introduce a video reason-ing framework organized as a Think–Memory–Observation loop and present VLX-VR, an agentic-aware video reason-ing model trained to operate within this framework. VLX-VR targets video-analysis tasks that require temporal local-ization, multimodal evidence selection, state tracking, and multi-step reasoning over both short and long videos. In-stead of relying on a fixed video context, VLX-VR learns to acquire and reassess multimodal evidence through the framework-defined loop with direct access to multimodal memory. We train VLX-VR with multimodal data and agent trajectories using reinforcement learning so that ev-idence acquisition, memory use, and termination become parts of its learned reasoning policy. Section 3 describes the framework and training procedure in detail. 
+
+Our contributions are: 
+
+1. We introduce a video reasoning framework that orga-nizes task-conditioned evidence acquisition as a Think– Memory–Observation loop with direct multimodal-memory access. 2. We train VLX-VR as an agentic-aware video reason-ing model with multimodal data and agent trajectories using reinforcement learning, enabling the model to learn evidence acquisition, memory read/write behavior, Observation-based reasoning, and termination within the framework-defined loop. 3. VLX-VR achieves state-of-the-art performance on MIN-ERVA, reaching 78.79% accuracy among the models in-cluded in our comparison. We further evaluate its cross-duration stability and the evidence-grounded agreement between its reasoning traces and the MINERVA refer-ence reasoning traces. 
+
+# 2. Related Work 
+
+2.1. General Video Understanding Models 
+
+Vision-language models (VLMs) extend language mod-els with visual perception and cross-modal alignment, pro-viding the foundation for multimodal video understand-ing [15]. Video-LLaVA learns a shared representation space for images and videos [8]. Qwen2.5-VL advances vi-sual understanding, temporal localization, and long-video processing [1], while VideoLLaMA 3 develops a vision-centric training strategy for general image and video un-derstanding [26]. These models support tasks such as video description, dialogue, event interpretation, tempo-ral analysis, and VideoQA. Within this line of research, OmChat [30] focuses on native multimodal modeling with strong long-context and video-understanding capabilities. It combines dynamic visual encoding with progressive multi-modal pretraining to process images, multiple images, and long videos in a unified model. VLX-Flow extends model-level video understanding from offline clips to continuous video streams. It incrementally maintains visual context and semantic memory, allowing previously observed con-tent to be reused without reprocessing the complete video history [12]. These studies strengthen the perceptual, alignment, temporal-modeling, and context-maintenance capabilities required for video understanding. VLX-VR builds on these foundations but focuses on a broader control problem: learning how to acquire task-relevant evidence, retain useful intermediate information, and determine whether the avail-able evidence is sufficient to complete the current video-analysis task. 
+
+2.2. From Perception to Visual Reasoning 
+
+Beyond perception and cross-modal alignment, recent research has increasingly focused on enabling models to perform explicit and multi-step reasoning [22, 27]. Chain-of-thought prompting demonstrates that generating inter-mediate reasoning steps can improve performance on com-plex language tasks [20, 23, 28]. Reasoning models such as OpenAI o1 and DeepSeek-R1 further show that reinforce-ment learning can train models to refine intermediate rea-soning strategies before producing a final response [3, 13]. This direction has subsequently been extended to vi-sual reasoning. VLM-R1 applies rule-based reinforce-ment learning to general vision-language tasks and stud-ies the stability and generalization of R1-style training for VLMs [14]. Video-R1 introduces temporal-aware rein-forcement learning for video reasoning and combines im-age and video reasoning data during training [5]. Together, these studies mark a transition from recognizing visual con-tent to deriving conclusions through structured reasoning over visual and temporal evidence. VLX-VR follows this transition but extends the learning target beyond generating an intermediate reasoning trace. Its reasoning process also controls multimodal-memory reads and writes, incorporates the Observations returned by these operations, and determines whether additional evi-dence is required before producing the task output. Reason-ing therefore serves not only to explain a result, but also to control how the model observes and analyzes the video. 
+
+2.3. Multimodal Agents for Visual Analysis 
+
+A complementary line of research combines multimodal models with memory, tools, and iterative interaction [10, 19]. ReAct establishes the reasoning–action–observation paradigm, in which intermediate results guide subsequent reasoning and actions [24]. For complex video understand-ing, OmAgent introduces a multimodal agent framework that stores and retrieves relevant video frames and uses a task divide-and-conquer loop to dynamically invoke tools and process complex video-analysis requests [29]. 2Related video-agent systems explore different mecha-nisms for adaptive evidence acquisition [9, 25]. VideoA-gent by Wang et al. iteratively identifies and collects task-relevant visual information from long-form videos using vi-sual tools [18]. VideoAgent by Fan et al. constructs struc-tured event and object memory and uses temporal localiza-tion and memory-query tools [4]. VideoAgent2 further em-ploys uncertainty-aware reasoning to regulate information gathering [31]. These studies demonstrate that iterative ob-servation, external memory, and tool use can reduce the lim-itations of analyzing a fixed and preselected video context. Building on these agent-based approaches, VLX-VR is trained as an agentic-aware VLM rather than rely-ing solely on external inference-time control. Within the framework-defined Think–Memory–Observation loop, VLX-VR conditions its decisions on the task instruction, current reasoning state, accumulated multimodal memory, and returned Observations. Memory directly provides the 
+
+read memory and write memory operations; VLX-VR selects one of them, integrates the resulting evidence or update status, and decides whether to continue the loop or produce the task output. The central objective is to make interaction with multimodal memory part of the model’s learned reasoning policy. 
+
+# 3. The Proposed Method 
+
+3.1. Framework Overview 
+
+Given a video and a task instruction, the agentic-aware VLX-VR model operates within the framework-defined Think–Memory–Observation loop. VLX-VR first performs Think to determine what evidence is needed. It then enters Memory and directly invokes the provided read memory 
+
+or write memory operation to retrieve relevant multi-modal evidence or retain intermediate state. The result is returned as an Observation, which VLX-VR uses to update its reasoning state. VLX-VR then decides whether to gather additional evidence or produce a final result. As illustrated in Figure 1, evidence acquisition is conditioned on the task objective, accumulated memory, and returned Observations rather than fixed before reasoning begins. 
+
+3.2. Think–Memory–Observation loop 
+
+At reasoning step t, VLX-VR maintains a state st that includes the task instruction, observed evidence, multi-modal content stored in memory, current output hypothe-ses, and unresolved uncertainty. VLX-VR generates Think from st and decides whether to invoke read memory or 
+
+write memory during Memory, or terminate. This state-dependent decision allows the evidence request to change as new Observations become available. The reasoning loop consists of three stages: • Think: VLX-VR interprets the task objective, proposes the next evidence need, and estimates whether the current evidence is sufficient. • Memory: Memory directly provides read memory and 
+
+write memory ; VLX-VR invokes one operation to re-trieve or retain multimodal evidence. • Observation: The result of the selected Memory opera-tion is returned to VLX-VR for the next decision. When evidence is sufficient, VLX-VR generates the final output with supporting evidence. When evidence is insuf-ficient or conflicting, the model returns to Think and starts another Memory step. The minimal operation space avoids dependence on a large collection of specialized tools and makes training and evaluation easier to standardize. The multimodal memory serves as an external and in-spectable reasoning state rather than only a cache of textual summaries. Video, audio, supporting evidence, Observa-tions, and intermediate states can be read, written, recorded, and reused across reasoning steps. This design also makes it possible to analyze whether the final output is supported by the evidence actually observed during inference. Evidence and reasoning traces play different but related roles in VLX-VR. Evidence refers to task-relevant multi-modal content acquired from the video or returned by Mem-ory, including visual regions, audio segments, textual cues, timestamps, and intermediate state information. A reason-ing trace is the ordered record of how VLX-VR interprets the task, selects Memory operations, incorporates returned Observations, connects evidence across steps, and reaches the final output. Thus, evidence provides the basis for the reasoning trace, while the reasoning trace determines which evidence to acquire, how to organize and interpret it, and whether the available evidence is sufficient for the task. Agreement between a reasoning trace and its supporting evidence indicates that the stated reasoning is grounded in the observed information; it does not by itself establish that the trace faithfully reveals the model’s internal decision pro-cess. The Memory stage provides two operations directly to VLX-VR. read memory retrieves video, audio, and other multimodal content relevant to the current task objective. 
+
+write memory stores the current Observation, evidence, and state information in multimodal memory. Each opera-tion returns an Observation containing either the requested evidence or the status of the memory update. The inference process can be written as: 
+
+s_0 = initialize(video, instruction) while not stop(s_t): think_t, call_t = VLX-VR(s_t) obs_t = execute(call_t) s_{t+1} = update(s_t, obs_t) output = VLX-VR(s_t) 
+
+Here, call t is either read memory or 3Figure 1. Overview of the framework-defined Think–Memory–Observation loop used to train and run VLX-VR, an agentic-aware video reasoning model. Memory directly provides read memory and write memory ; VLX-VR invokes one of these operations, and the resulting Observation guides the next Think step or the final output. 
+
+write memory , selected directly by VLX-VR from the current reasoning state, and obs t is the resulting Observation. The stopping condition depends on evidence sufficiency, output confidence, loop budget, and failure state. Premature termination with insufficient evidence should receive a lower reward. Repeatedly reading the same content or extending the loop without a useful objective should be penalized through cost and redundancy terms. 
+
+3.3. Training 
+
+Reinforcement learning has been used to incentivize language-model reasoning in DeepSeek-R1 [3]. For visual tasks, VLM-R1 investigates rule-based reinforcement learn-ing for visual grounding and open-vocabulary object de-tection, reporting improved generalization over supervised fine-tuning in the evaluated settings [14]. Video-R1 stud-ies video reasoning through temporal-aware T-GRPO opti-mization and mixed image–video training [5]. Search-R1 provides a complementary text-domain example of learn-ing interleaved reasoning and search-tool interactions with reinforcement learning [7]. These works motivate rein-forcement learning for visual tasks and tool interaction, without implying that they implement our Think–Memory– Observation loop. We train VLX-VR as an agentic-aware video reasoning model within this framework rather than only connecting a general-purpose model to an externally defined loop at in-ference time. Multimodal data, including videos and agent trajectories, are used for reinforcement learning. The train-ing objective considers task-output correctness, evidence validity, memory read/write behavior, agreement between the model’s reasoning trace and the reference reasoning trace, termination quality, and interaction cost. Through this training, VLX-VR learns what evidence to acquire, what in-formation to retain, how to use returned Observations, and when the available evidence is sufficient to complete the task. A possible reward decomposition is: 
+
+R = Rtask + λeRevidence + λmRmemory 
+
++ λcRconsistency − λcost Rcost . (1) Here, Rtask measures task-output quality (final-answer cor-rectness for VideoQA), Revidence measures whether the ac-quired evidence covers the task-relevant events, states, and cues identified by the reference reasoning trace, Rmemory 
+
+measures whether VLX-VR selects and executes useful read and write operations, Rconsistency measures agreement between the model’s reasoning trace and the reference rea-soning trace, and Rcost penalizes unnecessary loops, tool calls, and token usage. The evidence and consistency re-wards therefore measure complementary properties rather than the same behavior. 
+
+# 4. Dataset 
+
+We select MINERVA as the primary evaluation dataset because it combines broad temporal coverage with explicit reasoning supervision. It includes both short and long videos, and provides detailed, human-annotated reasoning traces in addition to final answer labels. This makes it suitable for evaluating not only whether VLX-VR selects the correct answer, but also whether its reasoning trace is grounded in the relevant evidence described by the annota-tion [11]. Each question contains a video, a question, five answer choices, and a human-annotated reasoning trace. In our analysis, the events, states, temporal locations, and cues described by this trace define the reference evidence against which evidence acquisition and reasoning consistency are interpreted. The questions require at least two reasoning skills and cover sports, tutorials, daily activities, travel, and other domains. Video-MME also evaluates video under-standing across domains, durations, and modality condi-tions [6], while LongVideoBench targets long-context in-4terleaved video-language understanding and referring rea-soning [21]. Compared with these complementary bench-marks, MINERVA is particularly suitable for our analysis of answer accuracy and evidence-grounded reasoning. The reference reasoning traces contain approximately 92 words on average. About 99.6% contain timestamps, with approximately four timestamps per trace [11]. These an-notations support temporal localization, reference-evidence identification, and reasoning-consistency analysis. The human accuracy reported by MINERVA is approximately 92.5% [11]; we report it as human reference performance rather than as a theoretical upper bound or a result obtained under exactly the same system conditions. We follow the original MINERVA task protocol [11]. The model receives a video, a question, and five candidate answers, and returns a final choice together with a VLX-VR reasoning trace for analysis. The main metric is multiple-choice accuracy. VLX-VR results are taken from the cur-rent evaluation report. Seed2.1 Pro, Seed2.1 Turbo, Gem-ini 3.5 Flash, and Gemini 3.1 Pro comparison numbers are linked to the official Seed2.1 page [2], while the remain-ing comparison numbers come from the public MINERVA evaluation [11]. 
+
+# 5. Experimental Results 
+
+This evaluation uses the agentic-aware VLX-VR model obtained from the training procedure described above. VLX-VR operates within the framework-defined Think– Memory–Observation loop to acquire relevant multimodal evidence before answering questions from the MINERVA dataset. During Memory, VLX-VR directly invokes the pro-vided read memory or write memory operation. 
+
+5.1. Overall Accuracy 
+
+The primary metric is multiple-choice accuracy: 
+
+Accuracy = Ncorrect 
+
+Nquestions 
+
+. (2) VLX-VR obtains 78.79% overall accuracy on MINERVA. The complete comparison with other models is reported in Table 1. VLX-VR is higher than the public comparison results in the current aggregate table, but remains below the hu-man reference level. This suggests strong performance on MINERVA’s multi-step, multi-skill video reasoning task, but does not establish universal superiority across video un-derstanding tasks. 
+
+5.2. Performance across Video Durations 
+
+Table 2 evaluates long-video performance using MIN-ERVA’s three duration groups and public baseline re-sults [11]. 
+
+Table 1. Comparison on MINERVA. Model rows are ordered by accuracy; human and random reference levels are listed separately. Seed2.1 and Gemini 3.x results are from the Seed2.1 page [2]; other external results are from MINERVA [11].                                                    
+
+> Model Accuracy (%)
+> ∆vs. VLX-VR (pp) Source
+> VLX-VR 78.79 –This work Seed2.1 Pro 70.70 -8.09 [2] Gemini 3.5 Flash 68.60 -10.19 [2] Gemini 2.5 Pro Thinking 66.20 -12.59 [11] Seed2.1 Turbo 65.90 -12.89 [2] Gemini 3.1 Pro 63.50 -15.29 [2] Gemini 2.5 Flash Thinking 57.30 -21.49 [11] GPT-4.1 53.99 -24.80 [11] GPT-4o 45.54 -33.25 [11] OpenAI o1 43.48 -35.31 [11] VideoLLaMA3 35.91 -42.88 [11] InternVideo2.5 35.18 -43.61 [11] Qwen2.5-VL 35.05 -43.74 [11] Claude 3.5 Sonnet v2 31.28 -47.51 [11] Human 92.54 +13.75 [11] Random 20.00 -58.79 [11]
+
+Table 2. Accuracy across three video-duration groups.                   
+
+> Model Below 5 min 5–15 min Above 15 min
+> VLX-VR 76.70 78.73 80.92
+> Gemini 2.5 Pro Thinking 68.87 66.84 57.97 GPT-4.1 58.84 54.79 47.25 OpenAI o1 48.28 41.45 40.38 Claude 3.5 Sonnet v2 40.90 33.68 28.30
+
+Figure 2. Accuracy comparison across video-duration groups. VLX-VR obtains 76.70%, 78.73%, and 80.92% in the three groups. The current result does not show a monotonic decrease with duration. 
+
+Figure 2 visualizes the three-group comparison. VLX-VR increases from 76.70% below 5 minutes to 78.73% at 5– 15 minutes and 80.92% above 15 minutes, whereas all four public baselines decline as video duration increases. We quantify cross-duration stability with the equally weighted 5population variance of accuracy across duration groups: 
+
+CDAV = 1
+
+n
+
+> n
+
+X
+
+> i=1
+
+(Acc i − Acc) 2. (3) Here, Acc i is measured in percentage points, so CDAV is reported in squared percentage points ( pp 2). Table 3 ap-plies this definition to the three groups in Table 2, with equal weighting across duration groups and statistics computed from the displayed rounded accuracies. 
+
+Table 3. Cross-duration performance statistics under MINERVA’s original duration grouping. Lower CDAV indicates less variation across duration groups, but does not by itself imply higher accu-racy.                            
+
+> Model Mean accuracy CDAV Std. Range (%) (pp 2)(pp) (pp)
+> VLX-VR 78.78 2.97 1.72 4.22
+> Gemini 2.5 Pro Thinking 64.56 22.40 4.73 10.90 GPT-4.1 53.63 23.06 4.80 11.59 OpenAI o1 43.37 12.24 3.50 7.90 Claude 3.5 Sonnet v2 34.29 26.65 5.16 12.60
+
+Under MINERVA’s original duration grouping, VLX-VR has a mean accuracy of 78.78%, a CDAV of 2.97 pp 2,a standard deviation of 1.72 pp, and a range of 4.22 pp. It has the lowest CDAV among the five models while also achieving the highest mean accuracy. The other four models have CDAV values of 22.40, 23.06, 12.24, and 26.65 pp 2,respectively. Thus, under the original MINERVA group-ing, VLX-VR maintains stable performance as duration in-creases; however, the aggregated Above 15 min group does not reveal how performance varies within longer videos. 
+
+5.3. Performance Analysis on Different Durations 
+
+The analysis under MINERVA’s original grouping shows the unusual pattern that VLX-VR performs better as video duration increases, reaching 80.92% in the aggregated Above 15 min group. To determine whether this improve-ment is uniform across longer videos, we divide that group into 15–30 min and Above 30 min intervals while retain-ing the original Below 5 min and 5–15 min groups. Table 4 reports the resulting refined analysis. 
+
+Table 4. Refined duration analysis with videos longer than 15 min-utes split at 30 minutes. 
+
+Video duration Accuracy (%) 0–5 min 76.70 5–15 min 78.73 15–30 min 83.40 Above 30 min 74.75 The highest accuracy occurs in the 15–30 min interval at 83.40%, whereas accuracy decreases to 74.75% above 30 minutes. The apparent improvement in the original Above 15 min result is therefore driven primarily by the strong 15– 30 min interval rather than by a uniform increase across all longer videos. We next compare the cross-duration statistics under the original and refined groupings in Table 5. 
+
+Table 5. Cross-duration performance statistics for VLX-VR under the original MINERVA and refined duration groupings.                   
+
+> Grouping Groups Mean accuracy CDAV Std. Range (%) (pp 2)(pp) (pp) Original MINERVA 378.78 2.97 1.72 4.22 Refined 478.40 10.33 3.21 8.65
+
+Both analyses assign equal weight to each duration group, and the statistics are computed from the rounded accuracies reported in Tables 2 and 4. Splitting the long-video group changes the equal-weight mean only slightly, from 78.78% to 78.40%, but increases CDAV from 2.97 to 10.33 pp 2, standard deviation from 1.72 to 3.21 pp, and range from 4.22 to 8.65 pp. The higher variation under the refined grouping shows that the original MINERVA group-ing smooths over the 15–30 min peak and the subsequent decline above 30 minutes. The strong 15–30 min result sug-gests that the learned evidence-acquisition behavior of the agentic-aware VLX-VR model broadens the duration range over which it can effectively analyze video. Although per-formance declines beyond 30 minutes, the refined-group ac-curacies remain within 74.75–83.40%, indicating broadly stable performance rather than a collapse on longer videos. 
+
+5.4. Performance across Reasoning Skills 
+
+Table 6 reports the accuracy distribution across reason-ing skills. 
+
+Table 6. VLX-VR accuracy by reasoning skill. 
+
+Skill Accuracy (%) Counting 66.67 Object recognition 82.01 Event occurrence 82.81 Listening 75.19 Temporal reasoning 85.95 Reading 90.76 Numerical reasoning 85.71 Spatial perception 73.47 Cause and effect 72.73 Counterfactual reasoning 74.19 Situational awareness 90.32 Goal reasoning 76.92 State changes 69.23 6VLX-VR is strongest on reading, situational awareness, temporal reasoning, and numerical reasoning. Event occur-rence and object recognition are also above the overall accu-racy. Counting, state changes, cause and effect, and spatial perception are below the overall level, suggesting the need for more reliable object tracking, state modeling, local ev-idence retrieval, and causal judgment. The skill results de-scribe the capability distribution and do not by themselves prove that a particular module caused a given difference. 
+
+5.5. Analysis of Reference-trace Agreement 
+
+On correctly answered samples, 96.20% of the VLX-VR reasoning traces are judged consistent with the MINERVA reference reasoning traces and the evidence described by them. Across the full evaluation set, the proportion of sam-ples estimated to have both a correct answer and a VLX-VR reasoning trace consistent with the reference reasoning trace is 78 .79% × 96 .20% ≈ 75 .80% . This joint criterion is stricter than answer accuracy alone. Nevertheless, the es-timated joint rate is approximately 5.10 percentage points higher than the published answer-only accuracy of Doubao Seed2.1 Pro (70.70%) [2]. This comparison is descriptive because the two results use different success criteria: VLX-VR is evaluated by the joint requirement of answer correctness and agreement be-tween its reasoning trace, the MINERVA reference reason-ing trace, and the evidence described by that trace, whereas Seed2.1 Pro reports answer accuracy only. The reported agreement is therefore an evaluation of evidence-grounded consistency with the annotation, not a direct measurement of the raw evidence itself or a guarantee that the trace faith-fully reveals the model’s internal decision process [17]. 
+
+# 6. Case Studies 
+
+To connect the aggregate results above with concrete model behavior, this section presents detailed positive and negative cases covering temporal reasoning, numerical rea-soning, situational awareness, counting, and state changes. The videos, questions, answer options, reference answers, and reference reasoning traces are from MINERVA [11]; the VLX-VR answers, reasoning traces, and case analyses are from our evaluation. The cases distinguish the evidence observed by VLX-VR from the reasoning trace that orga-nizes and interprets that evidence, making the reference an-swer, the VLX-VR answer, and the resulting strengths or limitations explicit. 
+
+6.1. Correct case 1: Temporal reasoning 
+
+Video: resource-169422, approximately 257 seconds. 
+
+Question: Who is the second person to speak in the video? 
+
+Options: A narrator; The brunette woman; It is a silent film; The blonde woman; The brunette woman’s fiancee. 
+
+Reference answer: The blonde woman. 
+
+Reference reasoning trace: I watch the video until I see the brunette woman speak at 00:41. When I see the blonde woman speak at 00:47, then, I know that she is the second woman to speak in the video. 
+
+VLX-VR answer: The blonde woman; correct. 
+
+VLX-VR reasoning trace: VLX-VR first reviewed the full video and confirmed that only two women appear. It then divided the 40–48 second interval into multiple obser-vation windows, identifying the brunette woman as the first speaker around 41 seconds and the blonde woman as the re-sponder around 45.6–48 seconds based on lip motion and shot reversals. It further used later alternating dialogue to cross-check the speaking order. 
+
+Analysis: The question requires event ordering rather than simple person identification. The VLX-VR reasoning trace contains a chain of first-speaking timestamp, speaker identity, and subsequent alternating dialogue, connecting local visual observations with temporal order. Within the framework-defined Think–Memory–Observation loop, VLX-VR uses the first Observation to locate the first ut-terance, the second to verify the second speaker, and later observations to test whether the speaking sequence remains coherent. Figure 3 summarizes the full-video scan, the de-cisive keyframes, and the supporting evidence described in the VLX-VR reasoning trace. 
+
+6.2. Correct case 2: Numerical reasoning 
+
+Video: resource-169908, approximately 5,686 seconds. 
+
+Question: When orange first takes control of the four territories of Australia, what is the average value per terri-tory that green controls? 
+
+Options: 2.9; 2.8; 3.2; 2.7; 2.3. 
+
+Reference answer: 2.7. 
+
+Reference reasoning trace: I identified Australia on the map as the continent in the bottom right section of the frame. At 12:11, I saw the leftmost territory of mainland Australia attack the chain of islands west of New Zealand. I saw that the attack was successful, as the chain of is-lands was now colored orange and had orange “10” on it. At this point, this territory, New Zealand, and the left and right mainland territories of Australia, all glowed orange. I understood this to mean that the orange player now con-trolled the entire continent. I observed the rest of the map and looked for green territories. I counted 10 territories col-ored green, each with their own cloud-shaped green icon on them that had a number inside. I understood from my knowledge of Risk that this corresponds to the number of troops in that territory. From left to right, top to bottom, I recorded the number of troops present in each of the terri-tories: 1, 1, 4, 4, 3, 3, 6, 3, 1, 1. I added these together to get the total value: 1+1+4+4+3+3+6+3+1+1=27. To find the average value per territory, I divided 27/10=2.7. 7Figure 3. Visualization of the temporal-reasoning case for resource-169422. The full-video overview supports coarse temporal localization, while the keyframes at 00:41 and 00:47 identify the first and second speakers. The lower panels align the MINERVA reference reasoning trace with the VLX-VR reasoning trace. 
+
+VLX-VR answer: 2.7; correct. 
+
+VLX-VR reasoning trace: VLX-VR first used a coarse full-video scan to locate the interval around 695–775 sec-onds. It then used fine-grained observation to confirm that western Australia changed from black to orange around 712–713 seconds. It read the green player’s panel, verified 10 green territories and a total value of 27, and computed 27 / 10 = 2.7. 
+
+Analysis: This case shows a long-video chain of event trigger, state reading, and numerical computation. Rather than guessing from a local frame, the model first localized the state change in which orange completed control of Aus-tralia and then read the global panel for green. During Memory, VLX-VR can use write memory to retain the time of the territory change and the “green 27 / 10” state, while read memory retrieves this evidence for the final arithmetic step. The retrieved evidence is returned as an Observation. 
+
+6.3. Correct case 3: Situational awareness 
+
+Video: resource-169911, approximately 338 seconds. 
+
+Question: Before the man kisses the other man, what does he do before this? 
+
+Options: He looks down; He walks away; He gestures around; He looks up; He looks around. 
+
+Reference answer: He looks around. 
+
+Reference reasoning trace: I watched the video to find the moment when the man kisses the other man. This oc-curs from 03:06–03:10. The most recent scene before this which features both men runs from 02:53–03:01. During this scene, the man looks down and around the two of them, up and down the stairwell where they are standing. Thus, he looks around before he kisses the other man. 
+
+VLX-VR answer: He looks around; correct. 
+
+VLX-VR reasoning trace: VLX-VR localized a con-tinuous stairwell segment and recorded the actions from ap-proximately 173–181 seconds. The man first looked at the other person, then turned his gaze downward, upward, and toward the upper-left area along the railing before turning back and approaching the other man. VLX-VR ruled out “walks away” and the isolated “looks down/looks up” op-tions and selected “looks around.” 
+
+Analysis: The decisive evidence is not a single action but a sequence of gaze directions forming a situation. The model interpreted looking down and looking up as instances of the higher-level action “looking around,” while using the surrounding interaction to disambiguate the options. This suggests that situational-awareness questions can benefit from repeated Observations that aggregate local actions be-fore Think performs semantic abstraction. 86.4. Incorrect case 1: Counting under occlusion and uncertainty 
+
+Video: resource-169417, approximately 221 seconds. 
+
+Question: How many women appear in the first row of the audience? 
+
+Options: 6; 4; 5; 3; 2. 
+
+Reference answer: 5. 
+
+Reference reasoning trace: I watched the video to iden-tify the times that the camera focuses on the audience. This happens at 01:04, 01:08, 02:18, and 03:39. Each in-stance features the same shot of the audience. From there, I counted how many women appeared sitting in the first row, which is 5. 
+
+VLX-VR answer: 4; incorrect. 
+
+VLX-VR reasoning trace: VLX-VR reviewed multi-ple audience windows and concluded that the first row con-tained seven seats: four people whose gender it could con-firm as female, two males, and one person whose torso and legs were visible but whose face was cropped out. It adopted a conservative policy, excluded the uncertain per-son, and returned 4. 
+
+Error cause: The model did not fail because it lacked all relevant evidence. Instead, it applied a “count only explic-itly confirmed instances” policy under occlusion and crop-ping. This disagreed with the benchmark annotation, which counted five women, producing an undercount of one. The failure lies in the definition of the target set and the treat-ment of uncertain instances, rather than in arithmetic. 
+
+Model limitation: Large models remain sensitive to oc-clusion, cropping, row assignment, and identity uncertainty in multi-object counting. The model can identify local at-tributes, but it may fail to merge observations across shots into the same object set as the benchmark. When visual ev-idence is incomplete, both conservative exclusion and un-supported inference can cause errors. VLX-VR may re-quest additional observations to reduce uncertainty, but the framework-defined loop in which the agentic-aware VLX-VR model operates cannot guarantee recovery of an at-tribute that is absent from the available visual evidence. 
+
+6.5. Incorrect case 2: State changes and temporal-chain tracking 
+
+Video: resource-169421, approximately 527 seconds. 
+
+Question: What change of color occurs to the letters added to the word “ZING” by Chris Cree? 
+
+Options: They turn from red to yellow; They turn from yellow to red; They turn from green to red; They turn from yellow to green; They turn from red to green. 
+
+Reference answer: They turn from yellow to green. 
+
+Reference reasoning trace: I watched for the section of video dedicated to Chris Cree and his addition to the word “ZING”, which I found from 03:06–03:38. Since the letters “ANNUALI” are added to the “ZING,” “ANNUALI” are then the letters whose color I pay attention to. Initially, the letters “ANNUALI” are displayed in yellow, but this color changes to green at 03:05 after they are played on the board. Therefore, the letters added to the word “ZING” by Chris Cree change color by turning from yellow to green. 
+
+VLX-VR answer: They turn from yellow to red; incor-rect. 
+
+VLX-VR reasoning trace: VLX-VR localized the Chris Cree segment around 03:06–03:38 and identified the added letters as “ANNUALI.” It observed that the letters turned green after being placed on the board around 185 seconds, but later observed them turn red around 215–218 seconds. It treated the later transition as the answer and described the change as “green to red.” The final option marker was also inconsistent with the textual conclusion: it corresponded to “yellow to red,” while the explanation de-scribed “green to red.” 
+
+Error cause: The question asks for the transition from the initial state to the state immediately after the letters are placed. The model continued tracking a later “unaccept-able” state and allowed this salient event to overwrite the earlier transition required by the question. It detected multi-ple real changes but failed to select the correct pair of states under the question’s temporal boundary. The inconsistency between the explanation and the final option further indi-cates state drift between reasoning and answer decoding. 
+
+Model limitation: Large models can be attracted to later salient events in state-change questions and may fail to maintain a complete temporal chain involving object iden-tity, initial state, target state, and event boundary. Even when the model recognizes the letters and multiple color states, it can answer incorrectly if it does not lock onto the first valid transition required by the question. During Mem-ory, VLX-VR should use write memory to store ob-ject identity and time-ordered state records explicitly, while 
+
+read memory should return structured “before–trigger– after” evidence as an Observation. Merely increasing the number of observations does not automatically solve event-boundary selection. 
+
+6.6. Case-study summary: separate observation from evidence decisions 
+
+The three correct cases show that VLX-VR can form coherent evidence chains for temporal order, numerical computation, and situational action understanding. The two incorrect cases show that VLX-VR may observe rel-evant frames yet fail in uncertain-object counting, selecting among multiple state transitions, or mapping its reasoning to the final option. Case analysis should therefore evalu-ate more than whether VLX-VR “saw” the relevant con-tent. It should separately measure whether VLX-VR found the correct time interval, maintained the correct object iden-tity, selected the state transition requested by the question, 9and kept the VLX-VR answer consistent with its reason-ing trace. These are the behaviors that process rewards and structured agent trajectories should reinforce and validate in VLX-VR. 
+
+# 7. Conclusion 
+
+We presented VLX-VR, an agentic-aware video rea-soning model trained to operate within a video reason-ing framework organized as a Think–Memory–Observation loop. Within this framework-defined loop, VLX-VR iden-tifies what evidence is needed, selects and executes the 
+
+read memory or write memory operation provided by Memory, integrates the returned Observation, and decides whether to continue gathering evidence or produce the task output. Multimodal memory serves as an external and inspectable reasoning state for video, audio, support-ing evidence, Observations, and intermediate states. Con-sequently, evidence acquisition and memory use become model behaviors that can be recorded, analyzed, and trained rather than remaining implicit components of an external in-ference pipeline. On MINERVA, VLX-VR achieves state-of-the-art per-formance among the models included in our comparison, with 78.79% overall accuracy. Across MINERVA’s three duration groups, it obtains accuracies of 76.70%, 78.73%, and 80.92%, together with the lowest CDAV under the orig-inal MINERVA grouping among the five models analyzed. The finer-grained duration analysis shows that the appar-ent improvement for longer videos is driven primarily by the 83.40% result in the 15–30 min interval; accuracy de-creases to 74.75% above 30 minutes rather than increasing monotonically with duration. On correctly answered sam-ples, 96.20% of VLX-VR’s reasoning traces are consistent with the MINERVA reference reasoning traces and the evi-dence described by them, and approximately 75.80% of all evaluated samples satisfy both answer correctness and this evidence-grounded trace criterion. These results support the effectiveness of VLX-VR across varied video durations and reasoning skills, while also defining clear limitations. Performance remains weaker for counting, state changes, cause and effect, and spatial perception, and evidence-grounded agreement with the reference reasoning trace indicates consistency with annotated reasoning and observed evidence rather than guaranteed faithfulness to the model’s internal de-cision process. Separating the causal contributions of the framework-defined loop, direct multimodal-memory access, and reinforcement-learning training will require matched ablations and remains an important direction for future evaluation. 
+
+# References 
+
+[1] Shuai Bai, Keqin Chen, Xuejing Liu, et al. Qwen2.5-VL technical report. arXiv preprint arXiv:2502.13923 , 2025. 2 [2] ByteDance Seed. Seed2.1: Official model evaluation re-sults. https://seed.bytedance.com/en/seed2_ 1, 2026. 5, 7 [3] DeepSeek-AI. DeepSeek-R1: Incentivizing reasoning capa-bility in LLMs via reinforcement learning. arXiv preprint arXiv:2501.12948 , 2025. 2, 4 [4] Yue Fan, Xiaojian Ma, Rujie Wu, Yuntao Du, Jiaqi Li, Zhi Gao, and Qing Li. VideoAgent: A memory-augmented multimodal agent for video understanding. arXiv preprint arXiv:2403.11481 , 2024. 1, 3 [5] Kaituo Feng, Kaixiong Gong, Bohao Li, Zonghao Guo, Yibing Wang, Tianshuo Peng, Junfei Wu, Xiaoying Zhang, Benyou Wang, and Xiangyu Yue. Video-R1: Rein-forcing video reasoning in MLLMs. arXiv preprint arXiv:2503.21776 , 2025. 2, 4 [6] Chaoyou Fu, Yuhan Dai, Yongdong Luo, et al. Video-MME: The first-ever comprehensive evaluation benchmark of multi-modal LLMs in video analysis. arXiv preprint arXiv:2405.21075 , 2024. 4 [7] Bowen Jin, Hansi Zeng, Zhenrui Yue, Jinsung Yoon, Sercan Arik, Dong Wang, Hamed Zamani, and Jiawei Han. Search-R1: Training LLMs to reason and leverage search engines with reinforcement learning. arXiv preprint arXiv:2503.09516 , 2025. 4 [8] Bin Lin, Yang Ye, Bin Zhu, Jiaxi Cui, Munan Ning, Peng Jin, and Li Yuan. Video-llava: Learning united visual rep-resentation by alignment before projection. arXiv preprint arXiv:2311.10122 , 2023. 1, 2 [9] Ye Liu, Kevin Qinghong Lin, Chang-Wen Chen, and Mike Zheng Shou. Videomind: A chain-of-lora agent for temporal-grounded video reasoning. In International Con-ference on Learning Representations , pages 57481–57506, 2026. 3 [10] Ziyu Ma, Chenhui Gou, Hengcan Shi, Bin Sun, Shutao Li, Hamid Rezatofighi, and Jianfei Cai. Drvideo: Document re-trieval based long video understanding. In 2025 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 18936–18946. IEEE, 2025. 2 [11] Arsha Nagrani, Sachit Menon, Ahmet Iscen, Shyamal Buch, Ramin Mehran, Nilpa Jha, Anja Hauth, Yukun Zhu, Carl Vondrick, Mikhail Sirotenko, Cordelia Schmid, and Tobias Weyand. Minerva: Evaluating complex video reasoning. 
+
+arXiv preprint arXiv:2505.00681 , 2025. 1, 4, 5, 7 [12] Om AI Lab. VLX-Flow: Continuous video understand-ing for real-time multimodal interaction. https://om-ai-lab.github.io/2026_06_26_vlx_flow_en. html , 2026. Official technical blog. 2 [13] OpenAI. OpenAI o1 System Card. https://openai. com/index/openai-o1-system-card/ , 2024. 2 [14] Haozhan Shen, Peng Liu, Jingcheng Li, Chunxin Fang, Yibo Ma, Jiajia Liao, Qiaoli Shen, Zilun Zhang, Kangjia Zhao, Qianqian Zhang, Ruochen Xu, and Tiancheng Zhao. VLM-R1: A stable and generalizable R1-style large vision-
+
+10 language model. arXiv preprint arXiv:2504.07615 , 2025. 2, 4[15] Enxin Song, Wenhao Chai, Guanhong Wang, Yucheng Zhang, Haoyang Zhou, Feiyang Wu, Haozhe Chi, Xun Guo, Tian Ye, Yanting Zhang, et al. Moviechat: From dense token to sparse memory for long video understanding. In 
+
+2024 IEEE/CVF Conference on Computer Vision and Pat-tern Recognition (CVPR) , pages 18221–18232. IEEE, 2024. 2[16] Qwen Team et al. Qwen3 technical report. arXiv preprint arXiv:2505.09388 , 6(7):13, 2025. 1 [17] Miles Turpin, Julian Michael, Ethan Perez, and Samuel R. Bowman. Language models don’t always say what they think: Unfaithful explanations in chain-of-thought prompt-ing. arXiv preprint arXiv:2305.04388 , 2023. 7 [18] Xiaohan Wang, Yuhui Zhang, Orr Zohar, and Serena Yeung-Levy. VideoAgent: Long-form video understand-ing with large language model as agent. arXiv preprint arXiv:2403.10517 , 2024. 1, 3 [19] Xiaohan Wang, Yuhui Zhang, Orr Zohar, and Serena Yeung-Levy. Videoagent: Long-form video understanding with large language model as agent. In European Conference on Computer Vision , pages 58–76. Springer, 2024. 2 [20] Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le, and Denny Zhou. Chain-of-thought prompting elicits reasoning in large language models. In Advances in Neural Information Processing Systems , pages 24824–24837, 2022. 2 [21] Haoning Wu, Dongxu Li, Bei Chen, and Junnan Li. LongVideoBench: A benchmark for long-context inter-leaved video-language understanding. arXiv preprint arXiv:2407.15754 , 2024. 5 [22] Yuan Xie, Tianshui Chen, Zheng Ge, and Lionel Ni. Video-mtr: Reinforced multi-turn reasoning for long video under-standing. arXiv preprint arXiv:2508.20478 , 2025. 2 [23] Jie Yang, Feipeng Ma, Zitian Wang, Dacheng Yin, Kang Rong, Fengyun Rao, and Ruimao Zhang. Wethink: To-ward general-purpose vision-language reasoning via rein-forcement learning. arXiv preprint arXiv:2506.07905 , 2025. 2[24] Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. React: Synergizing reasoning and acting in language models. arXiv preprint arXiv:2210.03629 , 2022. 2 [25] Woongyeong Yeo, Kangsan Kim, Jaehong Yoon, and Sung Ju Hwang. Worldmm: Dynamic multimodal mem-ory agent for long video reasoning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 25599–25609, 2026. 3 [26] Boqiang Zhang, Kehan Li, Zesen Cheng, Zhiqiang Hu, Yuqian Yuan, Guanzheng Chen, Sicong Leng, Yuming Jiang, Hang Zhang, Xin Li, Peng Jin, Wenqi Zhang, Fan Wang, Li-dong Bing, and Deli Zhao. VideoLLaMA 3: Frontier mul-timodal foundation models for image and video understand-ing. arXiv preprint arXiv:2501.13106 , 2025. 1, 2 [27] Haoji Zhang, Xin Gu, Jiawen Li, Chixiang Ma, Sule Bai, Chubin Zhang, Bowen Zhang, Zhichao Zhou, Dongliang He, and Yansong Tang. Thinking with videos: Multimodal tool-augmented reinforcement learning for long video reasoning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 32903–32914, 2026. 2[28] Jingyi Zhang, Jiaxing Huang, Huanjin Yao, Shunyu Liu, Xikun Zhang, Shijian Lu, and Dacheng Tao. R1-vl: Learning to reason with multimodal large language models via step-wise group relative policy optimization. In 2025 IEEE/CVF International Conference on Computer Vision (ICCV) , pages 1859–1869. IEEE, 2025. 2 [29] Lu Zhang, Tiancheng Zhao, Heting Ying, Yibo Ma, and Kyu-song Lee. OmAgent: A multi-modal agent framework for complex video understanding with task divide-and-conquer. In Proceedings of the 2024 Conference on Empirical Meth-ods in Natural Language Processing , pages 10031–10045, 2024. 2 [30] Tiancheng Zhao, Qianqian Zhang, Kyusong Lee, Peng Liu, Lu Zhang, Chunxin Fang, Jiajia Liao, Kelei Jiang, Yibo Ma, and Ruochen Xu. OmChat: A recipe to train multimodal language models with strong long context and video under-standing. arXiv preprint arXiv:2407.04923 , 2024. 2 [31] Zhuo Zhi, Qiangqiang Wu, Minghe Shen, Wenbo Li, Yinchuan Li, Kun Shao, and Kaiwen Zhou. VideoAgent2: Enhancing the LLM-based agent system for long-form video understanding by uncertainty-aware CoT. arXiv preprint arXiv:2504.04471 , 2025. 1, 3 
+
+11

@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-13</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-14</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-13 22:05:46 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-14 22:23:49 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-13日报：共收17篇，精读6篇、速读11篇，焦点集中在LLM Agent的记忆个性化、多智能体记忆编排与记忆评估/安全。最值得看的是9.0分的《Personalizing LLM Agent Memory Using Biometrics》和8.0分的《Diachronic Hypergraphs for Orchestrated Multi-Agent Multimodal Memory Curation》，前者指向生物特征驱动的记忆个性化，后者</p>
+<p>2026-09-14 日报完成 17 篇筛选：6 篇精读、11 篇速读，重点聚焦 LLM 智能体的长期记忆与隐私互操作。最值得看的是两篇 9.0 分精读——《AIM》解决多智能体多用户场景下的隐私感知记忆互通，《LifeFuse-Mem》用生命周期感知的状态融合对抗长期记忆被临时信息覆盖，另有速读关注部分可观测下的规划与系统级个性化共享内存。普通读者可先从这两篇精读入手，理解&quot;记忆管理&quot;正成为智能体可靠性的核心议题。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -81,7 +81,7 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Personalizing LLM Agent Memory Using Biometrics">Personalizing LLM Agent Memory Using Biometrics</span></li><li><span class="dpr-home-dashboard-paper-title" title="Diachronic Hypergraphs for Orchestrated Multi-Agent Multimodal Memory Curation">Diachronic Hypergraphs for Orchestrated Multi-Agent Multimodal Memory Curation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agents in the Large: Perception-Centered Architecture for Persistent Agents">Agents in the Large: Perception-Centered Architecture for Persistent Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="AIM: A Privacy-Aware Interoperable Memory Framework for Multi-Agent Multi-User LLM Systems">AIM: A Privacy-Aware Interoperable Memory Framework for Multi-Agent Multi-User LLM Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="LifeFuse-Mem: Lifecycle-Aware State Fusion Against Temporary Overwriting for Long-Term Memory">LifeFuse-Mem: Lifecycle-Aware State Fusion Against Temporary Overwriting for Long-Term Memory</span></li><li><span class="dpr-home-dashboard-paper-title" title="LifeMem: Enabling Lifelong Experience Reuse for LLM Agents">LifeMem: Enabling Lifelong Experience Reuse for LLM Agents</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>6</strong></span></div>
 </section>
@@ -94,7 +94,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Measure Before You Manage: Evaluating Agent Working Memory in Coding Agents">Measure Before You Manage: Evaluating Agent Working Memory in Coding Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Learning What to Retain: Gated-Memory Routing for Efficient Collaboration in Multi-Agent LLM Systems">Learning What to Retain: Gated-Memory Routing for Efficient Collaboration in Multi-Agent LLM Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents">CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Belief-State Engine: Augmenting LLMs for Principled Planning Under Partial Observability">Belief-State Engine: Augmenting LLMs for Principled Planning Under Partial Observability</span></li><li><span class="dpr-home-dashboard-paper-title" title="Kernel-Managed Shared Memory for System-Wide Personalization">Kernel-Managed Shared Memory for System-Wide Personalization</span></li><li><span class="dpr-home-dashboard-paper-title" title="2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation">2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>11</strong></span></div>
 </section>
