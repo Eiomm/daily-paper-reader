@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-14</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-06 ~ 2026-09-15</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-14 22:23:49 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-15 06:47:11 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-14 日报完成 17 篇筛选：6 篇精读、11 篇速读，重点聚焦 LLM 智能体的长期记忆与隐私互操作。最值得看的是两篇 9.0 分精读——《AIM》解决多智能体多用户场景下的隐私感知记忆互通，《LifeFuse-Mem》用生命周期感知的状态融合对抗长期记忆被临时信息覆盖，另有速读关注部分可观测下的规划与系统级个性化共享内存。普通读者可先从这两篇精读入手，理解&quot;记忆管理&quot;正成为智能体可靠性的核心议题。</p>
+<p>9月6日至15日共筛出14篇论文，完成3篇精读、11篇速读，主题集中在4D视频表示与具身智能任务规划。最值得看的是精读中9.0分的《VideoTok4D》和8.0分的《Safe Task Planning with Long-Term Graph Memory》，前者关注紧凑4D世界表示，后者聚焦具身智能体安全规划。普通读者可先读这两篇精读摘要，再按兴趣浏览速读里的世界模型与自动驾驶方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="AIM: A Privacy-Aware Interoperable Memory Framework for Multi-Agent Multi-User LLM Systems">AIM: A Privacy-Aware Interoperable Memory Framework for Multi-Agent Multi-User LLM Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="LifeFuse-Mem: Lifecycle-Aware State Fusion Against Temporary Overwriting for Long-Term Memory">LifeFuse-Mem: Lifecycle-Aware State Fusion Against Temporary Overwriting for Long-Term Memory</span></li><li><span class="dpr-home-dashboard-paper-title" title="LifeMem: Enabling Lifelong Experience Reuse for LLM Agents">LifeMem: Enabling Lifelong Experience Reuse for LLM Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="VideoTok4D: A 4D-Aware Video Tokenizer for Compact World Representation">VideoTok4D: A 4D-Aware Video Tokenizer for Compact World Representation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Safe Task Planning with Long-Term Graph Memory for Embodied Agents">Safe Task Planning with Long-Term Graph Memory for Embodied Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Semigroup-JEPA: Latent Dynamics Consistency for Zero-Shot Physics Generalization">Semigroup-JEPA: Latent Dynamics Consistency for Zero-Shot Physics Generalization</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>2</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Belief-State Engine: Augmenting LLMs for Principled Planning Under Partial Observability">Belief-State Engine: Augmenting LLMs for Principled Planning Under Partial Observability</span></li><li><span class="dpr-home-dashboard-paper-title" title="Kernel-Managed Shared Memory for System-Wide Personalization">Kernel-Managed Shared Memory for System-Wide Personalization</span></li><li><span class="dpr-home-dashboard-paper-title" title="2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation">2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="WM-Craftnet: World Synesthesia Model for Generalizable and Robust Dexterous In-Hand Manipulation">WM-Craftnet: World Synesthesia Model for Generalizable and Robust Dexterous In-Hand Manipulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models Under Asynchronous Sensor Observations">World Models Under Asynchronous Sensor Observations</span></li><li><span class="dpr-home-dashboard-paper-title" title="Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving">Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>8</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>3</strong></span></div>
 </section>
 </div>
 

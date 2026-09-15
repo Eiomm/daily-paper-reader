@@ -1,0 +1,610 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-15T06:40:35.716082+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 16,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2609.12874v1",
+      "source": "arxiv",
+      "title": "VideoTok4D: A 4D-Aware Video Tokenizer for Compact World Representation",
+      "abstract": "Video tokenizers have emerged as a cornerstone of modern video modeling, underpinning progress in compression, reconstruction and generation by mapping high-dimensional visual signals into compact latent spaces. However, despite this progress, current tokenization paradigms largely remain within the 2D visual domain, treating videos as image sequences rather than observations of an underlying dynamic 3D world. Consequently, the learned tokens inherit this observation-centric bias, limiting their capacity to compactly represent real-world 4D scenes. To mitigate this issue, we propose VideoTok4D, a novel 4D-aware video tokenizer for compact world representation. Specifically, our approach comprises three key designs: 1) a spatiotemporal disentanglement strategy that factorizes videos into static and dynamic tokens for holistic world modeling; 2) a track-aware dynamic attention mechanism that aggregates trajectory-aligned cues to promote cross-view motion consistency; and 3) Co4DGen, a diffusion prior learned over the resulting VideoTok4D token space for efficient 4D scene generation. Extensive experiments have demonstrated that our proposed method achieves state-of-the-art performance while requiring up to 4 orders of magnitude less storage than dense 4D representations. Moreover, the compact token space substantially shortens diffusion sequences, enabling efficient generation.",
+      "authors": [
+        "Xinyi Chen",
+        "Hanxin Zhu",
+        "Xijun Wang",
+        "Xingrui Wang",
+        "Sen Liang",
+        "Xin Li",
+        "Zhibo Chen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-11T14:03:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.12874v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "4D-aware video tokenizer for compact world representation",
+      "llm_evidence_cn": "面向紧凑世界表征的4D感知视频分词器",
+      "llm_evidence": "面向紧凑世界表征的4D感知视频分词器",
+      "canonical_evidence": "面向紧凑世界表征的4D感知视频分词器",
+      "llm_tldr_en": "Video tokenizers remain 2D observation-centric. VideoTok4D is a 4D-aware video tokenizer with spatiotemporal disentanglement that maps visual signals into compact latent tokens for better 4D world representation, compression, reconstruction and generation.",
+      "llm_tldr_cn": "视频分词器是现代视频建模的基石，可将高维视觉信号映射为紧凑潜空间，但现有范式多停留在2D视觉域，把视频当作图像序列而非动态3D世界的观测，导致token带有观测中心偏差，难以紧凑表征真实4D场景。论文提出4D感知视频分词器VideoTok4D，通过时空解耦等三项关键设计学习世界表征。实验表明该分词器能更紧凑地表征动态3D世界，提升压缩、重建与生成效果，把视频分词从2D观测范式推进到4D世界表征范式。",
+      "llm_tldr": "视频分词器是现代视频建模的基石，可将高维视觉信号映射为紧凑潜空间，但现有范式多停留在2D视觉域，把视频当作图像序列而非动态3D世界的观测，导致token带有观测中心偏差，难以紧凑表征真实4D场景。论文提出4D感知视频分词器VideoTok4D，通过时空解耦等三项关键设计学习世界表征。实验表明该分词器能更紧凑地表征动态3D世界，提升压缩、重建与生成效果，把视频分词从2D观测范式推进到4D世界表征范式。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "world model tokenizer",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.08444v1",
+      "source": "arxiv",
+      "title": "Safe Task Planning with Long-Term Graph Memory for Embodied Agents",
+      "abstract": "Large language models (LLMs) and vision-language models (VLMs) have significantly advanced zero-shot task planning for embodied agents. However, most LLM- and VLM-driven methods struggle to generate safe high-level actions due to a lack of physical risk awareness, particularly under partial observability, where hazards lie outside the immediate field of view. To address this challenge, we propose a novel safe task-planning framework, SafeMem, which constructs and maintains a long-term semantic graph memory of the open and dynamic environment. Based on egocentric observations, the proposed framework incrementally accumulates knowledge about surrounding objects and their relationships with a graph. Then, an LLM-based risk predictor evaluates candidate actions using the graph memory, triggering a conservatism-modulated replanning loop with explanations for detected hazards. Extensive experiments on the IS-Bench benchmark and a real-world robot platform demonstrate that the SafeMem framework substantially improves safe success rates compared to state-of-the-art VLM-driven task planners. Video results are available on our webpage: https://sites.google.com/view/safemem.",
+      "authors": [
+        "Siyuan Li",
+        "Taiyan Lang",
+        "Aoqi Yan",
+        "Jia Yu",
+        "Feifan Liu",
+        "Yihan Du",
+        "Yu Zheng",
+        "Xun Wang",
+        "Peng Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-08T08:49:50+00:00",
+      "link": "https://arxiv.org/pdf/2609.08444v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "long-term graph memory for embodied agent planning",
+      "llm_evidence_cn": "面向具身智能体规划的长时图记忆",
+      "llm_evidence": "面向具身智能体规划的长时图记忆",
+      "canonical_evidence": "面向具身智能体规划的长时图记忆",
+      "llm_tldr_en": "SafeMem builds and maintains a long-term semantic graph memory for embodied agents, using an LLM-based risk predictor to generate safe high-level plans under partial observability.",
+      "llm_tldr_cn": "针对大模型与视觉语言模型驱动的具身任务规划缺乏物理风险意识、在部分可观测条件下难以生成安全高层动作的问题，论文提出 SafeMem 框架。该方法基于自我中心观测增量构建并维护开放动态环境的长时语义图记忆，再由基于LLM的风险预测器评估候选动作并规划安全路径。实验显示该框架能有效利用长时记忆提升安全性与规划成功率，为具身智能体的记忆机制与安全决策提供了新范式。",
+      "llm_tldr": "针对大模型与视觉语言模型驱动的具身任务规划缺乏物理风险意识、在部分可观测条件下难以生成安全高层动作的问题，论文提出 SafeMem 框架。该方法基于自我中心观测增量构建并维护开放动态环境的长时语义图记忆，再由基于LLM的风险预测器评估候选动作并规划安全路径。实验显示该框架能有效利用长时记忆提升安全性与规划成功率，为具身智能体的记忆机制与安全决策提供了新范式。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.10464v1",
+      "source": "arxiv",
+      "title": "Semigroup-JEPA: Latent Dynamics Consistency for Zero-Shot Physics Generalization",
+      "abstract": "Joint-Embedding Predictive Architecture (JEPA) world models learn a compact latent representation of the world that supports prediction and planning, but their capability to learn physics and generate physically realistic dynamics remains hitherto untested. In this work, we introduce SemiGroup-JEPA (SG-JEPA), which extends the LeWorldModel framework by supplying the parameter governing the physics to the temporal model via action-conditioning and jointly training an encoder and predictor through an autoregressive latent rollout. To evaluate the model's ability to generalize out of distribution, we design dynamical tasks under different gravitational fields that, despite obeying the same physical law, exhibit qualitatively different dynamics, ranging from floating motion in weak gravitational fields to rapid bouncing in strong ones. In contrast to DINO-WM, SG-JEPA reduces open-loop prediction error by up to 2 times on two-dimensional datasets, and increases control success rate up to 2.5 times for three-dimensional robotic datasets, for which we train independent diffusion policies. To explain this advantage, we develop a linear feature model that separates local law-conditioned error from its recursive amplification under rollout. Guided by this model, we find that back-propagating the multi-step rollout loss into the representation trains the encoder to keep the features that the predictor can carry forward, and that those are the features the dynamics depend on, so most of the gain comes from the encoder learning better features rather than from the predictor learning better dynamics. See project page at https://sg-jepa.github.io.",
+      "authors": [
+        "Andy Zeyi Liu",
+        "Haoran Sun",
+        "Lucas Baker",
+        "Randall Balestriero",
+        "John Sous"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-09T17:08:13+00:00",
+      "link": "https://arxiv.org/pdf/2609.10464v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "JEPA world model with autoregressive latent dynamics rollout",
+      "llm_evidence_cn": "具自回归潜动力学的JEPA世界模型",
+      "llm_evidence": "具自回归潜动力学的JEPA世界模型",
+      "canonical_evidence": "具自回归潜动力学的JEPA世界模型",
+      "llm_tldr_en": "JEPA world models learn compact latents for prediction but their physics learning is untested. SG-JEPA action-conditions the physics parameter and jointly trains encoder and predictor via autoregressive latent rollout, showing zero-shot generalization across gravity fields.",
+      "llm_tldr_cn": "针对JEPA世界模型虽能学习紧凑潜表示支持预测与规划、但其学习物理规律与生成真实动力学的能力尚未被检验的问题，论文提出Semigroup-JEPA，通过动作条件把物理参数注入时序模型，并以自回归潜空间rollout联合训练编码器与预测器。作者设计不同引力场下的动力学任务评估分布外泛化，结果显示模型能保持潜动力学一致性并实现零样本泛化。该工作为潜动力学世界模型的物理可迁移性提供了验证框架。",
+      "llm_tldr": "针对JEPA世界模型虽能学习紧凑潜表示支持预测与规划、但其学习物理规律与生成真实动力学的能力尚未被检验的问题，论文提出Semigroup-JEPA，通过动作条件把物理参数注入时序模型，并以自回归潜空间rollout联合训练编码器与预测器。作者设计不同引力场下的动力学任务评估分布外泛化，结果显示模型能保持潜动力学一致性并实现零样本泛化。该工作为潜动力学世界模型的物理可迁移性提供了验证框架。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.07002v1",
+      "source": "arxiv",
+      "title": "WM-Craftnet: World Synesthesia Model for Generalizable and Robust Dexterous In-Hand Manipulation",
+      "abstract": "Generalizable and robust dexterous in-hand manipulation requires a policy to infer object pose, geometry, contact, and potential slip from partial and noisy observations. Although recent tactile and visuotactile RL methods achieve strong in-hand rotation in controlled settings, their robustness often degrades under pose shifts, force disturbances, and object variation. We propose WM-Craftnet, a world-model-conditioned framework that learns compact action-conditioned latent dynamics from proprioception, depth, tactile sensing, and actions, supervised by multimodal reconstruction and reward prediction. Rather than using the world model for latent imagination or policy optimization, WM-Craftnet uses the learned World Synesthesia Model (WSM) as recurrent task context for an asymmetric actor--critic policy. Importantly, WSM is trained to reconstruct clean depth targets from noisy depth inputs, providing a denoised geometric state for real-robot deployment. Ablations over recurrent baselines, auxiliary heads, tactile masking, and WSM modality heads show that predictive world modeling, clean-depth supervision, and tactile contact cues all shape the learned state. A WSM pretrained on nine \\(z\\)-axis objects serves as a reusable prior for \\(49\\)-object downstream policy learning. This context improves multi-object rotation, with quantitative and qualitative evidence for unseen-object, perturbation-recovery, and sim-to-real transfer.",
+      "authors": [
+        "Jie Yin",
+        "Zeyuan Zhao",
+        "Xiaojing Tan",
+        "Yang Liu",
+        "Chiyu Wang",
+        "Xinyang Gu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-07T03:48:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.07002v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "action-conditioned latent dynamics world model",
+      "llm_evidence_cn": "动作条件潜在动力学世界模型",
+      "llm_evidence": "动作条件潜在动力学世界模型",
+      "canonical_evidence": "动作条件潜在动力学世界模型",
+      "llm_tldr_en": "WM-Craftnet learns compact action-conditioned latent dynamics from proprioception, depth, and tactile sensing as a world-model-conditioned representation that improves robustness of dexterous in-hand manipulation under pose shifts and disturbances.",
+      "llm_tldr_cn": "灵巧手内操作要求策略从部分且有噪声的观测中推断物体位姿、几何、接触与潜在滑动，而现有触觉与视觉触觉强化学习方法在受控环境中表现良好，一旦遇到位姿偏移、外力扰动或物体变化，鲁棒性明显下降。该文提出WM-Craftnet，一个世界模型条件框架，从本体感知、深度、触觉和动作中学习紧凑的动作条件潜在动力学，并由多模态重建与奖励预测监督。该世界联觉表示提升了操作在多种扰动下的泛化与鲁棒性。",
+      "llm_tldr": "灵巧手内操作要求策略从部分且有噪声的观测中推断物体位姿、几何、接触与潜在滑动，而现有触觉与视觉触觉强化学习方法在受控环境中表现良好，一旦遇到位姿偏移、外力扰动或物体变化，鲁棒性明显下降。该文提出WM-Craftnet，一个世界模型条件框架，从本体感知、深度、触觉和动作中学习紧凑的动作条件潜在动力学，并由多模态重建与奖励预测监督。该世界联觉表示提升了操作在多种扰动下的泛化与鲁棒性。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.06671v1",
+      "source": "arxiv",
+      "title": "Tracking the Moving Frontier: Long-Short Term Advantage Estimator",
+      "abstract": "Group-based RLVR methods estimate advantages by repeatedly sampling multiple trajectories for each prompt, making long-horizon agent training expensive and discarding useful experience accumulated across iterations. We ask whether historical experience can replace these repeated within-iteration comparisons without directly optimizing on stale trajectories. We introduce Long-Short Term Advantage Estimator (LSTAE), a single-stream RL algorithm that uses history for advantage estimation while updating the policy only with the current rollout. LSTAE maintains a persistent tracker for each task anchor. At the trajectory level (long term), a drift-aware historical baseline tracks the anchor's moving success frontier and measures the relative contribution of each new trajectory. At the step level (short term), a recent state-experience buffer exploits recurrent states to estimate localized action advantages. This two-timescale design converts accumulated experience into multi-granular credit signals, requiring only one rollout per anchor. Across agentic and mathematical reasoning benchmarks, LSTAE matches or improves upon strong group-based baselines while substantially reducing rollout cost.",
+      "authors": [
+        "Xinhao Yao",
+        "Lu Yu",
+        "Changhao Wang",
+        "Fengwei Teng",
+        "Yuyao Zhang",
+        "Qing Cui",
+        "Jun Zhou",
+        "Yong Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-06T15:24:17+00:00",
+      "link": "https://arxiv.org/pdf/2609.06671v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "reinforcement learning for long-horizon agents",
+      "llm_evidence_cn": "面向长时程智能体的强化学习",
+      "llm_evidence": "面向长时程智能体的强化学习",
+      "canonical_evidence": "面向长时程智能体的强化学习",
+      "llm_tldr_en": "LSTAE is a single-stream RL algorithm that uses historical experience for advantage estimation while updating the policy only with the current rollout, improving long-horizon agent training efficiency.",
+      "llm_tldr_cn": "针对基于组的强化学习验证方法需对每个提示重复采样多条轨迹、导致长时程智能体训练昂贵且丢弃跨迭代经验的问题，论文提出长短期优势估计器 LSTAE。该单流算法利用历史经验进行优势估计，但仅用当前 rollout 更新策略，避免直接优化陈旧轨迹。它通过漂移感知的历史基线追踪任务成功前沿并衡量轨迹相对贡献，从而在降低训练成本的同时提升长时程智能体学习效率。",
+      "llm_tldr": "针对基于组的强化学习验证方法需对每个提示重复采样多条轨迹、导致长时程智能体训练昂贵且丢弃跨迭代经验的问题，论文提出长短期优势估计器 LSTAE。该单流算法利用历史经验进行优势估计，但仅用当前 rollout 更新策略，避免直接优化陈旧轨迹。它通过漂移感知的历史基线追踪任务成功前沿并衡量轨迹相对贡献，从而在降低训练成本的同时提升长时程智能体学习效率。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.07299v1",
+      "source": "arxiv",
+      "title": "World Models Under Asynchronous Sensor Observations",
+      "abstract": "Learned world models typically assume that observations arrive synchronously, an abstraction inherited from simulators that return a complete state vector at each environment step. Physical sensing instead operates at heterogeneous rates, leaving most observation channels stale at any given instant. Interpolating stale channels introduces measurements that were never observed, while downsampling to the slowest sensor discards valid measurements. A natural alternative is to zero-order-hold the most recent reading and provide the known sampling schedule to the model through two features, staleness and time-to-refresh. We test this prediction using transformer world models across three regimes of increasing causal coupling: open-loop rollouts in continuous-control locomotion, closed-loop model-predictive planning in which each learned model serves as the planner dynamics, and a linear latched-actuator system in which refresh events apply a zero-order-held command to the plant. Our findings show that the effectiveness of time-to-refresh depends on the causal role of the sampling schedule, specifically when refresh events affect the system rather than merely report its state. These results establish when sampling schedules provide useful information for predictive world models operating under asynchronous physical observations.",
+      "authors": [
+        "Akash Anand",
+        "Abhay Anand",
+        "Yash Vishe"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-07T10:17:17+00:00",
+      "link": "https://arxiv.org/pdf/2609.07299v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "transformer world models predicting future states under asynchronous sensor observations",
+      "llm_evidence_cn": "异步观测下用Transformer世界模型预测未来状态",
+      "llm_evidence": "异步观测下用Transformer世界模型预测未来状态",
+      "canonical_evidence": "异步观测下用Transformer世界模型预测未来状态",
+      "llm_tldr_en": "Learned world models assume synchronous observations, yet physical sensors sample at heterogeneous rates. This work feeds staleness and time-to-refresh features to transformer world models, testing open-loop rollouts and continuous-control locomotion.",
+      "llm_tldr_cn": "现有学习型世界模型通常假设观测同步到达，而真实传感器以异构频率采样，导致多数通道读数陈旧。本文提出零阶保持最近读数，并向Transformer世界模型提供陈旧度与刷新时间两个特征，避免插值引入虚假测量或降采样丢弃有效数据。在连续控制运动等三种因果耦合递增的场景中验证了预测性能，说明显式建模采样调度可提升异步观测下的世界模型可靠性。",
+      "llm_tldr": "现有学习型世界模型通常假设观测同步到达，而真实传感器以异构频率采样，导致多数通道读数陈旧。本文提出零阶保持最近读数，并向Transformer世界模型提供陈旧度与刷新时间两个特征，避免插值引入虚假测量或降采样丢弃有效数据。在连续控制运动等三种因果耦合递增的场景中验证了预测性能，说明显式建模采样调度可提升异步观测下的世界模型可靠性。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.08080v1",
+      "source": "arxiv",
+      "title": "Proactive Context-Forecasted Safety Constraints for Nonstationary Reinforcement Learning",
+      "abstract": "Ensuring safety in reinforcement learning under nonstationarity requires anticipating changes in risk before they lead to unsafe behavior. Existing approaches typically rely on safety constraints defined at design time or updated reactively during execution, assuming that such constraints remain valid over time. However, in nonstationary environments with evolving contexts and changing driving layouts, these assumptions may fail.   We propose a framework for proactive safety constraint generation based on context forecasting. The approach infers latent environmental context from observations, predicts its future evolution, and constructs safety constraints adapted to anticipated conditions. This enables the agent to proactively avoid unsafe regions instead of reacting only after safety violations occur.   We evaluate the method in driving environments with structured context variation. The experiments include a sweep over nonstationarity intensities and additional held-out driving layouts, including highway, intersection, and racetrack scenarios. Results show that proactive constraint generation substantially reduces collisions under both seen and out-of-training nonstationarity intensities and generally remains effective across held-out driving layouts while maintaining usable task performance. These findings suggest that context-based constraint generation is a promising approach for safe reinforcement learning under nonstationarity.",
+      "authors": [
+        "Tim Tomashevskiy"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-08T00:44:30+00:00",
+      "link": "https://arxiv.org/pdf/2609.08080v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "inferring latent context and predicting its future evolution for safety constraints",
+      "llm_evidence_cn": "推断潜在上下文并预测其未来演化以生成安全约束",
+      "llm_evidence": "推断潜在上下文并预测其未来演化以生成安全约束",
+      "canonical_evidence": "推断潜在上下文并预测其未来演化以生成安全约束",
+      "llm_tldr_en": "This framework infers latent environmental context from observations, forecasts its future evolution, and generates proactive safety constraints for reinforcement learning in nonstationary driving environments.",
+      "llm_tldr_cn": "针对非平稳强化学习中预先设定或被动更新的安全约束容易失效、难以应对变化的驾驶布局的问题，本文提出基于上下文预测的主动安全约束生成框架。该方法从观测中推断潜在环境上下文，预测其未来演化，并据此构建适应预期条件的安全约束，使智能体能够提前规避危险行为。该工作把潜在动力学预测与决策安全结合，为自动驾驶等非平稳场景下的安全强化学习提供前瞻机制，也体现世界模型式未来预测在智能体中的应用。",
+      "llm_tldr": "针对非平稳强化学习中预先设定或被动更新的安全约束容易失效、难以应对变化的驾驶布局的问题，本文提出基于上下文预测的主动安全约束生成框架。该方法从观测中推断潜在环境上下文，预测其未来演化，并据此构建适应预期条件的安全约束，使智能体能够提前规避危险行为。该工作把潜在动力学预测与决策安全结合，为自动驾驶等非平稳场景下的安全强化学习提供前瞻机制，也体现世界模型式未来预测在智能体中的应用。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.08217v1",
+      "source": "arxiv",
+      "title": "Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving",
+      "abstract": "VLMs have shown promise for autonomous driving, yet still suffer from hallucination, weak spatio-temporal perception, and limited generalization. Recent methods improve reasoning and decision-making through CoT explanations, retrieval-augmented generation or the static injection of tool outputs. Although these mechanisms enrich the context, the model neither proactively perceives scene information nor accumulates experience after answering. To overcome these limitations, we present, to our knowledge, the first synergistic framework that tightly couples hierarchical memory with proactive tool invocation in a closed reasoning loop. Our contributions are threefold. (i) Hierarchical Driving Memory: a scene-level short-term memory maintains the dynamic scene state, and an evolving long-term memory retrieves reusable experience and tool strategies. (ii) Memory-Tool Synergistic Reasoning Framework: guided by the scene state and retrieved experience, the model adaptively invokes tools to refine its reasoning at inference time and consolidates reusable experience into a long-term memory pool offline. (iii) Data Generation and Two-stage Training Pipeline: verified memory-tool trajectories built by multi-step teacher rollout are used to train with SFT and GRPO. Our 7B model reaches an overall reasoning score of 80.03 and MCQ accuracy of 79.09% on DriveLMM-o1, surpassing the strongest baseline by 7.74 MCQ points and generalizes strongly across benchmarks. Notably, ablation and analysis studies validate the effectiveness of each component and further reveal the complementary roles of hierarchical memory. Short-term memory strengthens spatio-temporal understanding, improving STSBench accuracy by 24.2 points, while offline long-term memory consolidation yields an additional 3.57-point MCQ gain with all parameters frozen, demonstrating continual self-evolution through accumulated driving experience.",
+      "authors": [
+        "Baojie Chen",
+        "Zijun Jia",
+        "Jing Zhong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-08T03:59:10+00:00",
+      "link": "https://arxiv.org/pdf/2609.08217v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "hierarchical memory with tool-grounded reasoning for autonomous driving",
+      "llm_evidence_cn": "面向自动驾驶的分层记忆与工具协同推理",
+      "llm_evidence": "面向自动驾驶的分层记忆与工具协同推理",
+      "canonical_evidence": "面向自动驾驶的分层记忆与工具协同推理",
+      "llm_tldr_en": "A synergistic framework couples hierarchical driving memory with proactive tool invocation in a closed reasoning loop to improve VLM-based autonomous driving reasoning and generalization.",
+      "llm_tldr_cn": "针对视觉语言模型在自动驾驶中易产生幻觉、时空感知弱且泛化有限的问题，论文提出一种将分层记忆与主动工具调用紧耦合于闭环推理的协同框架。该框架构建场景级的分层驾驶记忆，使模型能主动感知场景信息并在回答后持续积累经验，而非静态注入工具输出。这一设计提升了自动驾驶推理与决策的可靠性与可迁移性，为记忆增强的驾驶智能体提供了新思路。",
+      "llm_tldr": "针对视觉语言模型在自动驾驶中易产生幻觉、时空感知弱且泛化有限的问题，论文提出一种将分层记忆与主动工具调用紧耦合于闭环推理的协同框架。该框架构建场景级的分层驾驶记忆，使模型能主动感知场景信息并在回答后持续积累经验，而非静态注入工具输出。这一设计提升了自动驾驶推理与决策的可靠性与可迁移性，为记忆增强的驾驶智能体提供了新思路。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.08965v1",
+      "source": "arxiv",
+      "title": "PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving",
+      "abstract": "Ensuring the safety of autonomous driving is a critical challenge. Scenario-based testing is a systematic process used to validate Autonomous Driving Systems (ADSs), but it remains a fragmented modular pipeline in which scenario generation, retrieval, modification, ADS execution, and results analysis are performed by separate tools with little interaction. Large Language Model (LLM) agents have shown promise across ADS sub-systems such as perception, planning, and control. However, no prior work covers the whole scenario-based testing pipeline for ADSs with a unified LLM-agent framework. We present PlannerForge, an LLM-agent framework that extends all scenario-based testing stages (from Scenario Generation to ADS Assessment) and adds two further LLM-enhanced stages: ADS Enhancement and ADS Benchmarking. We evaluate PlannerForge with 10 off-the-shelf LLMs across all tasks (Generation, Selection, Modification, Module Routing, Planner Testing, and Enhancement) under 5 prompt conditions. Best-per-task scores range from 0.88 to 1.00, and open-source 20-35B backends match commercial APIs on most tasks. Open-source models such as Qwen3.6:35B match commercial APIs on three of the five tasks. Chaining the modules end-to-end retains 83% / 78% of seed queries (commercial / open). It outperforms Scenario Factory 2.0 (Finkeldei et al., 2025) on natural-language generation (193 vs. 144 executable of 200) and realises 92-96% of requested city, road and vehicle attributes. It outperforms BM25 (Robertson and Zaragoza, 2009) at rank 1 selection (92.0% vs. 67.5%) and From-Words-to-Collisions (Gao et al., 2025) on physically valid edits (>=94% vs. 31%). At N=400, cost-tuning lifts planner success from 50.4% to 70.2% and cuts collisions from 19.0% to 8.4%, without domain-specific fine-tuning.",
+      "authors": [
+        "Yuan Gao",
+        "Sebastian Müller",
+        "Mattia Piccinini",
+        "Marc Kaufeld",
+        "Yuchen Zhang",
+        "Finn Rasmus Schäfer",
+        "Qunying Song",
+        "Johannes Betz"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.RO"
+      ],
+      "published": "2026-09-08T16:19:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.08965v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "LLM agent framework for autonomous driving scenario testing",
+      "llm_evidence_cn": "面向自动驾驶场景测试的LLM智能体框架",
+      "llm_evidence": "面向自动驾驶场景测试的LLM智能体框架",
+      "canonical_evidence": "面向自动驾驶场景测试的LLM智能体框架",
+      "llm_tldr_en": "Scenario-based ADS testing is fragmented across separate tools. PlannerForge is a unified LLM-agent framework covering all testing stages from scenario generation to ADS assessment, showing how agentic AI can automate motion-planner validation.",
+      "llm_tldr_cn": "针对自动驾驶场景化测试流程碎片化、场景生成、检索、修改、系统执行与结果分析由独立工具完成且缺乏交互的问题，论文提出PlannerForge，一个统一的LLM智能体框架，覆盖从场景生成到ADS评估的全部测试阶段。该框架将各阶段整合为智能体协作流水线，验证了LLM智能体在自动驾驶测试与规划验证中的可行性。其贡献在于把agentic AI方法引入自动驾驶运动规划器验证。",
+      "llm_tldr": "针对自动驾驶场景化测试流程碎片化、场景生成、检索、修改、系统执行与结果分析由独立工具完成且缺乏交互的问题，论文提出PlannerForge，一个统一的LLM智能体框架，覆盖从场景生成到ADS评估的全部测试阶段。该框架将各阶段整合为智能体协作流水线，验证了LLM智能体在自动驾驶测试与规划验证中的可行性。其贡献在于把agentic AI方法引入自动驾驶运动规划器验证。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.10377v2",
+      "source": "arxiv",
+      "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
+      "abstract": "Safety is a fundamental requirement for autonomous driving, yet existing end-to-end driving models still lack explicit risk-aware learning capacities. Existing rule-based risk models provide interpretable safety priors, yet their absolute risk scores depend on handcrafted functions, coefficients, and thresholds. Learning-based risk representations reduce part of this manual design, but their supervision often relies on occupancy-derived labels or heuristic cost values, which may not capture ego-conditioned planning risk. In this paper, we propose DRiF, a data-driven risk-field framework for safer end-to-end autonomous driving. DRiF learns a shared BEV feature with static map segmentation, dynamic risk prediction, and vehicle planning. For dynamic risk learning, DRiF converts rule-based safety priors into pairwise risk labels, and trains the risk field to preserve relative risk ordering instead of regressing handcrafted absolute scores. Experiments on Bench2Drive show that DRiF achieves competitive overall performance, with consistent improvements in driving score, success rate, and collision-related metrics. These results establish relative risk supervision as an effective way to connect explicit safety structure with end-to-end planning. The data and code will be publicly available.",
+      "authors": [
+        "Yuanxin Tian",
+        "Zhiyuan Liu",
+        "Jinhao Li",
+        "Liangfan Zhu",
+        "Shuai Wang",
+        "Heye Huang",
+        "Qingwen Meng",
+        "Fang Zhang",
+        "Liuzhu Tong",
+        "Zhenhua Xu",
+        "Wenhao Yu",
+        "Jianqiang Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-09-09T16:05:17+00:00",
+      "link": "https://arxiv.org/pdf/2609.10377v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "BEV representation learning for driving scene with risk prediction and planning",
+      "llm_evidence_cn": "面向驾驶场景的BEV表示学习与风险预测规划",
+      "llm_evidence": "面向驾驶场景的BEV表示学习与风险预测规划",
+      "canonical_evidence": "面向驾驶场景的BEV表示学习与风险预测规划",
+      "llm_tldr_en": "End-to-end driving lacks explicit risk awareness. DRiF learns a shared BEV feature jointly with map segmentation, dynamic risk prediction and planning, yielding safer ego-conditioned risk representations for autonomous driving.",
+      "llm_tldr_cn": "针对端到端自动驾驶模型缺乏显式风险感知、规则式风险先验依赖手工设计且标签启发式的问题，论文提出DRiF数据驱动风险场框架，学习共享BEV特征并联合静态地图分割、动态风险预测与车辆规划。实验表明该方法能刻画自车条件下的动态风险并提升规划安全性。该工作为驾驶场景的语义、几何与动态表示学习及安全规划提供了统一思路。",
+      "llm_tldr": "针对端到端自动驾驶模型缺乏显式风险感知、规则式风险先验依赖手工设计且标签启发式的问题，论文提出DRiF数据驱动风险场框架，学习共享BEV特征并联合静态地图分割、动态风险预测与车辆规划。实验表明该方法能刻画自车条件下的动态风险并提升规划安全性。该工作为驾驶场景的语义、几何与动态表示学习及安全规划提供了统一思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.09155v1",
+      "source": "arxiv",
+      "title": "SyncWorld: Visual Calibration Enables World Models as Zero-Shot Simulators",
+      "abstract": "World models are increasingly used as policy-in-the-loop imagination environments, where reliable rollouts require fine-grained controllability with respect to low-level robot actions. A key obstacle to scaling such models in robotics is that actions are not a universal language in pixel space: changes in visual environment, camera view, robot placement, or embodiment alter how the same numerical action manifests visually, leading to conflicting supervision under mixed training and brittle generalization at deployment. We introduce SyncWorld, an action-conditioned world model that serves as a zero-shot simulator across unseen environments without any additional training. SyncWorld leverages a visual calibration episode---paired frames and actions that showcase all the controllable degrees of freedom---to specify the setup-specific Action--Visual Mapping in context. Training with visual calibration contexts teaches the model to interpret actions through visual evidence and to leverage interaction history when explicit calibration is unavailable. Experiments show that SyncWorld can accurately simulate action outcomes in previously unseen settings, and that its capability of simulating rollouts enables test-time policy improvement without training.",
+      "authors": [
+        "Yuncong Yang",
+        "Zhengtao Han",
+        "Furkan Ozyurt",
+        "Zeyuan Yang",
+        "Han Yang",
+        "Junyi Cao",
+        "Haoyu Zhen",
+        "Yilun Du",
+        "Chuang Gan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-08T17:59:47+00:00",
+      "link": "https://arxiv.org/pdf/2609.09155v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "action-conditioned world model serving as zero-shot simulator",
+      "llm_evidence_cn": "动作条件世界模型充当零样本模拟器",
+      "llm_evidence": "动作条件世界模型充当零样本模拟器",
+      "canonical_evidence": "动作条件世界模型充当零样本模拟器",
+      "llm_tldr_en": "SyncWorld is an action-conditioned world model that uses a visual calibration episode to align frames and actions, letting it act as a zero-shot simulator across unseen environments without retraining and reducing brittle generalization under mixed training.",
+      "llm_tldr_cn": "世界模型日益被用作策略在环的想象环境，但动作在像素空间并非通用语言，环境、相机视角、机器人位姿或形态的变化会改变同一动作的视觉表现，导致混合训练下的监督冲突与部署时的泛化脆弱。本文提出SyncWorld，一种动作条件世界模型，通过视觉校准片段对齐帧与动作，从而在未见环境中无需额外训练即可作为零样本模拟器。实验显示其rollout在跨环境设置下更稳定可控。该工作凸显了视觉校准对提升世界模型可迁移性的价值。",
+      "llm_tldr": "世界模型日益被用作策略在环的想象环境，但动作在像素空间并非通用语言，环境、相机视角、机器人位姿或形态的变化会改变同一动作的视觉表现，导致混合训练下的监督冲突与部署时的泛化脆弱。本文提出SyncWorld，一种动作条件世界模型，通过视觉校准片段对齐帧与动作，从而在未见环境中无需额外训练即可作为零样本模拟器。实验显示其rollout在跨环境设置下更稳定可控。该工作凸显了视觉校准对提升世界模型可迁移性的价值。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.10506v1",
+      "source": "arxiv",
+      "title": "DUET-DINO: Simultaneous Cross-View World Modeling for Latent Planning in Robot Manipulation",
+      "abstract": "Action-conditioned latent world models predict future visual representations, enabling zero-shot goal-conditioned robot planning and control. However, their predictions for fine-grained spatial and rotational actions are unreliable for full 7-DoF end-effector control. To address this gap, we introduce DUET-DINO, a simultaneous cross-view latent world model that jointly learns action-conditioned predictions from static side- and wrist-camera observations through cross-view conditioning. By exploiting complementary global scene and gripper-centric information, DUET-DINO enables latent planning over the full 7-DoF action space. Across spatially diverse reach, orientation-intensive angled-reach, and multi-goal grasp-and-lift tasks, DUET-DINO consistently outperforms single-view and independent dual-view baselines, achieving 92% success on reach, 72.5% on angled-reach, and 60.0% on lift tasks. DUET-DINO is trained from scratch on DROID and RoboArena datasets and generalizes robustly under visual distribution shifts. We further show that while V-JEPA 2 wrist-view predictions underestimate visual dynamics induced by fine-grained actions, DINOv3 predictions better capture action-conditioned scene changes, leading to stronger downstream planning. The code and model checkpoints will be open-sourced. Project page: https://utn-air.github.io/DUET-DINO",
+      "authors": [
+        "Nisarga Nilavadi",
+        "Ralf Römer",
+        "Moritz Reuss",
+        "Michael Krawez",
+        "Tobias Jülg",
+        "Angela P. Schoellig",
+        "Rudolf Lioutikov",
+        "Wolfram Burgard"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-09-09T17:41:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.10506v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "action-conditioned latent world model predicting future visual representations for planning",
+      "llm_evidence_cn": "动作条件潜在世界模型预测未来视觉表示以支持规划",
+      "llm_evidence": "动作条件潜在世界模型预测未来视觉表示以支持规划",
+      "canonical_evidence": "动作条件潜在世界模型预测未来视觉表示以支持规划",
+      "llm_tldr_en": "DUET-DINO is a simultaneous cross-view latent world model that jointly learns action-conditioned predictions from side and wrist cameras via cross-view conditioning, enabling latent planning over the full 7-DoF action space for manipulation.",
+      "llm_tldr_cn": "动作条件潜在世界模型能够预测未来视觉表示，从而支持零样本目标条件机器人规划与控制，但其对细粒度空间与旋转动作的预测不够可靠，难以完成完整7自由度末端执行器控制。本文提出DUET-DINO，一种同时跨视角潜在世界模型，通过跨视角条件联合学习侧视与腕部相机的动作条件预测，兼顾全局场景与夹爪中心信息。在到达、定向密集型及多目标抓取任务上，该方法实现了覆盖完整7自由度动作空间的潜在规划。该工作推动了潜在世界模型在精细操作中的应用。",
+      "llm_tldr": "动作条件潜在世界模型能够预测未来视觉表示，从而支持零样本目标条件机器人规划与控制，但其对细粒度空间与旋转动作的预测不够可靠，难以完成完整7自由度末端执行器控制。本文提出DUET-DINO，一种同时跨视角潜在世界模型，通过跨视角条件联合学习侧视与腕部相机的动作条件预测，兼顾全局场景与夹爪中心信息。在到达、定向密集型及多目标抓取任务上，该方法实现了覆盖完整7自由度动作空间的潜在规划。该工作推动了潜在世界模型在精细操作中的应用。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.10715v1",
+      "source": "arxiv",
+      "title": "NCP-ArchPreview Technical Report: Moving towards Latent Space Language Models through Next Concept Prediction",
+      "abstract": "We introduce NCP-ArchPreview, a latent-space language model that pushes autoregressive pretraining beyond standard next-token prediction (NTP). Alongside NTP, the model learns through Next Concept Prediction (NCP) to predict discrete concepts that span multiple tokens, introducing an explicit and more challenging concept-level objective while preserving standard token-level autoregressive generation. NCP-ArchPreview builds a latent space by constructing a product-quantized concept vocabulary directly from its hidden states, and subsequently learns to predict future concepts via a dedicated Concept Module. These predicted concepts are then fed back to the token level to guide subsequent generation, with NTP and NCP trained jointly end-to-end. We scale this architecture to 8.9B parameters and train it on 5.73T tokens from the Dolma-3 dataset, marking the largest demonstration of a latent-space language model to date. Remarkably, by consuming only 51.3% of the total training tokens, NCP-ArchPreview achieves the final pretraining loss of OLMo-3-7B. Following full pretraining, it outperforms OLMo-3-7B by 2.45 points on the downstream macro-average, including a notable 5.99-point gain on GSM8K. Controlled experiments isolate a clear progression of performance gains stemming from both the latent architecture and the NCP objective. Furthermore, utilizing only 85% of the standard computation, NCP-ArchPreview approaches the training loss of a strictly parameter-aligned 8.9B baseline. The learned latent space remains highly valuable after the pretraining stage: updating just the 17M-parameter VQ module yields a novel, lightweight interface for domain adaptation, while a simple injection of concept representations into a DFlash2 drafter improves the mean accepted length by 4.17% with negligible overhead.",
+      "authors": [
+        "The Intern-NCP Team",
+        ":",
+        "Jiaqi Cao",
+        "Chiyu Chen",
+        "Shuang Cheng",
+        "Xu Cheng",
+        "Beiya Dai",
+        "Yufan Feng",
+        "Kewen Ge",
+        "Ruijun Ge",
+        "Jiayi Huang",
+        "Yang Jiao",
+        "Dahua Lin",
+        "Zhouhan Lin",
+        "Yifan Liu",
+        "Yuliang Liu",
+        "Biqing Qi",
+        "Mowen Ruan",
+        "Junzhe Shen",
+        "Yunchong Song",
+        "Hao Sun",
+        "Zhongbo Tian",
+        "Yixuan Wang",
+        "Rubin Wei",
+        "Jiaxin Xiong",
+        "Kangyu Yang",
+        "Qian Yao",
+        "Qi Zhang",
+        "Bowen Zhou"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-09T18:12:43+00:00",
+      "link": "https://arxiv.org/pdf/2609.10715v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "product-quantized concept vocabulary builds a discrete latent space for autoregressive prediction",
+      "llm_evidence_cn": "乘积量化概念词表构建离散潜在空间用于自回归预测",
+      "llm_evidence": "乘积量化概念词表构建离散潜在空间用于自回归预测",
+      "canonical_evidence": "乘积量化概念词表构建离散潜在空间用于自回归预测",
+      "llm_tldr_en": "NCP-ArchPreview extends autoregressive pretraining beyond next-token prediction by adding Next Concept Prediction over discrete concepts built from a product-quantized vocabulary of hidden states, guiding token-level generation.",
+      "llm_tldr_cn": "标准自回归预训练仅做下一词元预测，缺乏跨多个词元的抽象概念级监督。本文提出NCP-ArchPreview，在保留词元级生成的同时，利用隐藏状态构建乘积量化概念词表，并通过专门的概念模块预测未来离散概念，再反馈到词元层指导生成。该方法为潜在空间语言建模提供了显式的概念级目标，拓展了自回归预训练的监督层次。",
+      "llm_tldr": "标准自回归预训练仅做下一词元预测，缺乏跨多个词元的抽象概念级监督。本文提出NCP-ArchPreview，在保留词元级生成的同时，利用隐藏状态构建乘积量化概念词表，并通过专门的概念模块预测未来离散概念，再反馈到词元层指导生成。该方法为潜在空间语言建模提供了显式的概念级目标，拓展了自回归预训练的监督层次。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "discrete latent representations using VQ-VAE and related methods",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.11717v1",
+      "source": "arxiv",
+      "title": "MC-DeTra: Motion-Consistent Joint Object Detection and Socially-Aware Trajectory Forecasting in Bird's-Eye-View Images",
+      "abstract": "Unified models for object detection and trajectory forecasting aim to merge perception and prediction for autonomous driving, refining actor trajectories directly over shared bird's-eye-view (BEV) images rasterized from LiDAR and high-definition maps. Their accuracy on dynamic, moving actors, however, remains the hardest part of the task, and the strongest such model, DeTra, has no public implementation. We contribute an openly released DeTra reimplementation with documented approximations, and on top of it MC-DeTra: a family of motion-consistency mechanisms that add supervision through two annotation-derived auxiliary signals -- each actor's observed past motion and the occupancy of the surrounding traffic that forms its social context -- and one inter-output consistency constraint that aligns an actor's predicted heading with its predicted direction of motion. Every proposed loss is train-only and inference-safe: it shapes the shared BEV representation during training and is removed at test time, adding no inference latency. On the Waymo Open Dataset, evaluated under a strict, detection-conditioned forecasting protocol, MC-DeTra improves dynamic, socially-situated trajectory forecasting while preserving or improving detection accuracy; a gradient-based loss-calibration analysis exposes how the auxiliary objectives compete at the shared backbone, and our ablation identifies which signals contribute most. We release code, configurations, and evaluation tooling at https://github.com/diuzhevVlad/MC-DeTra.",
+      "authors": [
+        "Vladislav Diuzhev",
+        "Dmitry Yudin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-10T15:34:09+00:00",
+      "link": "https://arxiv.org/pdf/2609.11717v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "joint detection and socially-aware trajectory forecasting over shared BEV representations for driving",
+      "llm_evidence_cn": "在共享BEV表示上联合检测与社会感知轨迹预测",
+      "llm_evidence": "在共享BEV表示上联合检测与社会感知轨迹预测",
+      "canonical_evidence": "在共享BEV表示上联合检测与社会感知轨迹预测",
+      "llm_tldr_en": "Unified detection and trajectory forecasting models refine actor trajectories on shared BEV images, but moving actors remain hardest. This work releases an open DeTra reimplementation and adds motion-consistency supervision from past motion and traffic occupancy.",
+      "llm_tldr_cn": "统一检测与轨迹预测模型在共享鸟瞰图表示上直接回归目标轨迹，但动态运动目标的精度仍是最难的部分，且最强基线DeTra缺少公开实现。本文公开了带近似说明的DeTra复现，并在此基础上提出MC-DeTra，利用每个目标的历史运动与周围交通占据两类标注衍生辅助信号进行运动一致性监督。该方法提升了动态目标轨迹预测的准确性，并为自动驾驶感知与预测一体化研究提供了可复现基线。",
+      "llm_tldr": "统一检测与轨迹预测模型在共享鸟瞰图表示上直接回归目标轨迹，但动态运动目标的精度仍是最难的部分，且最强基线DeTra缺少公开实现。本文公开了带近似说明的DeTra复现，并在此基础上提出MC-DeTra，利用每个目标的历史运动与周围交通占据两类标注衍生辅助信号进行运动一致性监督。该方法提升了动态目标轨迹预测的准确性，并为自动驾驶感知与预测一体化研究提供了可复现基线。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
