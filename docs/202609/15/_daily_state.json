@@ -1,0 +1,201 @@
+{
+  "date": "20260915",
+  "date_label": "",
+  "generated_at": "2026-09-15 22:30:44 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.15189v1",
+      "route": "202609/15/2609.15189v1-reconstructing-is-not-acting-action-centric-latent-dynamics-modeling",
+      "title": "Reconstructing Is Not Acting: Action-Centric Latent Dynamics Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "以动作为中心的潜动力学建模与正逆动力学模型",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.12347v1",
+      "route": "202609/15/2609.12347v1-dwmp-leveraging-dual-world-models-for-humanoid-obstacle-traversal",
+      "title": "DWMP: Leveraging Dual World Models for Humanoid Obstacle Traversal",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于 Koopman 的潜空间动力学世界模型用于具身控制",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.13845v1",
+      "route": "202609/15/2609.13845v1-leplanner-an-iterative-amortized-controller-for-world-models",
+      "title": "LePlanner: An Iterative Amortized Controller For World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向世界模型的迭代摊销控制器，在潜空间构造动作序列",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.14561v1",
+      "route": "202609/15/2609.14561v1-glam-training-a-latent-world-model-over-global-spatiotemporal-memory-for-active-exploration-and-navigation",
+      "title": "GLAM: Training a latent world model over global spatiotemporal memory for active exploration and navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "目标条件潜世界模型以JEPA式潜预测未来地图与路径点",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.14973v1",
+      "route": "202609/15/2609.14973v1-physbrain-15-from-vision-language-models-to-physical-foundation-models",
+      "title": "PhysBrain 1.5: From Vision-Language Models to Physical Foundation Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将运动与视觉目标编码为离散序列并自回归预测",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.15322v1",
+      "route": "202609/15/2609.15322v1-planning-in-the-backbone-diffadaptervla-for-native-continuous-trajectory-generation-with-driving-vlms",
+      "title": "Planning in the Backbone: DiffAdapterVLA for Native Continuous Trajectory Generation with Driving VLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "驾驶VLM中轨迹token与连续轨迹生成规划",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.15870v1",
+      "route": "202609/15/2609.15870v1-wla3-world-latent-action-modeling-for-semantics-dynamics-and-kinematics",
+      "title": "WLA$^3$: World Latent Action Modeling for Semantics, Dynamics, and Kinematics",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向统一策略表示的世界潜在动作建模",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.07874v1",
+      "route": "202609/15/2609.07874v1-influencefield-a-differentiable-field-with-interventionally-identifiable-causal-structure-for-multimodal-world-modeling",
+      "title": "InfluenceField: A Differentiable Field with Interventionally Identifiable Causal Structure for Multimodal World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态世界建模的可干预潜在场",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.08217v1",
+      "route": "202609/15/2609.08217v1-drive-by-hindsight-and-foresight-tool-grounded-synergistic-reasoning-over-hierarchical-memory-for-autonomous-driving",
+      "title": "Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶智能体的分层记忆与主动工具调用",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.09418v2",
+      "route": "202609/15/2609.09418v2-valerant-an-automatic-navigable-game-map-generator-via-action-conditioned-world-model-exploration",
+      "title": "Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "动作条件世界模型在持久三维世界中耦合预测与动作生成",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.11548v1",
+      "route": "202609/15/2609.11548v1-world-in-world-explore-the-world-with-world-models",
+      "title": "World in World: Explore the World with World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "自回归视频世界模型的灵活控制",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    },
+    {
+      "paper_id": "2609.13812v1",
+      "route": "202609/15/2609.13812v1-geomvla-unifying-scene-motion-and-action-in-3d",
+      "title": "GeomVLA: Unifying Scene, Motion, and Action in 3D",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "潜场景运动预测与中间运动token条件化动作生成",
+      "first_seen_at": "2026-09-15 22:30:44 UTC",
+      "updated_at": "2026-09-15 22:30:44 UTC"
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-15T22:22:33.293139+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 17,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2609.15189v1",
+      "source": "arxiv",
+      "title": "Reconstructing Is Not Acting: Action-Centric Latent Dynamics Modeling",
+      "abstract": "Latent action models (LAMs) learn action representations from unlabeled videos by inferring latent actions from visual transitions and reconstructing future states. However, we identify a fundamental $\\textbf{reconstruction-action mismatch}$: lower reconstruction error does not necessarily yield better latent dynamics or downstream performance. We attribute this mismatch to two underconstrained aspects of reconstruction-based latent dynamics modeling: (i) the inverse dynamics model (IDM) is not explicitly encouraged to distinguish action-related transitions from nuisance appearance, and (ii) the forward dynamics model (FDM) can underutilize the inferred latent action by exploiting predictive shortcuts from the current state. To address both limitations, we propose $\\textbf{ACT-LAM}$, a lightweight action-centric framework that strengthens both action extraction and action utilization. Specifically, its Action Query IDM (AQ-IDM) employs learnable action queries and gated aggregation to selectively extract rich action-related transition cues without strong information bottlenecks. And its Action Token FDM (AT-FDM) projects latent actions into action tokens that progressively interact with evolving state representations, enabling continuous state-aware action conditioning. ACT-LAM further streamlines feature processing to concentrate model capacity on latent dynamics modeling. Extensive experiments on several robotic datasets and the VP$^2$ benchmark demonstrate stronger latent action consistency, forward dynamics, and downstream visual planning performance with fewer trainable parameters and lower computational overhead. In particular, ACT-LAM surpasses the previous state of the art by $\\textbf{7.6%}$ on the aggregated VP$^2$ success rate. Codes at $\\href{https://github.com/DingjieFu/ACT-LAM}{url}$.",
+      "authors": [
+        "Dingjie Fu",
+        "Dianxing Shi",
+        "Yangyang Xu",
+        "Jun Yu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-14T08:10:46+00:00",
+      "link": "https://arxiv.org/pdf/2609.15189v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "action-centric latent dynamics modeling with forward and inverse dynamics models",
+      "llm_evidence_cn": "以动作为中心的潜动力学建模与正逆动力学模型",
+      "llm_evidence": "以动作为中心的潜动力学建模与正逆动力学模型",
+      "canonical_evidence": "以动作为中心的潜动力学建模与正逆动力学模型",
+      "llm_tldr_en": "This work identifies a reconstruction-action mismatch in latent action models and proposes action-centric latent dynamics modeling that constrains inverse and forward dynamics to better predict future states.",
+      "llm_tldr_cn": "潜动作模型通常从无标注视频推断潜动作并重建未来状态，但本文指出重建误差低并不等于潜动力学或下游表现好，存在重建-动作失配。作者归因于逆动力学模型未区分动作相关变化与外观噪声，以及前向动力学模型可利用当前状态的预测捷径。为此提出以动作为中心的潜动力学建模方法来约束二者，从而获得更可靠的潜动力学表示与下游性能。",
+      "llm_tldr": "潜动作模型通常从无标注视频推断潜动作并重建未来状态，但本文指出重建误差低并不等于潜动力学或下游表现好，存在重建-动作失配。作者归因于逆动力学模型未区分动作相关变化与外观噪声，以及前向动力学模型可利用当前状态的预测捷径。为此提出以动作为中心的潜动力学建模方法来约束二者，从而获得更可靠的潜动力学表示与下游性能。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.12347v1",
+      "source": "arxiv",
+      "title": "DWMP: Leveraging Dual World Models for Humanoid Obstacle Traversal",
+      "abstract": "Humanoid robots must traverse cluttered obstacle fields using onboard proprioceptive and visual observations, yet existing methods usually process multimodal observations without explicitly considering their different characteristics: proprioceptive observations are low-dimensional but governed by highly nonlinear robot dynamics, while egocentric visual observations are high-dimensional, noisy, and redundant. We propose DWMP (Dual World Model Policy), a framework that provides the actor with separate but complementary world-model representations for humanoid obstacle traversal. A Koopman-based dynamics world model lifts proprioceptive observations into a latent space where their temporal evolution is approximately linear, making the dynamics features easier for the actor to learn from. An RSSM-based visual world model compresses egocentric depth observations into compact stochastic states while preserving obstacle-related geometry. The student policy receives the fused latent representation for action generation, combining linearized proprioceptive dynamics with compressed visual perception. Experiments in simulation and on a Unitree G1 humanoid robot show that DWMP improves obstacle traversal performance over baselines and supports real-world deployment under randomized obstacle layouts.",
+      "authors": [
+        "Rongjun Jin",
+        "Jianming Ma",
+        "Yue Gao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-11T02:13:19+00:00",
+      "link": "https://arxiv.org/pdf/2609.12347v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Koopman-based latent dynamics world model for embodied control",
+      "llm_evidence_cn": "基于 Koopman 的潜空间动力学世界模型用于具身控制",
+      "llm_evidence": "基于 Koopman 的潜空间动力学世界模型用于具身控制",
+      "canonical_evidence": "基于 Koopman 的潜空间动力学世界模型用于具身控制",
+      "llm_tldr_en": "Humanoid obstacle traversal requires handling low-dimensional nonlinear proprioception and noisy visual input together. DWMP provides separate complementary world models, using a Koopman-based latent dynamics model that makes temporal evolution approximately linear, improving policy learning.",
+      "llm_tldr_cn": "人形机器人在杂乱障碍场中需依靠本体与视觉观测穿越，但现有方法未区分两类观测的统计特性，导致策略学习困难。论文提出 DWMP 双世界模型策略，为动作器提供分离而互补的世界模型表示，其中 Koopman 动力学世界模型将本体观测映射到时间演化近似线性的潜空间。实验表明该表示提升了障碍穿越任务的学习效率与成功率。该工作说明分离互补的世界模型表示有助于多模态具身决策。",
+      "llm_tldr": "人形机器人在杂乱障碍场中需依靠本体与视觉观测穿越，但现有方法未区分两类观测的统计特性，导致策略学习困难。论文提出 DWMP 双世界模型策略，为动作器提供分离而互补的世界模型表示，其中 Koopman 动力学世界模型将本体观测映射到时间演化近似线性的潜空间。实验表明该表示提升了障碍穿越任务的学习效率与成功率。该工作说明分离互补的世界模型表示有助于多模态具身决策。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.07874v1",
+      "source": "arxiv",
+      "title": "InfluenceField: A Differentiable Field with Interventionally Identifiable Causal Structure for Multimodal World Modeling",
+      "abstract": "Multimodal large language models often capture visual-linguistic correlations but struggle to predict how local visual interventions propagate and affect downstream answers. We introduce InfluenceField, an intervention-aware latent field inserted between the visual encoder and language decoder. It lifts patch features into a continuous spatial representation, propagates directed influence over multiple steps, and predicts local intervention effects through a shared transition operator. Training jointly optimizes language modeling, cross-environment invariance, counterfactual rollout supervision, and structural regularization. For a nonlinear finite-basis population model, we show that target-aligned interventional supervision, together with a one-step separation condition on the transition, restricts admissible representations to within-location reparameterizations, so that the directed dependency graph of the full transition is recovered exactly. A linear specialization gives an exact partial-coverage characterization and a finite-loss stability bound, and the field analysis derives the spatial profile of coefficient interventions together with a shared-channel calibration result. On CausalVQA, InfluenceField improves overall accuracy over its backbone by 13.1 percentage points, with the largest gains on the planning and hypothetical categories. Capacity-matched baselines and structural controls attribute the gains in robustness and factual-counterfactual consistency to the causal objectives rather than to added capacity.",
+      "authors": [
+        "Zihao Yang",
+        "Zijia Wang",
+        "Zhiqiu Huang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-09-07T18:36:20+00:00",
+      "link": "https://arxiv.org/pdf/2609.07874v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "intervention-aware latent field for multimodal world modeling",
+      "llm_evidence_cn": "面向多模态世界建模的可干预潜在场",
+      "llm_evidence": "面向多模态世界建模的可干预潜在场",
+      "canonical_evidence": "面向多模态世界建模的可干预潜在场",
+      "llm_tldr_en": "InfluenceField inserts an intervention-aware latent field between vision encoder and language decoder, propagating local visual influence over multiple steps with a shared transition operator for multimodal world modeling.",
+      "llm_tldr_cn": "多模态大模型能捕捉视觉与语言相关性，却难以预测局部视觉干预如何传播并影响最终回答。本文提出 InfluenceField，一种插入视觉编码器与语言解码器之间的可干预潜在场，将图像块特征提升为连续空间表示，并通过共享转移算子多步传播影响。训练联合优化语言建模、跨环境不变性、反事实展开监督与结构正则，在非线性有限基模型上证明了目标对齐的可识别性，为可解释的多模态世界建模提供了新思路。",
+      "llm_tldr": "多模态大模型能捕捉视觉与语言相关性，却难以预测局部视觉干预如何传播并影响最终回答。本文提出 InfluenceField，一种插入视觉编码器与语言解码器之间的可干预潜在场，将图像块特征提升为连续空间表示，并通过共享转移算子多步传播影响。训练联合优化语言建模、跨环境不变性、反事实展开监督与结构正则，在非线性有限基模型上证明了目标对齐的可识别性，为可解释的多模态世界建模提供了新思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.13845v1",
+      "source": "arxiv",
+      "title": "LePlanner: An Iterative Amortized Controller For World Models",
+      "abstract": "World models trained with joint-embedding predictive architectures learn compact, structured latent representations from physical interaction, yet planning in these latent spaces typically relies on one of two costly approaches. Search-based planners such as CEM, MPPI, and iCEM optimize action sequences through many predictor rollouts, achieving strong performance at the cost of high per-decision compute and latency. Policy-based methods amortize inference into a single forward pass but can degrade on contact-rich tasks where the demonstration distribution is multimodal. We propose LePlanner, an amortized iterative controller that learns to construct and refine latent action sequences through a frozen world-model predictor. LePlanner is trained with an arrival-and-hold objective that encourages the controller to reach the goal at the earliest feasible horizon and remain there. This addresses horizon-reset procrastination, a failure mode in which repeated receding-horizon replanning continually postpones goal arrival. An additional action-Gaussian loss keeps generated actions near the support of the offline dataset. Across navigation, contact-rich manipulation, and continuous-control environments, LePlanner matches or exceeds search-based planners while requiring an order of magnitude fewer predictor evaluations and 3-49x lower wall-clock time per decision. It achieves success rates of 98% on PushT, 100% on Reacher, 100% on TwoRooms, and 92% on the OGBench Cube task. These results show that much of the structure discovered through online search can be amortized into a lightweight iterative policy, enabling fast, horizon-aware, nonlinear physical control without online optimization.",
+      "authors": [
+        "Saksham Bansal",
+        "Om Naphade",
+        "Chayan Aggarwal",
+        "Vrishin M"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-09-12T10:01:21+00:00",
+      "link": "https://arxiv.org/pdf/2609.13845v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "amortized iterative controller for world models, latent action sequences",
+      "llm_evidence_cn": "面向世界模型的迭代摊销控制器，在潜空间构造动作序列",
+      "llm_evidence": "面向世界模型的迭代摊销控制器，在潜空间构造动作序列",
+      "canonical_evidence": "面向世界模型的迭代摊销控制器，在潜空间构造动作序列",
+      "llm_tldr_en": "Proposes LePlanner, an amortized iterative controller that learns to construct and refine latent action sequences through a frozen world-model predictor, avoiding costly search-based planning.",
+      "llm_tldr_cn": "论文指出基于联合嵌入预测架构的世界模型虽能学到紧凑潜表示，但潜空间规划要么依赖CEM等搜索式方法导致每步计算与延迟高，要么采用策略式单次前向但在多模态演示下退化。为此提出LePlanner摊销迭代控制器，通过冻结的世界模型预测器学习构造并迭代精炼潜动作序列。方法在保持规划质量的同时显著降低推理成本，为世界模型中的高效潜空间决策提供了新思路。",
+      "llm_tldr": "论文指出基于联合嵌入预测架构的世界模型虽能学到紧凑潜表示，但潜空间规划要么依赖CEM等搜索式方法导致每步计算与延迟高，要么采用策略式单次前向但在多模态演示下退化。为此提出LePlanner摊销迭代控制器，通过冻结的世界模型预测器学习构造并迭代精炼潜动作序列。方法在保持规划质量的同时显著降低推理成本，为世界模型中的高效潜空间决策提供了新思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.08217v1",
+      "source": "arxiv",
+      "title": "Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving",
+      "abstract": "VLMs have shown promise for autonomous driving, yet still suffer from hallucination, weak spatio-temporal perception, and limited generalization. Recent methods improve reasoning and decision-making through CoT explanations, retrieval-augmented generation or the static injection of tool outputs. Although these mechanisms enrich the context, the model neither proactively perceives scene information nor accumulates experience after answering. To overcome these limitations, we present, to our knowledge, the first synergistic framework that tightly couples hierarchical memory with proactive tool invocation in a closed reasoning loop. Our contributions are threefold. (i) Hierarchical Driving Memory: a scene-level short-term memory maintains the dynamic scene state, and an evolving long-term memory retrieves reusable experience and tool strategies. (ii) Memory-Tool Synergistic Reasoning Framework: guided by the scene state and retrieved experience, the model adaptively invokes tools to refine its reasoning at inference time and consolidates reusable experience into a long-term memory pool offline. (iii) Data Generation and Two-stage Training Pipeline: verified memory-tool trajectories built by multi-step teacher rollout are used to train with SFT and GRPO. Our 7B model reaches an overall reasoning score of 80.03 and MCQ accuracy of 79.09% on DriveLMM-o1, surpassing the strongest baseline by 7.74 MCQ points and generalizes strongly across benchmarks. Notably, ablation and analysis studies validate the effectiveness of each component and further reveal the complementary roles of hierarchical memory. Short-term memory strengthens spatio-temporal understanding, improving STSBench accuracy by 24.2 points, while offline long-term memory consolidation yields an additional 3.57-point MCQ gain with all parameters frozen, demonstrating continual self-evolution through accumulated driving experience.",
+      "authors": [
+        "Baojie Chen",
+        "Zijun Jia",
+        "Jing Zhong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-08T03:59:10+00:00",
+      "link": "https://arxiv.org/pdf/2609.08217v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "hierarchical memory and proactive tool invocation for autonomous driving agents",
+      "llm_evidence_cn": "面向自动驾驶智能体的分层记忆与主动工具调用",
+      "llm_evidence": "面向自动驾驶智能体的分层记忆与主动工具调用",
+      "canonical_evidence": "面向自动驾驶智能体的分层记忆与主动工具调用",
+      "llm_tldr_en": "This framework couples hierarchical driving memory with proactive tool invocation in a closed reasoning loop, letting an autonomous driving VLM perceive scenes and accumulate experience beyond static context injection.",
+      "llm_tldr_cn": "针对视觉语言模型用于自动驾驶时存在幻觉、时空感知薄弱、泛化有限且无法主动感知场景与积累经验的问题，论文提出由后见与前见驱动的协同推理框架，将分层记忆与主动工具调用紧密耦合在闭环推理中。该框架构建分层驾驶记忆，支持场景级信息存储与经验复用，并主动调用工具获取场景信息。研究旨在提升自动驾驶推理与决策的准确性、时空感知与泛化能力，为VLM智能体引入记忆与工具协同机制。",
+      "llm_tldr": "针对视觉语言模型用于自动驾驶时存在幻觉、时空感知薄弱、泛化有限且无法主动感知场景与积累经验的问题，论文提出由后见与前见驱动的协同推理框架，将分层记忆与主动工具调用紧密耦合在闭环推理中。该框架构建分层驾驶记忆，支持场景级信息存储与经验复用，并主动调用工具获取场景信息。研究旨在提升自动驾驶推理与决策的准确性、时空感知与泛化能力，为VLM智能体引入记忆与工具协同机制。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.14561v1",
+      "source": "arxiv",
+      "title": "GLAM: Training a latent world model over global spatiotemporal memory for active exploration and navigation",
+      "abstract": "Active exploration and semantic navigation require an embodied agent to build memory from partial observations, predict how the evolution of observed spatial memory may support future motion, and convert that prediction into actionable plans. We present GLAM, a goal-conditioned latent world model trained over global spatiotemporal memory, and GLAM NAV, the complete navigation system built around it. Given historical map tokens, a navigation goal, and the current robot pose, GLAM jointly predicts future map representations and robot-centric waypoint latents, allowing future spatial context and navigation intent to be inferred in a shared representation space. The model follows a JEPA-like latent prediction paradigm, operates directly on map-level latent tokens rather than RGB reconstruction, and uses a pretrained waypoint encoder-decoder to supervise and decode navigation plans within GLAM NAV. Training data are collected by replaying ObjectNav expert trajectories in Habitat over HM3D v0.2 scene assets and slicing them into multi-timescale prediction samples. On a controlled HM3D-ObjectNav subset reproduction setting, GLAM NAV improves over a reproduced BSC-Nav baseline in both success rate and success weighted by path length.",
+      "authors": [
+        "I-Tak Ieong",
+        "Ruizhi Feng",
+        "Zhaoyang Lu",
+        "Yifei Cao",
+        "Jiayao Zhao",
+        "Leon Li",
+        "Senhua Zhu",
+        "Wenbo Ding"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-13T14:47:33+00:00",
+      "link": "https://arxiv.org/pdf/2609.14561v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "goal-conditioned latent world model with JEPA-like latent prediction of future map and waypoint latents",
+      "llm_evidence_cn": "目标条件潜世界模型以JEPA式潜预测未来地图与路径点",
+      "llm_evidence": "目标条件潜世界模型以JEPA式潜预测未来地图与路径点",
+      "canonical_evidence": "目标条件潜世界模型以JEPA式潜预测未来地图与路径点",
+      "llm_tldr_en": "GLAM is a goal-conditioned latent world model over global spatiotemporal memory that jointly predicts future map representations and waypoint latents for active exploration and navigation.",
+      "llm_tldr_cn": "主动探索与语义导航要求智能体从部分观测构建记忆、预测空间记忆如何支撑未来运动并转化为规划。论文提出GLAM，一种建立在全局时空记忆之上的目标条件潜世界模型，采用JEPA式潜预测范式，根据历史地图token、目标与位姿联合预测未来地图表示与机器人路径点潜变量，并构建了完整导航系统。结果显示其能在共享表示空间推断未来空间上下文与导航意图，实现记忆、预测与规划一体化。",
+      "llm_tldr": "主动探索与语义导航要求智能体从部分观测构建记忆、预测空间记忆如何支撑未来运动并转化为规划。论文提出GLAM，一种建立在全局时空记忆之上的目标条件潜世界模型，采用JEPA式潜预测范式，根据历史地图token、目标与位姿联合预测未来地图表示与机器人路径点潜变量，并构建了完整导航系统。结果显示其能在共享表示空间推断未来空间上下文与导航意图，实现记忆、预测与规划一体化。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.09418v2",
+      "source": "arxiv",
+      "title": "Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration",
+      "abstract": "World Action Models (WAMs) couple predictive world modeling with action generation, allowing anticipated future states to guide agent behavior. Although WAMs are rapidly advancing embodied AI, general-purpose counterparts remain largely unexplored in games. Existing game-oriented approaches often combine action-conditioned world models with external policies and reward functions to realize WAM-like decision-making, yet they operate mainly in 2D visual observation space and do not instantiate persistent 3D geometry. Extending this paradigm to 3D games introduces a distinct challenge. In autonomous driving and robotics, the physical environment exists independently of the model, providing a persistent 3D world in which selected actions can be executed. Games have no such external substrate; the virtual world itself must be instantiated. Most playable games require a persistent and navigable space, while 3D games additionally require explicit geometry that supports movement and interaction. Action-conditioned video rollouts provide visual observations but not this spatial representation. We present \\textsc{Valerant}, a training-free framework that transforms a pretrained action-conditioned world model into a WAM for exploring and constructing 3D game maps. By coupling predictive visual rollouts with SLAM-based spatial reconstruction and exploration-driven action selection, \\textsc{Valerant} progressively transforms a single image into a persistent 3D game map. This framework extends WAM-based interaction beyond 2D visual simulation and offers a new approach to reducing manual effort in 3D game-map creation.",
+      "authors": [
+        "Yiran Qiao",
+        "Feng Wang",
+        "Jing Ma"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-08T20:17:48+00:00",
+      "link": "https://arxiv.org/pdf/2609.09418v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "action-conditioned world model couples prediction with action generation in a persistent 3D world",
+      "llm_evidence_cn": "动作条件世界模型在持久三维世界中耦合预测与动作生成",
+      "llm_evidence": "动作条件世界模型在持久三维世界中耦合预测与动作生成",
+      "canonical_evidence": "动作条件世界模型在持久三维世界中耦合预测与动作生成",
+      "llm_tldr_en": "Valerant tackles automatic generation of navigable 3D game maps by coupling predictive world modeling with action generation, exploring a persistent 3D world analogous to autonomous driving and robotics settings.",
+      "llm_tldr_cn": "现有面向游戏的世界模型多停留在二维视觉观测空间，难以构建持久的三维几何结构。Valerant提出将动作条件世界模型与动作生成耦合的世界动作模型，在三维游戏中自动探索并生成可导航地图。该方法借鉴自动驾驶与机器人中环境独立于模型的设定，为三维世界中的智能体决策提供了新范式。",
+      "llm_tldr": "现有面向游戏的世界模型多停留在二维视觉观测空间，难以构建持久的三维几何结构。Valerant提出将动作条件世界模型与动作生成耦合的世界动作模型，在三维游戏中自动探索并生成可导航地图。该方法借鉴自动驾驶与机器人中环境独立于模型的设定，为三维世界中的智能体决策提供了新范式。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.14973v1",
+      "source": "arxiv",
+      "title": "PhysBrain 1.5: From Vision-Language Models to Physical Foundation Models",
+      "abstract": "We present PhysBrain 1.5, a unified model for understanding physical environments, generating actions, and predicting future states. Motivated by the physical loop of observation, interaction, and environmental change, we bring these capabilities into a common learning framework. Starting from a general vision--language model, we encode language responses, end-effector motion, and dense visual targets as discrete sequences and jointly optimize them with autoregressive next-token prediction. Pre-training draws its embodied supervision entirely from human interaction videos, using task-centered episodes to pair semantic and spatial context with recovered motion and subsequent observations. We then adapt the model through supervised fine-tuning on a mixture of human demonstrations, robot trajectories, and simulated experience. Across 28 embodied understanding benchmarks, our 8B model achieves an average score of 72.5, setting a new open-source state of the art and performing on par with leading proprietary models such as GPT-6-Astra and Gemini 3.6 Flash. It achieves the best open-source results on 14 benchmarks while retaining general multimodal capabilities. Beyond these understanding evaluations, qualitative examples show the model's ability to produce end-effector trajectories and predict future scenes through spatially aligned RGB, depth, and robot-mask outputs.",
+      "authors": [
+        "DeepCybo Team",
+        "Yu Bin",
+        "Haipeng Cao",
+        "Zheng Chang",
+        "Kai Chen",
+        "Youning Chen",
+        "Kailin Deng",
+        "Yichao Du",
+        "Xiaotong Fu",
+        "Haoyang Ge",
+        "Yunlong Guo",
+        "Chenliu Hao",
+        "Jiyan He",
+        "Xuguo He",
+        "Yakun Hou",
+        "Kai Hu",
+        "Cong Huang",
+        "Tuopusen Huang",
+        "Yu Huang",
+        "Hong Li",
+        "Peize Li",
+        "Shijie Lian",
+        "Xiaopeng Lin",
+        "Yun Lin",
+        "Haibao Liu",
+        "Haochen Liu",
+        "Qiuzhi Liu",
+        "Shengcai Liu",
+        "Zhiqiang Liu",
+        "Tao Luo",
+        "Peng Ren",
+        "Shuo Ren",
+        "Chaoyi Ruan",
+        "Zhaolong Shen",
+        "Yukun Shi",
+        "Qiyuan Su",
+        "Yuxuan Tian",
+        "Yining Wang",
+        "Changti Wu",
+        "Hao Wu",
+        "Xueyin Xu",
+        "Ruoqi Yang",
+        "Zhaoyang Yang",
+        "Hang Yuan",
+        "Zhaoyang Zeng",
+        "Hanwen Zhang",
+        "Ruimeng Zhang",
+        "Yao Zhang",
+        "Yibo Zhang",
+        "Yuxiang Zhang",
+        "Zhirui Zhang",
+        "Ziyi Zhang",
+        "Zubin Zheng",
+        "Zishen Zhuang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-14T03:25:46+00:00",
+      "link": "https://arxiv.org/pdf/2609.14973v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "encodes motion and visual targets as discrete sequences with autoregressive next-token prediction",
+      "llm_evidence_cn": "将运动与视觉目标编码为离散序列并自回归预测",
+      "llm_evidence": "将运动与视觉目标编码为离散序列并自回归预测",
+      "canonical_evidence": "将运动与视觉目标编码为离散序列并自回归预测",
+      "llm_tldr_en": "PhysBrain 1.5 unifies physical understanding, action generation and future-state prediction by encoding language, motion and dense visual targets as discrete sequences and training with autoregressive next-token prediction.",
+      "llm_tldr_cn": "该文针对物理环境中理解、行动与未来状态预测彼此割裂的问题，提出统一的物理基础模型PhysBrain 1.5。它从通用视觉语言模型出发，把语言回复、末端执行器运动与稠密视觉目标编码为离散序列，用自回归下一Token预测联合优化，并利用人类交互视频中的任务片段进行预训练，再经监督微调适配。该工作将世界模型式的状态预测与具身动作生成统一在同一框架中，为具身世界模型提供新范式。",
+      "llm_tldr": "该文针对物理环境中理解、行动与未来状态预测彼此割裂的问题，提出统一的物理基础模型PhysBrain 1.5。它从通用视觉语言模型出发，把语言回复、末端执行器运动与稠密视觉目标编码为离散序列，用自回归下一Token预测联合优化，并利用人类交互视频中的任务片段进行预训练，再经监督微调适配。该工作将世界模型式的状态预测与具身动作生成统一在同一框架中，为具身世界模型提供新范式。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.11548v1",
+      "source": "arxiv",
+      "title": "World in World: Explore the World with World Models",
+      "abstract": "Autoregressive video world models enable interactive, long-horizon exploration, but flexible control remains challenging. Exploring a source video from new viewpoints requires the generated rollout to remain synchronised with the recorded event, place observed content in the requested view, plausibly complete newly exposed regions, and recover previously generated appearance on revisits. Existing methods typically address these requirements through task-specific modules or additional training. We present World in World, a training-free inference-time interface that converts heterogeneous control evidence into camera- and time-labelled clean visual states, which are read through the native self attention of a frozen causal video model. The evidence comprises source-video observations, target-view scene projections, geometry renderings that guide completion of newly exposed subject regions, and retrieved generated states beyond the rolling cache. Each evidence source carries token-level support and its own availability schedule. A correspondence router combines persistent point identities with geometry to establish token correspondences, guiding supported queries towards matching source-video tokens. Evidence-wise attention CFG (EWA) then independently regulates each auxiliary channel's additional contribution using attention responses from the same denoising forward pass. The shared interface supports camera-controlled rerendering, long-horizon revisiting, and human-motion transfer with the same frozen backbone. We evaluate World in World on camera-controlled video rerendering under diverse viewpoint changes, assessing perceptual quality, temporal consistency, and camera-following accuracy.",
+      "authors": [
+        "Chenxi Song",
+        "Yanming Yang",
+        "Chi Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-10T13:42:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.11548v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "autoregressive video world models for controllable exploration",
+      "llm_evidence_cn": "自回归视频世界模型的灵活控制",
+      "llm_evidence": "自回归视频世界模型的灵活控制",
+      "canonical_evidence": "自回归视频世界模型的灵活控制",
+      "llm_tldr_en": "World in World is a training-free inference-time interface for autoregressive video world models that turns heterogeneous control evidence into camera- and time-labelled visual states, enabling new-viewpoint exploration of a source video.",
+      "llm_tldr_cn": "针对自回归视频世界模型在视角控制上的不足，论文提出World in World这一免训练推理接口，将异构控制证据转化为带相机与时间标签的干净视觉状态，并借助冻结因果视频模型的原生自注意力进行读取。该方法无需额外训练或任务专用模块，即可实现源视频的新视角探索，保持与记录事件的同步、合理补全新暴露区域，并在重访时恢复已生成外观，为交互式长时程视频世界模型提供了灵活控制方案。",
+      "llm_tldr": "针对自回归视频世界模型在视角控制上的不足，论文提出World in World这一免训练推理接口，将异构控制证据转化为带相机与时间标签的干净视觉状态，并借助冻结因果视频模型的原生自注意力进行读取。该方法无需额外训练或任务专用模块，即可实现源视频的新视角探索，保持与记录事件的同步、合理补全新暴露区域，并在重访时恢复已生成外观，为交互式长时程视频世界模型提供了灵活控制方案。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.15322v1",
+      "source": "arxiv",
+      "title": "Planning in the Backbone: DiffAdapterVLA for Native Continuous Trajectory Generation with Driving VLMs",
+      "abstract": "Pretrained driving vision-language models (VLMs) integrate visual, route, language, and driving context into rich driving priors, yet their representation objectives remain separated from continuous driving planning. Existing methods typically begin trajectory generation only after the VLM has formed a final condition, leaving depth-wise condition computation outside the stepwise formation of trajectory state. We introduce DiffAdapterVLA, which realizes Planning in the Backbone: it injects explicit trajectory tokens into selected VLM late layers, bringing trajectory state into backbone forward computation, where it co-evolves with driving conditions at different depths. Lightweight layer-wise DiffAdapters organize this computation into recursive trajectory refinement, while asymmetric joint attention preserves directed guidance from the condition stream to trajectory planning. By placing planning within existing backbone computation rather than relying on an independent trajectory planner, DiffAdapterVLA adapts only lightweight trajectory modules to turn existing driving priors into efficient continuous planning capability. NAVSIM results show that it achieves high-quality closed-loop planning with low end-to-end latency using few trainable parameters, and demonstrate that jointly evolving trajectory state and depth-wise driving conditions in VLM late-layer computation effectively realizes continuous trajectory planning.",
+      "authors": [
+        "Changxin Lu",
+        "Xiaoliang Meng",
+        "Yu Wu",
+        "Rui Huang",
+        "Honglin Li",
+        "Tao Chen",
+        "Kaixuan Zhou",
+        "Yadong Shao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-09-14T10:14:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.15322v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "driving VLM with trajectory tokens and continuous trajectory generation for planning",
+      "llm_evidence_cn": "驾驶VLM中轨迹token与连续轨迹生成规划",
+      "llm_evidence": "驾驶VLM中轨迹token与连续轨迹生成规划",
+      "canonical_evidence": "驾驶VLM中轨迹token与连续轨迹生成规划",
+      "llm_tldr_en": "DiffAdapterVLA injects explicit trajectory tokens into late layers of a driving VLM backbone so trajectory state co-evolves with driving conditions for native continuous planning.",
+      "llm_tldr_cn": "预训练驾驶视觉语言模型融合视觉、路线、语言与驾驶上下文形成丰富先验，但其表示目标与连续驾驶规划相分离，现有方法通常在VLM形成最终条件后才生成轨迹，使条件计算脱离轨迹状态的逐步形成。本文提出DiffAdapterVLA，将显式轨迹token注入VLM后层，使轨迹状态在主干前向计算中与不同深度的驾驶条件共同演化。该工作实现了原生连续轨迹生成，提升了驾驶规划与表示的一体化程度。",
+      "llm_tldr": "预训练驾驶视觉语言模型融合视觉、路线、语言与驾驶上下文形成丰富先验，但其表示目标与连续驾驶规划相分离，现有方法通常在VLM形成最终条件后才生成轨迹，使条件计算脱离轨迹状态的逐步形成。本文提出DiffAdapterVLA，将显式轨迹token注入VLM后层，使轨迹状态在主干前向计算中与不同深度的驾驶条件共同演化。该工作实现了原生连续轨迹生成，提升了驾驶规划与表示的一体化程度。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.13812v1",
+      "source": "arxiv",
+      "title": "GeomVLA: Unifying Scene, Motion, and Action in 3D",
+      "abstract": "We present GeomVLA, a Vision-Language-Action (VLA) model that unifies perception, latent scene motion prediction, and action generation within a shared robot-centric 3D coordinate frame. Our approach lifts pretrained VLM features into spatially grounded 3D scene tokens using depth and camera calibration, while retaining the semantic representations learned during VLM pretraining. We further introduce a 3D Scene Trajectory Denoiser, a task-conditioned module that learns a latent representation of how scene points are expected to move in 3D. Rather than executing the predicted trajectory as an open-loop plan, GeomVLA extracts intermediate motion tokens from the trajectory denoiser and uses them to condition a 3D flow-based action denoiser through geometry-aware attention. GeomVLA achieves state-of-the-art performance on CALVIN, competitive performance on LIBERO and RoboTwin2.0, and outperforms strong baselines in real-world manipulation settings without robot-action pretraining. Extensive ablations show that future-motion reasoning alone is insufficient: the primary gains are associated with maintaining geometric consistency among scene representation, motion prediction, and robot actions throughout the perception-to-action pipeline.",
+      "authors": [
+        "Ziyin Xiong",
+        "Nikos Gkanatsios",
+        "Moritz Reuss",
+        "Katerina Fragkiadaki"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-12T08:51:52+00:00",
+      "link": "https://arxiv.org/pdf/2609.13812v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "latent scene motion prediction and intermediate motion tokens conditioning action generation",
+      "llm_evidence_cn": "潜场景运动预测与中间运动token条件化动作生成",
+      "llm_evidence": "潜场景运动预测与中间运动token条件化动作生成",
+      "canonical_evidence": "潜场景运动预测与中间运动token条件化动作生成",
+      "llm_tldr_en": "GeomVLA lifts VLM features into 3D scene tokens and learns latent scene motion via a trajectory denoiser, extracting motion tokens to condition a 3D flow-based action denoiser.",
+      "llm_tldr_cn": "机器人操作需要统一感知、场景运动预测与动作生成，但现有方法缺少共享的三维几何表示。论文提出GeomVLA，利用深度与相机标定将预训练VLM特征提升为空间接地的三维场景token，并引入任务条件的三维场景轨迹去噪器，学习场景点如何运动的潜表示。模型从去噪器提取中间运动token，通过几何感知注意力条件化三维流动作去噪器，把预测运动转化为可执行动作，实现了场景、运动与动作在统一三维坐标系下的整合。",
+      "llm_tldr": "机器人操作需要统一感知、场景运动预测与动作生成，但现有方法缺少共享的三维几何表示。论文提出GeomVLA，利用深度与相机标定将预训练VLM特征提升为空间接地的三维场景token，并引入任务条件的三维场景轨迹去噪器，学习场景点如何运动的潜表示。模型从去噪器提取中间运动token，通过几何感知注意力条件化三维流动作去噪器，把预测运动转化为可执行动作，实现了场景、运动与动作在统一三维坐标系下的整合。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "motion tokenization",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.15870v1",
+      "source": "arxiv",
+      "title": "WLA$^3$: World Latent Action Modeling for Semantics, Dynamics, and Kinematics",
+      "abstract": "Scaling generalist policy models with heterogeneous data is limited by the lack of unified, low-noise action supervision. Human egocentric videos are abundant, but only a small fraction comes with high-quality hand-action labels. Observed world transitions offer a common source of action-related supervision across data sources. We introduce WLA$^3$ (World Latent Action Modeling for Semantics, Dynamics, and Kinematics), a unified generalist policy model framework built around representations learned by a World Latent Action Model (WLAM). WLAM first learns how multimodal world states change over a local interval, encoding synchronized camera views and available embodiment-state changes into a compact local latent action and a richer transition feature. Reconstruction from partial modalities and consistency across overlapping windows encourage robust transition representations. WLA$^3$ reuses them across semantics, dynamics, and kinematics: local latent actions support action-sensitive physical-dynamics modeling, segment-level features directly supervise the VLM through a Semantic Latent Aggregate (SLA), and an action expert jointly predicts latent actions together with embodiment-specific robot controls. Human videos provide scalable transition supervision, while robot trajectories ground the shared representation in executable native controls. On LARYBench, the final 32D latent action reaches 67.89\\% average classification accuracy. WLA$^3$ achieves 81.9% average success across six real-robot tasks versus 66.2% for $π_{0.5}$. Performance improves as generalist policy model mid-training data scales, and human videos support human-to-robot transfer. Project page can be found at https://wla-3.github.io/.",
+      "authors": [
+        "Peidong Liu",
+        "Zhiyuan Xiang",
+        "Mingyang Li",
+        "Wenhao Li",
+        "Jiale Zhang",
+        "Jiahao Sun",
+        "Jiawei Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-14T16:59:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.15870v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "world latent action modeling for unified policy representations",
+      "llm_evidence_cn": "面向统一策略表示的世界潜在动作建模",
+      "llm_evidence": "面向统一策略表示的世界潜在动作建模",
+      "canonical_evidence": "面向统一策略表示的世界潜在动作建模",
+      "llm_tldr_en": "WLA^3 builds a generalist policy framework around a World Latent Action Model that encodes world-state transitions into compact latent actions and richer transition features.",
+      "llm_tldr_cn": "用异构数据扩展通用策略模型受限于缺乏统一、低噪声的动作监督，而人类第一视角视频中带高质量手部动作标签的仅占少数。本文提出 WLA^3 框架，其核心 World Latent Action Model 学习多模态世界状态在局部区间内如何变化，将同步相机视角与本体状态变化编码为紧凑的局部潜在动作与更丰富的转移特征。该表示可作为通用动作监督，支撑跨数据源的策略学习，为世界潜在动作建模提供了统一方案。",
+      "llm_tldr": "用异构数据扩展通用策略模型受限于缺乏统一、低噪声的动作监督，而人类第一视角视频中带高质量手部动作标签的仅占少数。本文提出 WLA^3 框架，其核心 World Latent Action Model 学习多模态世界状态在局部区间内如何变化，将同步相机视角与本体状态变化编码为紧凑的局部潜在动作与更丰富的转移特征。该表示可作为通用动作监督，支撑跨数据源的策略学习，为世界潜在动作建模提供了统一方案。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
