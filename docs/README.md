@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-16</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-17</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 13 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-16 22:20:11 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-17 22:05:15 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,10 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 13 篇推荐（精读 2 篇，速读 11 篇）</p>
-<p>精读：《Safe Task Planning with Long-Term Graph Memory for Embodied Agents》（8.0/10）, 《Open-UniMo: Towards Unified Motion-Language Understanding and Generation in the Open World》（8.0/10）</p>
-<p>速读：《World in World: Explore the World with World Models》（7.0/10）, 《Memory as Plans: World-Action Modeling with Memory-Grounded Planning》（7.0/10）, 《BLInD: Learning Driver Intent as a Distribution over Future Ego Trajectories》（7.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今天筛完17篇论文、精读6篇速读11篇，主线锁定自动驾驶安全关键场景下的风险感知世界模型与轨迹规划。</p>
+<p>最值得看的是两篇9.0分工作：CorrRisk-WM用走廊条件化风险世界模型做安全关键轨迹规划，以及用流引导占用演化实现选择性轨迹规划的风险感知世界模型。</p>
+<p>普通读者可先从7.0分的《World-Action Models for Robot Learning and Control: A Survey》入手建立全景认知，再回看这两篇精读理解风险建模如何落到规划决策。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -81,12 +80,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Safe Task Planning with Long-Term Graph Memory for Embodied Agents">Safe Task Planning with Long-Term Graph Memory for Embodied Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Open-UniMo: Towards Unified Motion-Language Understanding and Generation in the Open World">Open-UniMo: Towards Unified Motion-Language Understanding and Generation in the Open World</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CorrRisk-WM: Corridor-Conditioned Risk World Modeling for Safety-Critical Trajectory Planning">CorrRisk-WM: Corridor-Conditioned Risk World Modeling for Safety-Critical Trajectory Planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving">Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Modality-Autoregressive World-Action Models">Modality-Autoregressive World-Action Models</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span><span class="dpr-home-dashboard-tag">world-models <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -97,9 +96,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="World in World: Explore the World with World Models">World in World: Explore the World with World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Memory as Plans: World-Action Modeling with Memory-Grounded Planning">Memory as Plans: World-Action Modeling with Memory-Grounded Planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="BLInD: Learning Driver Intent as a Distribution over Future Ego Trajectories">BLInD: Learning Driver Intent as a Distribution over Future Ego Trajectories</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LPA-CWM: A Learned Physical Adjudicator for Motion Reasoning with Counterfactual World Models">LPA-CWM: A Learned Physical Adjudicator for Motion Reasoning with Counterfactual World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models">DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="World-Action Models for Robot Learning and Control: A Survey">World-Action Models for Robot Learning and Control: A Survey</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span></div>
 </section>
 </div>
 

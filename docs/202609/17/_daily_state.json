@@ -1,0 +1,281 @@
+{
+  "date": "20260917",
+  "date_label": "",
+  "generated_at": "2026-09-17 22:05:15 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.16724v2",
+      "route": "202609/17/2609.16724v2-corrrisk-wm-corridor-conditioned-risk-world-modeling-for-safety-critical-trajectory-planning",
+      "title": "CorrRisk-WM: Corridor-Conditioned Risk World Modeling for Safety-Critical Trajectory Planning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "递归预测智能体状态的潜在环境世界模型，用于驾驶规划",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.18442v1",
+      "route": "202609/17/2609.18442v1-risk-aware-world-modeling-with-flow-guided-occupancy-evolution-for-selective-trajectory-planning-in-automated-driving",
+      "title": "Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向自动驾驶的风险感知世界模型，预测占据以支持轨迹规划",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.17524v1",
+      "route": "202609/17/2609.17524v1-modality-autoregressive-world-action-models",
+      "title": "Modality-Autoregressive World-Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "自回归世界-动作模型，预测多种未来模态",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.17728v1",
+      "route": "202609/17/2609.17728v1-raf-vla-representation-alignment-with-the-future-for-end-to-end-autonomous-driving",
+      "title": "RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向未来驾驶场景表示对齐的世界建模VLA",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/17/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "视频世界模型从结构化描述与动作学习物理动力学",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.18487v1",
+      "route": "202609/17/2609.18487v1-actionpiece-rethinking-action-tokenization-for-autoregressive-vision-language-action-models",
+      "title": "ActionPiece: Rethinking Action Tokenization for Autoregressive Vision-Language-Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "自回归VLA模型中的动作分词保真度",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.14073v1",
+      "route": "202609/17/2609.14073v1-lpa-cwm-a-learned-physical-adjudicator-for-motion-reasoning-with-counterfactual-world-models",
+      "title": "LPA-CWM: A Learned Physical Adjudicator for Motion Reasoning with Counterfactual World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用学习式权重聚合进行运动推理的反事实世界模型",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.15570v2",
+      "route": "202609/17/2609.15570v2-dido-distilling-interaction-centric-dynamics-into-one-step-denoising-for-world-action-models",
+      "title": "DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "为机器人操作蒸馏视频世界模型的交互动力学",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.16074v1",
+      "route": "202609/17/2609.16074v1-world-action-models-for-robot-learning-and-control-a-survey",
+      "title": "World-Action Models for Robot Learning and Control: A Survey",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "综述耦合未来世界预测与动作生成的机器人世界-动作模型",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.16697v1",
+      "route": "202609/17/2609.16697v1-world-models-for-embodied-intelligence-from-plausible-to-controllable-to-actionable",
+      "title": "World Models for Embodied Intelligence: From Plausible to Controllable to Actionable",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "按预测能力梳理具身智能世界模型的综述",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.16871v1",
+      "route": "202609/17/2609.16871v1-spear-next-causal-latent-forecasting-across-multiple-horizons-for-spectral-temporal-earth-representation-learning",
+      "title": "SPEAR NeXT Causal Latent Forecasting Across Multiple Horizons for Spectral Temporal Earth Representation Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "因果掩码Transformer预测多个未来潜在状态",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.18259v1",
+      "route": "202609/17/2609.18259v1-m2tok-multi-head-multi-codebook-discrete-action-tokenization-for-vision-language-action-models",
+      "title": "${M}^2$Tok: Multi-head Multi-codebook Discrete Action Tokenization for Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多头多码本离散动作分词用于自回归VLA模型",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.11548v1",
+      "route": "202609/17/2609.11548v1-world-in-world-explore-the-world-with-world-models",
+      "title": "World in World: Explore the World with World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "自回归视频世界模型与推理期可控探索接口",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.11616v1",
+      "route": "202609/17/2609.11616v1-langstreet-persistent-language-fields-for-anchor-decoded-street-gaussians",
+      "title": "LangStreet: Persistent Language Fields for Anchor-Decoded Street Gaussians",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向锚点解码街道高斯的持久语言场，街景语义表示",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.13941v1",
+      "route": "202609/17/2609.13941v1-blind-learning-driver-intent-as-a-distribution-over-future-ego-trajectories",
+      "title": "BLInD: Learning Driver Intent as a Distribution over Future Ego Trajectories",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "由车辆状态历史预测未来自车轨迹的多模态分布",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.14833v1",
+      "route": "202609/17/2609.14833v1-one-model-two-physical-stories-auditing-misalignment-in-multi-modal-world-modeling",
+      "title": "One Model, Two Physical Stories: Auditing Misalignment in Multi-Modal World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "审计多模态世界模型的跨模态不一致",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    },
+    {
+      "paper_id": "2609.14997v1",
+      "route": "202609/17/2609.14997v1-from-learned-mode-av-traffic-pairing-to-planner-decisions-a-marginal-preserving-study-on-argoverse-2",
+      "title": "From Learned-Mode AV-Traffic Pairing to Planner Decisions: A Marginal-Preserving Study on Argoverse 2",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "联合运动预测中的自车-交通配对影响规划决策",
+      "first_seen_at": "2026-09-17 22:05:15 UTC",
+      "updated_at": "2026-09-17 22:05:15 UTC"
+    }
+  ]
+}
