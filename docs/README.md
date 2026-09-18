@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-17</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-18</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-17 22:05:15 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-18 21:34:08 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今天筛完17篇论文、精读6篇速读11篇，主线锁定自动驾驶安全关键场景下的风险感知世界模型与轨迹规划。</p>
-<p>最值得看的是两篇9.0分工作：CorrRisk-WM用走廊条件化风险世界模型做安全关键轨迹规划，以及用流引导占用演化实现选择性轨迹规划的风险感知世界模型。</p>
-<p>普通读者可先从7.0分的《World-Action Models for Robot Learning and Control: A Survey》入手建立全景认知，再回看这两篇精读理解风险建模如何落到规划决策。</p>
+<p>2026-09-18 日报：共 17 篇，精读 6 篇、速读 11 篇，主题高度集中在世界模型与自动驾驶/机器人控制。</p>
+<p>最值得看的是精读里《MM-Future》（9.0/10）的多模态世界-动作联合建模，以及《World-Action Models for Robot Learning and Control》综述（8.0/10）；速读方向也延续&quot;从可信到可控到可行动&quot;的世界模型路线。</p>
+<p>建议普通读者先从两篇精读入手，再顺着综述里的&quot;可控性&quot;线索挑 1~2 篇速读，不必一次追完 17 篇。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -83,9 +83,9 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CorrRisk-WM: Corridor-Conditioned Risk World Modeling for Safety-Critical Trajectory Planning">CorrRisk-WM: Corridor-Conditioned Risk World Modeling for Safety-Critical Trajectory Planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving">Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Modality-Autoregressive World-Action Models">Modality-Autoregressive World-Action Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving">MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="World-Action Models for Robot Learning and Control: A Survey">World-Action Models for Robot Learning and Control: A Survey</span></li><li><span class="dpr-home-dashboard-paper-title" title="Modality-Autoregressive World-Action Models">Modality-Autoregressive World-Action Models</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -96,9 +96,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LPA-CWM: A Learned Physical Adjudicator for Motion Reasoning with Counterfactual World Models">LPA-CWM: A Learned Physical Adjudicator for Motion Reasoning with Counterfactual World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models">DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="World-Action Models for Robot Learning and Control: A Survey">World-Action Models for Robot Learning and Control: A Survey</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="World in World: Explore the World with World Models">World in World: Explore the World with World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Stable by Construction: Variational Latent Markov Operators for Long-Horizon PDE Prediction">Stable by Construction: Variational Latent Markov Operators for Long-Horizon PDE Prediction</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>9</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>2</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,373 @@
+Title: Kernel-Based Metrics Learning for Uncertain Opponent Vehicle Trajectory Prediction in Autonomous Racing
+
+URL Source: https://arxiv.org/pdf/2609.17147v1
+
+Published Time: Wed, 16 Sep 2026 01:31:59 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+> IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED OCTOBER, 2024 1
+
+# Kernel-based Metrics Learning for Uncertain Opponent Vehicle Trajectory Prediction in Autonomous Racing 
+
+Hojin Lee, Youngim Nam, Sanghun Lee, and Cheolhyeon Kwon 
+
+Abstract —Autonomous racing confronts significant challenges in safely overtaking Opponent Vehicles (OVs) that exhibit uncer-tain trajectories, stemming from unknown driving policies. To address these challenges, this study proposes heterogeneous ker-nel metrics for Deep Kernel Learning (DKL), designed to robustly capture the diverse driving policies of OVs, and carry out precise trajectory predictions along with the associated uncertainties. A key virtue of the proposed kernel metrics lies in their ability to align similar driving policies and disjoin dissimilar ones in an unsupervised manner, given the observed interactions between the Ego Vehicle (EV) and OVs. The efficacy of the proposed method is substantiated through experimental studies on a 1/10th scale racecar platform, demonstrating improved prediction accu-racy and thereby safely overtaking against OVs. Furthermore, our method is computationally efficient for onboard computing units, affirming its viability in fast-paced racing environments. The video and source code can be found at https://github.com/ HMCL-UNIST/OpponentPredictionWithKMDKL.git. 
+
+Index Terms —Planning under Uncertainty, Integrated Plan-ning and Learning, Machine Learning for Robot Control 
+
+I. I NTRODUCTION 
+
+# AUTONOMOUS racing has emerged as a significant subfield of autonomous driving, attracting considerable interest and fostering competitions such as Roborace, Indy Autonomous Challenge, and F1TENTH [1]. One of the key challenges in autonomous racing lies in safely running against OVs and executing overtaking maneuvers. Various strategies have been developed to address these challenges [2], [3], among which a commonly adopted approach involves pre-dicting the future trajectory of OV and then planning the overtaking maneuver accordingly [1]. Although previous studies have made strides in trajectory prediction for autonomous racing, they still face challenges in addressing diverse driving policies of OVs [4]. On the one hand, physics-based prediction methods are grounded in first-principles dynamics models. They are capable of anticipating momentary behavior but struggle to capture the long-term 
+
+Manuscript received: May 30, 2024; Revised: September 1, 2024; Accepted: October 16, 2024. This paper was recommended for publication by Editor Jens Kober upon evaluation of the Associate Editor and Reviewers’ comments. This work was supported by the National Research Foundation of Korea(NRF) grants funded by the Korea government (MSIT) (RS-2024-00342930 and 2020R1A5A8018822). (corresponding author: Cheolhyeon Kwon) 
+
+The authors are with the Department of Mechanical Engineering, Ul-san National Institute of Science and Technology, Ulsan, 44919, Repub-lic of Korea hojinlee@unist.ac.kr, nyi0944@unist.ac.kr, sanghun17@unist.ac.kr, kwonc@unist.ac.kr 
+
+Digital Object Identifier (DOI): see top of this page. 
+
+Fig. 1: Overtaking scenarios where the EV maximizes its progress while taking into account the predicted trajectory distribution of the OV, which is based on the driving policy inferred from the observed EV-OV interaction. (a) OV exhibits non-blocking behavior, allowing the EV to navigate without interference; (b) OV actively tries to block the EV’s progress. 
+
+interactions between EV and OVs [4]. On the other hand, planning-based prediction methods infer the OVs’ actions as solutions to optimization problems that account for the strategic objectives of the race and tactical interactions with the EV [2]. However, these methods often demand intensive computation, which is critical for fast-paced racing environ-ments. Moreover, the prediction performance heavily relies on the fidelity of the optimization problem, which neces-sitates encoding the OV’s real objective [4]. Lastly, recent advancements in learning-based methods, which empirically examine driving data patterns, have shown promising results in trajectory prediction [5], [6]. Nonetheless, data scarcity often hinders the implementation of learning-based methods within the autonomous racing regime. Moreover, when the encountered driving policy of the OV deviates from the training data, the resulting predictions fall short in planning safe maneuvers of the EV against OV [1]. This paper presents a learning-based method that can ad-dress the diverse driving policies of OVs, thereby accurately predicting the OV’s trajectory and further assessing the un-certainty of prediction results (See Fig. 1). First, the one-step OV’s state prediction model is trained from the observed interaction between the EV and OV through DKL. In detail, a multi-scale Convolutional Neural Network (CNN) is employed to learn the interactions between the EV and OV, transforming the interaction patterns into latent representations of the OV’s driving policy in an unsupervised manner. The represented OV’s driving policy is then processed through a Gaussian Process (GP) model to predict the OV’s state at the next time step. Building upon this process, we propose novel heteroge-neous kernel-based metrics whereby DKL can more adeptly ascertain driving policy from complex interaction patterns. The proposed metrics are particularly devised to assess the similar-arXiv:2609.17147v1 [cs.RO] 15 Sep 2026 2 IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED OCTOBER, 2024 
+
+ities across different spaces, i.e., the latent space representing driving policies and the output space depicting the OV’s state prediction. Then, these metrics are optimized to render the latent space of DKL such that similar driving policies are clustered closely, while dissimilar ones are simultaneously spread apart. Such a strategic alignment improves the GP model’s ability to capture the correlation between the driving policy and the state prediction. As a result, the DKL model not only enhances prediction performance but also addresses calibrated uncertainty concerning both trained and untrained driving policies. Next, the one-step OV state prediction model is recursively executed to generate multi-step trajectory samples. These samples are utilized to construct the probabilistic OV trajectory distribution, predicting the state at each time step by its mean and variance. Subsequently, the predicted trajectory distribu-tion information is integrated into the EV’s Model Predictive Control (MPC) framework as dynamic obstacle constraints. This enables the EV to execute safe and agile overtaking maneuvers while considering the OV’s uncertain predicted state distributions. To the best of the authors’ knowledge, the proposed method for the first time attempts to apply kernel-based metrics learning to the realm of autonomous racing. Our method marks a notable advancement in OV trajectory prediction and surpasses the existing work in racing against OVs with diverse driving policies. The contributions of this paper are highlighted as follows:  
+
+> •
+
+A novel kernel-based metrics learning framework for DKL is proposed, aimed at representing the diverse driving policies of OVs that are aligned with respect to their similarity.  
+
+> •
+
+A probabilistic OV trajectory prediction model is de-veloped, improving prediction accuracy and uncertainty calibration based on the inferred OV’s driving policy.  
+
+> •
+
+An MPC-based planning for EV maneuver is seamlessly integrated with the trajectory prediction results, empow-ering the EV to safely overtake the OV.  
+
+> •
+
+Extensive real autonomous racing experiments with a 1/10th scale racecar demonstrate the effectiveness of the proposed algorithm, both quantitatively and qualitatively, compared to the existing algorithms. II. R ELATED WORK 
+
+A. Physics and planning-based trajectory predictions 
+
+Physics-based trajectory prediction methods exploit the kinematics and dynamics of OVs, tailored by statistical fil-tering techniques [4]. However, these methods often face challenges in long-term forecasting due to their limited un-derstanding of the interactions between the EV and OVs, implying a lack of consideration for the underlying driving policies of OVs. To account for the interactions, planning-based methods presume that the OVs logically decide their actions through optimization [2]. These methods consider OVs as rational entities seeking to maximize their internal objectives. However, the accuracy of predictions hinges on the coherence between the presumed objective and the true objective of the OV. Furthermore, planning-based methods often demand heavy computations [7], presenting a formidable burden in fast-paced racing circumstances. 
+
+B. Learning-based trajectory prediction 
+
+Recent trajectory prediction research has primarily shifted towards learning-based methods that account for the complex interactions involving human social behavior [5] and multiple vehicles in urban settings [6]. Nevertheless, their applicability degenerates when situated in autonomous racing, mostly due to deficient datasets in both quantity (limited number of racing scenes) and quality (lack of semantic cues) [8]. Moreover, the diversity in driving policies across different OVs further complicates learning the prediction model, requiring pertinent representations of driving policies. Such a complication is further exacerbated by imbalanced datasets (e.g., overfitting on the dominant driving policies in the training data), making it difficult to generalize the prediction model. In response, methods such as meta-learning and representation learning have been explored to address the generalization of the predic-tion model against diverse driving policies [9]. These methods employ distance metrics to capture complex data patterns and establish robust representations for similar/dissimilar patterns, improving prediction performance while reducing the risk of overfitting. While the choice of distance metrics, such as Euclidean, cosine, and kernel-based metrics, greatly impacts the representation model, determining the optimal metrics for measuring similarities remains an unresolved task to date [10]. Lastly, the learning-based prediction model can be susceptible to out-of-training data distribution, meaning it is prone to yield unreliable prediction results when the encountered OV’s driving policy deviates from the training data [11]. 
+
+C. Trajectory prediction with uncertainty 
+
+Extensive investigation has been carried out to address uncertainty in trajectory prediction [6], among which GP has gained substantial attention due to its quantitative measure of uncertainty. Taking these advantages, GP has proven its effectiveness in cut-in behavior prediction [12], and multi-step trajectory prediction of OV in autonomous racing [3]. Typical GP describes the unknown function using stationary kernels, assuming that the properties of the function are constant across all input values. However, this often results in poor uncertainty calibration for non-stationary stochastic processes that exhibit intricate data patterns in practice [13]. To handle the non-stationary aspect within GP, different techniques have been explored, such as input-dependent parametric kernels, Deep GP, and DKL [13]. In particular, DKL leverages the non-linear mapping capability of neural networks to transform complex non-stationary input space into the latent feature space that can be effectively processed with stationary kernels in GP. However, training these complex kernels remains a significant challenge, as highlighted by recent studies [14]. Addressing this issue, this paper introduces a kernel-based metrics learning framework for DKL. This framework presents heterogeneous kernels to fine-tune the alignment of latent features transformed by the neural network, thereby adequately embedding the non-stationary properties into DKL. LEE et al. : KERNEL-BASED METRICS LEARNING FOR UNCERTAIN OPPONENT VEHICLE TRAJECTORY PREDICTION IN AUTONOMOUS RACING 3
+
+III. P ROBLEM FORMULATION 
+
+A. Vehicle dynamics 
+
+The racing vehicles are modeled using a dynamic bicycle model [15], where the state is represented by the vector 
+
+X = [ px, p y , ψ z , v lon , v lat , w z ]T . This vector consists of the vehicle’s pose in Cartesian frame, [px, p y ]T , the heading angle, 
+
+ψz , the longitudinal and lateral velocities, [vlon , v lat ]T , and the yaw rate, wz . The input vector u = [ Fxx , δ ]T comprises the rear longitudinal tire force Fxx and the front steering wheel angle δ. To discretize the vehicle’s nonlinear dynamics, we apply the 4th order Runge-Kutta method with a sampling time step size Ts. The resulting discrete-time vehicle dynamics is compactly described as Xk+1 = f (Xk, u k), where the subscription k indicates the time index. To examine the racing vehicle’s motion, we interpret the vehicle’s pose as Frenet-Serret formulas with respect to the racing track’s centerline [15]. Let C : R4 7 → R4 denotes the invertible operator which projects the vehicle’s pose in Cartesian frame to the curvilinear frame. Accordingly, the pose in curvilinear frame is denoted as c = C(p) where p = [ px, p y , ψ z , v lon ]T and 
+
+c = [ s, e lat , e ψ , v lon ]T . Here, s is the distance progress along the track’s center line, elat is the lateral offset from the center line, and eψ is the angular deviation from the center line’s tangent. The track’s signed curvature at any distance 
+
+s ∈ [0 , τ ] is represented as η(s), where τ is the track length. To distinguish the state variables of EV and OV, we use superscripts in notations like Xev , c ev , X ov , and cov .
+
+B. EV trajectory planning problem for racing 
+
+The EV trajectory planning problem is formulated as Model Predictive Contouring Control (MPCC), which allows the EV to plan its trajectory over N steps ahead at time step k,defined as ˆXev k:k+N = { ˆXev k , . . . , ˆXev k+N }, with respect to the projected distance progress ¯st on the centerline [15]. Further, the constraints of MPCC related to dynamic obstacles are augmented to incorporate the predicted OV trajectory. Given the predicted trajectory of the OV over N steps ahead at time step k, i.e., { ˆXov k , . . . , ˆXov k+N }, the MPCC problem for the EV is formulated as follows: 
+
+min  
+
+> u,v
+> N−1
+
+X
+
+> t=0
+
+|| ec( ˆXev t , ¯st)|| 2 
+
+> qc
+
++ || ut|| 2
+
+> Ru
+
++ || ut − ut−1|| 2 
+
+> Rd
+
+− qs ¯vN (1a) 
+
+s.t. ˆXev  
+
+> 0
+
+= Xev k , ¯s0 = sev k , u −1 = uev k−1, (1b) 
+
+ˆXev t+1 = f ( ˆXev t , u t), t = 0 , ...., N − 1 (1c) 
+
+¯st+1 = ¯ st + Ts ¯vt, t = 0 , ..., N − 1 (1d) 
+
+ˆXev t ∈ Xtrack , u t ∈ U, t = 0 , ..., N (1e) 
+
+h( ˆXev t , ˆXov k+t) ≤ 0, t = 0 , ..., N (1f) where u = {u0, ..., u N −1}, v = {¯v0, . . . , ¯vN −1}. ¯vt repre-sents the progression rate, and ec measures the approximated projection errors between ˆXev t and the reference centerline at ¯st [15]. The objective cost (1a) conceives of maximizing the race progress while penalizing the centerline deviation according to weighting parameters, qc, q s > 0. To ensure a smooth control profile, cost minimizes the magnitude and rate of the input with the weights Ru and Rd ≻ 0, respectively. The dynamics of the EV is governed by Eqs. (1c) and (1d). In (1e), Xtrack = {X| − Wtrack /2 ≤ elat ≤ Wtrack /2} and U
+
+represent the constraints imposed by the track boundary and the control input limits, where Wtrack is the track width. The constraint in Eq. (1f) ensures collision avoidance, given that the predicted OV state forms a probability distribution, such as Gaussian distribution ˆXov k+t ∼ N (μ( ˆXov k+t), σ 2( ˆXov k+t)) . In constructing Eq. (1f), the EV’s safety margin is drawn as a collection of four circles, while an ellipse represents the OV’s margin. To accommodate the uncertainty encoded in the predicted state distribution ˆXov k+t, the size of the OV’s ellipse is dynamically adjusted in proportion to its variance, 
+
+σ2( ˆXov k+t). Detailed derivation for the ellipse size can be found in Section IV of [3], which is omitted here for brevity. Notably, the ellipsoidal safety margin is widely adopted due to its effectiveness in capturing Gaussian-distributed uncertainties in the predicted OV state and its computational efficiency in solving nonlinear MPC problems [16]. 
+
+C. GP and DKL for OV trajectory prediction 
+
+To predict the OV trajectory which is implicated in the patterns of both EV and OV states, we employ a GP Re-gression (GPR) model to be trained using the EV-OV in-teraction dataset. GPR is a non-parametric Bayesian regres-sion that embeds a GP, characterized by a mean function 
+
+m(·) and a covariance function κ(·, ·), commonly referred to as a kernel. Typically assuming a zero-mean GP prior for simplicity, the posterior distribution of GPR is given by 
+
+ˆf (x) ∼ N ( ¯ m(x), ¯σ(x)) where ¯m(x) and ¯σ(x) represent the posterior mean and covariance functions calculated from the training data, respectively. In this paper, we adopt the Mat ´ern kernel, κ(x, x ′), which has proven to be effective in the autonomous driving domain [3], [12]. Mat ´ern kernel, however, is a stationary kernel that may be insufficient to capture the complex patterns in the trajectories of different OVs with diverse driving policies. To address this, DKL applies a non-linear transformation to the input space and utilizes the same stationary kernels for the transformed space, namely feature space. Accordingly, the kernel in DKL can be reformulated as: 
+
+¯κ(x, x ′) = κ(Φ(x), Φ(x′)) 
+
+where Φ : Rn → Rn′
+
+denotes the transformation function designed as a neural network, mapping inputs to feature space. However, learning the optimal design of Φ in an unsupervised manner is challenging due to complex EV-OV interactions that yield diverse OV driving policies. IV. A LGORITHM DEVELOPMENT 
+
+A. Algorithm overview 
+
+In this section, we introduce the main algorithm to predict the trajectory distributions of OVs. First, the one-step OV state prediction model is developed using DKL, which is trained on the EV-OV interaction dataset. Then, we introduce a DKL training framework where novel kernel metrics are employed 4 IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED OCTOBER, 2024 
+
+> Fig. 2: The architecture of the proposed algorithm: (a) the training process of the one-step state prediction model, which utilizes the proposed kernel-based metrics learning for DKL; and (b) an autonomous racing algorithm for EV, which plans its maneuver based on the predicted trajectory distribution of OV.
+
+to address the diversity of OV driving policies. Based on the trained DKL, a sampling-based method is applied to the one-step prediction model to yield a multi-step predicted trajectory distribution. The overall training and deployment phases of the proposed OV trajectory prediction are outlined in Fig. 2. 
+
+B. One-step OV state prediction using DKL 
+
+To model the one-step state prediction of the OV, we employ DKL, whose input is the past trajectories of both EV and OV, signifying their interaction patterns over a high-dimensional space. The input for the DKL at time step k is formulated as a sequence zk−M :k = [ zT 
+
+> k−M
+
+, . . . , zT 
+
+> k
+
+]T ∈ R10 ×M , where M
+
+denotes the sequence length that records the past interactions, including the current states of EV and OV. Specifically, the vector zk includes the state information of both vehicles along with track geometry, defined as: 
+
+zk = [( sov k − sev k ), e ov lat,k , e ov ψ,k , v ov lon,k , e ev lat,k , e ev ψ,k , v ev lon,k , ˜ηov k ]T
+
+where ˜ηov k = [ η(sov k ), η (sov k + ζ), η (sov k + 2 ζ)] T ∈ R3 repre-sents the vector of track curvatures at look-ahead distances 
+
+sov k + iζ, i = 0, 1, 2 with some offset ζ > 0. Notably, the vector zk is crafted to capture the interaction between the EV and OV, specifically contextualized within the racing track geometry. This facilitates a more accurate description of interaction patterns relative to the track layout, rather than relying solely on the absolute global pose. The DKL transforms the input into the feature space, representing the OV’s latent driving policy as follows: 
+
+ˆϕov k := Φ(zk−M :k) (2) where Φ : R10 ×M → RL is a nonlinear mapping function that encodes the interaction history between EV and OV over the past M steps. By this definition, Φ is designed to map different EV-OV interaction patterns to OV driving policies. In this paper, we implement Φ as a neural network model trained on racing data against various OVs. Consequently, the resulting ˆϕov k exhibits “diverse driving policies” that arise from the different interaction patterns of the OVs. In pursuit of extracting an informative policy representation from the interaction data, we adopt a multi-scale encoder architecture as detailed in [10]. This architecture employs multi-filters with varying kernel sizes to capture both global and local interaction patterns, utilizing 1D causal convolution layers to preserve only the causal relationships in the data sequence. Subsequent to the multi-filtering, the final layers average the outputs of different kernel sizes, resulting in a comprehensive representation of the interaction patterns. Subsequently, the driving policy ˆϕov k inputs into GPR to predict the uncertain state propagation of the OV at the next time step, expressed by the following output vector: 
+
+yk = [ sov k+1 − sov k , e ov lat,k +1 − eov lat,k ,eov ψ,k +1 − eov ψ,k , v ov lon,k +1 − vov lon,k ]T
+
+This one-step state difference yk ∈ R4 is modeled as unknown stochastic processes g as follows: 
+
+yk = [ y(1)  
+
+> k
+
+, y (2)  
+
+> k
+
+, y (3)  
+
+> k
+
+, y (4)  
+
+> k
+
+]T = g(Φ(zk−M :k)) 
+
+Without loss of generality, we assume the individual output elements y(1) , y (2) , y (3) , and y(4) are independent of each other. Then, the GPR produces a probability distribution for each output element y(n) as follows: 
+
+y(n) = g(n)(Φ(zk−M :k)) 
+
+∼ N (μ(n)(Φ(zk−M :k)) , (σ(n)(Φ(zk−M :k))) 2)
+
+where μ(n) and (σ(n))2, n = 1 , . . . , 4, represent the posterior means and variances, respectively. It is noted that the obtained variances of the GPR capture the epistemic uncertainty, pri-marily emerging from the diversity of OVs’ driving policies, as well as aleatoric uncertainty stemming from measurement noise. 
+
+C. Kernel-based metrics learning for DKL 
+
+In this section, a novel training framework for DKL is introduced. The DKL is typically optimized in regard to the negative log marginal likelihood loss, Lmll . However, solely optimizing Lmll is prone to overfitting and often yields suboptimal performance during testing [14]. To address this challenge, we incorporate additional regularization to better align the latent driving policies, ˆϕov k , computed by the neural network transformation, Φ. Central to our approach is the strategic clustering of similar latent driving policies while distancing dissimilar ones, based on the similarities in the output space, i.e., OV’s state differences. Fig. 3 illustrates the impact of alignment in latent driving policies on the performance of GPR given the same stochastic unknown processes. In the left subfigure, the input and output arrangement is disorganized, leading to increased susceptibil-ity to overfitting and difficulties in training a GPR. Such a poor alignment eventually degrades the prediction model. In con-trast, the right subfigure demonstrates a strategically aligned arrangement of latent driving policies, mirroring similarities observed in the output space. This, in turn, ensures that the driving policy ϕov k is robustly represented, enabling the trained LEE et al. : KERNEL-BASED METRICS LEARNING FOR UNCERTAIN OPPONENT VEHICLE TRAJECTORY PREDICTION IN AUTONOMOUS RACING 5
+
+OV state propagation model, g, to accurately predict the output 
+
+yk from ϕov k , even when ϕov k is influenced by variations or uncertainties in the input zk−M :k. As a result, this alignment reduces the risk of overfitting and improves robustness by minimizing sensitivity to input variations, thereby enhancing overall prediction performance. 
+
+> Fig. 3: Impact of latent space alignment on DKL prediction model: (Left) Without latent space alignment, (Right) With latent space alignment achieved by clustering similar features and dispersing dissimilar ones.
+
+To align the latent driving policies, we introduce a distance-matching loss term denoted as Ldist to minimize the dissimi-larity between the distances in the pair of latent features and the distances in the pair of outputs. This loss for a mini-batch 
+
+D = { ˆϕov i , y i}i∈[1: D] can be written as: 
+
+Ldist = 1
+
+D
+
+> D
+
+X
+
+> i̸=j
+
+|| κΦ( ˆϕov i , ˆϕov j ) − κy (yi, y j )|| 2 (3) where D is the size of the mini-batch. κΦ and κy are Mat ´ern kernels, the same type of kernel used in GPR. The prediction model regularized by Eq. (3) enforces the data to be aligned in the relevant distance. On the other hand, the extent of alignment is strongly sub-ject to the hyperparameters of κΦ and κy , i.e., lengthscales lΦ
+
+and ly , respectively. These hyperparameters directly influence the representation of data, thereby affecting the alignment of latent features. For instance, a smaller lengthscale in the kernel increases its sensitivity to small differences between data, causing them to be treated as significantly dissimilar. Con-versely, a larger lengthscale reduces this sensitivity, allowing for a broader margin to identify similarities among distanced data. To find the best lengthscales for enhanced clustering    
+
+> Fig. 4: Alignment in latent space with varying kernel lengthscales: (Left)
+> ly< l Φ, (Right) ly> l Φ.
+
+of similar data and dispersion of dissimilar ones in latent space, we adjust the kernel sensitivity: decreasing it in the latent space, κΦ, to widen the distribution of dissimilar data, while increasing it in the output space, κy , for precise capture of data differences. This dual regularization is facilitated by introducing a sensitivity loss as follows: 
+
+Lsense = ln( ly
+
+lΦ
+
+) + max (0 , w 1(σsense ( ˆϕov ) − α)) (4) where w1 and α denote the predefined weight and the thresh-old, respectively. The second term in Eq. (4) prevents excessive divergence in the latent space, where the standard deviation of the latent features of the batch data, i.e., { ˆϕov i |i ∈ 1, . . . , D },is denoted as σsense ( ˆϕov ). Fig. 4 graphically visualizes the effectiveness of the proposed regularization by Eq. (4). Here, the left-hand side illustrates the preferred scenario in which the different latent driving policies are more widely dispersed across various data. Incorporating all the aforementioned loss terms, DKL is trained to optimize both the neural network and the GP’s hyperparameters by minimizing the following composite loss: 
+
+LDKL = Lmll + w2Ldist + w3Lsense (5) where w2 and w3 are scaling constants. In a nutshell, our distinct novelty lies in the inclusion of both Ldist and Lsense 
+
+in DKL. While Lmll addresses the nominal DKL model for prediction, Ldist is essential for appropriately aligning the latent driving policies and Lsense is for fine-tuning of kernel sensitivity. Without Lsense , kernel-based metrics for both output and latent space may exhibit reduced sensitivities, undermining the clustering efficacy intended by Ldist . It is to be noted that Ldist and Lsense are mutually complementing each other to achieve the latent feature alignment. Therefore, their interdependency obviates the need for an ablation study of each loss term individually. 
+
+D. Sampling-based multi-step OV trajectory prediction 
+
+The one-step OV state prediction model, trained by the proposed DKL framework, is used to predict the OV trajectory over the N step horizon. The basic idea of this multi-step prediction is consecutively executing one-step predictions over future time steps, considering not only the past interaction history but also future interaction. This requires the predicted EV trajectory, ˆXev k:k+N −1, which can be obtained from the open-loop solution to (1) for the EV motion planning at k − 1
+
+time step. Analytically computing the solution to the multi-step pre-diction model is intractable in general [3]. To address this, we utilize a sampling-based approach with Q samples to estimate the multi-step state propagation of the OV. Subse-quently, we calculate the statistics of these samples to derive the nominal trajectory prediction along with its variances. Specifically, for the ith sample, starting at time step k, we sample OV states at time step k + 1 as cov,i k+1 using one-step prediction. Given the predicted states of the EV and OV, we construct zik+1 along with the track information. This vector is used to update the input to the one-step prediction model at the next time step, zik−M +1: k+1 . We then continue to roll out the consecutive steps for multi-step prediction, repeating over N steps, resulting in the set of multi-step samples, 
+
+{cov,i k+t| i = 1 , . . . , Q, t = 1 , . . . , N }. Correspondingly, the predicted trajectory distribution at each future time step, k + t,6 IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED OCTOBER, 2024 
+
+is defined by its mean, cov k+t, and covariance, Σov k+t, calculated as follows: 
+
+cov k+t = 1
+
+Q ΣQi=1 cov,i k+t
+
+Σov k+t = 1
+
+Q − 1 ΣQi=1 (cov,i k+t − cov k+t)( cov,i k+t − cov k+t)T
+
+(6) Lastly, the prediction outcomes are utilized to define collision avoidance constraints, as formulated in Eq. (1f), ensuring safe and agile racing maneuvers of EV. The detailed procedure is described in Algorithm 1. 
+
+Algorithm 1 Multi-step trajectory prediction with DKL 
+
+Set : Prediction horizon length N and the number of samples 
+
+Q.
+
+Input : Current EV and OV states, cev k and cov k ; EV’s predicted states, ˆXev k:k+N −1; interaction history between EV and OV, zk−M :k. 
+
+> 1:
+
+cov,i k = cov k , zik−M :k = zk−M :k, ∀i = 1 , . . . , Q  
+
+> 2:
+
+for i = 1 , . . . , Q do  
+
+> 3:
+
+for t = 0 , . . . , N − 1 do  
+
+> 4:
+
+Compute ˆϕov,i k+t in Eq. (2) given zik−M +t:k+t 
+
+> 5:
+
+Sample yik+t ∼ N (μ( ˆϕov,i k+t), σ 2( ˆϕov,i k+t)) with GP  
+
+> 6:
+
+cov,i k+t+1 = cov,i k+t + yik+t 
+
+> 7:
+
+if t < N − 1 then  
+
+> 8:
+
+Update zik−M +t+1: k+t+1 given ˆXev k+t+1 , cov k+t+1  
+
+> 9:
+
+end for  
+
+> 10:
+
+end for  
+
+> 11:
+
+for t = 1 , . . . , N do  
+
+> 12:
+
+Compute cov k+t and Σov k+t by Eq. (6)  
+
+> 13:
+
+end for  
+
+> 14:
+
+Output : cov k+t, Σov k+t ∀t = 1 , .., N 
+
+V. H ARDWARE EXPERIMENTS 
+
+A. Experiment setup 
+
+The EV and OV are built on the 1/10th scale racecar shown in Fig. 5. To assure reliable real-time execution, the EV utilizes a Jetson AGX Orin, while the OV operates efficiently with a Jetson Orin NX. In terms of software configuration, both vehi-cles operate with ROS Noetic. They utilize the Cartographer [17] to perform local pose estimation within a shared map common to both the EV and OV. The state estimation involves a customized estimator based on GTSAM [18]. Instead of detecting and tracking the states of other vehicles using sensor measurements, the EV and OV exchange their own state estimates via ROS topics. Both the EV and OV solve optimal control problems using the FORCESPRO Nonlinear Interior-Point solver [19] through code generation. Additionally, DKL is implemented within the PyTorch framework, incorporating variational GPR from GPyTorch [20]. Control operations are executed at 20Hz, while multi-step trajectory predictions are performed at 10Hz. 
+
+B. Diverse driving policies of opponent vehicles 
+
+The baseline driving policy for both the EV and OV is established by the MPCC formulation in (1) with a planning 
+
+> Fig. 5: 1/10th scale racing experiments setup. L-shape racing track and the vehicles’ specifications.
+
+horizon of N = 12 and the sample time of Ts = 0 .1s. To facilitate overtaking maneuvers and ensure close interaction between vehicles, longitudinal speed constraints of 1.9m/s for the EV and 1.6m/s for the OV are imposed, respectively. OV driving policies are designed to interact with the EV in two different manners: through direct blocking maneuvers (i.e., aggressive driving policy) or by focusing solely on minimal lap time without blocking (i.e., passive driving policy). The implementation of the OV’s aggressive driving policy, as outlined in [3], actively obstructs the EV by minimizing the lateral distance between the OV and EV. This is achieved by including the blocking weights in the cost function (1a). Conversely, the passive driving policy is implemented by omitting the collision avoidance constraints in Eq. (1f) and not incorporating the blocking weights, thus disregarding any interactive maneuvers with the EV. To train the prediction model, two datasets, Daggr and 
+
+Dpass , are collected to capture the interaction with OVs under these two different driving policies: aggressive and passive, respectively. For our one-step OV state prediction model, we set the dimension of the latent driving policy to L = 11 and the observed interaction sequence length to M = 10 . The weights in Eqs. (4) and (5) are tuned as w1 = 2 , w2 = 1 ,and w3 = 0 .05 . The training, validation, and test datasets are constructed using samples that are randomly pooled from 
+
+Daggr and Dpass without any annotations. Finally, for the multi-step prediction model, we set the number of samples in generating the predicted trajectory distribution to Q = 25 .
+
+C. Racing results and discussion 
+
+Extensive experiments are carried out to assess the predic-tion performance of the proposed method and further validate its effectiveness in head-to-head racing, particularly in terms of overtaking maneuvers. For comparative analysis, we evaluate our multi-step trajectory prediction method versus five distinct baseline trajectory predictors. The first baseline, referred to as NMPC (a.k.a Ground Truth, GT), utilizes a planning-based nonlinear MPC predictor. This method employs the open-loop solution to the OV’s MPCC problem, serving as the ground truth prediction from the OV’s perspective. The second baseline, denoted as Constant Angular Velocity (CAV), is a physics-based prediction method that propagates the OV’s current state under constant linear and angular velocity assumptions. The third baseline, DNN, adapted from [6], is a deep learning-based method originally developed for urban en-vironments. The input is modified to include EV and OV state histories and track information, i.e., zk−M :k. Additionally, the output provides the mean and variances of the multi-step LEE et al. : KERNEL-BASED METRICS LEARNING FOR UNCERTAIN OPPONENT VEHICLE TRAJECTORY PREDICTION IN AUTONOMOUS RACING 7                                                                                                        
+
+> Fig. 6: Snapshots of EV racing maneuvers against OV with passive (a,c,e,g,i) and aggressive (b,d,f,h,j) driving policies. Black solid lines rep-resent the track boundaries. Acomprehensive video demonstration of the hardware experiments is accessible at https://github.com/HMCL-UNIST/ OpponentPredictionWithKMDKL.git. TABLE I: Racing result statistics against OVs with diverse driving policies. NMPC(GT) CAV DNN [6] GPR [3] DKL KM-DKL(proposed) Longitudinal MSE (mean ±std) 0.178 ±0.11 0.746 ±0.307 0.839 ±0.12 0.290 ±0.15 0.256 ±0.193 0.244 ±0.09
+> Lateral MSE (mean ±std) 0.217 ±0.14 0.584 ±0.35 0.377 ±0.15 0.219 ±0.14 0.261 ±0.17 0.139 ±0.08
+> Overtaking rate per race 0.85 0.55 0.65 0.35 0.65 0.95
+> Collision rate per race (minor) 0.30 0.45 0.85 0.40 0.50 0.30
+> Collision rate per race (major) 0.10 0.30 0.25 0.55 0.30 0.00
+> Average computation time (ms) 12 639 84 97 98
+
+predicted state propagation, which are matched with the output of Algorithm 1 for a fair comparison with other baselines. The fourth baseline, denoted as GPR, adapted from [3], is a learning-based method that employs GPR with a stationary Mat ´ern kernel to predict the multi-step trajectory together with its associated uncertainties. This method utilizes the current driving scene information only, i.e., zk. Consequently, it faces limitations in capturing the interaction patterns between the EV and OV that are influenced by OV’s driving policy. The fifth baseline denoted as DKL, represents an ablation version of our proposed method. It utilizes the same architecture as the one-step prediction model but omits the proposed kernel-based metrics learning. This is more or less nominal DKL that solely aims at maximizing the log marginal likelihood of observations, i.e., Lmll . Lastly, our proposed method, incor-porating a novel kernel-based metrics learning as in Eq. (5), is referred to as KM-DKL. Unlike the other methods that provide prediction results as trajectory distributions, CAV and NMPC (GT) predictors provide deterministic trajectories, lacking a probabilistic measure of prediction confidence. For the sake of fair comparison concerning uncertainty quantification ability, we set a fixed circular boundary to their prediction results. The experiment involves twenty races for each baseline method. The OV is placed in various starting positions, which remain the same for all predictors. Each race concludes once the EV completes three laps or if a major collision occurs that drastically changes the course of both cars, making it impossible to continue the race. For each race, we set the OV’s driving policy to either passive or aggressive, resulting in ten races for each policy. The prediction performance is then evaluated by the mean square errors of longitudinal and lateral poses between predicted and actual trajectories at the last prediction step when the EV is in the proximity to the OV, i.e., 0 ≤ sov − sev ≤ 2.Notably, given the result statistics detailed in Table. I and the prediction snapshots in Fig. 6, our method surpasses all the baselines in lateral prediction accuracy, with NMPC(GT) achieving the lowest longitudinal mean error. Even though NMPC(GT) anticipates the ground truth open-loop solution from OV’s perspective, it fails to capture the multi-step ahead closed-loop interactions between EV and OV in real racing. GPR’s prediction surpasses the physics-based CAV method, yet struggles to adapt to different OV driving policies, leading to a higher risk of collisions due to misapprehension of the driving policy, e.g., blocking as a non-blocking policy and vice versa. Similarly, DKL and DNN falls short of capturing the interactions between EV and OV, resulting in a higher collision rate compared to KM-DKL. In contrast, our KM-DKL, with its prediction ability against different OV driving policies, facilitates agile and safe overtaking maneuvers without major collisions. Furthermore, computational complexity is evaluated using the average computation time in milliseconds. Although our method requires more computation time compared to other baselines, it meets the 10Hz real-time requirement, making it feasible for high-speed autonomous racing. 
+
+D. Ablation study for unseen driving policy 
+
+To further investigate the virtue of our method, we ex-amine the uncertainty calibration performance of the pro-posed KM-DKL model compared to the nominal DKL, the ablated version of our model. This involves evaluating the prediction model against out-of-training-distribution scenarios, specifically when the encountered OV’s driving pattern is not included in the training dataset, i.e., unseen driving policies. To create the unseen driving policy, we introduce a cooperative driving policy designed to yield the pathway to the EV. We 8 IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED OCTOBER, 2024 
+
+realize this policy by modifying the aggressive driving policy’s cost with the reversed sign of the blocking weight. This encourages the OV to move away from the EV’s anticipated path during the race. We carry out the experiment in a similar fashion to the afore-mentioned racing setup but with the unseen OV driving policy. The prediction models, DKL and KM-DKL, are evaluated in terms of the Negative Log-Likelihood (NLL) concerning the predicted OV pose at the last prediction step. NLL quanti-fies the likelihood of the predicted state given the observed data, with lower values indicating more accurate uncertainty calibration to unseen data [21]. Fig. 7 indicates that KM-DKL achieves lower NLL values than the DKL predictor. This demonstrates our method’s improved uncertainty calibration, highlighting the advantages of incorporating kernel metrics learning into DKL. 
+
+Fig. 7: Histograms of the negative log-likelihood for prediction results in races against OVs exhibiting unseen driving policies. 
+
+VI. C ONCLUSIONS 
+
+This study has developed a learning-based OV trajectory prediction model and downstream EV planning framework for autonomous racing against OVs with diverse driving policies. The key idea is to introduce novel heterogeneous kernel met-rics and embed them into the learning pipeline of DKL. The prediction model is then learned in an unsupervised manner based on the EV-OV interaction dataset, adeptly differentiating the diverse driving policies. Compared to existing work, the proposed method enhances prediction accuracy and improves uncertainty calibration, which is instrumental for the safe and agile trajectory planning of EV. This has been validated on a 1/10th scale racecar platform, where the experimental results have shown better-calibrated prediction errors, lower collision rates, and higher overtaking success rates. Future work will focus on: i) online learning and adaptation of the algorithm to streaming data from EV-OV interactions; and ii) scaling the method to full-scale vehicles, addressing perception errors and multi-vehicle interactions in real-world racing. REFERENCES [1] Johannes Betz, Hongrui Zheng, Alexander Liniger, Ugo Rosolia, Phillip Karle, Madhur Behl, Venkat Krovi, and Rahul Mangharam. Autonomous vehicles on the edge: A survey on autonomous vehicle racing. IEEE Open Journal of Intelligent Transportation Systems , 3:458–488, 2022. [2] Mingyu Wang, Zijian Wang, John Talbot, J Christian Gerdes, and Mac Schwager. Game-theoretic planning for self-driving cars in multivehicle competitive scenarios. IEEE Transactions on Robotics , 37(4):1313– 1325, 2021. [3] Edward L Zhu, Finn Lukas Busch, Jake Johnson, and Francesco Borrelli. A gaussian process model for opponent prediction in autonomous racing. In 2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , pages 8186–8191. IEEE, 2023. [4] Mahir Gulzar, Yar Muhammad, and Naveed Muhammad. A survey on motion prediction of pedestrians and vehicles for autonomous driving. 
+
+IEEE Access , 9:137957–137969, 2021. [5] Alexandre Alahi, Kratarth Goel, Vignesh Ramanathan, Alexandre Ro-bicquet, Li Fei-Fei, and Silvio Savarese. Social lstm: Human trajectory prediction in crowded spaces. In Proceedings of the IEEE conference on computer vision and pattern recognition , pages 961–971, 2016. [6] Balakrishnan Varadarajan, Ahmed Hefny, Avikalp Srivastava, Khaled S Refaat, Nigamaa Nayakanti, Andre Cornman, Kan Chen, Bertrand Douillard, Chi Pang Lam, Dragomir Anguelov, et al. Multipath++: Efficient information fusion and trajectory aggregation for behavior pre-diction. In 2022 International Conference on Robotics and Automation (ICRA) , pages 7814–7821. IEEE, 2022. [7] Yuxiao Chen, Ugo Rosolia, Wyatt Ubellacker, Noel Csomay-Shanklin, and Aaron D Ames. Interactive multi-modal motion planning with branch model predictive control. IEEE Robotics and Automation Letters ,7(2):5365–5372, 2022. [8] Lan Feng, Mohammadhossein Bahari, Kaouther Messaoud Ben Amor, ´Eloi Zablocki, Matthieu Cord, and Alexandre Alahi. Unitraj: A unified framework for scalable vehicle trajectory prediction. arXiv preprint arXiv:2403.15098 , 2024. [9] Junwei Liang, Lu Jiang, and Alexander Hauptmann. Simaug: Learning robust representations from simulation for trajectory prediction. In 
+
+Computer Vision–ECCV 2020: 16th European Conference, Glasgow, UK, August 23–28, 2020, Proceedings, Part XIII 16 , pages 275–292. Springer, 2020. [10] Xiaochen Zheng, Xingyu Chen, Manuel Sch¨ urch, Amina Mollaysa, Ahmed Allam, and Michael Krauthammer. Simts: Rethinking contrastive representation learning for time series forecasting. arXiv preprint arXiv:2303.18205 , 2023. [11] Thomas Gilles, Stefano Sabatini, Dzmitry Tsishkou, Bogdan Stanci-ulescu, and Fabien Moutarde. Uncertainty estimation for cross-dataset performance in trajectory prediction. In ICRA 2022 Fresh Perspectives on the Future of Autonomous Driving Workshop , 2022. [12] Youngmin Yoon, Changhee Kim, Jongmin Lee, and Kyongsu Yi. Interaction-aware probabilistic trajectory prediction of cut-in vehicles using gaussian process for proactive control of autonomous vehicles. 
+
+IEEE Access , 9:63440–63455, 2021. [13] Andrew Gordon Wilson, Zhiting Hu, Ruslan Salakhutdinov, and Eric P Xing. Deep kernel learning. In Artificial intelligence and statistics ,pages 370–378. PMLR, 2016. [14] Sebastian W Ober, Carl E Rasmussen, and Mark van der Wilk. The promises and pitfalls of deep kernel learning. In Uncertainty in Artificial Intelligence , pages 1206–1216. PMLR, 2021. [15] Alexander Liniger, Alexander Domahidi, and Manfred Morari. Optimization-based autonomous racing of 1: 43 scale rc cars. Optimal Control Applications and Methods , 36(5):628–647, 2015. [16] Rudolf Reiter, Armin Nurkanovi´ c, Jonathan Frey, and Moritz Diehl. Frenet-cartesian model representations for automotive obstacle avoid-ance within nonlinear mpc. European Journal of Control , 74:100847, 2023. [17] Wolfgang Hess, Damon Kohler, Holger Rapp, and Daniel Andor. Real-time loop closure in 2d lidar slam. In 2016 IEEE international conference on robotics and automation (ICRA) , pages 1271–1278. IEEE, 2016. [18] Frank Dellaert and GTSAM Contributors. borglab/gtsam, May 2022. [19] A. Zanelli, A. Domahidi, J. Jerez, and M. Morari. Forces nlp: an efficient implementation of interior-point... methods for multistage nonlinear nonconvex programs. International Journal of Control , pages 1–17, 2017. [20] Jacob Gardner, Geoff Pleiss, Kilian Q Weinberger, David Bindel, and Andrew G Wilson. Gpytorch: Blackbox matrix-matrix gaussian process inference with gpu acceleration. Advances in neural information processing systems , 31, 2018. [21] Alonso Marco, Elias Morley, and Claire J Tomlin. Out of distribution detection via domain-informed gaussian process state space models. In 
+
+2023 62nd IEEE Conference on Decision and Control (CDC) , pages 5487–5493. IEEE, 2023.

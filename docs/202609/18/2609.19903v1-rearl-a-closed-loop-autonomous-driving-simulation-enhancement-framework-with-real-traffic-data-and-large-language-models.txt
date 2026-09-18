@@ -1,0 +1,582 @@
+Title: REARL: A Closed-loop Autonomous Driving Simulation Enhancement Framework with Real Traffic Data and Large Language Models
+
+URL Source: https://arxiv.org/pdf/2609.19903v1
+
+Published Time: Fri, 18 Sep 2026 00:52:17 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+> JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 1
+
+# REARL: A Closed-loop Autonomous Driving Simulation Enhancement Framework with Real Traffic Data and Large Language Models 
+
+Xiaojun Bi, Jun Jiang, Yiwen Sun ∗, Quanyi Ou, Ke Cheng, Mingjie Bi and Yexin Li 
+
+Abstract —Accurate simulation is crucial for autonomous driv-ing development. Yet capturing real-world traffic complexity remains challenging. The existing simulators, which rely on predefined rules or static data playback, struggle to handle dynamic traffic scenarios. To address this, CRITICAL proposes using real traffic data and large language model(LLM) to adjust the initial simulation environment configuration. Based on our experiments, while this improves realism, the data distribution gradually diverges from real-world traffic scenarios as the simu-lation evolves. We propose a novel framework, REARL, a closed-loop autonomous driving simulation enhancement framework with real traffic data and large language models, whose main advantage lies in integrating real traffic data with LLM. First, real-world traffic data employed for enriching the simulation environment is partitioned into multiple categories via a clus-tering method. The cluster center of each category is defined as a representative scenario, serving as the target simulation object. These representative scenarios constitute typical real-world traffic patterns, which the LLM uses as references to learn the characteristics of real-world traffic distributions. Second, a timed detection mechanism with a sliding window continuously monitors the discrepancies between the current simulation and the most similar representative scenario, specifically in terms of vehicle speed distribution and the mean spacing between pairs of vehicles. Third, if any evaluation metric exceeds apredefined threshold, the LLM intervenes to adjust the vehicle’s decision-making; otherwise, the existing control strategy remains unchanged. Finally, based on the current vehicle’s driving state, the LLM selects the most relevant vehicle from a real-world traffic data snapshot that best matches the current driving scenario. It then modulates the simulated vehicle’s behavior with reference to the actions of the matched real vehicle, thereby promoting more realistic behavior adjustment under the given 
+
+This work was supported by the National Natural Science Foundation of China (Grant No. 62503015). (Corresponding author: Yiwen Sun.) Xiaojun Bi is with the Key Laboratory of Ethnic Language Intelligent Analysis and Security Governance of MOE, Minzu University of China, Beijing, 100081, China(e-mail: bixiaojun@hrbeu.edu.cn). Yiwen Sun is with the Institute for Artificial Intelligence, Peking Uni-versity, Beijing, 100871, China, and also with the State Key Laboratory of General Artificial Intelligence, BIGAI, Beijing, 100080, China (e-mail: sunyiwen@pku.edu.cn). Jun Jiang is with the Key Laboratory of Ethnic Language Intelligent Analysis and Security Governance of MOE, Minzu University of China, Beijing, 100081, China(e-mail: 23302184@muc.edu.cn). Quanyi Ou is with the Key Laboratory of Ethnic Language Intelligent Analysis and Security Governance of MOE, Minzu University of China, Beijing, 100081, China(e-mail: ouquanyi@muc.edu.cn). Ke Cheng is with the School of Computer Science and Engineering, Bei-hang University, Beijing, 100191, China (e-mail: ckpassenger@buaa.edu.cn). Mingjie Bi is with State Key Laboratory of General Artificial Intelligence, BIGAI, Beijing, 100080, China (e-mails: bimingjie@bigai.ai). Yexin Li is with State Key Laboratory of General Artificial Intelligence, BIGAI, Beijing, 100080, China (e-mails: liyexin@bigai.ai). 
+
+simulation setting. Evaluations in the controlled HighD highway setting show that REARL achieves competitive and metric-dependent performance across the evaluated metrics. Compared to the CRITICAL baseline and a PPO-based learning baseline, it reduces the Hellinger distance for speed distributions to 0.3067, the Mean Absolute Percentage Error (MAPE) for mean spacing between pairs of vehicles to 0.8371, while achieving a higher time headway (THW) of 22.8575, reflecting more conservative car-following behavior, and a moderate lane change rate of 0.0708, suggesting a moderate level of lateral maneuvering under the tested setting. 
+
+Index Terms —Traffic simulation, Large Language Models, Autonomous driving. 
+
+I. I NTRODUCTION 
+
+# AUTONOMOUS driving technology is essential for ad-vancing ITS, enabling efficient and adaptive traffic sys-tems. Simulation environments, as the core platform for testing and validating autonomous driving systems, are becoming increasingly important [1], [2]. As a result, enhancing sim-ulation environments is critical for developing autonomous driving. It provides realistic and dynamic testing of algorithms in a controlled virtual setting. Figure 1 illustrates the issues faced by autonomous driving simulation environments and their ideal state. Figure 1(a) shows the initial simulation state, where the distribution of simulated vehicles deviates slightly from real traffic data. Figure 1(b) highlights the limitations of methods without simulation environment enhancement: as the simulation environment evolves, it gradually deviates from real data, increasing distortion. Figure 1(c) illustrates the idealized simulation state, where the vehicle speed distribution and the mean spacing between pairs of vehicles in the simulation gradually approach the real-world distribution. Traditional autonomous driving simulation methods mainly rely on predefined driver models and traffic behavior rules. These include heuristic models or static data based on log playback [3]. These methods work well in simple scenario testing. However, their performance is limited in dynamic environments. They struggle to simulate complex interactions accurately [4]. In high-density traffic scenarios, driver deci-sions are influenced by factors such as traffic density, mean spacing between pairs of vehicles, and individual driving habits. These factors exhibit significant time-varying and non-linear characteristics. Traditional models are too simplified. They fail to capture these dynamic features. As a result, simulation results deviate from real-world scenarios. 0000–0000/00$00.00 © 2021 IEEE arXiv:2609.19903v1 [cs.LG] 17 Sep 2026 JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 2Real traffic data distribution Traffic data distribution in simulation environment Adjusted traffic data distribution of the simulation environment         
+
+> Real vehicles Simulated Vehicles (c) (b) (a)
+> Fig. 1. In some cases, the simulation environment will gradually deviate from the real data as the process progresses. The proposed paradigm monitors discrepancies between the simulated vehicle distribution and real traffic data and adjusts the simulation environment during rollout to reduce these discrepancies, as illustrated in Fig. 1(a).
+
+To address the limitations of traditional methods, data-driven simulation environments have gained increasing atten-tion. These methods integrate and analyze large-scale traffic data. This significantly enhances the dynamic nature and precision of simulations. However, data-driven methods still face challenges such as data bias, overfitting, and poor in-terpretability. These issues limit their application in complex interaction scenarios [5]–[9]. Moreover, the randomness and noise characteristics of traffic data make it difficult for purely data-driven models to make reasonable decisions in critical scenarios, especially when responding to emergencies [10]– [12]. Recent advances in LLMs have opened new possibilities for autonomous driving simulation. For example, [13] propose CRITICAL, using LLMs to optimize the initial simulation configuration, enhancing system intelligence and adaptability. Simulation enhancement technologies, integrating large-scale real data, improve realism by capturing dynamic traffic flow and complex driver behavior. The advantages of LLMs in reasoning and decision-making enable them to simulate traffic behavior based on real-world data [10], [14]. However, the application of LLMs in dynamic driving scenarios still faces challenges. These include dependence on historical data and prior knowledge, as well as poor performance in highly unpre-dictable situations [4], [14]. The CRITICAL only optimizes the initial simulation configuration, without monitoring and correcting intermediate processes. As a result, it falls short in simulating traffic flow statistical characteristics and flexibly responding to complex interactions. Current autonomous driving simulation research has the following major shortcomings: First, insufficient simulation of traffic flow statistical characteristics. Existing methods fail to capture the statistical features of dynamic traffic flow and complex interaction scenarios, leading to deviations between simulation and real-world environments [14]–[17]. Second, the lack of closed-loop feedback mechanisms. Existing rule-based or data-driven simulation systems struggle to simulate dynamic driving behavior in high-density traffic or complex interaction scenarios. Most simulation systems cannot adjust simulation states during rollout, reducing the realism and adaptability of the simulation. These shortcomings highlight the need for more realistic and flexible autonomous driving simulation environments. This remains a key direction for current research [18], [19]. Existing traffic simulators lack mechanisms to dynamically align simulated vehicle behaviors with evolving real-world traffic patterns; this work addresses how to achieve such alignment through an LLM-augmented online calibration framework. To address the above issues, we present an online calibra-tion framework designed to improve the alignment between the simulated environment and real-world traffic data during rollout. To counteract the degradation of environmental realism during simulation, we introduce a timed discrepancy detection mechanism and leverage an LLM to inform and adjust vehicle decision-making. Experiments on selected HighD highway scenarios demonstrate the effectiveness of our approach in preserving simulation validity, as shown in Section IV-B. The contributions of this paper are as follows:  
+
+> •
+
+We formulate REARL as a closed-loop simulation cal-ibration framework for autonomous driving simulation, which monitors distributional discrepancies during rollout and adjusts the simulation environment to improve align-ment with real traffic statistics under the tested setting.  
+
+> •
+
+This approach integrates two main components: the timed detection of traffic flow changes and representative scenarios-guided LLM decision-making for background vehicles. Traffic data undergoes clustering to extract representative scenarios based on cluster centers. Sub-sequently, these scenarios are utilized to support the decision-making and simulation processes in LLMs. The timed detection mechanism monitors vehicle speed dis-tribution and mean spacing between pairs of vehicles. It triggers LLM intervention when thresholds are exceeded to support discrepancy-aware adjustment during simula-tion rollout.  
+
+> •
+
+Our experiments were conducted on the HighD dataset [20] and the highway-env simulation environment [21]. Compared to the CRITICAL method, our approach re-duces the Hellinger distance for speed distributions to 0.3067 and the MAPE for mean spacing between pairs of vehicles to 0.8371. The validity and effectiveness of the proposed REARL framework rely on four key assumptions. First, we assume that representative scenarios, derived from clustering real-world traffic data, capture essential patterns of dynamic traffic flow and provide realistic driving-context references. Second, we posit that monitoring only two macroscopic indicators—— vehicle speed distribution and mean spacing between back-ground vehicle pairs——provides a tractable proxy for moni-toring simulation fidelity, as both are highly sensitive to traffic flow consistency. Third, we assume that a Large Language Model (LLM), when guided by scenario-informed prompts, can plausibly imitate driver behaviors from static observa-tional snapshots under predefined efficiency and traffic-rule constraints. Fourth, we assume that LLM-based interventions can reduce accumulated distributional deviations during sim-ulation rollout under the tested setting, so that micro-level adjustments can contribute to macro-level realism. Together, JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 3
+
+these assumptions underpin REARL’s closed-loop, adaptive enhancement mechanism. The framework continuously optimizes simulation states through a timed discrepancy detection and adjustment mech-anism. This aims to improve simulation realism in the tested dynamic traffic environments, providing a reliable platform for testing and validating autonomous driving systems. The structure of the following chapters is as follows: Section 2 presents related work on autonomous driving simulation methods and their limitations. Section 3 provides a detailed description of REARL method. Section 4 validates REARL from different perspectives. Section 5 concludes the paper and discusses future directions. II. R ELATED WORKS 
+
+The rapid development of autonomous driving technology has raised higher demands for high-fidelity simulation envi-ronments. These are necessary to enhance the objectivity and credibility of the testing. Existing research mainly focuses on building realistic driving simulators. These can be categorized into three types: traditional simulation methods, data-driven methods, and the application of LLMs in autonomous driving. While these methods have advanced simulation technology, they still have significant limitations. These limitations are especially evident in statistical realism, dynamic adaptability, and modeling of complex scenarios. 
+
+A. Traditional simulation methods 
+
+Traditional simulation methods rely on predefined rules and heuristic models to simulate traffic behavior. Representative tools include SUMO [22], VISSIM [23], AIMSUN [24], and Highway-env [21]. These methods typically use physics-based models, such as car-following models [25], [26] and lane-changing models [27], [28]. They have been studied for decades in the field of traffic engineering. However, these methods have limitations. Their parameterization and man-ually coded rules prevent them from capturing the dynamic characteristics and nonlinear interactions of real-world traffic. In high-density traffic or complex driving scenarios, they struggle to simulate time-dependent behavior. This results in significant differences between simulated and real driving environments [29]. Furthermore, they do not provide the required precision for modeling safety-critical scenarios, such as collisions or dangerous situations. This limits the credibility and realism in autonomous driving testing. 
+
+B. Data-driven simulation methods 
+
+To overcome the limitations of traditional methods, data-driven approaches use large-scale real-world traffic data. They aim to improve simulation realism. Relevant techniques in-clude direct sampling and clustering of traffic primitives [30]. They also include probabilistic modeling using Bayesian networks [31]. scenario enhancement with deep generative models is another technique [32]. These methods have made progress in dynamic traffic representation. Neural networks [33]–[35] are commonly used to model specific scenarios or vehicle behaviors. For example, Mo et al. [36] proposed a data-driven framework that combines deep learning models with traffic flow simulation to improve prediction accuracy in complex environments. Similarly, Liu et al. [37] introduced a learning-based stochastic driving model for autonomous vehicle testing, using a long short-term memory (LSTM) network to generate human-like, interactive vehicle behaviors. Furthermore, Liu et al. [38] developed a data-driven sim-ulation system (DDSS) that uses a Sim-Hybrid Retraining Constrained LSTM (SHRC-LSTM) model for traffic flow prediction, achieving higher precision than traditional methods like VISSIM in assessing efficiency, safety, and emissions. These networks model specific scenarios or vehicle behavior. However, data-driven methods face challenges. They include data bias, overfitting, and poor interpretability. Models that rely purely on data are prone to noise interference. This occurs when modeling long-tail safety-critical events, which can hinder the precise representation of rare yet high-impact traffic situations. It makes precise decision support difficult. Existing data-driven methods generate only short-term simu-lations. For example, a few seconds (e.g., D2Sim [39]). This limits their applicability in complex interaction scenarios. It also limits their ability to meet the full journey training needs of autonomous driving. 
+
+C. Application of LLMs in Enhancing Autonomous Driving Simulation Environments 
+
+In recent years, large language models (LLMs) have been incorporated into autonomous driving due to their advanced reasoning and contextual understanding capabilities [40], [41]. Beyond autonomous driving, LLMs have also shown potential in wireless communication tasks, such as massive MIMO CSI feedback and large-small model collaboration for air-interface optimization [42], [43]. For instance, LinguaSim utilizes natu-ral language instructions to generate realistic multi-vehicle test scenarios, thus enhancing the diversity of scenario libraries [44]. Additionally, multi-agent LLM frameworks have been applied in design space exploration to enhance simulation efficiency [45]. Comprehensive reviews emphasize the grow-ing role of LLMs in autonomous driving systems, including reasoning, behavior modeling, and multi-task coordination, providing a solid theoretical and experimental foundation for integrating intelligent reasoning into simulations [46]– [48]. [13] proposed the use of LLMs to optimize simulation configurations by generating critical scenarios such as edge cases and boundary conditions. This process enhances the diversity of the training data. However, it only modifies the initial state of the simulation environment, ensuring that the starting conditions align with real traffic data. In the meantime, background vehicles in the simulation are controlled using a rule-based approach, with the parameters of the rule-based model adjusted based on statistical analysis of real datasets. However, as the simulation progresses, particularly in the later stages, the interactions between background and target vehicles may lead to deviations, resulting in uncontrolled scenarios, and the simulation may no longer remain consistent with real traffic data. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 4
+
+III. M ETHODOLOGY 
+
+A. Overview 
+
+In this study, we propose REARL, a closed-loop calibra-tion framework designed to reduce distributional deviations in autonomous driving simulations by integrating real-world traffic data with LLM-guided intervention. REARL aims to improve the realism and adaptability of autonomous driving environments, addressing the limitations of traditional simula-tion methods. As shown in Fig. 2, the framework consists of three inter-connected modules: Real Data Preprocessing and Clustering, Speed Distribution and mean spacing between pairs of vehicles Discrepancy Detection, and representative scenarios-guided LLM Decision-Making for Vehicle Behavior Adjustment. Real Data Preprocessing and Clustering: This module pro-cesses high-frequency vehicle trajectory data collected from real-world traffic scenarios. The data is clustered into repre-sentative traffic scenarios, capturing key patterns in vehicle movement and behavior. These clustered data sets serve as a foundation for the subsequent modules by providing represen-tative real-traffic references for simulation adjustment. Speed Distribution and mean spacing between pairs of vehicles Discrepancy Detection: Building on the preprocessed and clustered data, this module continuously monitors the simulation’s alignment with real traffic data. It focuses on detecting discrepancies in vehicle speed and spacing, which are critical indicators of realistic traffic flow. When significant deviations from real-world traffic statistics are identified, the system triggers interventions to adjust the simulation and improve its consistency with real traffic dynamics. Represen-tative Scenarios-Guided LLM Decision-Making for Vehicle Behavior Adjustment: Upon detecting discrepancies, the LLM module intervenes by adjusting the vehicle behavior within the simulation. It uses insights derived from the clustered real-world data to generate adjustment decisions during simulation rollout, with the aim of improving alignment between simu-lated and observed traffic patterns. This dynamic adjustment process allows REARL to improve simulation realism during rollout by adapting to observed traffic-flow discrepancies, while its effectiveness remains bounded by the evaluated scenarios and metrics. More details about the Real Data Preprocessing and Clus-tering, Speed Distribution and mean spacing between pairs of vehicles Discrepancy Detection, and Representative Scenarios-Guided LLM Decision-Making for Vehicle Behavior Adjust-ment modules will be elaborated in the following sections. 
+
+B. Real data preprocessing and clustering 
+
+In this study, we perform cluster analysis on vehicle tra-jectories based on the HighD dataset. The HIGH D dataset contains high-frequency vehicle trajectory data, sampled at 25 frames per second [20]. To ensure the data is suitable for simulation environment analysis, we align the real data time scale with the simulation environment and normalize the speed values using min-max normalization to the range [5, 32]. Each simulation cycle has a duration of Ts = 60 seconds, with decisions made once per second. Therefore, the real traffic data is trimmed to create 60-second traffic scenarios si for the simulation environment, retaining only the snapshot data for each second. A total of 741 traffic scenarios were obtained. The data trimming process meets the following constraints: For any time scale t ∈ [0 , T s], the number of vehicles in the scenario Nv (t) ≥ 10 . This excludes noisy scenarios. Therefore, the trimmed dataset S′ ⊆ D satisfies Eq. 1. Since the number of vehicles recorded per frame in the real data varies, we select the 10 vehicles that have been recorded for the longest duration in each frame as the representative snapshot for that second. 
+
+S′ = {si ∈ D | ∀ t ∈ [0 , T s], N v (t) ≥ 10 } (1) Fig. 3 illustrates the data clustering process. We first extract the trajectories D from the HighD dataset. To ensure the reliability of the clustering results, we filter out trajectories with length L(Pi) < 100 time steps. As shown in Eq. 2, the final trajectory set is denoted as P = P1, P 2, ..., P n, where Pi
+
+represents the i-th vehicle trajectory and n is the total number of trajectories. Trajectory clustering is then performed using the center-based kicluster algorithm [49] to obtain trajectory labels Q. The scenario representation V is calculated, where the representation of each scenario is a vector formed by the proportions of each type of trajectory in that scenario. Subsequently, k-means clustering is applied to obtain the scenario centers M . This figure visually presents the data flow and the core logic of the method. 
+
+P = {Pi ∈ P ′ | L(Pi) ≥ 100 } (2) Here, L(Pi) represents the number of time steps in trajectory 
+
+Pi. Each trajectory Pi has a feature vector F (Pi(t)) =(vi(t), x i(t), d i(t)) at each time step t. These represent speed, position, and spacing, respectively. To quantify the similarity between trajectories, we use the approximating Fr´ echet dis-tance as a metric [50]. Based on kicluster algorithm trajectory clustering results Q,we further perform scenario clustering, grouping the scenarios into 15 categories. For each scenario si, we use vehicle ID labels to calculate vehicle type ratios. This generates a feature vector vk ∈ R3 with a length of 3. We apply k-means clustering to the scenario feature set V = {v1, v 2, ..., v k}.The goal is to minimize the within-cluster squared distance, as shown in Eq. 3. 
+
+J =
+
+> K
+
+X
+
+> k=1 15
+
+X
+
+> j=1
+
+rkj ∥vk − vuj ∥2 (3) Here, rkj = 1 if vk belongs to cluster j, otherwise rkj = 0 .
+
+vuj is the central scenario of cluster j. The resulting scenario cluster centers M = {su1 , s u2 , ..., s u15 } represent representa-tive traffic scenarios. 
+
+C. A speed distribution and mean spacing between pairs of vehicles discrepancy detection framework 
+
+To support more consistent simulated interactions when LLM decision-making is involved, we introduce a discrepancy detection mechanism based on speed distribution and mean JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 5tn-t  tn
+
+Scenario 
+
+Description 
+
+Window 
+
+Information 
+
+Trajectory 
+
+cluster center 
+
+Scene cluster 
+
+center 
+
+LLM Decision 
+
+Making 
+
+> tn+1
+
+Non-interfering frame 
+
+/distribution matching 
+
+Rule Control 
+
+> Traffic data distribution in simulation environment
+
+# ...  Simulation environment 
+
+DISCREPANCY DETECTION 
+
+> Real traffic data distribution
+> Is the discrepancy between the
+> speed distribution or vehicle
+> spacing too large?
+
+Real data preprocessing 
+
+and clustering 
+
+Real data 
+
+Fig. 2. The REARL framework consists of three main modules: data preprocessing, a timed detection framework and LLM decision-making. The timed detection framework continuously monitors the deviation between the simulation environment and real data. If a large deviation is detected, the LLM decision module is activated. It provides adjustment suggestions for vehicle control strategies to improve consistency between the simulated traffic state and the real-traffic reference. Trajectory Extraction 
+
+Tracks clustering 
+
+> Scenarios Extraction
+> Trajectory Label Extraction
+
+Scenarios clustering 
+
+> …
+> Available data
+> Noisy data
+
+Scenario 1  Scenario 2 
+
+# … Scenario m 
+
+Track category 1  Track category  2
+
+Track category  n
+
+# …
+
+Track category  3
+
+> Cluster Center
+
+V1
+
+V2
+
+Vn
+
+> …
+> S1
+
+Scenarios  category 1 
+
+> Cluster Center
+> S2
+
+Scenarios  category  2
+
+> Sn
+
+Scenarios  category  n
+
+> …
+
+Fig. 3. Clustering method. Track category n represents each cluster after clustering. For example, in track category 1, the red track represents the cluster center. Vn is a characterization vector for each scenario, indicating the proportion of each track type within the scenario. Scenario category n represents the result of scenario clustering. For example, in Scenario category 1, the gray scenario S1 represents the cluster center. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 6
+
+spacing between vehicle pairs. This mechanism determines whether LLM decision-making intervention is required. First, we identify the most similar representative scenario by aver-aging the frame-wise MAPE of mean spacing over a prefix window, where the MAPE at each frame compares the mean spacing of all background vehicle pairs in the simulation with that in each candidate scenario. The scenario with the smallest MAPE is selected as the reference. Using this refer-ence, we compute the Hellinger distance between the speed distributions over the past 5 seconds in the simulation and real traffic data. We also compute the MAPE of mean spacing in the current frame. When significant deviations are detected between the simulation’s statistics and real data, the timed detection mechanism triggers LLM intervention. This provides an opportunity to adjust the vehicle control strategies in the simulation environment. The process is shown in Fig. 4. Specifically, the speed distribution and mean spacing be-tween pairs of vehicles discrepancy detection mechanism makes judgments based on the following formulas. The Hellinger distance is used to measure the similarity between the vehicle speed distribution in the simulation environment and the real data speed distribution. The collected vehicle speed data are binned and statistically analyzed according to the intervals [ 5.0, 8.375, 11.75, 15.125, 18.5, 21.875, 25.25, 28.625, 32.0 ]. Compared to KL divergence, the Hellinger distance has better symmetry and stability in its calculation, making it more precise in reflecting the similarity between real data and simulation data [14]. Its formula is shown in Eq. 4. 
+
+H(P, Q ) = 1
+
+√2
+
+> n
+
+X
+
+> i=1
+
+p Pi − pQi
+
+2
+
+!1/2
+
+(4) Here, Pi and Qi represent the speed distributions in the simulation environment and real data, respectively. The MAPE is used to assess how closely the mean spacing between pairs of vehicles in the simulation environment matches real traffic data. While RMSE gives more weight to larger errors and MAE treats all errors equally, MAPE provides a clearer and more balanced indication of model performance. [51] Unlike RMSE and MAE, MAPE is scale-independent and calculates the average absolute percentage difference, making it particularly suitable for comparing simulations to real traffic data. This is crucial in our case, as each scenario and frame in both simulation and real traffic data may have different scales. By using MAPE, we aim to fairly quantify the relative realism of the simulation, measuring how closely it approximates real-world traffic data across varying scenarios and frames. The formula is shown in Eq. 5. MAPE = 1
+
+n
+
+> n
+
+X
+
+> i=1
+
+yi − ˆyi
+
+yi
+
+(5) Here, ˆyi represents the real mean spacing between pairs of vehicles, and yi is the mean spacing between pairs of vehicles in the simulation environment. When the Hellinger distance or MAPE values exceed the set threshold, the timed detection mechanism notifies the LLM to make adjustments. This intervention is intended to improve the alignment be-Decision Frame t  
+
+> Dt-5 t-5
+> Dt-5 t-5 t-4
+> Dt-5 t
+> ....
+> Dt-5
+> Dt-5
+> Dt-5
+> ....
+> t-5
+> t-4
+> t
+> Traffic data distribution in
+> simulation environment Real traffic data distribution
+> Simulation Environment
+> LLM Decision
+> DISCREPANCY DETECTION
+> Is the discrepancy between the
+> speed distribution or vehicle
+> spacing too large?
+> representative scenario 1
+> representative scenario 2
+> representative scenario n
+> ....
+> Choose the most similar
+> representative scene
+
+Fig. 4. Speed distribution and mean spacing discrepancy detection framework. At each detection point, we select a reference scenario. It is the representative scenario with the smallest average frame-wise MAPE of mean spacing over a prefix window. This MAPE is computed between the mean spacing of all background vehicle pairs in the simulation and that in each candidate scenario. Using this reference, we evaluate two discrepancies. One is the Hellinger distance of speed distributions over the past 5 seconds. The other is the MAPE of current-frame mean spacing. If either exceeds a threshold, LLM intervention is triggered. The LLM then adjusts vehicle control strategies in the simulation. 
+
+tween simulated vehicle behavior, traffic-flow statistics, and the corresponding real-data reference. 
+
+D. Representative scenarios-guided LLM decision-making for background vehicles 
+
+To enhance the simulation environment, we propose amethod that leverages LLMs and representative scenarios for decision-making of background vehicles. This method is designed to guide the simulation toward the statistical char-acteristics of real datasets, thereby improving realism under the evaluated setting. This method is inspired by the DILU framework [14]. It uses LLM to control vehicle decision-making, simulating more realistic traffic scenarios. Fig. 5 shows the specific decision prompt design. The real traffic data snapshots originate from a set of representative scenarios, which represent the most typical traffic patterns. These scenarios are defined by the cluster centers M = {su1 , s u2 , ..., s u15 }, as derived from the cluster-ing process described in Section III-B. For all representative scenarios, at simulation moment t, we compare the simulation data from time 0 to t with the data of all representative scenar-ios from time 0 to t using prefix comparison, calculating the differences in vehicle speed distribution and the mean spacing between pairs of vehicles. The representative scenario with the smallest difference is selected. We then extract the speed and spacing of the top 10 vehicles with the longest driving time from the frame corresponding to time moment t of the representative scenario. These serve as feature representations of road conditions. For any scenario center uk, the feature vector at the decision frame is defined as shown in Eq. 6. 
+
+Fuk (t) = ( v1(t), v 2(t), . . . , v 10 (t), d 1(t), d 2(t), . . . , d 10 (t)) 
+
+(6) JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 7Vehicle 912 (Left lane, ahead)         
+
+> Position: (174.40, 8.00), Speed: 21.88 m/s, Acceleration: 0.00 m/s², Lane: 174.40 m
+> Vehicle 960 (Same lane, ahead)
+> Position: (186.01, 12.00), Speed: 21.88 m/s, Acceleration: 0.00 m/s², Lane: 186.01 m
+> Your Vehicle (Rightmost lane)
+> Position: (168.38, 12.00), Speed: 25.25 m/s,
+> Acceleration: 0.00 m/s², Lane: 168.38 m
+> Road structure description
+> Local observation
+> Available Actions:
+> IDLE: Stay in current lane, current speed (Action_id: 1)
+> Turn-left: Change to the left lane (Action_id: 0)
+> Acceleration: Increase speed (Action_id: 3)
+> Deceleration: Decrease speed (Action_id: 4)
+> Action Space
+> Vehicle Data (5th second)
+> ID 1149: Speed: 13.55 m/s, Spacing: 192.02 m
+> ID 1153: Speed: 17.14 m/s, Spacing: 183.89 m
+> ......
+> ID 1164: Speed: 16.58 m/s, Spacing: 107.69 m
+> real traffic data snapshot
+> Decision-making Suggestion Channel 2
+> Decision-making Suggestion Channel 3
+> Road State Real Road State
+> Ensure safety by avoiding collisions for at least the next {self.detectN} frames. Matc
+> while prioritizing safety. You may increase speed (up to the speed limit) and change
+> to a safe state after {self.detectN} frames. Consider factors like road layout, traffic, a
+> for efficiency, ensure they don't compromise safety. Provide a brief explanation of yo
+> Match a vehicle from real-world data to the current scenario based on road layout,
+> you may increase speed (up to the limit), change lanes, and improve efficiency, eve
+> {self.detectN} frames. Provide a brief explanation of the matched vehicle, its influen
+> Match a vehicle from real-world data to the current driving scenario based on factor
+> Adjust driving style to mimic the matched vehicle’s behavior. Provide a brief explan
+> Match the most similar vehicle based on driving state ；
+> Mimic the matched vehicle’s behavior , ensuring safety
+> after {self.detectN} frames.
+> Decision recommendations
+
+Fig. 5. LLM Decision Design. It consists of three core components. First, prefix comparison is used to compare the representative scenarios with the current simulation data, selecting the representative scenario with the smallest difference. The snapshot of the current moment from the representative scenario is selected as the real-world traffic data snapshot, providing real-world traffic conditions as a reference for LLM decision-making. Second, the road description module provides a detailed description of the current road network structure, the vehicle’s location on the network, and its driving status. Finally, the decision-making module focuses on the design of prompt to optimize the decision-making and reasoning process. 
+
+Here, vi(t) represents the speed of the i-th vehicle, and di(t)
+
+represents the average spacing with the other 9 vehicles. Through prompt engineering design, this information serves as a reference for decision-making, allowing the LLM to learn the dynamic characteristics of real traffic flow. The road description module mainly includes descriptions of the current road network, the vehicle’s position within the road network, and the vehicle’s current driving state. In real traffic systems, drivers make decisions based on the behavior of surrounding vehicles. Therefore, the local observation in-formation module provides the driving status of other vehicles nearby. Based on the local observation information provided by the highway-env simulation platform, it is converted into textual form. The action description module calculates the vehicle’s action space based on its current position and sur-rounding road conditions. This reduces interference noise and reduces the likelihood of ineffective or inadmissible decisions. In implementation, the LLM output is parsed as a discrete action identifier within the predefined action space; outputs that cannot be parsed or fall outside the admissible set are treated as invalid and are not directly applied to the simulator. The decision suggestion module primarily involves the design of prompts to optimize the decision-making process. At each simulation time step t, the LLM generates decisions based on the snapshot Fuk (t). When an invalid or inadmissible action is detected, the framework falls back to the existing rule-based control strategy for that vehicle at the current step. For lane-changing actions, the admissibility check further considers whether the target lane is available in the current road context before the action is accepted. This mechanism is intended as an action-level validity filter rather than a formal safety verification guarantee. This module focuses solely on optimizing the simulation to closely approximate real traffic data. The goal is to adjust the simulation environment— specifically, the speed distribution and mean spacing between vehicle pairs—to reduce discrepancies relative to real-world traffic patterns. Moreover, the simulation not only aims to match real-world traffic data but also incorporates safety con-siderations for background vehicles, discouraging collision-prone maneuvers and that vehicle behaviors are constrained by the admissible action space. The method derives representative scenarios from real traffic data via preprocessing and clustering, identifies the one most similar to current conditions through prefix comparison, and produces time aligned snapshots Fuk (t). Then, it employs prompt-designed LLM decision-making guided by snapshot 
+
+Fuk (t) to jointly optimize traffic realism and promote safer behavior of background vehicles. Since decisions directly affect the simulation environment, the traffic flow simulation’s speed and spacing distributions Psim are gradually optimized. Ultimately, they approximate the real data distribution Preal .This process forms a detection-adjustment feedback loop that supports the realism and dynamic consistency of the simula-tion environment. IV. E XPERIMENTS 
+
+A. Experimental settings 
+
+Our experiment uses a well-established highway-env as the simulation platform, widely used in autonomous driving and tactical decision-making research [21]. This environment offers a realistic multi-vehicle interaction setup and allows direct modification of the underlying code, providing a flexible experimental framework. The simulation is conducted in a four-lane highway environment, with 10 background vehicles, a vehicle density of 2.0, and a simulation horizon of 60 steps. The validation is performed using four evaluation metrics: the Hellinger distance, the MAPE, the average time headway (THW), and the lane change rate. The Hellinger distance and the MAPE capture macroscopic distributional similarity between the simulation and real traffic data. Specifically, the Hellinger distance measures the difference between the speed distribution of real traffic data and the simulation environ-ment’s speed at each decision frame over a 5-second window. The final result is the average Hellinger distance across all JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 8
+
+decision frames. The MAPE calculates the mean distance between all vehicles and every other vehicle on the road at each decision frame. It then compares the average mean spacing between pairs of vehicles of real traffic data with that of the simulation environment, with the final result being the average MAPE across all decision frames. To further evaluate microscopic traffic-flow fidelity, we introduce THW and lane change rate (LCR). THW is a commonly used longitudinal car-following indicator in traffic engineering, defined as the ratio of the spatial gap between a leader–follower vehicle pair in the same lane to the follower’s speed, measured in seconds. A larger THW indicates more conservative car-following behavior. For each episode, we compute the mean THW across all decision frames and all valid same-lane leader–follower pairs as the longitudinal behavioral metric. LCR quantifies the frequency of lateral maneuvering behavior. A successful lane change is defined as a change in a vehicle’s lane ID between two adjacent decision frames without a collision in the target frame, thereby excluding lane-change attempts that fail due to a crash. The episode-level LCR is computed as the total number of successful lane changes divided by the product of the number of decision frames and the number of vehicles, normalized to the range [0 , 1] . A higher LCR indicates more frequent lane-changing and a stronger tendency for lateral maneuvering. Together, these four metrics provide a broader but still bounded assessment of simulation realism from both macroscopic distributional alignment and microscopic behavioral fidelity perspectives. 
+
+B. The validation of the REARL method 
+
+In this section, we evaluate the proposed method against three baselines and three variants of REARL on 50 randomly selected HighD highway scenarios. The compared methods include a rule-based baseline (Base), a reinforcement learning baseline (PPO), an LLM-enhanced simulation baseline (CRIT-ICAL) [13], and three REARL variants with different back-bone models, namely Qwen3 32B, DeepSeek-R1 32B, and GLM-4.7-Flash 30B. To ensure a controlled comparison under the same highway setting, all methods are evaluated under the same controlled highway simulation setting, a four-lane highway with 10 controlled vehicles, a vehicle density of 2.0, and a simulation horizon of 60 steps. Each method is evaluated over five independent runs. For all LLM-based variants, we use deterministic decoding with the sampling temperature set to 0, so that the same prompt and simulation state produce reproducible action outputs. The prompt template follows the structure shown in Fig. 5, and the model is instructed to return only the selected discrete action identifier from the predefined action space. The same parsing, admissibility-checking, and fallback rules described above are applied consistently during evaluation. In each run, we compute the Hellinger distance be-tween speed distributions, the mean absolute percentage error (MAPE) of the average spacing between pairs of background vehicles, the average time headway (THW), and the lane change rate on the same 50 selected HighD highway scenarios. The final performance is obtained by averaging the results across all runs and scenarios. The 50 evaluation scenarios are sampled from the held-out scenario subset rather than from the subset used for threshold estimation.  
+
+> •
+
+Base : This baseline uses the rule-based models pro-vided by highway-env under the same simulation setting. Specifically, IDM (Intelligent Driver Model) is used to model longitudinal driving behavior, whereas MOBIL (Minimizing Overall Braking Induced by Lane Changes) is used to model lateral lane-changing decisions.  
+
+> •
+
+PPO : This baseline employs Proximal Policy Optimiza-tion (PPO) [52], a widely used deep reinforcement learning algorithm, to train a policy that controls the longitudinal and lateral behavior of background vehicles. PPO is trained under the same simulation setting as the other methods. Including PPO as a learning-based baseline allows us to assess whether a general-purpose RL policy, optimized purely through environment interaction, can achieve comparable simulation realism without direct real-data guidance or LLM-based reasoning.  
+
+> •
+
+CRITICAL [13]: This method leverages LLMs to op-timize the initial simulation configuration, thereby im-proving the realism of the generated traffic environment. To ensure comparability, we adapt the original setting of CRITICAL to a 60-step simulation on a four-lane highway with 10 controlled vehicles and a vehicle density of 2.0.  
+
+> •
+
+REARL(DeepSeek-R1 32B) : This variant uses DeepSeek-R1 32B as the backbone model within REARL. DeepSeek-R1 32B is a distilled reasoning model derived from DeepSeek-R1 based on the Qwen-32B model and is specifically optimized for reasoning-intensive tasks. Its inclusion allows evaluation of whether a reasoning-oriented backbone can further improve the proposed simulation enhancement framework.  
+
+> •
+
+REARL(GLM-4.7-Flash 30B) : This variant uses GLM-4.7-Flash as the backbone model within REARL. GLM-4.7-Flash is a lightweight model in the GLM-4.7 series and emphasizes enhanced coding capability, more stable multi-step reasoning, and efficient execution in complex agent-style tasks. In addition, it supports a long context window, which makes it well suited to handling structured scenario descriptions and interactive simulation genera-tion.  
+
+> •
+
+REARL(Qwen3 32B) : This variant uses Qwen3 32B as the backbone model within REARL. Qwen3 represents the latest generation of the Qwen family and is designed to provide strong reasoning ability, instruction-following ability, agent capability, and multilingual support across both dense and MoE variants. The 32B dense version provides a strong and stable general-purpose LLM back-bone, making it a suitable default choice for evaluating the effectiveness of REARL. The quantitative results are summarized in Table I. In terms of macroscopic distributional metrics, all REARL variants achieve lower Hellinger distances than the three baselines, with REARL(deepseek-r1 32b) obtaining the smallest value of 0.2562 and the default REARL achieving 0.3067. Among the baselines, PPO achieves a Hellinger distance of 0.3258, which improves over Base (0.3460) and is comparable to JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 9
+
+> TABLE I COMPARISON OF EFFECTIVENESS WITH OTHER METHODS
+
+Method Speed Distribution Mean Spacing THW Lane Change Rate (Hellinger Distance) (MAPE) 
+
+Base 0.3460 0.8978 7.6679 0.0081 PPO 0.3258 1.3940 10.6617 0.0138 CITICAL 0.3277 2.0523 7.2094 0.5630 REARL (DeepSeek-R1 32B) 0.2562 0.8600 16.3352 0.0616 REARL (GLM-4.7-Flash 30B) 0.3131 1.2099 14.2384 0.0617 REARL 0.3067 0.8371 22.8575 0.0708 
+
+CRITICAL (0.3277), indicating that RL-based policy learning can partially reduce speed distribution discrepancy. However, for mean spacing MAPE, PPO yields a value of 1.3940, which is considerably worse than Base (0.8978) and only slightly better than CRITICAL (2.0523). This indicates that PPO does not achieve balanced alignment across the two macroscopic metrics under the current experimental setting. CRITICAL shows a similar trade-off: it reduces the Hellinger distance from 0.3460 for Base to 0.3277, but increases the spacing MAPE from 0.8978 to 2.0523. The default REARL achieves the lowest MAPE of 0.8371, and REARL(DeepSeek-R1 32B) achieves 0.8600, whereas REARL(GLM-4.7-Flash 30B) yields 1.2099, which is better than PPO and CRITICAL but worse than Base. Therefore, the results should not be interpreted as every REARL variant outperforming all baselines on every metric. Instead, they reveal a backbone- and metric-dependent trade-off, with the default REARL providing the most bal-anced performance across the two macroscopic metrics in this experiment. In terms of microscopic behavioral metrics, the advantages of REARL become more pronounced. For THW, a higher value generally indicates more conservative and safer car-following behavior with larger inter-vehicle time gaps. The default REARL achieves a THW of 22.8575, which is sub-stantially higher than those of Base (7.6679), PPO (10.6617), and CRITICAL (7.2094). PPO’s THW of 10.6617 represents a moderate improvement over Base and CRITICAL, suggesting that the RL policy learns to adopt slightly larger following gaps through environment interaction, but still falls consid-erably short of the larger inter-vehicle time gaps observed for REARL. REARL(deepseek-r1 32b) and REARL(glm-4.7-flash 30b) also produce considerably higher THW values of 16.3352 and 14.2384, respectively, further confirming that the larger THW values are consistently observed across different REARL backbones under the current experimental setting. For lane change rate, Base relies on the MOBIL rule-based model and yields an extremely low rate of 0.0081, indicating overly passive lateral behavior where vehicles rarely change lanes even when beneficial. PPO achieves a similarly low lane change rate of 0.0138, indicating that RL training under a standard reward formulation does not encourage realistic lane-changing behavior. In contrast, CRITICAL produces an ex-cessively high lane change rate of 0.5630, suggesting unstable and erratic lateral decision-making that is inconsistent with realistic highway driving patterns. The three REARL variants achieve moderate lane change rates of 0.0616, 0.0617, and 0.0708, respectively, which reflect a more balanced and natu-ralistic level of lane-changing activity. These results indicate that REARL improves macroscopic distributional similarity and provides more conservative car-following and moderate lane-changing observations under the evaluated setting, but they should be interpreted as bounded behavioral evidence rather than comprehensive validation of simulation realism or driving safety. The temporal evolution of the speed-distribution discrep-ancy is shown in Fig. 6(a), Fig. 6(d), Fig. 6(g), Fig. 6(j), and Fig. 6(m). As shown in Fig. 6(a) and Fig. 6(d), Base and CRIT-ICAL maintain relatively large Hellinger distances throughout the simulation, which indicates limited ability to stay aligned with real traffic dynamics over time. CRITICAL begins with a slightly smaller discrepancy than Base, suggesting that optimizing the initial simulation configuration provides alimited benefit at the early stage. However, this advantage gradually disappears as the rollout continues. By contrast, the three REARL variants in Fig. 6(g), Fig. 6(j), and Fig. 6(m) maintain lower speed-distribution discrepancies over much of the simulation horizon. Among them, REARL(deepseek-r1 32b) in Fig. 6(j) shows the largest reduction in Hellinger distance, while the default REARL in Fig. 6(m) also keeps the discrepancy consistently low and shows more balanced behavior over the full rollout. The REARL(glm-4.7-flash 30b) in Fig. 6(g) also improves clearly over Base and CRITICAL, although its gain is smaller than that of the other two REARL variants. The histogram comparisons in Fig. 6(c), Fig. 6(f), Fig. 6(i), Fig. 6(l), and Fig. 6(o) further support these observations. As shown in Fig. 6(c) and Fig. 6(f), the speed distributions generated by Base and CRITICAL are mainly concentrated in the higher-speed region and show limited overlap with the real-data distribution. In contrast, the three REARL variants in Fig. 6(i), Fig. 6(l), and Fig. 6(o) produce distributions that are visibly closer to the real distribution, with much larger overlap. In particular, REARL(DeepSeek-R1 32B) in Fig. 6(l) shows the closest match in terms of speed-distribution similarity, while the default REARL in Fig. 6(o) also shows a favorable balance across the two macroscopic metrics. These results suggest that the proposed discrepancy-aware regulation strategy can reduce speed-distribution discrepancies relative to JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 10 0 10 20 30 40 50 
+
+Time step 
+
+0.334 0.336 0.338 0.340 0.342 0.344 0.346 0.348 0.350 
+
+> Hellinger Distance
+
+Hellinger Distance base:0.3460781033900667 
+
+Speed 
+
+0 10 20 30 40 50 60 
+
+Time step 
+
+0.4 0.6 0.8 1.0 1.2 1.4 1.6 1.8 
+
+> MAE
+
+Average spacing diff base:0.8978518543548091 
+
+Spacing 
+
+5 10 15 20 25 30 
+
+Bins 
+
+0.00 0.02 0.04 0.06 0.08 0.10 
+
+> Probability
+
+Bucket Distribution Comparison 
+
+Real data Controlled by Base 
+
+0 10 20 30 40 50 
+
+Time step 
+
+0.3150 0.3175 0.3200 0.3225 0.3250 0.3275 0.3300 0.3325 
+
+> Hellinger Distance
+
+Hellinger Distance base:0.3277779770230623 
+
+Speed 
+
+0 10 20 30 40 50 60 
+
+Time step 
+
+1.0 1.5 2.0 2.5 3.0 3.5 
+
+> MAE
+
+Average spacing diff base:2.0523475647601397 
+
+Spacing 
+
+5 10 15 20 25 30 
+
+Bins 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability
+
+Bucket Distribution Comparison 
+
+Real data Controlled by CRITIC 
+
+0 10 20 30 40 50 
+
+Time step 
+
+0.29 0.30 0.31 0.32 0.33 0.34 0.35 0.36 
+
+> Hellinger Distance
+
+Hellinger Distance base:0.3131851209242793 
+
+Speed 
+
+0 10 20 30 40 50 60 
+
+Time step 
+
+0.5 1.0 1.5 2.0 2.5 
+
+> MAE
+
+Average spacing diff base:1.209921710340364 
+
+Spacing 
+
+5 10 15 20 25 30 
+
+Bins 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 
+
+> Probability
+
+Bucket Distribution Comparison 
+
+Real data Controlled by REARL(glm-4.7-flash) 
+
+0 10 20 30 40 50 
+
+Time step 
+
+0.18 0.20 0.22 0.24 0.26 0.28 0.30 0.32 0.34 
+
+> Hellinger Distance
+
+Hellinger Distance base:0.2562839141074259 
+
+Speed 
+
+0 10 20 30 40 50 60 
+
+Time step 
+
+0.2 0.4 0.6 0.8 1.0 1.2 1.4 1.6 
+
+> MAE
+
+Average spacing diff base:0.8600097157547185 
+
+Spacing 
+
+5.0 7.5 10.0 12.5 15.0 17.5 20.0 22.5 25.0 
+
+Bins 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability
+
+Bucket Distribution Comparison 
+
+Real data Controlled by REARL(deepseek-r1:32b) 
+
+0 10 20 30 40 50 
+
+Time step 
+
+0.29 0.30 0.31 0.32 0.33 
+
+> Hellinger Distance
+
+Hellinger Distance base:0.30672994291975125 
+
+Speed 
+
+0 10 20 30 40 50 60 
+
+Time step 
+
+0.2 0.4 0.6 0.8 1.0 1.2 1.4 1.6 1.8 
+
+> MAE
+
+Average spacing diff base:0.8371751451869937 
+
+Spacing 
+
+5 10 15 20 25 30 
+
+Bins 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability
+
+Bucket Distribution Comparison 
+
+Real data Controlled by REARL 
+
+BASE CRITICAL REARL 
+
+(glm-4.7-flash) 
+
+REARL 
+
+(deepseek-r1:32b) 
+
+REARL Powered by TCPDF (www.tcpdf.org) Powered by TCPDF (www.tcpdf.org) 
+
+Fig. 6. Comparison of the simulation results generated by Base, CRITICAL, and REARL with different LLM backbones. From top to bottom, the rows correspond to Base, CRITICAL, REARL (glm-4-flash 30b), REARL (deepseek-r1 32b), and REARL (Qwen 32b), respectively. From left to right, the columns present the Hellinger distance of the speed distribution, the evolution of the mean spacing between vehicle pairs over time, and the histogram comparison of the overall speed distribution during the simulation. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 11 
+
+Base and CRITICAL under the tested backbone settings. A similar trend appears in the mean spacing between vehicle pairs, as shown in Fig. 6(b), Fig. 6(e), Fig. 6(h), Fig. 6(k), and Fig. 6(n). Although the spacing error increases over time for all methods because of accumulated rollout deviation, the increase is much more severe for CRITICAL in Fig. 6(e), which is consistent with its high MAPE of 2.0523 in Table I. Base in Fig. 6(b) performs better than CRITICAL, but still shows a clear upward trend as the simulation proceeds. The three REARL variants exhibit different spacing-error trajectories in Fig. 6(h), Fig. 6(k), and Fig. 6(n), indicating that their spacing performance depends on the backbone model. Notably, the default REARL in Fig. 6(n) achieves the lowest MAPE among all compared methods, indicating the best overall balance between speed-distribution alignment and spacing consistency. Although REARL(deepseek-r1 32b) in Fig. 6(k) achieves com-parable spacing accuracy and the best speed-distribution sim-ilarity, the default REARL remains the most favorable setting when both metrics are considered together. REARL(GLM-4.7-Flash 30B) achieves a spacing MAPE of 1.2099, which is lower than PPO (1.3940) and CRITICAL (2.0523), but higher than Base (0.8978). Therefore, the improvement in spacing fidelity is not uniform across LLM backbones and should be interpreted together with the speed-distribution results. Overall, the results in Table I and Fig. 6(a)–(o) show that REARL reduces the speed-distribution discrepancy across all three backbone models, whereas its spacing performance varies across backbones. Unlike CRITICAL, which adjusts only the initial simulation configuration, and PPO, which learns a policy without direct real-data guidance, REARL performs discrepancy-aware online adjustment during rollout. THW and lane change rate provide complementary descrip-tions of microscopic behavior. Under the current setting, the REARL variants produce larger THW values and interme-diate lane change rates relative to the compared baselines; however, these observations should not be interpreted as direct validation of driving safety or universal behavioral realism. The results therefore demonstrate method- and metric-dependent trade-offs rather than uniform superiority across all four metrics. Among the three REARL variants, the default REARL based on Qwen3 32B provides the most balanced performance across the two macroscopic alignment metrics in this experiment. 
+
+C. Timed discrepancy detection threshold study 
+
+In the timed discrepancy detection and adjustment process, we evaluate two discrepancy metrics against real traffic data. One is the Hellinger distance of speed distributions over the past 5 seconds. The other is the MAPE of current-frame mean spacing between background vehicle pairs. If either metric exceeds a predefined threshold, the error is considered significant. If such an error is detected, the REARL method intervenes to adjust the control strategy. When REARL does not intervene, the control strategy follows that of the Base method. To reduce possible overlap between threshold estimation and evaluation, a total of 741 scenarios were divided following a 2:8 ratio. To determine the threshold, we repeated the Base method’s experiment 5 times and compared it with 150 randomly selected scenarios. A total of 42,000 Hellinger distance differences for speed distribution and 45,000 mean spacing differences between background vehicle pairs were obtained. The distribution of statistical quantiles is illustrated in Fig. 7. From the remaining 591 scenarios, 15 were randomly chosen for threshold hyperparameter testing without reusing the threshold-estimation subset. Based on this distribution, we selected the 5%, 10%, 20% and 30% percentiles as intervention thresholds for the REARL method, resulting in a total of 16 threshold combinations. We then conducted experiments on 15 randomly selected scenarios to determine the optimal intervention threshold combination. The experimental results in Table II show how different threshold settings influence the evaluated metrics. It is evident that a 30% threshold for speed distribution and a 5% threshold for mean spacing between vehicle pairs yield the best overall performance. These findings indicate that threshold selection influences the trade-off between intervention frequency and distributional alignment in the tested scenarios. 
+
+D. Trajectory clustering parameters study of the KIcluster algorithm 
+
+To further improve the clustering performance, we em-ployed a Bayesian optimization approach to tune the parame-ters of the KIcluster algorithm. Given the challenges in select-ing optimal parameters for clustering algorithms, we leveraged Bayesian optimization [53] to search for the best configuration in a data-driven and unbiased manner. Specifically, the opti-mization process utilized a Gaussian prior function and the gp hedge adaptive acquisition function selection strategy. The optimization ran for 500 iterations, randomly sampling 5% of the vehicle trajectories to determine the optimal parameters. The optimal parameters for the KIcluster algorithm in this task were found to be clustering into 3 groups with 3 iterations. Based on the above optimization, the scenario clustering results are shown in Fig. 8. From the clustering plot, it is evident that the real traffic scenarios are effectively grouped into 15 distinct clusters, as indicated by the separation in the plot. Each grouping represents a typical traffic pattern, which is crucial for adjusting the simulation environment. The distinct separation between clusters represents the variability in driving behaviors, such as speed and spacing, that is captured from real-world data. The linear distribution observed in the clustering plot arises because the smaller traffic scenarios are cropped from long-term traffic data. Traffic flow is typically smooth and continu-ous, with vehicle states gradually changing over time, such as transitioning from free-flowing to congested conditions. This state change is not abrupt, but rather gradual. Additionally, the movement of vehicles is influenced by inertia, which results in small state changes between adjacent time steps, creating continuity. t-SNE preserves these local similarities during the dimensionality reduction process, leading to the formation of a streamline-like cluster structure in the low-dimensional space, reflecting the natural transitions between different traffic states. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 12 
+
+Fig. 7. Cumulative distribution function and percentile markers. (a) The cumulative density function (CDF) curve for the Hellinger distance of the collected speed distribution. The orange points on the curve represent the percentiles of the distribution, with the 5%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, and 90% percentiles labeled on the plot. (b) The cumulative density function (CDF) curve for the MAPE of the collected mean spacing between pairs of vehicles distribution. TABLE II COMPARISON OF DIFFERENT INTERVENTION THRESHOLD COMBINATIONS 
+
+Hellinger distance threshold for speed distribution MAPE threshold for mean spacing between pairs of vehicles speed distribution (Hellinger distance) mean spacing between pairs of vehicles (MAPE) 
+
+0.2829(5%) 0.1982(5%) 0.3207 0.9401 0.3009(10%) 0.1982(5%) 0.3471 1.0918 0.3192(20%) 0.1982(5%) 0.3446 1.0294 0.3306(30%) 0.1982(5%) 0.3098 0.8188 0.2829(5%) 0.2385(10%) 0.3336 0.9212 0.3009(10%) 0.2385(10%) 0.3223 0.9786 0.3192(20%) 0.2385(10%) 0.3315 0.9029 0.3306(30%) 0.2385(10%) 0.3230 1.3504 0.2829(5%) 0.3283(20%) 0.3062 1.0992 0.3009(10%) 0.3283(20%) 0.3299 1.0404 0.3192(20%) 0.3283(20%) 0.3241 0.8160 0.3306(30%) 0.3283(20%) 0.3271 1.2365 0.2829(5%) 0.4242(30%) 0.3289 1.2995 0.3009(10%) 0.4242(30%) 0.3335 1.1469 0.3192(20%) 0.4242(30%) 0.2969 1.0534 0.3306(30%) 0.4242(30%) 0.3097 1.0604 
+
+Therefore, this linear distribution illustrates the temporal con-tinuity and gradual state changes in traffic flow. Moreover, the presence of outliers in the top-right corner of the plot may represent rare traffic scenarios. While these rare scenarios are infrequent, they can often contribute to safety incidents in real traffic conditions. These incidents are typically caused by the inability to handle such uncommon situations effectively. Therefore, we have retained the outliers in our analysis to preserve these rare cases in the threshold analysis, while systematic evaluation of long-tail safety-critical scenarios remains future work. 
+
+E. Inference Time Comparison 
+
+To examine computational efficiency, we compare the infer-ence time of three decision-making methods: highway-env’s built-in rule-based method (IDM+MOBIL), PPO [52], and the proposed REARL framework. Under the same experimental setting, we record the inference time over 10 consecutive decision steps for each method and report the average, as summarized in Table III. 
+
+TABLE III COMPARISON OF AVERAGE INFERENCE TIME OVER 10 DECISION STEPS FOR DIFFERENT METHODS .Method Average inference time (ms) IDM+MOBIL 0.461 PPO 15.898 REARL 86241.309 
+
+Table III shows that IDM+MOBIL has the shortest inference time, averaging 0.461 ms, which confirms the efficiency of rule-based decision-making. PPO takes 15.898 ms on average, which is longer than IDM+MOBIL but still relatively efficient. By contrast, REARL requires 86241.309 ms on average for 10 consecutive decisions. This much higher cost mainly comes JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 13  
+
+> Fig. 8. The scenario clustering results after t-SNE dimensionality reduction. The results of the scenario clustering are visualized using t-SNE (t-Distributed Stochastic Neighbor Embedding) for dimensionality reduction, with the data points representing different vehicle trajectories across the clustering process. The color-coded data points correspond to different clusters identified by the KIcluster algorithm, with each cluster being grouped according to its statistical characteristics. The red stars represent the cluster centers, which act as the representative points of each cluster.
+
+from the additional computation associated with discrepancy-aware detection and LLM-based reasoning in the decision process. Overall, the results reflect a trade-off between computational efficiency and simulation fidelity. Although REARL takes much longer than IDM+MOBIL and PPO, its goal is not to serve as a lightweight vehicle-level control policy, but to improve the realism of the simulation environment. From this perspective, the additional computational cost may be acceptable in simulation-oriented settings where fidelity is prioritized over inference efficiency. V. C ONCLUSION AND FUTURE WORK 
+
+In this paper, we proposed REARL, a closed-loop sim-ulation enhancement framework that incorporates real-world traffic data and large language models to improve the realism of autonomous driving simulation. The framework combines representative scenario construction from real traffic trajec-tories, discrepancy-aware online detection, and LLM-guided behavior adjustment for background vehicles. By tracking the gap between simulated traffic flow and real traffic data in terms of speed distribution, mean spacing between vehicle pairs, time headway, and lane change rate, REARL can intervene during rollout to improve the alignment between simulated traffic flow and real-world traffic patterns under the evaluated setting. Experimental results on the HighD dataset and the highway-env platform show that REARL improves speed-distribution alignment across the tested backbones and provides the most balanced overall performance with the default Qwen3 32B configuration, while the spacing results reveal backbone-dependent trade-offs. Among them, the default REARL with Qwen3 32B provides the most balanced performance under the evaluated metrics, with a Hellinger distance of 0.3067, a MAPE of 0.8371, a THW of 22.8575, and a lane change rate of 0.0708. The inclusion of PPO as a stronger learning-based baseline further suggests that the observed performance gain is associated with the proposed framework design rather than solely with a particular backbone model or the use of learning-based methods. The current validation is limited to selected HighD-derived highway scenarios with a fixed four-lane highway configura-tion, 10 controlled vehicles, and a 60-step horizon, and there-fore does not by itself demonstrate generalization to urban, mixed-traffic, or larger-scale simulation settings. Despite these improvements, the current framework still incurs a relatively high inference cost because it relies on discrepancy detection and LLM-based reasoning. Future work will therefore focus on improving computational efficiency through lightweight decision modules, more selective intervention strategies, and faster backbone models. We also plan to systematically eval-uate and extend REARL to a wider range of traffic scenarios and rare edge cases, and to evaluate it in larger-scale and higher-fidelity simulation environments, including urban and 3D driving settings. Another direction is to further enrich the evaluation framework with additional realism-oriented metrics, such as collision rate, jerk-based comfort measures, and long-tail safety-critical event coverage, to provide a more fine-grained yet still bounded assessment of simulation fidelity. REFERENCES [1] J.-A. Bolte, A. Bar, D. Lipinski, and T. Fingscheidt, “Towards corner case detection for autonomous driving,” in 2019 IEEE Intelligent Vehi-cles Symposium (IV) . IEEE, 2019, pp. 438–445. [2] J. Zhou and J. Beyerer, “Corner cases in data-driven automated driving: Definitions, properties and solutions,” in 2023 IEEE Intelligent Vehicles Symposium (IV) . IEEE, 2023, pp. 1–8. [3] X. Yan, Z. Zou, S. Feng, H. Zhu, H. Sun, and H. X. Liu, “Learning naturalistic driving environment with statistical realism,” Nature com-munications , vol. 14, no. 1, p. 2037, 2023. [4] K. Jiang, X. Cai, Z. Cui, A. Li, Y. Ren, H. Yu, H. Yang, D. Fu, L. Wen, and P. Cai, “Koma: Knowledge-driven multi-agent framework for autonomous driving with large language models,” IEEE Transactions on Intelligent Vehicles , 2024. [5] N. Jaipuria, X. Zhang, R. Bhasin, M. Arafa, P. Chakravarty, S. Shri-vastava, S. Manglani, and V. N. Murali, “Deflating dataset bias using synthetic data augmentation,” in Proceedings of the IEEE/CVF confer-ence on computer vision and pattern recognition workshops , 2020, pp. 772–773. [6] X. Ying, “An overview of overfitting and its solutions,” in Journal of physics: Conference series , vol. 1168. IOP Publishing, 2019, p. 022022. [7] D. M. Hawkins, “The problem of overfitting,” Journal of chemical information and computer sciences , vol. 44, no. 1, pp. 1–12, 2004. [8] Y. Zhang, P. Tiˇ no, A. Leonardis, and K. Tang, “A survey on neural network interpretability,” IEEE transactions on emerging topics in computational intelligence , vol. 5, no. 5, pp. 726–742, 2021. [9] L. H. Gilpin, D. Bau, B. Z. Yuan, A. Bajwa, M. Specter, and L. Kagal, “Explaining explanations: An overview of interpretability of machine learning,” in 2018 IEEE 5th International Conference on data science and advanced analytics (DSAA) . IEEE, 2018, pp. 80–89. [10] L. Chen, Y. Li, C. Huang, B. Li, Y. Xing, D. Tian, L. Li, Z. Hu, X. Na, Z. Li et al. , “Milestones in autonomous driving and intelligent vehicles: Survey of surveys,” IEEE Transactions on Intelligent Vehicles , vol. 8, no. 2, pp. 1046–1056, 2022. [11] L. Wen, P. Cai, D. Fu, S. Mao, and Y. Li, “Bringing diversity to autonomous vehicles: An interpretable multi-vehicle decision-making and planning framework,” arXiv preprint arXiv:2302.06803 , 2023. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 14 
+
+[12] F. Heidecker, J. Breitenstein, K. R¨ osch, J. L¨ ohdefink, M. Bieshaar, C. Stiller, T. Fingscheidt, and B. Sick, “An application-driven concep-tualization of corner cases for perception in highly automated driving,” in 2021 IEEE Intelligent Vehicles Symposium (IV) . IEEE, 2021, pp. 644–651. [13] H. Tian, K. Reddy, Y. Feng, M. Quddus, Y. Demiris, and P. Angeloudis, “Enhancing autonomous vehicle training with language model integra-tion and critical scenario generation,” arXiv preprint arXiv:2404.08570 ,2024. [14] L. Wen, D. Fu, X. Li, X. Cai, T. Ma, P. Cai, M. Dou, B. Shi, L. He, and Y. Qiao, “DiLu: A knowledge-driven approach to autonomous driving with large language models,” arXiv preprint arXiv:2309.16292 , 2023. [15] W. Ding, C. Xu, M. Arief, H. Lin, B. Li, and D. Zhao, “A survey on safety-critical driving scenario generation—a methodological perspec-tive,” IEEE Transactions on Intelligent Transportation Systems , vol. 24, no. 7, pp. 6971–6988, 2023. [16] F. Codevilla, E. Santana, A. M. L´ opez, and A. Gaidon, “Exploring the limitations of behavior cloning for autonomous driving,” in Proceedings of the IEEE/CVF International Conference on Computer Vision , 2019, pp. 9329–9338. [17] Y. Jin, X. Shen, H. Peng, X. Liu, J. Qin, J. Li, J. Xie, P. Gao, G. Zhou, and J. Gong, “SurrealDriver: Designing generative driver agent simulation framework in urban contexts based on large language model,” 
+
+CoRR , 2023. [18] G. Wang, Y. Xie, Y. Jiang, A. Mandlekar, C. Xiao, Y. Zhu, L. Fan, and A. Anandkumar, “Voyager: An open-ended embodied agent with large language models,” arXiv preprint arXiv:2305.16291 , 2023. [19] X. Zhu, Y. Chen, H. Tian, C. Tao, W. Su, C. Yang, G. Huang, B. Li, L. Lu, X. Wang et al. , “Ghost in the minecraft: Generally capable agents for open-world environments via large language models with text-based knowledge and memory,” arXiv preprint arXiv:2305.17144 , 2023. [20] R. Krajewski, J. Bock, L. Kloeker, and L. Eckstein, “The highd dataset: A drone dataset of naturalistic vehicle trajectories on german highways for validation of highly automated driving systems,” in 2018 21st international conference on intelligent transportation systems (ITSC) .IEEE, 2018, pp. 2118–2125. [21] E. Leurent, “An environment for autonomous driving decisionmaking,” 2018, accessed: 2025-09-08. [Online]. Available: https://github.com/ eleurent/highway-env [22] P. A. Lopez, M. Behrisch, L. Bieker-Walz, J. Erdmann, Y.-P. Fl¨ otter¨ od, R. Hilbrich, L. L¨ ucken, J. Rummel, P. Wagner, and E. Wießner, “Microscopic traffic simulation using sumo,” in 2018 21st international conference on intelligent transportation systems (ITSC) . Ieee, 2018, pp. 2575–2582. [23] P. P. T. V. AG, VISSIM 5.40 User Manual . epubli GmbH, 2012. [24] AIMSUN, “Aimsun next,” 2022, accessed: 2025-09-04. [Online]. Available: https://www.aimsun.com/aimsun-next [25] M. Bando, K. Hasebe, A. Nakayama, A. Shibata, and Y. Sugiyama, “Dynamical model of traffic congestion and numerical simulation,” 
+
+Physical review E , vol. 51, no. 2, p. 1035, 1995. [26] M. Treiber, A. Hennecke, and D. Helbing, “Congested traffic states in empirical observations and microscopic simulations,” Physical review E ,vol. 62, no. 2, p. 1805, 2000. [27] A. Kesting, M. Treiber, and D. Helbing, “General lane-changing model mobil for car-following models,” Transportation Research Record , vol. 1999, no. 1, pp. 86–94, 2007. [28] J. Erdmann, “Sumo’s lane-changing model,” in Modeling Mobility with Open Data: 2nd SUMO Conference 2014 Berlin, Germany, May 15-16, 2014 . Springer, 2015, pp. 105–123. [29] K. Chen, M. Zhu, L. Sun, and H. Yang, “Combining time dependency and behavioral game: A deep markov cognitive hierarchy model for human-like discretionary lane changing modeling,” Transportation Re-search Part B: Methodological , vol. 189, p. 102980, 2024. [30] W. Wang and D. Zhao, “Extracting traffic primitives directly from naturalistically logged data for self-driving applications,” IEEE Robotics and Automation Letters , vol. 3, no. 2, pp. 1223–1229, 2018. [31] T. A. Wheeler and M. J. Kochenderfer, “Factor graph scene distribu-tions for automotive safety analysis,” in 2016 IEEE 19th International Conference on Intelligent Transportation Systems (ITSC) . IEEE, 2016, pp. 1035–1040. [32] W. Ding, W. Wang, and D. Zhao, “A new multi-vehicle trajectory generator to simulate vehicle-to-vehicle encounters,” arXiv preprint arXiv:1809.05680 , 2018. [33] X. Wang, R. Jiang, L. Li, Y. Lin, X. Zheng, and F.-Y. Wang, “Captur-ing car-following behaviors by deep learning,” IEEE Transactions on Intelligent Transportation Systems , vol. 19, no. 3, pp. 910–920, 2017. [34] M. Zhu, X. Wang, and Y. Wang, “Human-like autonomous car-following model with deep reinforcement learning,” Transportation research part C: emerging technologies , vol. 97, pp. 348–368, 2018. [35] D.-F. Xie, Z.-Z. Fang, B. Jia, and Z. He, “A data-driven lane-changing model based on deep learning,” Transportation research part C: emerg-ing technologies , vol. 106, pp. 41–60, 2019. [36] Z. Mo, R. Shi, and X. Di, “A physics-informed deep learning paradigm for car-following models,” Transportation research part C: emerging technologies , vol. 130, p. 103240, 2021. [37] L. Liu, S. Feng, Y. Feng, X. Zhu, and H. X. Liu, “Learning-based stochastic driving model for autonomous vehicle testing,” Transportation research record , vol. 2676, no. 1, pp. 54–64, 2022. [38] H. Liu, Y. Tian, J. Sun, and D. Wang, “An exploration of data-driven microscopic simulation for traffic system and case study of freeway,” 
+
+Transportmetrica B: Transport Dynamics , vol. 11, no. 1, pp. 301–324, 2023. [39] K. Zhang, C. Chang, W. Zhong, S. Li, Z. Li, and L. Li, “A systematic solution of human driving behavior modeling and simulation for auto-mated vehicle studies,” IEEE transactions on intelligent transportation systems , vol. 23, no. 11, pp. 21 944–21 958, 2022. [40] W. X. Zhao, K. Zhou, J. Li, T. Tang, X. Wang, Y. Hou, Y. Min, B. Zhang, J. Zhang, Z. Dong et al. , “A survey of large language models,” arXiv preprint arXiv:2303.18223 , vol. 1, no. 2, 2023. [41] A. Madaan, S. Zhou, U. Alon, Y. Yang, and G. Neubig, “Language models of code are few-shot commonsense learners,” arXiv preprint arXiv:2210.07128 , 2022. [42] “Exploring the potential of large language models for massive MIMO CSI feedback,” in GLOBECOM 2025 - 2025 IEEE Global Communica-tions Conference , Taipei, Taiwan, 2025, pp. 3511–3516. [43] “Large and small model collaboration for air interface,” arXiv preprint arXiv:2512.12170 , 2025. [44] Q. Shi, Q. Meng, H. Cheng, Q. Xu, and J. Wang, “Linguasim: Interactive multi-vehicle testing scenario generation via natural language instruction based on large language models,” arXiv preprint arXiv:2510.08046 ,2025. [45] P.-A. Shih, S.-H. Wang, Y.-C. Li, C.-H. Tu, and C.-H. Chang, “A multi-agent llm framework for design space exploration in autonomous driving systems,” arXiv preprint arXiv:2512.08476 , 2025. [46] Y. Wu, D. Li, Y. Chen, R. Jiang, H. P. Zou, W.-C. Huang, Y. Li, L. Fang, Z. Wang, and P. S. Yu, “Multi-agent autonomous driving systems with large language models: A survey of recent advances,” arXiv preprint arXiv:2502.16804 , 2025. [47] Z. Yang, X. Jia, H. Li, and J. Yan, “Llm4drive: A survey of large language models for autonomous driving,” arXiv preprint arXiv:2311.01043 , 2023. [48] Y. Li, K. Katsumata, E. Javanmardi, and M. Tsukada, “Large language models for human-like autonomous driving: A survey,” in 2024 IEEE 27th International Conference on Intelligent Transportation Systems (ITSC) . IEEE, 2024, pp. 439–446. [49] K. Buchin, A. Driemel, N. van de L’Isle, and A. Nusser, “klcluster: Center-based clustering of trajectories,” in Proceedings of the 27th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems , 2019, pp. 496–499. [50] A. Driemel, S. Har-Peled, and C. Wenk, “Approximating the fr´ echet distance for realistic curves in near linear time,” in Proceedings of the twenty-sixth annual symposium on Computational geometry , 2010, pp. 365–374. [51] W. Abuouelezz, N. Ali, Z. Aung, A. Altunaiji, S. B. Shah, and D. Glid-don, “Exploring pm2. 5 and pm10 ml forecasting models: a comparative study in the uae,” Scientific Reports , vol. 15, no. 1, p. 9797, 2025. [52] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, “Prox-imal policy optimization algorithms,” arXiv preprint arXiv:1707.06347 ,2017. [53] J. L. Hammer, A. J. Devanny, and L. J. Kaufman, “Bayesian opti-mized parameter selection for density-based clustering applied to single molecule localization microscopy,” Communications Biology , vol. 8, no. 1, p. 902, 2025.

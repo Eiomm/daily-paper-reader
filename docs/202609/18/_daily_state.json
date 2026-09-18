@@ -1,0 +1,281 @@
+{
+  "date": "20260918",
+  "date_label": "",
+  "generated_at": "2026-09-18 21:34:08 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.20377v1",
+      "route": "202609/18/2609.20377v1-mm-future-multi-mode-joint-world-action-modeling-for-autonomous-driving",
+      "title": "MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向自动驾驶的世界-动作模型，用MM-Tokens压缩多视角视频并生成多模式场景-动作假设",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.16074v1",
+      "route": "202609/18/2609.16074v1-world-action-models-for-robot-learning-and-control-a-survey",
+      "title": "World-Action Models for Robot Learning and Control: A Survey",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "综述世界-动作模型，耦合未来世界预测与动作生成",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.17524v1",
+      "route": "202609/18/2609.17524v1-modality-autoregressive-world-action-models",
+      "title": "Modality-Autoregressive World-Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "自回归预测多种未来模态的世界-动作模型",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.18461v1",
+      "route": "202609/18/2609.18461v1-disentangling-long-term-memory-via-latent-neuro-symbolic-reasoning",
+      "title": "Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向智能体长期记忆的潜在空间解耦",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.19903v1",
+      "route": "202609/18/2609.19903v1-rearl-a-closed-loop-autonomous-driving-simulation-enhancement-framework-with-real-traffic-data-and-large-language-models",
+      "title": "REARL: A Closed-loop Autonomous Driving Simulation Enhancement Framework with Real Traffic Data and Large Language Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "真实交通数据与LLM的闭环自动驾驶仿真",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.20709v1",
+      "route": "202609/18/2609.20709v1-mowam-explicit-future-motion-prediction-for-efficient-world-action-models",
+      "title": "MoWAM: Explicit Future Motion Prediction for Efficient World Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "以显式未来运动预测替代未来视频生成的高效世界-动作模型",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.11548v1",
+      "route": "202609/18/2609.11548v1-world-in-world-explore-the-world-with-world-models",
+      "title": "World in World: Explore the World with World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "自回归视频世界模型与交互式长时程探索",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.16621v1",
+      "route": "202609/18/2609.16621v1-stable-by-construction-variational-latent-markov-operators-for-long-horizon-pde-prediction",
+      "title": "Stable by Construction: Variational Latent Markov Operators for Long-Horizon PDE Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向长时程自回归预测的潜马尔可夫动力学",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.16697v1",
+      "route": "202609/18/2609.16697v1-world-models-for-embodied-intelligence-from-plausible-to-controllable-to-actionable",
+      "title": "World Models for Embodied Intelligence: From Plausible to Controllable to Actionable",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "从合理到可行动的具身智能世界模型综述",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.17815v1",
+      "route": "202609/18/2609.17815v1-principled-koopman-representations-with-kalman-inference-for-efficient-time-series-prediction",
+      "title": "Principled Koopman Representations with Kalman Inference for Efficient Time-Series Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于动力学预测的潜Koopman空间",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/18/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "从结构化描述与机器人动作学习物理动力学的视频世界模型",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.18462v2",
+      "route": "202609/18/2609.18462v2-cswam-better-causal-semantic-representations-for-out-of-distribution-generalization-in-world-action-models",
+      "title": "CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于 V-JEPA 表征的因果语义世界动作模型",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.13878v1",
+      "route": "202609/18/2609.13878v1-a-multi-resolution-multi-domain-pre-training-framework-for-universal-traffic-forecasting",
+      "title": "A Multi-Resolution Multi-Domain Pre-Training Framework for Universal Traffic Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向交通预测的统一时空表征预训练",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.14833v1",
+      "route": "202609/18/2609.14833v1-one-model-two-physical-stories-auditing-misalignment-in-multi-modal-world-modeling",
+      "title": "One Model, Two Physical Stories: Auditing Misalignment in Multi-Modal World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态世界模型跨模态不一致审计",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.15570v2",
+      "route": "202609/18/2609.15570v2-dido-distilling-interaction-centric-dynamics-into-one-step-denoising-for-world-action-models",
+      "title": "DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向具身控制的世界动作模型动力学蒸馏",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.17147v1",
+      "route": "202609/18/2609.17147v1-kernel-based-metrics-learning-for-uncertain-opponent-vehicle-trajectory-prediction-in-autonomous-racing",
+      "title": "Kernel-Based Metrics Learning for Uncertain Opponent Vehicle Trajectory Prediction in Autonomous Racing",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用核度量表示学习进行交通智能体轨迹预测",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    },
+    {
+      "paper_id": "2609.17247v1",
+      "route": "202609/18/2609.17247v1-drivemcp-an-agentic-ai-framework-for-advanced-driver-assistance-system",
+      "title": "DriveMCP: An Agentic AI framework for Advanced Driver Assistance System",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向驾驶辅助的智能体框架与工具编排",
+      "first_seen_at": "2026-09-18 21:34:08 UTC",
+      "updated_at": "2026-09-18 21:34:08 UTC"
+    }
+  ]
+}

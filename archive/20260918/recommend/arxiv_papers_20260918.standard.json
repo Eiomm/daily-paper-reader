@@ -1,0 +1,717 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-18T21:25:57.436133+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 6,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 22,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2609.20377v1",
+      "source": "arxiv",
+      "title": "MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving",
+      "abstract": "Autonomous driving involves coupled decision-making and scene evolution under multi-mode uncertainty. To capture this coupling and uncertainty, we introduce MM-Future, a world-action model that generates multiple paired scene-action hypotheses and models bidirectional interaction within each pair. Each hypothesis is initialized from a structured action prior and an independent future scene source, which are then co-evolved through a modality-aware diffusion Transformer. To support efficient multi-mode rollout, MM-Future compresses multi-view video into planning-oriented representations, dubbed MM-Tokens. Finally, a future-conditioned proposal scorer ranks trajectory candidates by shared history context and their paired predicted future. On NAVSIM navtest, MM-Future achieves 94.0 PDMS and 91.5 EPDMS, while attaining a 32.3 HD-Score in zero-shot closed-loop evaluation on HUGSIM. Ablations show consistent improvements over both single-mode and action-only variants, validating the benefit of multi-mode joint world-action modeling.",
+      "authors": [
+        "Shuai Liu",
+        "Hechangle Gong",
+        "Hao Jiang",
+        "Runlin He",
+        "Junxiang Zhan",
+        "Kai Huang",
+        "Sheng Yang",
+        "Shaoqing Ren"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-17T13:31:59+00:00",
+      "link": "https://arxiv.org/pdf/2609.20377v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "World-action model for autonomous driving generating multi-mode scene-action hypotheses with MM-Tokens",
+      "llm_evidence_cn": "面向自动驾驶的世界-动作模型，用MM-Tokens压缩多视角视频并生成多模式场景-动作假设",
+      "llm_evidence": "面向自动驾驶的世界-动作模型，用MM-Tokens压缩多视角视频并生成多模式场景-动作假设",
+      "canonical_evidence": "面向自动驾驶的世界-动作模型，用MM-Tokens压缩多视角视频并生成多模式场景-动作假设",
+      "llm_tldr_en": "MM-Future is a world-action model for autonomous driving that generates multiple paired scene-action hypotheses and co-evolves them via a modality-aware diffusion Transformer, using MM-Tokens to compress multi-view video for efficient multi-mode rollout.",
+      "llm_tldr_cn": "自动驾驶需在多种不确定性下耦合决策与场景演化，现有方法难以同时刻画二者的双向交互。本文提出MM-Future世界-动作模型，为每个假设初始化结构化动作先验与独立未来场景源，并通过模态感知扩散Transformer协同演化，同时用MM-Tokens将多视角视频压缩为面向规划的表示。在NAVSIM基准上，该方法支持高效多模式推演，并由未来条件提案评分器筛选轨迹。其贡献在于把场景预测与动作决策统一到可复用的token表示中。",
+      "llm_tldr": "自动驾驶需在多种不确定性下耦合决策与场景演化，现有方法难以同时刻画二者的双向交互。本文提出MM-Future世界-动作模型，为每个假设初始化结构化动作先验与独立未来场景源，并通过模态感知扩散Transformer协同演化，同时用MM-Tokens将多视角视频压缩为面向规划的表示。在NAVSIM基准上，该方法支持高效多模式推演，并由未来条件提案评分器筛选轨迹。其贡献在于把场景预测与动作决策统一到可复用的token表示中。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "driving world model",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.18461v1",
+      "source": "arxiv",
+      "title": "Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning",
+      "abstract": "Personalized agents are required to reason over long-term history interactions to infer both explicit preferences and implicit behavioral evidence. While early flat retrieval methods score memory fragments independently and neglect the distributed information, current structured memory frameworks rely on query-agnostic static graphs that fail to capture the context-dependent relations. Crucially, raw textual memories are inherently entangled and noisy, making fine-grained personalization and cross-session reasoning computationally prohibitive. To this end, we present LGM, a novel neuro-symbolic framework that shifts long-term memory disentanglement into a continuous latent space. Specifically, (i) instead of persisting fixed graphs, we design a tailored latent graph construction with a sparse autoencoder. Subject to each query, it maps historical interactions into latent memory nodes and disentangles the memory traces into sparse concept activations, dynamically synthesizing query-aware relational edge weights. (ii) A graph encoder then treats the query embedding as a conditioning preference to direct non-linear message passing across the task-specific latent subgraph. This yields a highly expressive memory representation for effective activations. Extensive experiments on long-term personalization benchmarks demonstrate that LGM significantly outperforms state-of-the-art baselines in capturing both explicit and implicit preferences while enabling personalized responses.",
+      "authors": [
+        "Cai Ke",
+        "Xinghao Chen",
+        "Xiaoyu Shen",
+        "Keyu Chen",
+        "Siyu An",
+        "Junnan Dong",
+        "Ruifeng Xu",
+        "Ruizhi Qiao",
+        "Xing Sun"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-16T10:55:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.18461v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "long-term memory disentanglement in continuous latent space for agents",
+      "llm_evidence_cn": "面向智能体长期记忆的潜在空间解耦",
+      "llm_evidence": "面向智能体长期记忆的潜在空间解耦",
+      "canonical_evidence": "面向智能体长期记忆的潜在空间解耦",
+      "llm_tldr_en": "Personalized agents struggle with entangled, noisy textual memories; LGM shifts long-term memory disentanglement into a continuous latent space with a neuro-symbolic framework for cross-session reasoning.",
+      "llm_tldr_cn": "个性化智能体需要基于长期交互历史推理用户显式偏好与隐式行为证据，但现有扁平检索方法忽略分布信息，结构化记忆又依赖与查询无关的静态图，且原始文本记忆纠缠含噪。本文提出LGM神经符号框架，将长期记忆解耦迁移到连续潜在空间，设计定制化的潜在结构以支持跨会话推理。该方法提升了细粒度个性化与记忆复用能力，为LLM智能体的长期记忆机制提供了新架构。",
+      "llm_tldr": "个性化智能体需要基于长期交互历史推理用户显式偏好与隐式行为证据，但现有扁平检索方法忽略分布信息，结构化记忆又依赖与查询无关的静态图，且原始文本记忆纠缠含噪。本文提出LGM神经符号框架，将长期记忆解耦迁移到连续潜在空间，设计定制化的潜在结构以支持跨会话推理。该方法提升了细粒度个性化与记忆复用能力，为LLM智能体的长期记忆机制提供了新架构。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.17524v1",
+      "source": "arxiv",
+      "title": "Modality-Autoregressive World-Action Models",
+      "abstract": "World-action models (WAMs) jointly model future observations and actions, typically predicting the future as RGB images. Other visual modalities such as depth, pretrained visual features, and point tracks can more efficiently capture geometric, semantic, and motion features. However, how best to combine these modalities within WAMs remains an open question. We introduce ModAR, the first WAM to autoregressively denoise multiple future modalities before predicting actions. This allows each prediction to condition on previously generated modalities. We train from scratch to systematically study how training-data mixtures, predicted modalities, and WAM formulations affect performance. In our evaluations, WAMs benefit from predicting point tracks, DINO features, and depth maps, while additionally predicting future RGB does not provide a consistent benefit. We also find that ModAR's sequential generation outperforms existing WAM formulations, with the highest average success rate at all evaluated data scales. We also fine-tune the video-model-initialized WAM Flex-$π$ on the same data; ModAR achieves a slightly higher observed average success rate (75% vs. 72%) while using approximately $20\\times$ fewer training FLOPs and no pretraining. On three real-world bimanual tasks, ModAR outperforms baselines and improves with human videos.",
+      "authors": [
+        "Adam Hung",
+        "Bardienus P. Duisterhof",
+        "Deva Ramanan",
+        "Jeffrey Ichnowski"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-15T17:56:24+00:00",
+      "link": "https://arxiv.org/pdf/2609.17524v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "world-action model autoregressively predicting multiple future modalities",
+      "llm_evidence_cn": "自回归预测多种未来模态的世界-动作模型",
+      "llm_evidence": "自回归预测多种未来模态的世界-动作模型",
+      "canonical_evidence": "自回归预测多种未来模态的世界-动作模型",
+      "llm_tldr_en": "World-action models typically predict the future only as RGB images, ignoring more efficient geometric and semantic modalities. ModAR is the first WAM that autoregressively denoises multiple future modalities before predicting actions, showing gains from point tracks, DINO features and depth maps.",
+      "llm_tldr_cn": "世界-动作模型通常联合建模未来观测与动作,但多以RGB图像作为未来预测形式,忽略了深度、预训练视觉特征与点轨迹等更高效的几何、语义与运动模态。本文提出ModAR,首个在预测动作之前对多种未来模态进行自回归去噪的世界-动作模型,使每次预测都能以先前生成的模态为条件。作者从零训练,系统研究训练数据配比、预测模态与模型形式对性能的影响。结果表明预测点轨迹、DINO特征与深度图能显著提升世界-动作模型表现,为多模态潜空间世界建模提供了设计准则。",
+      "llm_tldr": "世界-动作模型通常联合建模未来观测与动作,但多以RGB图像作为未来预测形式,忽略了深度、预训练视觉特征与点轨迹等更高效的几何、语义与运动模态。本文提出ModAR,首个在预测动作之前对多种未来模态进行自回归去噪的世界-动作模型,使每次预测都能以先前生成的模态为条件。作者从零训练,系统研究训练数据配比、预测模态与模型形式对性能的影响。结果表明预测点轨迹、DINO特征与深度图能显著提升世界-动作模型表现,为多模态潜空间世界建模提供了设计准则。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.16074v1",
+      "source": "arxiv",
+      "title": "World-Action Models for Robot Learning and Control: A Survey",
+      "abstract": "Robots operating in open environments act under partial observability, physical constraints, and dynamic task contexts. Beyond mapping observations and language instructions to actions, they must anticipate how candidate actions may affect future states and task-relevant outcomes. Recent advances in world models, video generation, and Vision-Language-Action (VLA) policies have motivated the development of World-Action Models (WAMs), which couple future world prediction with executable action generation. This survey provides a robotics-oriented review of WAMs. We clarify their scope relative to conventional world models, model-based reinforcement learning, action-conditioned video generation, and reactive VLA policies, and organize existing methods through a unified taxonomy covering representations, transition modeling, action interfaces, architectures, training pipelines, data modalities, and scaling strategies. We further review applications of WAMs in manipulation, navigation, and autonomous driving, and we summarize the datasets, benchmarks, metrics, and protocols used to evaluate WAM systems. Finally, we discuss key challenges in action alignment, world-action factorization, spatial and multi-view consistency, long-horizon memory, neural simulation for closed-loop policy learning, and efficient inference. Taken together, this survey aims to provide a concise technical foundation for integrating predictive world modeling with action generation, toward more reliable embodied robot intelligence. Project page: https://rcl-robotics.github.io/Awesome-World-Action-Models.",
+      "authors": [
+        "Zuxing Lu",
+        "Hongjia Zhai",
+        "Guanzhi Wang",
+        "Huajian Zeng",
+        "Jiaqi Yang",
+        "Jingyu Liu",
+        "Lei Cheng",
+        "Yuantai Zhang",
+        "Yuheng Qiu",
+        "Zezhou Cheng",
+        "Ivan Laptev",
+        "Danfei Xu",
+        "Benjamin Riviere",
+        "Giuseppe Loianno",
+        "Eric Xing",
+        "Xingxing Zuo"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-09-13T16:35:56+00:00",
+      "link": "https://arxiv.org/pdf/2609.16074v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "survey of world-action models coupling future world prediction with action generation",
+      "llm_evidence_cn": "综述世界-动作模型，耦合未来世界预测与动作生成",
+      "llm_evidence": "综述世界-动作模型，耦合未来世界预测与动作生成",
+      "canonical_evidence": "综述世界-动作模型，耦合未来世界预测与动作生成",
+      "llm_tldr_en": "This survey reviews World-Action Models for robotics, which couple future world prediction with executable action generation, clarifying their scope relative to world models, model-based RL, and action-conditioned video generation.",
+      "llm_tldr_cn": "机器人在开放环境中需在部分可观测与动态任务下预测动作的未来后果。本文综述面向机器人学习与控制的世界-动作模型（WAM），将未来世界预测与可执行动作生成相耦合，并厘清其与传统世界模型、基于模型的强化学习、动作条件视频生成及反应式VLA策略的区别，进而提出统一的分类体系。该综述为具身智能体的预测式控制与相邻世界模型研究提供了参考框架。",
+      "llm_tldr": "机器人在开放环境中需在部分可观测与动态任务下预测动作的未来后果。本文综述面向机器人学习与控制的世界-动作模型（WAM），将未来世界预测与可执行动作生成相耦合，并厘清其与传统世界模型、基于模型的强化学习、动作条件视频生成及反应式VLA策略的区别，进而提出统一的分类体系。该综述为具身智能体的预测式控制与相邻世界模型研究提供了参考框架。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.19903v1",
+      "source": "arxiv",
+      "title": "REARL: A Closed-loop Autonomous Driving Simulation Enhancement Framework with Real Traffic Data and Large Language Models",
+      "abstract": "Accurate simulation is crucial for autonomous driving development, yet capturing real-world traffic complexity remains challenging. Existing simulators that rely on predefined rules or static data playback struggle with dynamic traffic. CRITICAL uses real traffic data and a large language model (LLM) to adjust the initial simulation configuration, but the simulated distribution still diverges from real traffic as the rollout evolves. We propose REARL, a closed-loop simulation enhancement framework that integrates real traffic data with LLMs. Real traffic data are clustered, and each cluster center is used as a representative scenario that provides typical real-world traffic patterns for the LLM. A timed sliding-window detector then monitors discrepancies in vehicle speed distribution and mean spacing between pairs of vehicles. If a metric exceeds a threshold, the LLM adjusts vehicle decision-making; otherwise the existing controller is kept. The LLM also selects a matching real vehicle from a traffic snapshot and modulates the simulated vehicle with reference to that real action. In a controlled HighD highway setting, compared with the CRITICAL baseline and a PPO-based learning baseline, REARL reduces the Hellinger distance for speed distributions to 0.3067 and the MAPE for mean spacing to 0.8371, while achieving a time headway (THW) of 22.8575 and a lane change rate of 0.0708.",
+      "authors": [
+        "Xiaojun Bi",
+        "Jun Jiang",
+        "Yiwen Sun",
+        "Quanyi Ou",
+        "Ke Cheng",
+        "Mingjie Bi",
+        "Yexin Li"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-17T08:47:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.19903v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "closed-loop autonomous driving simulation with real traffic data and LLM",
+      "llm_evidence_cn": "真实交通数据与LLM的闭环自动驾驶仿真",
+      "llm_evidence": "真实交通数据与LLM的闭环自动驾驶仿真",
+      "canonical_evidence": "真实交通数据与LLM的闭环自动驾驶仿真",
+      "llm_tldr_en": "Existing autonomous driving simulators diverge from real traffic as rollouts evolve; REARL clusters real traffic data and uses LLM-guided representative scenarios in a closed loop to keep simulated distributions aligned with reality.",
+      "llm_tldr_cn": "现有自动驾驶仿真器依赖预设规则或静态数据回放，难以刻画真实交通的动态复杂性，且随仿真推进分布逐渐偏离真实。本文提出REARL闭环仿真增强框架，将真实交通数据聚类，以簇中心作为代表性场景为LLM提供典型交通模式，并在时间维度上持续校正仿真配置。实验表明该框架能显著提升仿真分布与真实交通的一致性，为自动驾驶系统提供更可信的闭环测试环境。",
+      "llm_tldr": "现有自动驾驶仿真器依赖预设规则或静态数据回放，难以刻画真实交通的动态复杂性，且随仿真推进分布逐渐偏离真实。本文提出REARL闭环仿真增强框架，将真实交通数据聚类，以簇中心作为代表性场景为LLM提供典型交通模式，并在时间维度上持续校正仿真配置。实验表明该框架能显著提升仿真分布与真实交通的一致性，为自动驾驶系统提供更可信的闭环测试环境。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "world model for autonomous driving and traffic simulation",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.20709v1",
+      "source": "arxiv",
+      "title": "MoWAM: Explicit Future Motion Prediction for Efficient World Action Models",
+      "abstract": "World Action Models (WAMs) improve robot policy learning by incorporating future dynamics, yet explicitly generating future videos at inference introduces substantial computational overhead. Removing future generation improves efficiency, but leaves future dynamics only implicitly encoded in observation features, which can limit robustness under distribution shifts. We propose MoWAM, an efficient WAM that replaces future video generation with explicit future motion prediction. Instead of reconstructing the complete future scene, MoWAM models structured robot motion as a compact abstraction of the future, capturing how the robot is expected to evolve under the current scene and interaction constraints. A Mixture-of-Transformer architecture learns future visual dynamics during training while jointly predicting motion and action, allowing video generation to be removed entirely at inference while retaining an explicit representation of the future. The compact motion representation further enables efficient inference-time scaling by sampling multiple candidates of motion and action pairs and selecting among them with a motion-aware task-progress verifier. Experiments on LIBERO, LIBERO-Plus, and real-world manipulation tasks demonstrate that MoWAM achieves strong in-distribution performance, improved out-of-distribution robustness, and higher average real-world success than representative WAM baselines. In addition, performance improves as more candidates are explored, demonstrating that explicit future motion provides an effective and efficient basis for inference-time scaling.",
+      "authors": [
+        "Jiayu Wang",
+        "Bin Zhu",
+        "Yue Yu",
+        "Jingjing Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-17T17:07:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.20709v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Efficient world action model replacing future video generation with explicit future motion prediction",
+      "llm_evidence_cn": "以显式未来运动预测替代未来视频生成的高效世界-动作模型",
+      "llm_evidence": "以显式未来运动预测替代未来视频生成的高效世界-动作模型",
+      "canonical_evidence": "以显式未来运动预测替代未来视频生成的高效世界-动作模型",
+      "llm_tldr_en": "MoWAM replaces expensive future video generation in world action models with explicit future motion prediction, modeling structured robot motion as a compact future abstraction via a Mixture-of-Transformer architecture.",
+      "llm_tldr_cn": "世界-动作模型通过引入未来动力学改进机器人策略学习，但在推理时显式生成未来视频带来巨大计算开销，而去掉未来生成又使动力学仅隐含于观测特征，分布偏移下鲁棒性受限。本文提出MoWAM，用显式未来运动预测替代未来视频生成，将结构化机器人运动建模为未来的紧凑抽象。基于混合Transformer架构，该方法在保持效率的同时提升鲁棒性。其贡献在于以紧凑运动表示支撑高效世界建模。",
+      "llm_tldr": "世界-动作模型通过引入未来动力学改进机器人策略学习，但在推理时显式生成未来视频带来巨大计算开销，而去掉未来生成又使动力学仅隐含于观测特征，分布偏移下鲁棒性受限。本文提出MoWAM，用显式未来运动预测替代未来视频生成，将结构化机器人运动建模为未来的紧凑抽象。基于混合Transformer架构，该方法在保持效率的同时提升鲁棒性。其贡献在于以紧凑运动表示支撑高效世界建模。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.11548v1",
+      "source": "arxiv",
+      "title": "World in World: Explore the World with World Models",
+      "abstract": "Autoregressive video world models enable interactive, long-horizon exploration, but flexible control remains challenging. Exploring a source video from new viewpoints requires the generated rollout to remain synchronised with the recorded event, place observed content in the requested view, plausibly complete newly exposed regions, and recover previously generated appearance on revisits. Existing methods typically address these requirements through task-specific modules or additional training. We present World in World, a training-free inference-time interface that converts heterogeneous control evidence into camera- and time-labelled clean visual states, which are read through the native self attention of a frozen causal video model. The evidence comprises source-video observations, target-view scene projections, geometry renderings that guide completion of newly exposed subject regions, and retrieved generated states beyond the rolling cache. Each evidence source carries token-level support and its own availability schedule. A correspondence router combines persistent point identities with geometry to establish token correspondences, guiding supported queries towards matching source-video tokens. Evidence-wise attention CFG (EWA) then independently regulates each auxiliary channel's additional contribution using attention responses from the same denoising forward pass. The shared interface supports camera-controlled rerendering, long-horizon revisiting, and human-motion transfer with the same frozen backbone. We evaluate World in World on camera-controlled video rerendering under diverse viewpoint changes, assessing perceptual quality, temporal consistency, and camera-following accuracy.",
+      "authors": [
+        "Chenxi Song",
+        "Yanming Yang",
+        "Chi Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-10T13:42:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.11548v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "autoregressive video world model for interactive long-horizon exploration",
+      "llm_evidence_cn": "自回归视频世界模型与交互式长时程探索",
+      "llm_evidence": "自回归视频世界模型与交互式长时程探索",
+      "canonical_evidence": "自回归视频世界模型与交互式长时程探索",
+      "llm_tldr_en": "Autoregressive video world models allow long-horizon exploration but lack flexible control. World in World is a training-free inference-time interface that converts heterogeneous control evidence into camera- and time-labelled visual states read by a frozen causal video model, enabling synchronized novel-view rollouts.",
+      "llm_tldr_cn": "现有自回归视频世界模型虽支持长时程交互探索,但在新视角控制下难以保持与原始事件同步、合理补全新暴露区域并恢复已生成外观。本文提出World in World,一种免训练的推理时接口,将异构控制证据转换为带相机与时间标签的干净视觉状态,并借助冻结因果视频模型的原生自注意力进行读取。实验表明该方法无需任务专用模块或额外训练即可实现同步、可控的新视角长时程展开。该工作为冻结视频世界模型的灵活控制提供了通用方案。",
+      "llm_tldr": "现有自回归视频世界模型虽支持长时程交互探索,但在新视角控制下难以保持与原始事件同步、合理补全新暴露区域并恢复已生成外观。本文提出World in World,一种免训练的推理时接口,将异构控制证据转换为带相机与时间标签的干净视觉状态,并借助冻结因果视频模型的原生自注意力进行读取。实验表明该方法无需任务专用模块或额外训练即可实现同步、可控的新视角长时程展开。该工作为冻结视频世界模型的灵活控制提供了通用方案。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.13878v1",
+      "source": "arxiv",
+      "title": "A Multi-Resolution Multi-Domain Pre-Training Framework for Universal Traffic Forecasting",
+      "abstract": "Spatio-temporal traffic data are central to intelligent transportation systems, yet their heterogeneity poses significant challenges for large-scale modeling. Existing pre-trained models often rely on a homogeneous modeling paradigm to handle highly heterogeneous traffic data. This fundamental mismatch not only limits model generalization but also leads to computationally expensive and parameter-inefficient designs. To this end, we propose FlexST, a novel pre-training framework that introduces modularity and adaptivity for traffic modeling. Specifically, we first propose a multi-resolution spatio-temporal diffusion module that captures both short-term fluctuations and long-range trends, effectively reconciling inputs with divergent temporal and spatial resolutions. After that, we construct a domain-adaptive mixture-of-experts that dynamically routes data to specialized sub-networks, enabling selective knowledge transfer while preventing negative interference across diverse domains. Moreover, we devise a unified periodic encoding strategy that injects resolution- and domain-aware inductive biases to harmonize periodic inconsistencies across datasets. Extensive experiments on 23 real-world traffic datasets demonstrate that FlexST significantly outperforms state-of-the-art baselines in zero- and few-shot settings, showcasing superior generalization, adaptability and efficiency. This work offers a new direction for building general-purpose pre-trained models capable of handling the complexity and variability of urban traffic systems.",
+      "authors": [
+        "Zhouyang Liu",
+        "Jindong Han",
+        "Hao Wang",
+        "Xinyue Liu",
+        "Hui Gao",
+        "Dongsheng Li",
+        "Hao Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-12T11:04:04+00:00",
+      "link": "https://arxiv.org/pdf/2609.13878v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified spatio-temporal representation pretraining for traffic forecasting",
+      "llm_evidence_cn": "面向交通预测的统一时空表征预训练",
+      "llm_evidence": "面向交通预测的统一时空表征预训练",
+      "canonical_evidence": "面向交通预测的统一时空表征预训练",
+      "llm_tldr_en": "FlexST is a modular multi-resolution spatio-temporal pretraining framework with diffusion modules capturing short-term fluctuations and long-range trends for heterogeneous traffic forecasting.",
+      "llm_tldr_cn": "交通时空数据高度异质，现有预训练模型采用同质建模范式，导致泛化受限且参数效率低下。FlexST 提出多分辨率时空扩散模块，同时刻画短期波动与长程趋势，并构建模块化、可自适应的预训练框架以协调异构输入。实验表明该框架在通用交通预测任务上提升了泛化性与计算效率，为交通智能体表征学习与下游预测提供了可复用的预训练方案。",
+      "llm_tldr": "交通时空数据高度异质，现有预训练模型采用同质建模范式，导致泛化受限且参数效率低下。FlexST 提出多分辨率时空扩散模块，同时刻画短期波动与长程趋势，并构建模块化、可自适应的预训练框架以协调异构输入。实验表明该框架在通用交通预测任务上提升了泛化性与计算效率，为交通智能体表征学习与下游预测提供了可复用的预训练方案。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.16621v1",
+      "source": "arxiv",
+      "title": "Stable by Construction: Variational Latent Markov Operators for Long-Horizon PDE Prediction",
+      "abstract": "Neural PDE solvers provide efficient surrogates for time-dependent physical systems, but autoregressive prediction over long horizons remains challenging because local errors can induce distribution shift and accumulate under recursive deployment. We develop a variational approach to this problem by introducing latent Markov dynamics in which physical states are represented by latent distributions and evolved through probabilistic transitions. The framework is formulated directly on function spaces and specialized to functional Gaussian models, where structured latent perturbations induce a spectral geometry and variational transition alignment regularizes the learned dynamics. We further analyze how these mechanisms affect autoregressive error propagation, providing a theoretical connection between variational training and long-horizon prediction. We instantiate the framework as the Variational Autoencoding Markov Operator (VAMO), which combines spatially resolved latent fields, structured Gaussian perturbations, and a neural-operator transition. Empirically, we demonstrate the effectiveness of VAMO on several fluid-dynamics benchmarks with prediction horizons extending substantially beyond those represented during training, where it consistently reduces error accumulation and improves rollout stability over several deterministic and noise-injection baselines. Overall, these results highlight variational modeling as a complementary approach to robust long-horizon neural PDE dynamics.",
+      "authors": [
+        "Junyi Liao",
+        "Johann Guilleminot",
+        "Vahid Tarokh"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-09-15T04:28:59+00:00",
+      "link": "https://arxiv.org/pdf/2609.16621v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "latent Markov dynamics for long-horizon autoregressive prediction",
+      "llm_evidence_cn": "面向长时程自回归预测的潜马尔可夫动力学",
+      "llm_evidence": "面向长时程自回归预测的潜马尔可夫动力学",
+      "canonical_evidence": "面向长时程自回归预测的潜马尔可夫动力学",
+      "llm_tldr_en": "This paper addresses error accumulation in long-horizon autoregressive neural PDE surrogates by introducing variational latent Markov dynamics, representing physical states as latent distributions evolved through probabilistic transitions.",
+      "llm_tldr_cn": "针对神经PDE求解器在长时程自回归预测中局部误差会引发分布漂移并逐步累积的问题，本文提出变分潜马尔可夫动力学框架，将物理状态表示为潜分布并通过概率转移演化。方法直接在函数空间上构造并特化为函数高斯模型，用结构化潜扰动诱导谱几何、以变分转移对齐正则化学习动力学，并分析了这些机制对自回归预测稳定性的影响，为长时程潜动力学预测提供了稳定可构造的建模方法。",
+      "llm_tldr": "针对神经PDE求解器在长时程自回归预测中局部误差会引发分布漂移并逐步累积的问题，本文提出变分潜马尔可夫动力学框架，将物理状态表示为潜分布并通过概率转移演化。方法直接在函数空间上构造并特化为函数高斯模型，用结构化潜扰动诱导谱几何、以变分转移对齐正则化学习动力学，并分析了这些机制对自回归预测稳定性的影响，为长时程潜动力学预测提供了稳定可构造的建模方法。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.14833v1",
+      "source": "arxiv",
+      "title": "One Model, Two Physical Stories: Auditing Misalignment in Multi-Modal World Modeling",
+      "abstract": "World models, systems that generate what happens next given current environmental conditions, are increasingly being implemented with multi-modal generation in mind. However, generating multiple modalities simultaneously, such as visual simulations alongside physical state predictions in the form of text, introduces the risk of cross-modal inconsistency. Tested separately, both outputs may look convincing while still disagreeing: a model can calculate that a ball should rebound in one modality, then generate no rebound in another modality, to say nothing of diverging from real-world dynamics entirely. In this work we focus on two failures explicitly: \\emph{Internal misalignment}, the disagreement between the world model's generated video and the same world model's prediction in a different modalities, and \\emph{external misalignment} the disagreement between the world model's generation and an analytic physical environment. We derive common contracts of event, magnitude, timing, and construct a physics grounded pipeline to make comparisons measurable in both external and internal settings. We then ask whether progressively supplying the model's own contract (the A ladder for the internal setting) or a corrected physical contract (the B ladder for the external setting) closes the respective gaps. Across four mechanisms and 20 settings, we find that while language answers all 22 text probes correctly with respect to the true environment, the neutral video is often in disagreement, suggesting that the current unified backbones may not be capable of correct reasoning, internal consistency, and external physical fidelity all at once.",
+      "authors": [
+        "Geigh Zollicoffer",
+        "Minh Vu",
+        "Rajiv Ranasinghe",
+        "Manish Bhattarai"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-13T22:56:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.14833v1",
+      "tags": [
+        "keyword:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-modal world modeling inconsistency auditing",
+      "llm_evidence_cn": "多模态世界模型跨模态不一致审计",
+      "llm_evidence": "多模态世界模型跨模态不一致审计",
+      "canonical_evidence": "多模态世界模型跨模态不一致审计",
+      "llm_tldr_en": "World models that generate multiple modalities can produce inconsistent physical predictions; this work audits internal and cross-modal misalignment between generated video and textual state predictions.",
+      "llm_tldr_cn": "该论文关注多模态世界模型在同时生成视频与文本物理状态预测时出现的跨模态不一致问题，即单看每种输出都合理但彼此矛盾。作者提出对内部错位与跨模态错位两类失败进行审计的方法，通过对比不同模态对同一物理事件的预测来暴露分歧。研究揭示了当前世界模型在物理动力学建模上的系统性缺陷，为构建更一致的多模态世界模型提供了诊断工具。",
+      "llm_tldr": "该论文关注多模态世界模型在同时生成视频与文本物理状态预测时出现的跨模态不一致问题，即单看每种输出都合理但彼此矛盾。作者提出对内部错位与跨模态错位两类失败进行审计的方法，通过对比不同模态对同一物理事件的预测来暴露分歧。研究揭示了当前世界模型在物理动力学建模上的系统性缺陷，为构建更一致的多模态世界模型提供了诊断工具。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.16697v1",
+      "source": "arxiv",
+      "title": "World Models for Embodied Intelligence: From Plausible to Controllable to Actionable",
+      "abstract": "World models connect perception and decision-making in embodied intelligence by maintaining hidden state, anticipating consequences, comparing interventions, and adapting when execution departs from expectations. Although progress is often measured by visual fidelity, their value lies in improving behavior. Before reaching for a cup, a person anticipates its weight and resistance to grasping, shaping the hand before contact. Such anticipation is coarse and rarely pictorial, yet it guides action. This raises a central question: which predictive capabilities improve behavior? Existing surveys, organized by architecture, output modality, or application domain, leave this question implicit. We introduce three progressively stronger capability levels: Plausible models preserve task-relevant temporal, geometric, or physical structure; Controllable models additionally predict how interventions alter that structure; and Actionable models translate predictions into measurable gains in planning, action, learning, evaluation, verification, recovery, or data selection. We complement this hierarchy with a 3 x 4 matrix crossing geometry, physics, and action grounding with improvement loops centered on data, rewards, policies, and the model itself. Using this framework, we survey manipulation, navigation, locomotion, autonomous driving, and general embodied learning, tracing technical progressions, clarifying capability requirements, and examining datasets, benchmarks, and evaluation protocols. We identify challenges in long-horizon consistency, uncertainty calibration, causal intervention testing, latency, verification and recovery, and cross-embodiment transfer. This perspective shifts evaluation from visual plausibility toward whether predictions capture task-relevant state, reflect intervention effects, and improve the closed-loop behavior of embodied agents.",
+      "authors": [
+        "Nanjie Yao",
+        "Hao Wang",
+        "Chong Cheng",
+        "Zhikang Chen",
+        "Wenzhe Li",
+        "Jiafei Lyu",
+        "Li Shen",
+        "Peilin Zhao",
+        "Zongqing Lu",
+        "Gao Huang",
+        "Steven Hoi",
+        "Dacheng Tao",
+        "Deheng Ye"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-09-15T06:22:42+00:00",
+      "link": "https://arxiv.org/pdf/2609.16697v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "survey on world models for embodied intelligence from plausible to actionable",
+      "llm_evidence_cn": "从合理到可行动的具身智能世界模型综述",
+      "llm_evidence": "从合理到可行动的具身智能世界模型综述",
+      "canonical_evidence": "从合理到可行动的具身智能世界模型综述",
+      "llm_tldr_en": "This survey argues that the value of world models for embodied intelligence lies in improving behavior rather than visual fidelity, organizing prior work into three progressively stronger predictive capabilities.",
+      "llm_tldr_cn": "世界模型在具身智能中连接感知与决策，但其进展常以视觉保真度衡量，真正价值却在于改善行为。本文指出现有综述多按架构、输出模态或应用领域组织，未回答哪些预测能力能提升行为。作者提出从合理到可控再到可行动三种逐步增强的能力视角，重新组织世界模型研究。该综述为具身世界模型提供了以行为改善为核心的评估框架，对机器人世界模型研究具有指导意义。",
+      "llm_tldr": "世界模型在具身智能中连接感知与决策，但其进展常以视觉保真度衡量，真正价值却在于改善行为。本文指出现有综述多按架构、输出模态或应用领域组织，未回答哪些预测能力能提升行为。作者提出从合理到可控再到可行动三种逐步增强的能力视角，重新组织世界模型研究。该综述为具身世界模型提供了以行为改善为核心的评估框架，对机器人世界模型研究具有指导意义。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.15570v2",
+      "source": "arxiv",
+      "title": "DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models",
+      "abstract": "World Action Models (WAMs) use video generation models to predict future visual dynamics for robotic manipulation, but iterative denoising introduces additional latency for closed-loop control. We empirically find that visual content converges at different rates during denoising. Static background structure forms early, whereas the gripper and manipulated object remain blurry after the first step, with their interaction dynamics emerging only through subsequent denoising. Consequently, naively truncating a multi-step video model to one step preserves scene structure but loses the interaction-centric dynamics most critical for manipulation. To address this issue, we propose DIDO, which distills the converged dynamics of a multi-step video model into a single denoising step. DIDO combines distribution matching distillation with interaction-centric representation guidance. Beyond compressing multi-step generation into one forward pass, DIDO explicitly models the gripper, manipulated object, and their interaction using supervised bounding-box visual reasoning tokens. Additionally, DIDO aligns the target object's representations across multiple model layers with features from a pretrained DINOv3 encoder. This interaction-centric guidance helps the distilled model preserve both the relevant entities and their future dynamics in a single step, while substantially reducing inference latency. DIDO achieves an average success rate of 99.0\\% on LIBERO, 76.6\\% on LIBERO-Plus, and 92.0\\% on RoboTwin, while also demonstrating effective transfer to long-horizon and generalization tasks in real-world robotic manipulation.",
+      "authors": [
+        "Jing Lyu",
+        "Shuanghao Bai",
+        "Runze Xiao",
+        "Zhenyu Liao",
+        "Wenxing Tan",
+        "Zihan Tang",
+        "Ruochuan Shi",
+        "Cheng Peng",
+        "Yuheng Ji",
+        "Yihao Wang",
+        "Badong Chen",
+        "Pengwei Wang",
+        "Zhongyuan Wang",
+        "Xiaoguang Zhao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-14T13:46:57+00:00",
+      "link": "https://arxiv.org/pdf/2609.15570v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "world action model distilling interaction dynamics for embodied control",
+      "llm_evidence_cn": "面向具身控制的世界动作模型动力学蒸馏",
+      "llm_evidence": "面向具身控制的世界动作模型动力学蒸馏",
+      "canonical_evidence": "面向具身控制的世界动作模型动力学蒸馏",
+      "llm_tldr_en": "This paper tackles the latency of iterative video-based world action models and proposes DIDO, which distills the converged interaction-centric dynamics of a multi-step video model into one-step denoising for robotic manipulation.",
+      "llm_tldr_cn": "针对世界动作模型用视频生成预测未来视觉动力学时迭代去噪带来闭环控制延迟的问题，本文发现视觉内容在去噪中收敛速率不同：静态背景结构较早形成，而机械臂与操作物体的交互动力学需后续步骤才显现。为此作者提出DIDO，将多步视频模型收敛后的交互中心动力学蒸馏到单步去噪中，实验表明该方法在保留场景结构的同时守住了操作最关键的运动信息。",
+      "llm_tldr": "针对世界动作模型用视频生成预测未来视觉动力学时迭代去噪带来闭环控制延迟的问题，本文发现视觉内容在去噪中收敛速率不同：静态背景结构较早形成，而机械臂与操作物体的交互动力学需后续步骤才显现。为此作者提出DIDO，将多步视频模型收敛后的交互中心动力学蒸馏到单步去噪中，实验表明该方法在保留场景结构的同时守住了操作最关键的运动信息。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.17815v1",
+      "source": "arxiv",
+      "title": "Principled Koopman Representations with Kalman Inference for Efficient Time-Series Prediction",
+      "abstract": "The Koopman operator has been widely used for time-series prediction in dynamical systems. However, prior work that learns latent ``Koopman spaces'' using neural networks often did not construct a valid Koopman space for forecasting, as these representations may be mathematically inconsistent with the operator-theoretic formulation and fail to capture the intrinsic low-rank structure of system dynamics. To address this issue, we introduce K$^2$SVD, a method that explicitly learns the leading singular functions of the Koopman operator by optimizing a Hilbert-Schmidt objective. This yields a well-defined low-rank approximation of the Koopman operator with an interpretable linear combination, featuring a compact latent space with less than $10\\%$ of the dimensions used in previous work. In the learned Koopman space, K$^2$SVD further captures temporal evolution with a linear Gaussian state-space model and performs inference via Kalman filtering, mitigating noise accumulation during multi-step prediction. Empirical results show that K$^2$SVD outperforms state-of-the-art methods across multiple datasets, with significantly faster prediction speeds and lower computational cost than previous efficiency-focused models. This highlights the benefits of principled low-rank Koopman representations and opens up broader potential for applications.",
+      "authors": [
+        "Ruiquan Li",
+        "Yuheng Bu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-15T20:32:25+00:00",
+      "link": "https://arxiv.org/pdf/2609.17815v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "latent Koopman space for dynamics forecasting",
+      "llm_evidence_cn": "用于动力学预测的潜Koopman空间",
+      "llm_evidence": "用于动力学预测的潜Koopman空间",
+      "canonical_evidence": "用于动力学预测的潜Koopman空间",
+      "llm_tldr_en": "This paper addresses inconsistent neural Koopman latent spaces and proposes K2SVD, which learns the leading singular functions of the Koopman operator via a Hilbert-Schmidt objective to obtain a compact, interpretable low-rank latent space for time-series prediction.",
+      "llm_tldr_cn": "针对以往神经网络学习的Koopman潜空间常与算子理论不一致、难以捕捉系统内在低秩结构的问题，本文提出K²SVD方法，通过优化Hilbert-Schmidt目标显式学习Koopman算子的主奇异函数。该方法得到具有可解释线性组合的良定义低秩近似与紧凑潜空间，提升了动力学系统的时间序列预测能力，为潜动力学建模提供了有理论保证的表示学习框架。",
+      "llm_tldr": "针对以往神经网络学习的Koopman潜空间常与算子理论不一致、难以捕捉系统内在低秩结构的问题，本文提出K²SVD方法，通过优化Hilbert-Schmidt目标显式学习Koopman算子的主奇异函数。该方法得到具有可解释线性组合的良定义低秩近似与紧凑潜空间，提升了动力学系统的时间序列预测能力，为潜动力学建模提供了有理论保证的表示学习框架。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.17147v1",
+      "source": "arxiv",
+      "title": "Kernel-Based Metrics Learning for Uncertain Opponent Vehicle Trajectory Prediction in Autonomous Racing",
+      "abstract": "Autonomous racing confronts significant challenges in safely overtaking Opponent Vehicles (OVs) that exhibit uncertain trajectories, stemming from unknown driving policies. To address these challenges, this study proposes heterogeneous kernel metrics for Deep Kernel Learning (DKL), designed to robustly capture the diverse driving policies of OVs, and carry out precise trajectory predictions along with the associated uncertainties. A key virtue of the proposed kernel metrics lies in their ability to align similar driving policies and disjoin dissimilar ones in an unsupervised manner, given the observed interactions between the Ego Vehicle (EV) and OVs. The efficacy of the proposed method is substantiated through experimental studies on a 1/10th scale racecar platform, demonstrating improved prediction accuracy and thereby safely overtaking against OVs. Furthermore, our method is computationally efficient for onboard computing units, affirming its viability in fast-paced racing environments. The video and source code can be found at https://github.com/HMCL-UNIST/OpponentPredictionWithKMDKL.git.",
+      "authors": [
+        "Hojin Lee",
+        "Youngim Nam",
+        "Sanghun Lee",
+        "Cheolhyeon Kwon"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-09-15T13:13:23+00:00",
+      "link": "https://arxiv.org/pdf/2609.17147v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "trajectory prediction of traffic agents with learned kernel metrics representations",
+      "llm_evidence_cn": "用核度量表示学习进行交通智能体轨迹预测",
+      "llm_evidence": "用核度量表示学习进行交通智能体轨迹预测",
+      "canonical_evidence": "用核度量表示学习进行交通智能体轨迹预测",
+      "llm_tldr_en": "This paper proposes heterogeneous kernel metrics for deep kernel learning to capture diverse opponent driving policies, enabling accurate trajectory prediction with uncertainty in autonomous racing overtaking scenarios.",
+      "llm_tldr_cn": "自动驾驶赛车中对手车辆驾驶策略未知导致轨迹不确定，给安全超车带来困难。论文提出用于深度核学习的异质核度量，在观测到自车与对手交互后无监督地对齐相似策略并分离不同策略，从而实现精确轨迹预测与不确定性估计。实验验证了该方法能稳健捕捉对手多样驾驶策略。该工作为不确定交互场景下的轨迹预测提供了可复用的度量学习思路。",
+      "llm_tldr": "自动驾驶赛车中对手车辆驾驶策略未知导致轨迹不确定，给安全超车带来困难。论文提出用于深度核学习的异质核度量，在观测到自车与对手交互后无监督地对齐相似策略并分离不同策略，从而实现精确轨迹预测与不确定性估计。实验验证了该方法能稳健捕捉对手多样驾驶策略。该工作为不确定交互场景下的轨迹预测提供了可复用的度量学习思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.18430v1",
+      "source": "arxiv",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "abstract": "Modeling physical dynamics, including how objects move, interact, and change state, is central to video world models for embodied AI. We present StrucPhysVideo, a family of video world models that bridges physics-focused data curation with language- and action-conditioned prediction of scene evolution. Our data pipeline combines motion-aware video segmentation, quality and content filtering, and physical relevance verification with structured annotations of objects, materials, and temporally localized interactions. By disentangling camera motion from object behavior and explicitly describing contact, deformation, and state transitions, the pipeline provides supervision grounded in observable physical events. Building on these data, we introduce StrucPhysVideo-TI2V, a sparse Mixture-of-Experts (MoE) text-image-to-video model trained with a curriculum that progressively emphasizes physical dynamics while retaining general-domain video data. StrucPhysVideo-TI2V achieves state-of-the-art performance on Physics-IQ Verified, scoring 45.5% and outperforming Cosmos3-Super-Image2Video by 2.8 percentage points. Caption ablations across backbones further demonstrate the effectiveness of physics-focused supervision. We further extend StrucPhysVideo-TI2V to StrucPhysVideo-IA2V, an interactive image-action-to-video world model that predicts visual outcomes from robot end-effector commands. Action conditioning, causal autoregressive generation, and few-step distillation enable incremental robot rollouts with only four denoising steps. Together, StrucPhysVideo advances physical dynamics modeling from image- and language-conditioned video prediction toward action-driven interaction.",
+      "authors": [
+        "Awomo-WM Team",
+        ":",
+        "Enhui Ma",
+        "Kaiwen Guo",
+        "Tingrui Zhang",
+        "Wei Song",
+        "Yingshui Tan",
+        "Jianhua Xu",
+        "Tong Zhang",
+        "Kaicheng Yu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-16T10:23:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.18430v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "video world models learning physical dynamics from captions and robot actions",
+      "llm_evidence_cn": "从结构化描述与机器人动作学习物理动力学的视频世界模型",
+      "llm_evidence": "从结构化描述与机器人动作学习物理动力学的视频世界模型",
+      "canonical_evidence": "从结构化描述与机器人动作学习物理动力学的视频世界模型",
+      "llm_tldr_en": "Modeling physical dynamics is central to video world models for embodied AI. StrucPhysVideo couples physics-focused data curation with language- and action-conditioned prediction, using motion-aware segmentation and structured annotations of objects, materials and interactions to supervise scene evolution.",
+      "llm_tldr_cn": "建模物体如何运动、交互与改变状态,是具身智能视频世界模型的核心,但缺乏面向物理动态的结构化监督数据。本文提出StrucPhysVideo系列视频世界模型,将物理导向的数据构建与语言、动作条件下的场景演化预测相结合。其数据流程融合运动感知视频分割、质量与内容过滤以及物理相关性验证,并对物体、材质与时间局部化交互进行结构化标注,通过分离相机运动与物体行为、显式描述接触、形变与状态转换提供可观测物理事件监督。该工作为具身视频世界模型提供了物理接地的高质量训练范式。",
+      "llm_tldr": "建模物体如何运动、交互与改变状态,是具身智能视频世界模型的核心,但缺乏面向物理动态的结构化监督数据。本文提出StrucPhysVideo系列视频世界模型,将物理导向的数据构建与语言、动作条件下的场景演化预测相结合。其数据流程融合运动感知视频分割、质量与内容过滤以及物理相关性验证,并对物体、材质与时间局部化交互进行结构化标注,通过分离相机运动与物体行为、显式描述接触、形变与状态转换提供可观测物理事件监督。该工作为具身视频世界模型提供了物理接地的高质量训练范式。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.17247v1",
+      "source": "arxiv",
+      "title": "DriveMCP: An Agentic AI framework for Advanced Driver Assistance System",
+      "abstract": "An agentic AI driver-assistance framework that integrates perception, compliance reasoning, vehicle-state interpretation, and safety arbitration into a modular and auditable pipeline. The architecture, referred to as DriveMCP, incorporates a sensor-like perception stack alongside DriveLM as the vision-language front end to generate a graph-structured scene understanding (Graph Visual Question Answering) and language-grounded driving information. Key compliance elements in world_state, including posted speed limits and jurisdiction cues, are derived from DriveLM outputs through a structured parsing layer rather than being injected as simulator ground truth. A stateful orchestration layer coordinates specialized experts exposed as Model Context Protocol (MCP) servers: (i) a Rules server that performs retrieval-augmented compliance reasoning over jurisdiction-specific traffic codes and sign conventions, (ii) a Weather server that estimates traction risk and contextual speed advisories, and (iii) an MCP-CAN server that surfaces Controller Area Network (CAN)/On-Board Diagnostics (OBD) telemetry and diagnostic context for health-aware risk shaping. These outputs are fused to generate a structured decision that prompts a recommended course of action. The outcome is then further filtered by a Responsibility-Sensitive Safety (RSS)-inspired guardrail that arbitrates speak versus act decisions under bounded online adaptation. In CARLA simulation across multilingual, cross-border, and dynamic speed-limit scenarios, DriveMCP reduces traffic infractions and overspeed relative to the VLM-Direct, VLM-Direct+RAG, and VLM-Tools-NoArbiter baselines, while improving hazard response time and maintaining sub-second advisory latency.",
+      "authors": [
+        "Farzad Nadiri",
+        "Mehdi Cina",
+        "Ahmad B. Rad"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-15T14:29:18+00:00",
+      "link": "https://arxiv.org/pdf/2609.17247v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "agentic AI framework with MCP tool orchestration for driving",
+      "llm_evidence_cn": "面向驾驶辅助的智能体框架与工具编排",
+      "llm_evidence": "面向驾驶辅助的智能体框架与工具编排",
+      "canonical_evidence": "面向驾驶辅助的智能体框架与工具编排",
+      "llm_tldr_en": "DriveMCP is an agentic AI driver-assistance framework combining perception, compliance reasoning, vehicle-state interpretation and safety arbitration, orchestrating Model Context Protocol experts in a modular auditable pipeline.",
+      "llm_tldr_cn": "高级驾驶辅助系统需要把感知、合规推理与安全决策整合到可审计的流程中。本文提出DriveMCP，一种智能体式驾驶辅助框架，以DriveLM视觉语言模型为前端生成图结构场景理解与语言化驾驶信息，并从模型输出中解析限速与辖区等合规要素，而非直接注入仿真真值。系统由状态化编排层调度以模型上下文协议暴露的专家模块，实现模块化、可审计的驾驶辅助流水线。该工作展示了智能体与工具调用范式在驾驶辅助中的落地方式。",
+      "llm_tldr": "高级驾驶辅助系统需要把感知、合规推理与安全决策整合到可审计的流程中。本文提出DriveMCP，一种智能体式驾驶辅助框架，以DriveLM视觉语言模型为前端生成图结构场景理解与语言化驾驶信息，并从模型输出中解析限速与辖区等合规要素，而非直接注入仿真真值。系统由状态化编排层调度以模型上下文协议暴露的专家模块，实现模块化、可审计的驾驶辅助流水线。该工作展示了智能体与工具调用范式在驾驶辅助中的落地方式。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.18462v2",
+      "source": "arxiv",
+      "title": "CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models",
+      "abstract": "FastWAM-style world action models enable efficient action-only inference, but generalize poorly under visual distribution shifts. Their reconstruction-oriented representations emphasize appearance-specific details, limiting generalization to unseen scenes and objects. Without observation history, the model also lacks temporal evidence for robustly identifying task-relevant state changes and motion in unfamiliar visual conditions. To address these limitations, we present the Causal Semantic World Action Model (CSWAM), which augments FastWAM with a causal semantic expert built on V-JEPA 2.1. V-JEPA provides temporally grounded representations of semantic state changes and motion with less dependence on appearance-specific details. The expert learns their future evolution from a sparse history of current and past observations and shares the history-derived context with both the video and action streams through causal attention. At inference, CSWAM conditions action denoising on the current video state and observed semantic history, retaining efficient action-only inference. We conduct simulation and real-robot experiments to evaluate generalization under distribution shifts. With embodied pretraining, CSWAM raises Randomized success on RoboTwin 2.0 Clean-to-Randomized transfer from 10.16% to 45.18%, a gain of 35.02 percentage points over FastWAM. Across two real-robot tasks and three OOD difficulty levels, CSWAM improves average success over FastWAM by 42.5 percentage points, from 27.5% to 70.0%.",
+      "authors": [
+        "Tianbin Liu",
+        "Jian Zhu",
+        "Taiyi Su",
+        "Jianjun Zhang",
+        "Chong Ma",
+        "Zitai Huang",
+        "Weiyi Lu",
+        "Yi Xu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-16T10:56:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.18462v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "causal semantic world action model with V-JEPA representations",
+      "llm_evidence_cn": "基于 V-JEPA 表征的因果语义世界动作模型",
+      "llm_evidence": "基于 V-JEPA 表征的因果语义世界动作模型",
+      "canonical_evidence": "基于 V-JEPA 表征的因果语义世界动作模型",
+      "llm_tldr_en": "CSWAM augments FastWAM world action models with a V-JEPA-based causal semantic expert, yielding temporally grounded representations that generalize better under visual distribution shifts.",
+      "llm_tldr_cn": "FastWAM 类世界动作模型虽能高效推理，但在视觉分布偏移下泛化较差，其重建导向表征偏重外观细节且缺乏时序证据。CSWAM 在 FastWAM 上引入基于 V-JEPA 2.1 的因果语义专家，提取对语义状态变化与运动更鲁棒、较少依赖外观的时序表征。该方法提升了世界动作模型在未见场景与物体上的泛化能力，说明语义化世界表征对可迁移决策建模的重要性。",
+      "llm_tldr": "FastWAM 类世界动作模型虽能高效推理，但在视觉分布偏移下泛化较差，其重建导向表征偏重外观细节且缺乏时序证据。CSWAM 在 FastWAM 上引入基于 V-JEPA 2.1 的因果语义专家，提取对语义状态变化与运动更鲁棒、较少依赖外观的时序表征。该方法提升了世界动作模型在未见场景与物体上的泛化能力，说明语义化世界表征对可迁移决策建模的重要性。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
