@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-18</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-19</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 11 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-18 21:34:08 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-19 21:49:39 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,8 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-18 日报：共 17 篇，精读 6 篇、速读 11 篇，主题高度集中在世界模型与自动驾驶/机器人控制。</p>
-<p>最值得看的是精读里《MM-Future》（9.0/10）的多模态世界-动作联合建模，以及《World-Action Models for Robot Learning and Control》综述（8.0/10）；速读方向也延续&quot;从可信到可控到可行动&quot;的世界模型路线。</p>
-<p>建议普通读者先从两篇精读入手，再顺着综述里的&quot;可控性&quot;线索挑 1~2 篇速读，不必一次追完 17 篇。</p>
+<p>2026-09-19日报：11篇全部速读、0篇精读，重点集中在世界行动模型。</p>
+<p>最值得看的是DIDO的“交互动态→一步去噪”、CSWAM的因果语义与OOD泛化，以及世界模型从可信到可控再到可行动的</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -80,12 +79,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving">MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="World-Action Models for Robot Learning and Control: A Survey">World-Action Models for Robot Learning and Control: A Survey</span></li><li><span class="dpr-home-dashboard-paper-title" title="Modality-Autoregressive World-Action Models">Modality-Autoregressive World-Action Models</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -96,7 +95,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="World in World: Explore the World with World Models">World in World: Explore the World with World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Stable by Construction: Variational Latent Markov Operators for Long-Horizon PDE Prediction">Stable by Construction: Variational Latent Markov Operators for Long-Horizon PDE Prediction</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models">DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li><li><span class="dpr-home-dashboard-paper-title" title="CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models">CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>9</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>2</strong></span></div>
 </section>
