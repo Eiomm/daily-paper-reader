@@ -1,0 +1,185 @@
+{
+  "date": "20260920",
+  "date_label": "",
+  "generated_at": "2026-09-20 21:28:11 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.15570v2",
+      "route": "202609/20/2609.15570v2-dido-distilling-interaction-centric-dynamics-into-one-step-denoising-for-world-action-models",
+      "title": "DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将交互中心动态蒸馏为世界动作模型的一步去噪",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.16074v1",
+      "route": "202609/20/2609.16074v1-world-action-models-for-robot-learning-and-control-a-survey",
+      "title": "World-Action Models for Robot Learning and Control: A Survey",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "耦合未来世界预测与动作生成的世界动作模型综述",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.16697v1",
+      "route": "202609/20/2609.16697v1-world-models-for-embodied-intelligence-from-plausible-to-controllable-to-actionable",
+      "title": "World Models for Embodied Intelligence: From Plausible to Controllable to Actionable",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "具身智能世界模型能力综述",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/20/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向具身AI学习物理动力学的视频世界模型",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.19796v1",
+      "route": "202609/20/2609.19796v1-lifd-anchored-diffusion-for-3d-aware-scene-memory-in-robotic-manipulation",
+      "title": "LIFD: Anchored Diffusion for 3D-Aware Scene Memory in Robotic Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "场景token表示与3D感知的持久场景记忆",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.19863v1",
+      "route": "202609/20/2609.19863v1-feeling-terrain-before-crossing-world-models-for-off-road-navigation",
+      "title": "Feeling Terrain Before Crossing: World Models for Off-Road Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "预测未来含本体感知的导航世界模型",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.13595v1",
+      "route": "202609/20/2609.13595v1-predictive-audio-representations-for-early-detection-and-tracking-of-hidden-dynamic-objects",
+      "title": "Predictive audio representations for early detection and tracking of hidden dynamic objects",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶安全预测交通智能体的存在",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.14833v1",
+      "route": "202609/20/2609.14833v1-one-model-two-physical-stories-auditing-misalignment-in-multi-modal-world-modeling",
+      "title": "One Model, Two Physical Stories: Auditing Misalignment in Multi-Modal World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "审计多模态世界模型的跨模态失配",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.17247v1",
+      "route": "202609/20/2609.17247v1-drivemcp-an-agentic-ai-framework-for-advanced-driver-assistance-system",
+      "title": "DriveMCP: An Agentic AI framework for Advanced Driver Assistance System",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "具备图结构驾驶场景理解与世界状态的智能体驾驶辅助框架",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.17414v1",
+      "route": "202609/20/2609.17414v1-slotdit-object-centric-representations-for-diffusion-transformers",
+      "title": "SlotDiT: Object-Centric Representations for Diffusion Transformers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向生成扩散建模的物体中心 slot 潜在表征",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    },
+    {
+      "paper_id": "2609.18125v1",
+      "route": "202609/20/2609.18125v1-prism-predictive-representation-of-interaction-style-and-motion-for-social-robot-navigation",
+      "title": "PRISM: Predictive Representation of Interaction Style and Motion for Social Robot Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对行人运动与交互风格的预测性潜表示",
+      "first_seen_at": "2026-09-20 21:28:11 UTC",
+      "updated_at": "2026-09-20 21:28:11 UTC"
+    }
+  ]
+}

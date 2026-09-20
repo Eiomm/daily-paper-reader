@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-19</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-20</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 11 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-19 21:49:39 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-20 21:28:11 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,8 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-19日报：11篇全部速读、0篇精读，重点集中在世界行动模型。</p>
-<p>最值得看的是DIDO的“交互动态→一步去噪”、CSWAM的因果语义与OOD泛化，以及世界模型从可信到可控再到可行动的</p>
+<p>2026-09-20日报：11篇论文全数速读、精读挂零，今天主打“广撒网”式扫描。三篇7.0分速读都指向世界动作模型与具身智能世界模型，DIDO聚焦一步去噪，另两篇分别覆盖机器人学习控制综述和“可信—可控—可行动”演进。普通读者可先读两篇综述建立地图，再挑DIDO看方法细节。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -95,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models">DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li><li><span class="dpr-home-dashboard-paper-title" title="CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models">CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models">DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="World-Action Models for Robot Learning and Control: A Survey">World-Action Models for Robot Learning and Control: A Survey</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>9</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span></div>
 </section>
 </div>
 
