@@ -1,0 +1,233 @@
+{
+  "date": "20260921",
+  "date_label": "",
+  "generated_at": "2026-09-21 22:58:00 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.21712v1",
+      "route": "202609/21/2609.21712v1-zyt-world-a-real-time-controllable-world-model-for-closed-loop-autonomous-driving-simulation",
+      "title": "ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向闭环自动驾驶仿真的实时可控世界模型",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.18461v2",
+      "route": "202609/21/2609.18461v2-disentangling-long-term-memory-via-latent-neuro-symbolic-reasoning",
+      "title": "Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在连续潜在空间解耦智能体长期记忆",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.21379v1",
+      "route": "202609/21/2609.21379v1-jepa-guided-diffusion-predictive-vision-language-conditioning-for-generative-traffic-forecasting",
+      "title": "JEPA Guided Diffusion: Predictive Vision-Language Conditioning for Generative Traffic Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用于预测未来交通场景的紧凑潜在表示",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.16697v1",
+      "route": "202609/21/2609.16697v1-world-models-for-embodied-intelligence-from-plausible-to-controllable-to-actionable",
+      "title": "World Models for Embodied Intelligence: From Plausible to Controllable to Actionable",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向具身智能的世界模型综述",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/21/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向具身智能学习物理动力学的视频世界模型",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.18462v1",
+      "route": "202609/21/2609.18462v1-cswam-better-causal-semantic-representations-for-out-of-distribution-generalization-in-world-action-models",
+      "title": "CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于V-JEPA因果语义表示的世界动作模型",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.19796v2",
+      "route": "202609/21/2609.19796v2-lifd-anchored-diffusion-for-3d-aware-scene-memory-in-robotic-manipulation",
+      "title": "LIFD: Anchored Diffusion for 3D-Aware Scene Memory in Robotic Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "学习场景token并构建三维感知持久场景记忆",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.21470v1",
+      "route": "202609/21/2609.21470v1-risk-aware-occupancy-for-safety-oriented-end-to-end-autonomous-driving",
+      "title": "Risk-Aware Occupancy for Safety-Oriented End-to-End Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向规划的驾驶场景稠密风险感知占据表示",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.21474v1",
+      "route": "202609/21/2609.21474v1-mt-wam-reorienting-the-one-pass-predictive-representation-toward-action-generation",
+      "title": "MT-WAM: Reorienting the One-Pass Predictive Representation Toward Action Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "运动流token与未来点轨迹监督",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.14833v1",
+      "route": "202609/21/2609.14833v1-one-model-two-physical-stories-auditing-misalignment-in-multi-modal-world-modeling",
+      "title": "One Model, Two Physical Stories: Auditing Misalignment in Multi-Modal World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "审计多模态世界模型的跨模态不一致",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.19863v1",
+      "route": "202609/21/2609.19863v1-feeling-terrain-before-crossing-world-models-for-off-road-navigation",
+      "title": "Feeling Terrain Before Crossing: World Models for Off-Road Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以本体感知为条件的导航世界模型",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.20747v1",
+      "route": "202609/21/2609.20747v1-miler-semantic-mid-level-representation-for-sim-to-real-reinforcement-learning-in-unstructured-autonomous-driving",
+      "title": "MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶策略学习的语义中层表征",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.21228v1",
+      "route": "202609/21/2609.21228v1-focal-vla-subtask-guided-geometry-distillation-and-implicit-world-modeling-for-vision-language-action-models",
+      "title": "FOCAL-VLA: Subtask-Guided Geometry Distillation and Implicit World Modeling for Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向VLA的隐式世界建模与几何蒸馏",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    },
+    {
+      "paper_id": "2609.21486v1",
+      "route": "202609/21/2609.21486v1-driving-on-registers-reasoning-on-risk-risk-aware-occupancy-for-register-based-end-to-end-autonomous-driving",
+      "title": "Driving on Registers, Reasoning on Risk: Risk-Aware Occupancy for Register-Based End-to-End Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向端到端驾驶的密集场景表示",
+      "first_seen_at": "2026-09-21 22:58:00 UTC",
+      "updated_at": "2026-09-21 22:58:00 UTC"
+    }
+  ]
+}

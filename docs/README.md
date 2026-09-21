@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-20</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-21</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 11 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-20 21:28:11 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-21 22:58:00 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-20日报：11篇论文全数速读、精读挂零，今天主打“广撒网”式扫描。三篇7.0分速读都指向世界动作模型与具身智能世界模型，DIDO聚焦一步去噪，另两篇分别覆盖机器人学习控制综述和“可信—可控—可行动”演进。普通读者可先读两篇综述建立地图，再挑DIDO看方法细节。</p>
+<p>今日共筛出 14 篇世界模型与具身智能相关论文，其中 3 篇精读、11 篇速读，焦点集中在闭环仿真与记忆推理。</p>
+<p>最值得看的是《ZYT-World》（9.0/10）提出的实时可控世界模型用于自动驾驶闭环仿真，以及《Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning》（8.0/10）对长期记忆的神经符号解耦思路。</p>
+<p>普通读者可先读这两篇的摘要与方法图，再顺带扫一眼速读中 StrucPhysVideo 和 CSWAM 关于物理动态与因果语义表征的做法。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +80,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">0 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation">ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning">Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="JEPA Guided Diffusion: Predictive Vision-Language Conditioning for Generative Traffic Forecasting">JEPA Guided Diffusion: Predictive Vision-Language Conditioning for Generative Traffic Forecasting</span></li></ul>
   </div>
-
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>2</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,7 +96,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models">DIDO: Distilling Interaction-Centric Dynamics into One-Step Denoising for World Action Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="World-Action Models for Robot Learning and Control: A Survey">World-Action Models for Robot Learning and Control: A Survey</span></li><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></li><li><span class="dpr-home-dashboard-paper-title" title="StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions">StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions</span></li><li><span class="dpr-home-dashboard-paper-title" title="CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models">CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>11</strong></span></div>
 </section>
