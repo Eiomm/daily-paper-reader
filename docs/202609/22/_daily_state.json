@@ -1,0 +1,281 @@
+{
+  "date": "20260922",
+  "date_label": "",
+  "generated_at": "2026-09-22 22:17:09 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.24626v1",
+      "route": "202609/22/2609.24626v1-relationally-grounded-latent-world-models-for-autonomous-driving",
+      "title": "Relationally Grounded Latent World Models for Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "用交通场景图语义监督对齐自动驾驶潜在世界表示",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.22317v1",
+      "route": "202609/22/2609.22317v1-editwm-event-decomposed-world-modeling-with-incremental-correction-for-end-to-end-autonomous-driving",
+      "title": "EditWM: Event-Decomposed World Modeling with Incremental Correction for End-to-End Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "将未来预测分解为正常演化与事件校正的驾驶世界模型",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.18462v1",
+      "route": "202609/22/2609.18462v1-cswam-better-causal-semantic-representations-for-out-of-distribution-generalization-in-world-action-models",
+      "title": "CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于V-JEPA的因果语义专家增强世界动作模型的泛化能力",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.22762v1",
+      "route": "202609/22/2609.22762v1-drivereferee-geometric-safety-verdicts-need-not-be-learned-for-driving-world-action-models",
+      "title": "DriveReferee: Geometric Safety Verdicts Need Not Be Learned for Driving World-Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向生成未来视频与动作的驾驶世界动作模型的几何安全验证",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.23184v1",
+      "route": "202609/22/2609.23184v1-causalwm-causal-chain-of-thought-reasoning-for-embodied-world-model",
+      "title": "CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "具身世界模型在未来视频预测前进行显式因果思维链推理",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.24749v1",
+      "route": "202609/22/2609.24749v1-d-jepa-a-decision-aligned-latent-world-model",
+      "title": "D-JEPA: A Decision-Aligned Latent World Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "决策对齐的潜在世界模型学习候选未来间的决策相关关系",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.19863v1",
+      "route": "202609/22/2609.19863v1-feeling-terrain-before-crossing-world-models-for-off-road-navigation",
+      "title": "Feeling Terrain Before Crossing: World Models for Off-Road Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "以本体感觉为条件预测物理未来的导航世界模型",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.21474v1",
+      "route": "202609/22/2609.21474v1-mt-wam-reorienting-the-one-pass-predictive-representation-toward-action-generation",
+      "title": "MT-WAM: Reorienting the One-Pass Predictive Representation Toward Action Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "引入未来二维点轨迹监督与运动流token以支持动作生成",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.21576v1",
+      "route": "202609/22/2609.21576v1-gesturefar-streaming-co-speech-gesture-generation-with-flow-autoregression",
+      "title": "GestureFAR: Streaming Co-Speech Gesture Generation with Flow Autoregression",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "离散运动token与连续运动隐变量的自回归运动生成",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.22868v1",
+      "route": "202609/22/2609.22868v1-planning-aligned-pretraining-of-bev-representations-with-sparse-action-conditioned-targets-for-end-to-end-autonomous-driving",
+      "title": "Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "规划对齐的BEV编码器预训练与动作条件稀疏目标",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.23369v1",
+      "route": "202609/22/2609.23369v1-the-right-future-for-action-learning-action-relevant-predictive-states-in-world-action-models",
+      "title": "The Right Future for Action: Learning Action-Relevant Predictive States in World Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "世界动作模型中用于预测未来的紧凑预测状态",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.23488v1",
+      "route": "202609/22/2609.23488v1-feasibleflow-one-step-joint-transport-of-configuration-feasibility-and-trajectories-for-end-to-end-driving",
+      "title": "FeasibleFlow: One-Step Joint Transport of Configuration Feasibility and Trajectories for End-to-End Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "构型可行性场与多模态自车轨迹的一步联合传输",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/22/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "学习物体运动与交互物理动力学的视频世界模型",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.18562v1",
+      "route": "202609/22/2609.18562v1-sim-to-real-traffic-scene-understanding-by-decoupling-semantics-from-caption-generation-with-v-jepa",
+      "title": "Sim-to-Real Traffic Scene Understanding by Decoupling Semantics from Caption Generation with V-JEPA",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "冻结V-JEPA编码器提取交通场景的预测性表示",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.19796v2",
+      "route": "202609/22/2609.19796v2-lifd-anchored-diffusion-for-3d-aware-scene-memory-in-robotic-manipulation",
+      "title": "LIFD: Anchored Diffusion for 3D-Aware Scene Memory in Robotic Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "学习场景token与循环场景记忆，用于机器人接地的未来预测",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.21228v1",
+      "route": "202609/22/2609.21228v1-focal-vla-subtask-guided-geometry-distillation-and-implicit-world-modeling-for-vision-language-action-models",
+      "title": "FOCAL-VLA: Subtask-Guided Geometry Distillation and Implicit World Modeling for Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "VLA操作的隐式世界建模",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    },
+    {
+      "paper_id": "2609.22040v1",
+      "route": "202609/22/2609.22040v1-prime-perception-feedback-with-situational-memory-embeddings-in-vla-models",
+      "title": "PRIME: Perception Feedback with Situational Memory Embeddings in VLA Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "驾驶VLA的情境记忆潜在表示",
+      "first_seen_at": "2026-09-22 22:17:09 UTC",
+      "updated_at": "2026-09-22 22:17:09 UTC"
+    }
+  ]
+}
