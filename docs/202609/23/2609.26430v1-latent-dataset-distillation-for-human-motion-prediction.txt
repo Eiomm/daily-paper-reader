@@ -1,0 +1,193 @@
+Title: Latent Dataset Distillation for Human Motion Prediction
+
+URL Source: https://arxiv.org/pdf/2609.26430v1
+
+Published Time: Wed, 23 Sep 2026 01:23:32 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# LATENT DATASET DISTILLATION FOR HUMAN MOTION PREDICTION 
+
+# Ge Tian Guang Li ∗ Takahiro Ogawa Miki Haseyama 
+
+# Hokkaido University 
+
+# {tian, guang, ogawa, mhaseyama }@lmd.ist.hokudai.ac.jp 
+
+ABSTRACT 
+
+Dataset distillation (DD) compresses a large training set into a compact synthetic set while preserving downstream training utility. Although DD has been widely studied for images and recently ex-tended to time-series forecasting, its application to human motion prediction remains largely unexplored. Human motion is high-dimensional and structurally coupled, and gradient matching (GM) in the original motion space optimizes many correlated variables without a prior on pose plausibility or temporal dynamics, which frequently yields implausible and unstable synthetic motions. To address this limitation, we propose a latent DD framework that regularizes distillation with a learned motion prior. Motions are first compressed by a residual-quantized variational autoencoder (RVQ-VAE), and distillation then updates only a learnable latent bank through the frozen quantizer and decoder. The pretrained de-coder restricts synthetic motions to its output space, while residual quantization progressively refines the latent approximation across multiple codebooks and alleviates the representational bottleneck of single-stage vector quantization. Experiments on Human3.6M, CMU, and 3DPW with two prediction backbones show that the proposed framework outperforms direct GM in 27 of 30 evaluated settings and random subsets in every setting, and produces visibly more plausible synthetic motions in qualitative comparisons. 
+
+Index Terms — Dataset Distillation, Human Motion Prediction, Gradient Matching, RVQ-VAE 
+
+1. INTRODUCTION 
+
+Dataset distillation (DD) replaces a large training set with a compact synthetic set that preserves downstream training utility [1, 2]. Gradi-ent matching (GM) synthesizes such data by aligning the parameter gradients induced by real and synthetic samples [3], and later stud-ies improve condensation through differentiable augmentation [4], distribution matching [5], trajectory matching [6], synthetic-data pa-rameterization [7], and representative matching [8]. The resulting synthetic sets have enabled applications such as privacy-preserving medical data sharing [9]. All of these methods were developed for images, where a synthetic sample is a freely optimized pixel array with a fixed layout. DD has recently been extended to temporal data through fre-quency and trajectory matching [10], harmonic matching for fore-casting [11], and spatio-temporal condensation [12]. Human motion, however, differs fundamentally from generic time series. Each frame is a pose whose parameters are coupled by the kinematic structure of the body, and motion predictors model the temporal dependencies           
+
+> This research was supported in part by JSPS KAKENHI Grant Numbers JP24K02942 and JP25K21218. Correspondence to Guang Li
+> <guang@lmd.ist.hokudai.ac.jp> .
+
+among these parameters using recurrent [13], graph-based [14, 15], attention-based [16, 17], and MLP [18] architectures. Training such predictors is routinely repeated across architectures and horizons, so a compact synthetic set that retains training utility is of practical in-terest. Despite this potential, applying GM directly to motion data is problematic. Direct GM treats every value of a synthetic sequence as an independent variable and updates it using gradient signals from the predictor alone. For articulated motion, this means searching over many strongly correlated rotation parameters without a prior on which joint configurations and temporal transitions are plausible. Distilled motions then exhibit implausible joint configurations and abrupt transitions, training becomes unstable, and the resulting sets can be inferior even to random subsets. A natural solution is to regularize distillation with a learned mo-tion prior rather than optimizing freely in the original space. Latent-space DD reduces the optimization burden of synthetic data for im-ages [19], and discrete representations learned by VQ-VAE [20] are effective for motion modeling [21]. A single codebook, however, imposes a restrictive bottleneck that limits how well a synthetic set adapts to the distillation objective, whereas residual vector quantiza-tion (RVQ) represents a latent vector as a sum of codewords drawn progressively from multiple codebooks and relieves this bottleneck while retaining a structured motion prior [22]. Building on this ob-servation, we pretrain an RVQ-VAE motion autoencoder and distill in its pre-quantization latent space, updating only a learnable latent bank by GM through the frozen quantizer and decoder, and evaluate the framework on three benchmarks with two prediction backbones. Our contributions are summarized as follows. • We study dataset distillation for human motion prediction and show that direct GM in the original motion space, lacking a learned motion prior, yields implausible synthetic motions. • We propose a latent distillation framework built on a pre-trained RVQ-VAE, in which only a learnable latent bank is optimized by GM through the frozen residual quantizer. • We show empirically that, under a shared objective, distilling in the residual-quantized latent space outperforms direct GM as well as continuous and single-stage latent variants. 
+
+2. METHODOLOGY 2.1. Preliminaries Gradient matching. GM constructs synthetic data by matching the parameter gradients of real and synthetic samples. A sample is di-vided into an observed sequence P ∈ RTin ×D and a future sequence 
+
+F ∈ RTout ×D , where D is the dataset-specific feature dimension. Given a backbone fθ and prediction objective ℓ, the gradients in-duced by real and synthetic samples are gr = ∇θ ℓ(fθ (Pr ), F r ) and arXiv:2609.26430v1 [cs.CV] 22 Sep 2026 Fig. 1 . An illustration of the proposed latent dataset distillation framework. Stage I learns a compact motion representation with an RVQ-VAE. In Stage II, real segments are encoded to initialize a learnable latent bank H, which is the only quantity optimized while the RVQ-VAE remains frozen. 
+
+gs = ∇θ ℓ(fθ (Ps), F s). We minimize the normalized discrepancy between the two, 
+
+LGM =
+
+P 
+
+> p
+
+g(p) 
+
+> s
+
+− sg( g(p) 
+
+> r
+
+) 22
+
+P 
+
+> p′
+
+sg( g(p′) 
+
+> r
+
+) 22
+
++ ϵ, (1) where p and p′ index parameter tensors and sg( ·) denotes stop-gradient. The real gradients are fixed targets, whereas the synthetic branch retains the computation graph so that the synthetic repre-sentation can be optimized. Unlike the original GM formulation, which interleaves synthetic-data updates with network training, the backbone is held fixed as a shared gradient probe. 
+
+Motion data format. Each motion sequence is represented as 
+
+X = [ x1, . . . , x T ] with xt ∈ RD , where xt is the pose at time t. A 35-frame window is divided into Tin = 25 observed and Tout = 10 
+
+future frames, and each synthetic trajectory contains 50 frames so that several prediction windows can be extracted from it. 
+
+2.2. Residual-Quantized Motion Representation 
+
+Direct GM optimizes motion features without an explicit structural prior. To regularize the optimization with a learned motion prior, we first train an autoencoder that combines a stochastic VAE encoder with residual vector quantization. 
+
+Stochastic latent encoder. Given a motion segment X ∈
+
+RT ×D , the encoder produces the mean and log-variance of a latent distribution, (μ, log σ2) = Eϕ(X), from which z = μ + σ ⊙ ε
+
+is sampled with ε ∼ N (0 , I ). Temporal convolutions reduce the temporal resolution and map each latent step to a 64-D vector. 
+
+Residual vector quantization. Instead of quantizing z with a single codebook, RVQ progressively represents the remaining resid-ual. Starting from r(0) = z, the k-th codebook performs 
+
+q(k) = arg min 
+
+> e∈C (k)
+
+r(k−1) − e 22
+
+, r(k) = r(k−1) − sg( q(k)),
+
+(2) and the final quantized representation is Q(z) = PKk=1 q(k). Each stage refines the approximation left by the preceding one, so the rep-resentation capacity grows with K instead of being fixed by a single codebook. Quantizers of this form were introduced for neural au-dio coding [23] and later used for motion synthesis [22]. We exploit the same property to obtain a distillation space compact enough to regularize GM yet expressive enough for the motions it represents. 
+
+Pretraining objective. Since the nearest-codeword selection is not differentiable, a straight-through estimator passes gradients from the decoder to the continuous latent representation during train-ing. The RVQ-VAE is optimized using LRVQ = Lrec + λv Lrec vel +
+
+Lcodebook + Lcommit + λKL (t)LKL , where Lrec reconstructs the motion features, Lrec vel reconstructs their first-order differences with weight λv (not to be confused with the distillation term Lvel in Eq. (4)), Lcodebook and Lcommit are the codebook and commitment losses of VQ-VAE [20] summed over the K stages, and λKL (t) is an annealed KL weight. The KL term pulls the pre-quantization latent toward a standard Gaussian, bounding the scale of the space in which distillation later operates. After pretraining, the encoder, codebooks, and decoder are frozen. 
+
+2.3. Latent Dataset Distillation 
+
+The framework that performs distillation over the pretrained latent space is illustrated in Fig. 1. 
+
+Latent-bank initialization. For a budget of M synthetic trajec-tories, we first select real 50-frame segments {X(0)  
+
+> i
+
+}Mi=1 and initial-ize a latent bank H = {hi}Mi=1 using the encoder mean branch, 
+
+h(0)  
+
+> i
+
+= Eμ(X(0)  
+
+> i
+
+). A trajectory eXi = Dψ (Q(hi)) is then de-coded from each slot with the frozen RVQ and decoder, so distil-lation searches over H rather than over all motion values. 
+
+Gradient flow through the frozen quantizer. Because nearest-codeword selection is piecewise constant in hi, its gradient is zero almost everywhere and gives no optimization signal. During distil-lation, we therefore apply the same straight-through estimator to the frozen quantizer, 
+
+QST (h) = h + sg( Q(h) − h) , (3) so that the forward pass decodes Q(h) while the gradient of the dis-tillation objective reaches h directly. 
+
+Motion-space regularization. At each iteration, a batch of 50-frame real segments is sampled from the full training pool, and synthetic segments are decoded from randomly selected la-tent slots, so the sequence or action used for initialization does not determine the real–synthetic pairing. For each pair, 35-frame windows Wr = [ Pr , F r ] and Ws = [ Ps, F s] are extracted with Table 1 . Comparisons at the 1× synthetic-data budget on Human3.6M, CMU, and 3DPW. Results are MPJPE (mm) at frames #2/#4/#8/#10/#14, given as mean ±std over five runs, and Mean5 is the average of the five horizon-wise means. Best compressed-set re-sults are in bold, and Full is trained under the same fixed budget and serves as a reference. 
+
+Dataset Method #2 #4 #8 #10 #14 Mean5 (a) Simple H36M Full 7.48 ±0.37 15 .14 ±0.67 31 .72 ±1.08 40 .72 ±1.19 58 .98 ±1.86 30.81 Random 17 .72 ±1.22 34 .88 ±3.17 68 .34 ±4.71 82 .98 ±6.00 107 .94 ±7.66 62.37 GM 45 .84 ±10 .42 56 .12 ±16 .20 92 .16 ±18 .85 114 .08 ±12 .39 119 .52 ±14 .32 85.54 Ours 13 .78 ±0.60 26 .50 ±0.89 47 .38 ±1.27 57 .04 ±1.81 73 .94 ±1.13 43.73 
+
+CMU Full 11 .82 ±1.27 23 .09 ±2.26 47 .62 ±3.08 60 .56 ±2.80 87 .90 ±2.93 46.20 Random 30 .54 ±2.63 58 .65 ±6.83 111 .07 ±12 .96 131 .82 ±14 .65 176 .85 ±13 .34 101.79 GM 32 .36 ±5.48 51 .58 ±7.41 88 .38 ±11 .10 108 .54 ±15 .44 133 .25 ±12 .93 82.82 Ours 21 .41 ±0.99 41 .47 ±1.31 77 .03 ±2.49 92 .56 ±3.55 118 .73 ±5.00 70.24 
+
+3DPW Full 18 .83 ±2.77 34 .94 ±3.28 67 .34 ±7.44 79 .32 ±8.14 100 .85 ±13 .81 60.26 Random 38 .18 ±11 .20 68 .57 ±19 .25 112 .72 ±30 .57 130 .32 ±31 .00 155 .73 ±35 .67 101.10 GM 31 .83 ±5.27 49 .60 ±5.13 82 .22 ±11 .43 96 .23 ±10 .24 116 .63 ±12 .05 75.30 Ours 22 .82 ±0.96 42 .68 ±2.65 74 .68 ±3.29 86 .56 ±3.71 104 .85 ±4.14 66.32 
+
+(b) DLinear H36M Full 14 .46 ±2.53 30 .16 ±3.45 64 .54 ±8.30 81 .52 ±10 .22 112 .02 ±14 .38 60.54 Random 17 .92 ±7.18 34 .70 ±8.10 66 .84 ±8.25 78 .42 ±10 .22 107 .58 ±13 .53 61.09 GM 19 .88 ±4.81 35 .24 ±4.88 60 .28 ±3.45 70 .20 ±2.61 85 .04 ±3.15 54.13 Ours 11 .44 ±1.05 24 .28 ±2.10 47 .62 ±4.95 57 .96 ±5.57 80 .16 ±9.81 44.29 
+
+CMU Full 19 .33 ±0.36 36 .89 ±0.61 71 .49 ±0.75 86 .64 ±0.66 112 .29 ±1.12 65.33 Random 16 .93 ±1.67 35 .93 ±2.86 75 .14 ±4.74 92 .80 ±5.25 123 .27 ±6.81 68.81 GM 20 .76 ±2.67 39 .79 ±3.52 74 .44 ±2.74 89 .37 ±2.06 111 .79 ±1.09 67.23 Ours 12 .85 ±1.35 28 .96 ±3.07 67 .33 ±7.36 86 .11 ±9.60 118 .18 ±13 .53 62.69 
+
+3DPW Full 19 .05 ±0.29 37 .51 ±0.62 69 .79 ±0.58 81 .86 ±0.74 99 .63 ±1.05 61.57 Random 19 .69 ±3.56 38 .87 ±7.79 74 .84 ±12 .01 88 .53 ±13 .36 109 .45 ±18 .92 66.28 GM 18 .83 ±1.74 37 .83 ±3.69 70 .85 ±4.21 83 .63 ±4.26 102 .82 ±5.60 62.79 
+
+Ours 17 .96 ±0.81 36 .05 ±1.52 70 .65 ±3.38 84 .70 ±3.91 107 .12 ±5.31 63.30 
+
+Fig. 2 . Synthetic training trajectories (not predictions) initialized from two Human3.6M sequences; the left column shows the initialization, and frame indices #0–#30 index the 50-frame trajectory rather than prediction horizons. The distilled motions need not retain the initializing action. In the examples shown, direct GM produces implausible joint configurations and abrupt transitions, whereas motions decoded from the latent bank stay within the decoder output space. the same random temporal offset and passed to the shared back-bone to compute LGM . We further regularize the decoded motion using Lpose = MSE( Ws, W r ) and Lvel = MSE(∆ Ws, ∆Wr ),where ∆Wt = Wt+1 − Wt. These regularizers do not assume semantic correspondence between paired windows. Under random pairing, their expectation splits into a term minimized at the mean real window and a term independent of Ws, so they act as a mean-shrinkage regularizer that anchors the decoded motion to the bulk of the real distribution. Note that Lvel operates on differences of rotation parameters rather than physical angular velocities. 
+
+Distillation objective. The complete objective is 
+
+Ldistill = λGM LGM + λvel Lvel + λpose Lpose . (4) Only H is updated, while the RVQ-VAE remains fixed and the back-bone provides gradient-matching signals. After optimization, all la-tent slots are decoded once into 50-frame sequences, yielding a stan-dard synthetic dataset that trains predictors without the RVQ-VAE. 
+
+3. EXPERIMENTS 3.1. Experimental Setup Datasets and Evaluation Metrics. We evaluate the framework on Human3.6M [24], the CMU Graphics Lab Motion Capture Database [25], and 3DPW [26]. Human3.6M is represented by 99-D exponential maps, CMU by 70-D normalized features, and 3DPW by 72-D SMPL axis-angle features. Prediction quality is measured by mean per-joint position error (MPJPE, mm) on 3D joint positions recovered from each representation, where a lower value is better. Models observe 25 frames and predict the next 10; at test time the predicted block is appended to the observation window, and the pre-dictor is reapplied until 25 future frames are produced, so horizons beyond #10 come from rollout. We report frames #2/#4/#8/#10/#14, corresponding to 80/160/320/400/560 ms at 25 fps. Mean5 averages these horizons, and Mean8 adds #18/#22/#25 (720/880/1000 ms). 
+
+Baselines and Budgets. We compare Full-data training, Ran-dom subset selection, direct GM, and the proposed method. Direct Fig. 3 . Ablation studies. (a) Mean5 MPJPE on Human3.6M with DLinear as the budget grows, where Full is budget-independent and trained for the same 4000 updates. (b) Mean5 and Mean8 MPJPE on CMU with Simple at the 2× budget. GM+Reg is direct GM trained with the objective of Eq. (4), K = 1 is a single-stage VQ variant, and error bars are standard deviations over five runs. GM optimizes the same initialized segments in the feature space us-ing only the GM objective, with the same budget, backbone, itera-tions, and learning rate as Ours; the ablation also reports direct GM trained with the objective of Eq. (4), denoted GM+Reg. The back-bone used as the gradient probe is randomly initialized and kept fixed within each run. Adapting temporal DD methods [10–12] to artic-ulated motion is left for future work. The budget is the number M
+
+of synthetic trajectories, each of which yields 16 overlapping, hence non-independent, 35-frame training windows. The 1×/2×/4× bud-gets correspond to 5%/10%/20% of the real training sequences on Human3.6M, 10%/20%/40% on 3DPW, and 1/2/4 trajectories per action class on CMU, with identical M for Random, GM, and Ours. 
+
+Implementation Details. We use a lightweight backbone based on SiMLPe [18], denoted Simple, and DLinear [27]. The RVQ-VAE uses a 64-D latent space, six residual stages, and 128 entries per codebook, pretrained for 4000 iterations with a learning rate of 2 ×
+
+10 −4. We set λv = 1 and warm up λKL (t) = 10 −4 min(1 , t/ 1000) 
+
+over the first 1000 iterations. The latent bank is distilled for 2500 iterations with Adam, learning rate 10 −2, and batch size 16, with 
+
+λGM = 10 and λpose = λvel = 1 .5. All downstream models, including Full, use the same setting of 4000 iterations, learning rate 
+
+3 × 10 −4, and weight decay 10 −4, so Full is a reference under this protocol rather than a converged upper bound. We report results averaged over five random seeds. 
+
+3.2. Evaluation Results Comparisons at the Fixed Budget. Table 1 compares the pro-posed method with Full, Random, and direct GM at the 1× budget. Ours achieves the lowest Mean5 MPJPE in five of the six dataset– backbone combinations, cutting the error of direct GM by 48.9% on Human3.6M with Simple and by 6.8% to 18.2% on four pairs, while 3DPW with DLinear is 0.8% worse. Over the 30 horizon-level com-parisons, Ours leads direct GM in 27 and Random in all 30. Direct GM is unstable on Human3.6M with Simple, where its error exceeds that of Random with a large variance. Its distilled motions contain implausible joint configurations (Fig. 2). Ours falls below Full on several DLinear settings, where Full is trained for the same 4000 updates and has not converged. 
+
+Ablation on the Data Budget. Fig. 3(a) varies the synthetic-data budget on Human3.6M with DLinear. Ours achieves 44.29, 43.82, and 41.72 Mean5 at the three budgets, beating direct GM and Random at every budget. Random and direct GM instead degrade at 
+
+4×, where the fixed downstream budget gives each trajectory fewer passes over training. 
+
+Cross-Backbone Transfer. Table 2 asks whether a set distilled with one backbone stays useful for another, and Ours yields lower transfer error than direct GM in all four directions. The gain is clear-
+
+Table 2 . Cross-backbone transfer at the 2× budget. Each cell is the Mean5 MPJPE (mm) of the target backbone trained on the set distilled with the source backbone (S: Simple, D: DLinear). Paren-theses give the target backbone trained on a set distilled with the target backbone itself.                   
+
+> Transfer GM Ours CMU S →D70 .40 ±3.48 (68.37) 58 .45 ±2.61 (63.32) CMU D →S100 .34 ±7.41 (80.21) 90 .98 ±4.35 (67.51) H36M S →D66 .12 ±14 .37 (57.22) 47 .30 ±4.05 (43.82) H36M D →S102 .16 ±14 .05 (70.97) 78 .41 ±9.18 (43.89)
+
+est for Simple →DLinear, where the transferred data stays close to the in-backbone result and on CMU outperforms it. The distilled sets thus retain cross-backbone utility in absolute accuracy, while the relative degradation from in-backbone to transferred training is larger for Ours than for direct GM in two of the four directions. 
+
+Ablation on the Latent Representation. Fig. 3(b) compares latent representations at the 2× budget. Adding the regularizers of Eq. (4) to direct GM lowers Mean5 from 80.2 to 74.9, and all la-tent variants use this same objective, so the remaining differences reflect the representation alone. Relative to GM+Reg, the continuous VAE latent space lowers Mean5 to 70.8, a single-stage VQ variant is worse than the continuous space at 76.2, and increasing the resid-ual depth recovers the loss, with K = 6 reaching 67.5 Mean5 and 97.1 Mean8, 9.9% and 6.0% below GM+Reg and with the smallest spread among all variants. A larger K also enlarges the codebooks, so the gain in residual depth includes the added capacity. 
+
+Qualitative Comparison. Fig. 2 shows synthetic training tra-jectories, not predictions. Since pairing ignores the initializing se-quence, the distilled motions need not retain the initializing action. In the examples shown, direct GM produces implausible joint con-figurations and abrupt transitions, whereas motions decoded from the latent bank stay within the decoder output space. 
+
+4. CONCLUSION 
+
+We have presented a latent dataset distillation framework for human motion prediction. Rather than optimizing motion features directly, it distills in the pre-quantization latent space of a pretrained RVQ-VAE and updates only a latent bank through the frozen quantizer and decoder, so gradient matching is regularized by a learned mo-tion prior. On Human3.6M, CMU, and 3DPW with two backbones, the distilled sets outperform direct gradient matching and random subsets under a fixed downstream budget, and residual quantization improves over single-stage quantization among latent variants shar-ing the same objective. The distilled sets also remain useful when transferred to a backbone other than the one used for distillation. 5. REFERENCES 
+
+[1] Tongzhou Wang, Jun-Yan Zhu, Antonio Torralba, and Alexei A. Efros, “Dataset distillation,” arXiv preprint arXiv:1811.10959 , 2018. [2] Guang Li, Bo Zhao, and Tongzhou Wang, “Awesome dataset distillation,” https://github.com/Guang000/ Awesome-Dataset-Distillation , 2022. [3] Bo Zhao, Konda Reddy Mopuri, and Hakan Bilen, “Dataset condensation with gradient matching,” in International Con-ference on Learning Representations , 2021. [4] Bo Zhao and Hakan Bilen, “Dataset condensation with dif-ferentiable siamese augmentation,” in Proceedings of the 38th International Conference on Machine Learning , 2021, pp. 12674–12685. [5] Bo Zhao and Hakan Bilen, “Dataset condensation with dis-tribution matching,” in Proceedings of the IEEE/CVF Win-ter Conference on Applications of Computer Vision , 2023, pp. 6514–6523. [6] George Cazenavette, Tongzhou Wang, Antonio Torralba, Alexei A. Efros, and Jun-Yan Zhu, “Dataset distillation by matching training trajectories,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recog-nition , 2022, pp. 10718–10727. [7] Jang-Hyun Kim, Jinuk Kim, Seong Joon Oh, Sangdoo Yun, Hwanjun Song, Joonhyun Jeong, Jung-Woo Ha, and Hyun Oh Song, “Dataset condensation via efficient synthetic-data pa-rameterization,” in Proceedings of the 39th International Con-ference on Machine Learning , 2022, pp. 11102–11118. [8] Yanqing Liu, Jianyang Gu, Kai Wang, Zheng Zhu, Wei Jiang, and Yang You, “DREAM: Efficient dataset distillation by rep-resentative matching,” in Proceedings of the IEEE/CVF In-ternational Conference on Computer Vision , 2023, pp. 17314– 17324. [9] Guang Li, Ren Togo, Takahiro Ogawa, and Miki Haseyama, “Compressed gastric image generation based on soft-label dataset distillation for medical data sharing,” Computer Meth-ods and Programs in Biomedicine , vol. 227, pp. 107189, 2022. [10] Hao Miao, Ziqiao Liu, Yan Zhao, Chenjuan Guo, Bin Yang, Kai Zheng, and Christian S. Jensen, “Less is more: Efficient time series dataset condensation via two-fold modal matching,” 
+
+Proceedings of the VLDB Endowment , vol. 18, no. 2, pp. 226– 238, 2024. [11] Seungha Hong, Sanghwan Jang, Wonbin Kweon, Suyeon Kim, Gyuseok Lee, and Hwanjo Yu, “Harmonic dataset distillation for time series forecasting,” Proceedings of the AAAI Con-ference on Artificial Intelligence , vol. 40, no. 26, pp. 21770– 21778, 2026. [12] Taehyung Kwon, Yeonje Choi, Yeongho Kim, and Kijung Shin, “Effective dataset distillation for spatio-temporal fore-casting with bi-dimensional compression,” in 2026 IEEE 42nd International Conference on Data Engineering (ICDE) , 2026, pp. 1–14. [13] Julieta Martinez, Michael J. Black, and Javier Romero, “On human motion prediction using recurrent neural networks,” in 
+
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , 2017. [14] Wei Mao, Miaomiao Liu, Mathieu Salzmann, and Hongdong Li, “Learning trajectory dependencies for human motion pre-diction,” in Proceedings of the IEEE/CVF International Con-ference on Computer Vision , 2019, pp. 9489–9497. [15] Maosen Li, Siheng Chen, Yangheng Zhao, Ya Zhang, Yanfeng Wang, and Qi Tian, “Dynamic multiscale graph neural net-works for 3D skeleton based human motion prediction,” in 
+
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 2020. [16] Wei Mao, Miaomiao Liu, and Mathieu Salzmann, “History re-peats itself: Human motion prediction via motion attention,” in 
+
+Proceedings of the European Conference on Computer Vision ,2020, pp. 474–489. [17] Emre Aksan, Manuel Kaufmann, Peng Cao, and Otmar Hilliges, “A spatio-temporal transformer for 3D human mo-tion prediction,” in 2021 International Conference on 3D Vi-sion , 2021, pp. 565–574. [18] Wen Guo, Yuming Du, Xi Shen, Vincent Lepetit, Xavier Alameda-Pineda, and Francesc Moreno-Noguer, “Back to MLP: A simple baseline for human motion prediction,” in Pro-ceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision , 2023, pp. 4809–4819. [19] Yuxuan Duan, Jianfu Zhang, and Liqing Zhang, “Dataset dis-tillation in latent space,” arXiv preprint arXiv:2311.15547 ,2023. [20] Aaron van den Oord, Oriol Vinyals, and Koray Kavukcuoglu, “Neural discrete representation learning,” in Advances in Neu-ral Information Processing Systems , 2017, vol. 30. [21] Jianrong Zhang, Yangsong Zhang, Xiaodong Cun, Yong Zhang, Hongwei Zhao, Hongtao Lu, Xi Shen, and Ying Shan, “Generating human motion from textual descriptions with dis-crete representations,” in Proceedings of the IEEE/CVF Con-ference on Computer Vision and Pattern Recognition , 2023, pp. 14730–14740. [22] Chuan Guo, Yuxuan Mu, Muhammad Gohar Javed, Sen Wang, and Li Cheng, “MoMask: Generative masked modeling of 3D human motions,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 2024, pp. 1900– 1910. [23] Neil Zeghidour, Alejandro Luebs, Ahmed Omran, Jan Skoglund, and Marco Tagliasacchi, “SoundStream: An end-to-end neural audio codec,” IEEE/ACM Transactions on Audio, Speech, and Language Processing , vol. 30, pp. 495–507, 2022. [24] Catalin Ionescu, Dragos Papava, Vlad Olaru, and Cristian Sminchisescu, “Human3.6M: Large scale datasets and predic-tive methods for 3D human sensing,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 36, no. 7, pp. 1325–1339, 2014. [25] Carnegie Mellon University, “CMU graphics lab motion cap-ture database,” https://mocap.cs.cmu.edu/ .[26] Timo von Marcard, Roberto Henschel, Michael J. Black, Bodo Rosenhahn, and Gerard Pons-Moll, “Recovering accurate 3D human pose in the wild using IMUs and a moving camera,” in 
+
+Proceedings of the European Conference on Computer Vision ,2018, pp. 601–617. [27] Ailing Zeng, Muxi Chen, Lei Zhang, and Qiang Xu, “Are transformers effective for time series forecasting?,” Proceed-ings of the AAAI Conference on Artificial Intelligence , vol. 37, no. 9, pp. 11121–11128, 2023.

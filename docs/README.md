@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-22</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-23</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-22 22:17:09 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-23 22:10:48 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-22 日报：17 篇中精读 6 篇、速读 11 篇，自动驾驶世界模型与端到端建模成今日主线。</p>
-<p>最值得看的是两篇精读——关系型潜世界模型（10.0/10）和带增量纠错的事件分解世界模型 EditWM（9.0/10），均聚焦自动驾驶中的场景理解与预测。</p>
-<p>普通读者可优先从这两篇的摘要入手，理解世界模型如何为自动驾驶“预演”路况，再按兴趣延伸至越野导航等速读方向。</p>
+<p>2026-09-23 日报完成：从17篇中精读6篇、速读11篇，焦点集中在具身世界模型、自动驾驶与机器人操作。</p>
+<p>最值得看的是两篇9分精读：CausalWM用因果链式思维推理做具身世界模型，ForeDrive用规划相关潜在世界模型做前瞻引导端到端自动驾驶。</p>
+<p>普通读者可先读这两篇，再按兴趣从StrucPhysVideo、ForwardDLO、AffordanceWAM等速读中选物理动力学或机器人操作方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -83,9 +83,9 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Relationally Grounded Latent World Models for Autonomous Driving">Relationally Grounded Latent World Models for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="EditWM: Event-Decomposed World Modeling with Incremental Correction for End-to-End Autonomous Driving">EditWM: Event-Decomposed World Modeling with Incremental Correction for End-to-End Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models">CSWAM: Better Causal Semantic Representations for Out-of-Distribution Generalization in World Action Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model">CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model</span></li><li><span class="dpr-home-dashboard-paper-title" title="ForeDrive: Foresight-Guided End-to-End Autonomous Driving with a Planning-Relevant Latent World Model">ForeDrive: Foresight-Guided End-to-End Autonomous Driving with a Planning-Relevant Latent World Model</span></li><li><span class="dpr-home-dashboard-paper-title" title="DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving">DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -96,9 +96,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Feeling Terrain Before Crossing: World Models for Off-Road Navigation">Feeling Terrain Before Crossing: World Models for Off-Road Navigation</span></li><li><span class="dpr-home-dashboard-paper-title" title="MT-WAM: Reorienting the One-Pass Predictive Representation Toward Action Generation">MT-WAM: Reorienting the One-Pass Predictive Representation Toward Action Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="GestureFAR: Streaming Co-Speech Gesture Generation with Flow Autoregression">GestureFAR: Streaming Co-Speech Gesture Generation with Flow Autoregression</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions">StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions</span></li><li><span class="dpr-home-dashboard-paper-title" title="ForwardDLO: Model-Based Bimanual Shape Matching of Unconstrained Deformable Linear Objects">ForwardDLO: Model-Based Bimanual Shape Matching of Unconstrained Deformable Linear Objects</span></li><li><span class="dpr-home-dashboard-paper-title" title="AffordanceWAM: Affordance-Aware Joint World-Action Modeling for Robot Manipulation">AffordanceWAM: Affordance-Aware Joint World-Action Modeling for Robot Manipulation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>10</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>8</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>3</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,281 @@
+{
+  "date": "20260923",
+  "date_label": "",
+  "generated_at": "2026-09-23 22:10:48 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.23184v1",
+      "route": "202609/23/2609.23184v1-causalwm-causal-chain-of-thought-reasoning-for-embodied-world-model",
+      "title": "CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "具身世界模型，使用因果链式推理预测未来视频",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.26299v1",
+      "route": "202609/23/2609.26299v1-foredrive-foresight-guided-end-to-end-autonomous-driving-with-a-planning-relevant-latent-world-model",
+      "title": "ForeDrive: Foresight-Guided End-to-End Autonomous Driving with a Planning-Relevant Latent World Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向端到端自动驾驶的规划相关潜在世界模型",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.26792v1",
+      "route": "202609/23/2609.26792v1-dreamstream-towards-policy-oriented-generative-simulation-for-end-to-end-driving",
+      "title": "DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于自回归视频世界模型的闭环驾驶生成仿真器",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/23/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "具身AI视频世界模型，从结构化描述和机器人动作学习物理动态",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.18461v1",
+      "route": "202609/23/2609.18461v1-disentangling-long-term-memory-via-latent-neuro-symbolic-reasoning",
+      "title": "Disentangling Long-Term Memory via Latent Neuro-Symbolic Reasoning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在连续潜在空间中解耦智能体长期记忆",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.23881v1",
+      "route": "202609/23/2609.23881v1-motionjepa-preventing-temporal-feature-collapse-by-capturing-visual-changes-in-latent-space",
+      "title": "MotionJEPA: Preventing Temporal Feature Collapse by Capturing Visual Changes in Latent Space",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "潜世界模型学习与时序动态正则化",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.25820v1",
+      "route": "202609/23/2609.25820v1-beyond-reconstruction-error-analytical-and-data-driven-action-tokenization-for-autoregressive-vision-language-action-models",
+      "title": "Beyond Reconstruction Error: Analytical and Data-Driven Action Tokenization for Autoregressive Vision-Language-Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向自回归视觉语言动作模型的离散动作分词",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.18455v1",
+      "route": "202609/23/2609.18455v1-forwarddlo-model-based-bimanual-shape-matching-of-unconstrained-deformable-linear-objects",
+      "title": "ForwardDLO: Model-Based Bimanual Shape Matching of Unconstrained Deformable Linear Objects",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于机器人操作的循环潜在动力学模型，预测每段位移",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.22332v1",
+      "route": "202609/23/2609.22332v1-affordancewam-affordance-aware-joint-world-action-modeling-for-robot-manipulation",
+      "title": "AffordanceWAM: Affordance-Aware Joint World-Action Modeling for Robot Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "预测未来场景的生成式世界-动作模型",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.24313v1",
+      "route": "202609/23/2609.24313v1-neuido-neural-intrinsic-dynamics-operator-for-physics-informed-4d-world-models",
+      "title": "NeuIDO: Neural Intrinsic Dynamics Operator for Physics-Informed 4D World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "为4D世界模型学习统一内在动力学表示",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.26293v1",
+      "route": "202609/23/2609.26293v1-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "刻画智能体何时可信任其学习到的世界模型",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.26430v1",
+      "route": "202609/23/2609.26430v1-latent-dataset-distillation-for-human-motion-prediction",
+      "title": "Latent Dataset Distillation for Human Motion Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "残差量化VAE将运动压缩为离散潜码用于预测",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.19796v2",
+      "route": "202609/23/2609.19796v2-lifd-anchored-diffusion-for-3d-aware-scene-memory-in-robotic-manipulation",
+      "title": "LIFD: Anchored Diffusion for 3D-Aware Scene Memory in Robotic Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向具身智能体的3D感知场景记忆与场景token",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.19863v1",
+      "route": "202609/23/2609.19863v1-feeling-terrain-before-crossing-world-models-for-off-road-navigation",
+      "title": "Feeling Terrain Before Crossing: World Models for Off-Road Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以本体感知为条件的越野导航世界模型",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.20103v2",
+      "route": "202609/23/2609.20103v2-safety-critical-scenarios-emerge-from-initial-scenes",
+      "title": "Safety-Critical Scenarios Emerge from Initial Scenes",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "安全关键驾驶场景生成与交通仿真",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.21945v1",
+      "route": "202609/23/2609.21945v1-learning-to-move-cities-deep-meta-models-and-reinforcement-policies-for-calibration-and-control-in-urban-networks",
+      "title": "Learning to Move Cities: Deep Meta-Models and Reinforcement Policies for Calibration and Control in Urban Networks",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向交通仿真标定与控制的城市交通动力学共享潜在空间表示",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    },
+    {
+      "paper_id": "2609.24127v1",
+      "route": "202609/23/2609.24127v1-action-slot-structured-action-centric-representation-learning-for-multi-agent-atomic-activity-understanding",
+      "title": "Action-Slot: Structured Action-Centric Representation Learning for Multi-Agent Atomic Activity Understanding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多智能体交通活动的结构化动作表示学习",
+      "first_seen_at": "2026-09-23 22:10:48 UTC",
+      "updated_at": "2026-09-23 22:10:48 UTC"
+    }
+  ]
+}
