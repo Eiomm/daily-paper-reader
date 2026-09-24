@@ -1,0 +1,598 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-24T22:22:24.638612+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 16,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2609.23184v2",
+      "source": "arxiv",
+      "title": "CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model",
+      "abstract": "Embodied world models learn to predict future physical dynamics from visual observations and control signals, where physical knowledge is implicitly entangled within latent representations. We introduce CausalWM, a 16B embodied world model that performs explicit causal chain-of-thought reasoning before future video prediction. CausalWM organizes useful variables into a reasoning trajectory, allowing the model to progressively capture causal dependencies underlying physical evolution. To train CausalWM, we collect 31K hours embodied data and develop a three-stage paradigm consisting of large-scale video pre-training, causal CoT mid-training, and multi-objective RL post-training. Despite using only a limited set of supervised CoT variables, CausalWM exhibits emergent in-context learning capabilities, enabling contextual visual feature guidance and efficient few-step generation. CausalWM achieves state-of-the-art performance across language-conditioned, action-conditioned, single-view and multi-view benchmarks, including Top-1 performance on TriWorldBench leaderboard.",
+      "authors": [
+        "Ziming Xu",
+        "Shuang Liang",
+        "Ruobing Han",
+        "Ziqiao Xi",
+        "Mingxing Rao",
+        "Kun Zhou",
+        "Zijun Zhang",
+        "Yuchen Yan",
+        "Yufan Wei",
+        "Junbo Huang",
+        "Yifei Shao",
+        "Fang Nan",
+        "Biwei Huang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-19T19:16:56+00:00",
+      "link": "https://arxiv.org/pdf/2609.23184v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "embodied world model predicting future physical dynamics in latent space",
+      "llm_evidence_cn": "具身世界模型在潜在空间预测未来物理动态",
+      "llm_evidence": "具身世界模型在潜在空间预测未来物理动态",
+      "canonical_evidence": "具身世界模型在潜在空间预测未来物理动态",
+      "llm_tldr_en": "CausalWM is a 16B embodied world model that performs explicit causal chain-of-thought reasoning before future video prediction, trained with video pretraining, causal CoT mid-training, and RL post-training.",
+      "llm_tldr_cn": "具身世界模型通常将物理知识隐式纠缠在潜在表示中，难以显式刻画物理演化规律。本文提出16B参数的CausalWM，在预测未来视频前先进行显式的因果链式思维推理，将有用变量组织为推理轨迹，并采用大规模视频预训练、因果CoT中训与多目标强化学习后训的三阶段范式。实验表明，即便仅使用少量监督CoT变量，模型也能更好地捕捉物理动态，说明显式因果推理有助于提升具身世界模型的预测能力。",
+      "llm_tldr": "具身世界模型通常将物理知识隐式纠缠在潜在表示中，难以显式刻画物理演化规律。本文提出16B参数的CausalWM，在预测未来视频前先进行显式的因果链式思维推理，将有用变量组织为推理轨迹，并采用大规模视频预训练、因果CoT中训与多目标强化学习后训的三阶段范式。实验表明，即便仅使用少量监督CoT变量，模型也能更好地捕捉物理动态，说明显式因果推理有助于提升具身世界模型的预测能力。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.27513v1",
+      "source": "arxiv",
+      "title": "Behavior-Aligned Action Tokenization for Robot Policy Learning",
+      "abstract": "Autoregressive robot policies learn continuous control by predicting discrete action tokens from observations. Different tasks often share local motions, yet behavioral correspondence across demonstrations receives limited explicit supervision in existing tokenizers. Motions with different timing can therefore lack a shared representation despite following similar patterns. We propose Behavior-Aligned Action Tokenization (BAAT), which uses soft dynamic time warping (Soft-DTW) to select corresponding action chunks and aligns their quantized coordinates jointly with reconstruction. This objective encourages similar motions across tasks to occupy nearby quantized representations while retaining executable action detail. A history-conditioned diffusion decoder reconstructs continuous action chunks from these tokens, and a downstream autoregressive policy learns to predict them. We evaluate BAAT on selected tasks from three simulation benchmarks and two real robot tasks. BAAT achieves a mean simulation success rate of approximately 45.2%, exceeding OAT by approximately 7.2 percentage points. In the controlled LIBERO-All alignment ablation, policy success rises from 70.2% to 79.0% while trajectory replay success decreases. These results support behavioral correspondence as supervision for organizing shared motion structure in action tokenizers and improving downstream robot policy learning.",
+      "authors": [
+        "Junbo Dong",
+        "Ze Chen",
+        "Zhendong Xie",
+        "Junjie Li",
+        "Lixin Xu",
+        "Xuemin Chi",
+        "Yiming Song",
+        "Zhaoyuan Ma"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-23T08:12:03+00:00",
+      "link": "https://arxiv.org/pdf/2609.27513v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "action tokenization aligning quantized motion representations across tasks",
+      "llm_evidence_cn": "跨任务对齐量化动作表示的动作分词",
+      "llm_evidence": "跨任务对齐量化动作表示的动作分词",
+      "canonical_evidence": "跨任务对齐量化动作表示的动作分词",
+      "llm_tldr_en": "BAAT aligns action tokens across demonstrations using soft dynamic time warping and joint reconstruction, so similar motions across tasks share nearby quantized representations for autoregressive robot policies.",
+      "llm_tldr_cn": "自回归机器人策略通过预测离散动作token实现连续控制，但现有分词器缺乏跨示教的行为对应监督，导致时序不同的相似运动难以共享表示。本文提出行为对齐动作分词BAAT，利用软动态时间规整选择对应动作片段，并将量化坐标与重建目标联合对齐。实验表明该方法能让跨任务的相似运动占据邻近量化表示，同时保留可执行的动作细节，从而提升策略学习效果。",
+      "llm_tldr": "自回归机器人策略通过预测离散动作token实现连续控制，但现有分词器缺乏跨示教的行为对应监督，导致时序不同的相似运动难以共享表示。本文提出行为对齐动作分词BAAT，利用软动态时间规整选择对应动作片段，并将量化坐标与重建目标联合对齐。实验表明该方法能让跨任务的相似运动占据邻近量化表示，同时保留可执行的动作细节，从而提升策略学习效果。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "motion tokenization",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.27747v1",
+      "source": "arxiv",
+      "title": "Less Language, More Latents: Annotation-Efficient VLAs for Driving",
+      "abstract": "Vision-language-action models (VLA) promise human-steerable autonomous driving, but their training is bottlenecked by the scarcity of frames paired with natural-language instructions: while camera streams and expert trajectories are logged at scale, language annotations (e.g., turn left at the intersection) remain scarce and expensive to acquire. To address this challenge, we introduce Latent Action Driving Annotations (LADA), a three-stage pipeline that transforms abundant unlabelled observation-trajectory pairs into a substrate for language-conditioned control. First, we train a latent action model with a vector-quantised bottleneck, producing a compact codebook of high-level vehicle intents. Second, a small language-annotated subset is used to train a vision-language translator to map observations and language instructions into this codebook. Third, we train a driving VLA on observation-latent-action pairs over the full unlabelled corpus. Using fewer than 5% of language annotations and without leveraging any auxiliary chain-of-thought reasoning or visual question answering streams, LADA achieves a Driving Score of 87.98 and a Success Rate of 70.46% on the closed-loop Bench2Drive benchmark, matching or surpassing fully supervised baselines.",
+      "authors": [
+        "Alexey Zakharov",
+        "Kemal Oksuz",
+        "Puneet K. Dokania"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-09-23T12:00:04+00:00",
+      "link": "https://arxiv.org/pdf/2609.27747v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "vector-quantised latent action codebook for driving",
+      "llm_evidence_cn": "驾驶的向量量化潜动作码本",
+      "llm_evidence": "驾驶的向量量化潜动作码本",
+      "canonical_evidence": "驾驶的向量量化潜动作码本",
+      "llm_tldr_en": "LADA addresses scarce language annotations for driving VLAs by training a latent action model with a vector-quantised bottleneck, producing a compact codebook of high-level vehicle intents that enables language-conditioned control from unlabelled data.",
+      "llm_tldr_cn": "视觉-语言-动作模型有望实现人类可操控的自动驾驶，但其训练受限于带自然语言指令的帧十分稀缺，而相机流与专家轨迹却可大规模采集。本文提出潜动作驾驶标注（LADA）三阶段流程，将大量无标注的观测-轨迹对转化为语言条件控制的基座。首先训练带向量量化瓶颈的潜动作模型，得到高层车辆意图的紧凑码本；再用少量语言标注子集训练语言条件策略。该工作缓解了驾驶VLA的语言标注瓶颈，展示了离散潜表示在驾驶表示学习与预测中的价值。",
+      "llm_tldr": "视觉-语言-动作模型有望实现人类可操控的自动驾驶，但其训练受限于带自然语言指令的帧十分稀缺，而相机流与专家轨迹却可大规模采集。本文提出潜动作驾驶标注（LADA）三阶段流程，将大量无标注的观测-轨迹对转化为语言条件控制的基座。首先训练带向量量化瓶颈的潜动作模型，得到高层车辆意图的紧凑码本；再用少量语言标注子集训练语言条件策略。该工作缓解了驾驶VLA的语言标注瓶颈，展示了离散潜表示在驾驶表示学习与预测中的价值。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "discrete latent representations using VQ-VAE and related methods",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.19863v1",
+      "source": "arxiv",
+      "title": "Feeling Terrain Before Crossing: World Models for Off-Road Navigation",
+      "abstract": "Navigation world models plan by foresight, predicting the future that each candidate action sequence produces and selecting the best, rather than mapping observations to actions directly. Unlike urban settings where a predicted scene is a sufficient proxy, off-road navigation hinges on the robot--terrain interaction, so the prediction must cover not only what the camera will see but what the robot will feel. However, existing scene-focused models do not predict how much the robot will slip, tilt or shake along a planned trajectory. Proprioception captures these dynamics directly and, when used as input, improves the prediction of the physical future. We present Feel-WM, the first off-road navigation world model that conditions on proprioception and predicts what the robot will feel alongside what the camera will see. The physical future takes the form of a future proprioceptive state and a failure risk, both learned from the robot's own experience without human labels. The planner rolls out the physical future alongside the scene and weighs the predicted failure risk against goal similarity in a separable score. Experiments on real off-road data and in simulation demonstrate that Feel-WM outperforms visual-only navigation world models in open-loop planning and closed-loop rough-terrain navigation across wheeled and legged platforms. Deployed on a Husky on mountain trails, Feel-WM plans onboard, predicts rough ground ahead and steers around it, completing courses that an end-to-end policy fails.",
+      "authors": [
+        "E-In Son",
+        "Dong-Wook Kim",
+        "Ji-Hoon Hwang",
+        "Kangsun Lee",
+        "Jisung Bae",
+        "Jung-Taak Kim",
+        "Seung-Woo Seo"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-09-17T08:19:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.19863v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proprioception-conditioned world model for off-road navigation",
+      "llm_evidence_cn": "以本体感受为条件的越野导航世界模型",
+      "llm_evidence": "以本体感受为条件的越野导航世界模型",
+      "canonical_evidence": "以本体感受为条件的越野导航世界模型",
+      "llm_tldr_en": "Feel-WM is a navigation world model for off-road settings that conditions on proprioception to predict not only future camera views but also physical outcomes like slip, tilt and shake.",
+      "llm_tldr_cn": "导航世界模型通过预测候选动作序列产生的未来来选择动作，但越野导航依赖机器人-地形交互，仅预测相机所见不足，还需预测机器人将感受到的打滑、倾斜与颠簸，而现有以场景为中心的模型无法做到。本文提出Feel-WM，首个以本体感受为条件的越野导航世界模型，将本体感受作为输入以改进物理未来预测。实验表明引入本体感受可提升预测质量并改善导航决策，拓展了世界模型在机器人越野场景中的能力。",
+      "llm_tldr": "导航世界模型通过预测候选动作序列产生的未来来选择动作，但越野导航依赖机器人-地形交互，仅预测相机所见不足，还需预测机器人将感受到的打滑、倾斜与颠簸，而现有以场景为中心的模型无法做到。本文提出Feel-WM，首个以本体感受为条件的越野导航世界模型，将本体感受作为输入以改进物理未来预测。实验表明引入本体感受可提升预测质量并改善导航决策，拓展了世界模型在机器人越野场景中的能力。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.18430v1",
+      "source": "arxiv",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "abstract": "Modeling physical dynamics, including how objects move, interact, and change state, is central to video world models for embodied AI. We present StrucPhysVideo, a family of video world models that bridges physics-focused data curation with language- and action-conditioned prediction of scene evolution. Our data pipeline combines motion-aware video segmentation, quality and content filtering, and physical relevance verification with structured annotations of objects, materials, and temporally localized interactions. By disentangling camera motion from object behavior and explicitly describing contact, deformation, and state transitions, the pipeline provides supervision grounded in observable physical events. Building on these data, we introduce StrucPhysVideo-TI2V, a sparse Mixture-of-Experts (MoE) text-image-to-video model trained with a curriculum that progressively emphasizes physical dynamics while retaining general-domain video data. StrucPhysVideo-TI2V achieves state-of-the-art performance on Physics-IQ Verified, scoring 45.5% and outperforming Cosmos3-Super-Image2Video by 2.8 percentage points. Caption ablations across backbones further demonstrate the effectiveness of physics-focused supervision. We further extend StrucPhysVideo-TI2V to StrucPhysVideo-IA2V, an interactive image-action-to-video world model that predicts visual outcomes from robot end-effector commands. Action conditioning, causal autoregressive generation, and few-step distillation enable incremental robot rollouts with only four denoising steps. Together, StrucPhysVideo advances physical dynamics modeling from image- and language-conditioned video prediction toward action-driven interaction.",
+      "authors": [
+        "Awomo-WM Team",
+        ":",
+        "Enhui Ma",
+        "Kaiwen Guo",
+        "Tingrui Zhang",
+        "Wei Song",
+        "Yingshui Tan",
+        "Jianhua Xu",
+        "Tong Zhang",
+        "Kaicheng Yu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-16T10:23:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.18430v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "video world models for physical dynamics with structured captions and actions",
+      "llm_evidence_cn": "结合结构化描述与动作的物理动态视频世界模型",
+      "llm_evidence": "结合结构化描述与动作的物理动态视频世界模型",
+      "canonical_evidence": "结合结构化描述与动作的物理动态视频世界模型",
+      "llm_tldr_en": "StrucPhysVideo builds physics-focused data curation and language/action-conditioned video world models that predict scene evolution grounded in observable physical events.",
+      "llm_tldr_cn": "建模物体如何运动、交互与改变状态，是具身智能视频世界模型的核心问题。该文提出 StrucPhysVideo，将面向物理的数据整理与语言、动作条件的场景演化预测相结合，数据流程含运动感知分割、质量与内容过滤及物理相关性校验。通过解耦相机运动与物体行为并显式描述接触、形变与状态转移，提供基于可观测物理事件的监督。工作为物理一致的视频世界模型提供数据与条件预测框架。",
+      "llm_tldr": "建模物体如何运动、交互与改变状态，是具身智能视频世界模型的核心问题。该文提出 StrucPhysVideo，将面向物理的数据整理与语言、动作条件的场景演化预测相结合，数据流程含运动感知分割、质量与内容过滤及物理相关性校验。通过解耦相机运动与物体行为并显式描述接触、形变与状态转移，提供基于可观测物理事件的监督。工作为物理一致的视频世界模型提供数据与条件预测框架。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.22332v2",
+      "source": "arxiv",
+      "title": "AffordanceWAM: Affordance-Aware Joint World-Action Modeling for Robot Manipulation",
+      "abstract": "Generalizable robot manipulation requires predicting how a scene will evolve, identifying where interactions are feasible, and determining how to act. Action-labeled robot videos directly supervise control but are costly and limited in diversity, whereas egocentric human videos capture diverse interactions but lack robot actions and differ in embodiment and appearance. We introduce AffordanceWAM, an affordance-aware generative World Action Model that represents object-centric spatiotemporal affordance through Scalar Affordance and Affordance Heatmap, within the generated future World. This representation grounds visual prediction in task-relevant objects and interaction regions for action generation, and provides shared interaction targets across human and robot videos. Built on a pretrained video diffusion Transformer, AffordanceWAM uses separately parameterized World and Action Experts, coupled through Masked Joint Self-Attention, to jointly predict future RGB observations, Scalar Affordance fields, Affordance Heatmaps, and continuous robot actions under a unified flow-matching objective. Human videos supervise all three future-World streams, whereas robot trajectories additionally provide action supervision, enabling transfer without human action labels or retargeting. Experiments on RoboCasa, CALVIN ABC$\\rightarrow$D, and real-world manipulation demonstrate consistent gains over RGB-only and robot-data-only baselines. Under fixed robot supervision, RoboCasa performance improves monotonically as affordance-annotated human video scales. These results support affordance as an effective interface for both vision-language-action learning and human-to-robot transfer.",
+      "authors": [
+        "Jiadi You",
+        "Qize Yu",
+        "Yue Chen",
+        "Minghong Cai",
+        "Zhide Zhong",
+        "Yuran Wang",
+        "Bowen Ping",
+        "Jiaqi Liang",
+        "Zhenhao Shen",
+        "Haodong Yan",
+        "Yinchuan Li",
+        "Ruihai Wu",
+        "Xiaojuan Qi",
+        "Yingcong Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-16T14:07:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.22332v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "affordance-aware generative world action model predicting future scene evolution for manipulation",
+      "llm_evidence_cn": "面向操作的可供性感知生成式世界动作模型预测未来场景演化",
+      "llm_evidence": "面向操作的可供性感知生成式世界动作模型预测未来场景演化",
+      "canonical_evidence": "面向操作的可供性感知生成式世界动作模型预测未来场景演化",
+      "llm_tldr_en": "AffordanceWAM represents object-centric spatiotemporal affordance as scalar and heatmap signals inside a generated future world, grounding visual prediction for generalizable robot manipulation.",
+      "llm_tldr_cn": "泛化性机器人操作需要预测场景如何演化、判断何处可交互并决定如何行动，但带动作标注的机器人视频昂贵且多样性有限，人类视频又缺乏机器人动作。本文提出AffordanceWAM，一种可供性感知的生成式世界动作模型，用标量可供性与可供性热图表示以物体为中心的时空可供性，并将其嵌入生成的未来世界中。该表示将视觉预测锚定到任务相关物体与交互区域，为动作生成提供共享交互目标，从而提升跨具身的操作泛化能力。",
+      "llm_tldr": "泛化性机器人操作需要预测场景如何演化、判断何处可交互并决定如何行动，但带动作标注的机器人视频昂贵且多样性有限，人类视频又缺乏机器人动作。本文提出AffordanceWAM，一种可供性感知的生成式世界动作模型，用标量可供性与可供性热图表示以物体为中心的时空可供性，并将其嵌入生成的未来世界中。该表示将视觉预测锚定到任务相关物体与交互区域，为动作生成提供共享交互目标，从而提升跨具身的操作泛化能力。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.19796v2",
+      "source": "arxiv",
+      "title": "LIFD: Anchored Diffusion for 3D-Aware Scene Memory in Robotic Manipulation",
+      "abstract": "During manipulation, robot and scene motion can move previously observed regions outside the camera's field of view. Geometry-aware RGB features encode visible structure, while control under partial observability requires scene memory that integrates observation history and grounds inferred content in current evidence. We introduce \\lifd{} (Look, Imagine, Focus, and Do), a framework for persistent, 3D-aware scene memory. LIFD learns scene tokens through multi-view agreement, then completes them from a single RGB view and recurrent memory using rectified flow. Anchor-Guided Cross-Attention anchors generation to current geometry-aware features, and compact slot features condition a visuomotor policy. Multi-view and geometric supervision are used during representation learning; deployment requires one RGB camera, proprioception, and a task instruction. LIFD (Staged) reaches 91.6\\% average success on LIBERO and 79.8\\% on MetaWorld, improving LIBERO average success by 11.1 percentage points over Joint training. After policy-head adaptation with ten demonstrations per family, LIFD achieves 56.0\\% mean success across four UR5e task families, compared with 40.5\\% for OpenVLA-7B.",
+      "authors": [
+        "Wenbo Li",
+        "Yiteng Chen",
+        "Wenhao Li",
+        "Qingyao Wu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-17T07:07:03+00:00",
+      "link": "https://arxiv.org/pdf/2609.19796v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "scene tokens learned via multi-view agreement and completed from single view for persistent 3D-aware scene memory",
+      "llm_evidence_cn": "通过多视图一致性学习场景token并从单视图补全的持久3D场景记忆",
+      "llm_evidence": "通过多视图一致性学习场景token并从单视图补全的持久3D场景记忆",
+      "canonical_evidence": "通过多视图一致性学习场景token并从单视图补全的持久3D场景记忆",
+      "llm_tldr_en": "During manipulation, observed regions can leave the camera view, so control under partial observability needs persistent 3D-aware scene memory. LIFD learns scene tokens via multi-view agreement and completes them from a single RGB view using rectified flow, grounding generation in current evidence.",
+      "llm_tldr_cn": "机器人与场景运动会把先前观测区域移出视野，部分可观测下的控制需要能整合历史并锚定当前证据的持久场景记忆。本文提出LIFD框架，先通过多视图一致性学习场景token，再用rectified flow从单张RGB视图与递归记忆补全缺失内容，并以锚点引导交叉注意力把生成锚定到当前几何特征。紧凑槽特征进一步驱动视觉运动策略，为机器人操作提供了3D感知的场景记忆与token表示。",
+      "llm_tldr": "机器人与场景运动会把先前观测区域移出视野，部分可观测下的控制需要能整合历史并锚定当前证据的持久场景记忆。本文提出LIFD框架，先通过多视图一致性学习场景token，再用rectified flow从单张RGB视图与递归记忆补全缺失内容，并以锚点引导交叉注意力把生成锚定到当前几何特征。紧凑槽特征进一步驱动视觉运动策略，为机器人操作提供了3D感知的场景记忆与token表示。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.22641v1",
+      "source": "arxiv",
+      "title": "ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models",
+      "abstract": "Autoregressive video world models enable temporally coherent generation for a single observer. Extending them to multiple agents requires consistency across independently controlled views and temporal gaps under causal streaming. We present ConsistWorld, a multi-agent world model that generates camera-controlled video streams of a static scene from one shared image. We formulate consistency as routing evidence from committed multi-agent history and concurrently generated peer views to the tokens being generated. Pose Conditioned Memory Retrieval selects relevant historical observations from all agents, recovering evidence beyond the recent context window. Visibility-Gated Peer Sharing regulates current peer information according to estimated historical coverage and current-view overlap. Together, they determine which historical observations enter the context and where concurrent peer information contributes, supporting long-term recall and coordinated exploration. Both mechanisms use camera geometry and maintain a bounded active context for a fixed agent count and retrieval budget. Experiments on evidence sharing cases and video length and agent number generalizations show that ConsistWorld achieves a strong cross-time and cross-agent consistency while preserving competitive generation quality.",
+      "authors": [
+        "Qianxun Xu",
+        "Xianfang Zeng",
+        "Xinyao Liao",
+        "Wei Cheng",
+        "Gang Yu",
+        "Chi Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-18T23:31:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.22641v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-agent autoregressive video world model with token evidence routing",
+      "llm_evidence_cn": "多智能体自回归视频世界模型与token证据路由",
+      "llm_evidence": "多智能体自回归视频世界模型与token证据路由",
+      "canonical_evidence": "多智能体自回归视频世界模型与token证据路由",
+      "llm_tldr_en": "ConsistWorld extends autoregressive video world models to multiple agents, routing evidence from committed history and peer views to generated tokens to keep cross-view and temporal consistency.",
+      "llm_tldr_cn": "单视角自回归视频世界模型能生成时间连贯画面，但扩展到多智能体时难以在独立控制视角与时间间隔间保持一致性。ConsistWorld 提出多智能体世界模型，从共享图像生成相机可控视频流，并把一致性建模为向生成 token 路由证据。方法包含姿态条件记忆检索与可见性门控的同伴共享，以恢复超出近期上下文的历史观测并调节当前信息。该工作为多视角视频世界模型提供了一致性机制。",
+      "llm_tldr": "单视角自回归视频世界模型能生成时间连贯画面，但扩展到多智能体时难以在独立控制视角与时间间隔间保持一致性。ConsistWorld 提出多智能体世界模型，从共享图像生成相机可控视频流，并把一致性建模为向生成 token 路由证据。方法包含姿态条件记忆检索与可见性门控的同伴共享，以恢复超出近期上下文的历史观测并调节当前信息。该工作为多视角视频世界模型提供了一致性机制。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.21228v1",
+      "source": "arxiv",
+      "title": "FOCAL-VLA: Subtask-Guided Geometry Distillation and Implicit World Modeling for Vision-Language-Action Models",
+      "abstract": "Vision-language-action (VLA) models built on pretrained vision-language models have demonstrated strong performance across diverse robotic manipulation tasks. However, VLA models that directly map current 2D observations to actions often lack sufficient spatial and temporal understanding, limiting their performance in precise and long-horizon manipulation. Recent methods enhance VLA models through geometric supervision and future-state prediction across the entire scene. However, these methods can suffer from redundant scene information, distracting the model from learning the geometry and dynamics relevant to the current interaction. To address this issue, we propose FOCAL-VLA, a framework that combines subtask-guided geometry distillation with implicit world modeling to learn representations of current spatial structure and future interaction dynamics. To focus geometric learning on the current subtask, we transfer geometric knowledge from VGGT to the VLA model by aligning geometry latents with features from subtask-relevant image regions. To capture the future 3D evolution of the current interaction, we incorporate implicit world modeling using Track4World features from current and future demonstration frames. The two complementary representations jointly guide action generation without running VGGT or Track4World at inference time. Experiments show that FOCAL-VLA outperforms baselines on both simulation benchmarks and real-world manipulation tasks. Project website: https://zhiyuan-gao.github.io/FOCAL-VLA/.",
+      "authors": [
+        "Zhiyuan Gao",
+        "Di Wen",
+        "Yanxiang Zhan",
+        "Mohammad Khoshnazar",
+        "Jeroen Schäfer",
+        "Kunyu Peng",
+        "Michael Beetz"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-18T02:18:34+00:00",
+      "link": "https://arxiv.org/pdf/2609.21228v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "implicit world modeling with geometry distillation for VLA models",
+      "llm_evidence_cn": "面向VLA模型的隐式世界建模与几何蒸馏",
+      "llm_evidence": "面向VLA模型的隐式世界建模与几何蒸馏",
+      "canonical_evidence": "面向VLA模型的隐式世界建模与几何蒸馏",
+      "llm_tldr_en": "FOCAL-VLA adds subtask-guided geometry distillation and implicit world modeling to vision-language-action models, focusing supervision on interaction-relevant dynamics.",
+      "llm_tldr_cn": "视觉-语言-动作模型直接由二维观测映射动作，缺乏充分的空间与时间理解，长程精确操作受限。该文提出 FOCAL-VLA，结合子任务引导的几何蒸馏与隐式世界建模，抑制与当前交互无关的冗余场景信息。方法使模型聚焦于当前交互相关的几何与动态，从而提升精确与长程操作表现。工作为 VLA 引入任务相关的预测性世界建模监督。",
+      "llm_tldr": "视觉-语言-动作模型直接由二维观测映射动作，缺乏充分的空间与时间理解，长程精确操作受限。该文提出 FOCAL-VLA，结合子任务引导的几何蒸馏与隐式世界建模，抑制与当前交互无关的冗余场景信息。方法使模型聚焦于当前交互相关的几何与动态，从而提升精确与长程操作表现。工作为 VLA 引入任务相关的预测性世界建模监督。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.26293v1",
+      "source": "arxiv",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "abstract": "Learned world models are becoming essential to general-purpose agents: by predicting action consequences, they support planning and decision-making while reducing reliance on costly trial and error. This reliance creates a fundamental ambiguity: when a world-model-guided decision fails, the trajectory alone may not reveal whether the agent's decision rule or the world model caused the loss. We formalize this failure-attribution problem as a counterfactual decomposition of return loss and prove that its components are not identifiable from passive interaction, even for finite-horizon planners. This obstruction motivates Dual-Frontier, a learning principle that admits a world-model-guided decision only when its predicted advantage exceeds a certified bound on decision-relevant world-model error; otherwise, evidence is allocated to world-model verification. Action-conditioned value bounds and a closed-loop extension guarantee non-decreasing return for admitted decisions. Calibrated gates and simultaneous confidence sequences support adaptive evidence reuse, with sufficient and necessary verification bounds. Controlled learned-model experiments validate the predicted failure modes and certification behavior, while cross-backbone tool-use benchmarks instantiate the same verify-then-promote rule in realistic agent world-model pipelines, consistently improving decision quality and reliability.",
+      "authors": [
+        "Huatai Zhu",
+        "Qiang Chen",
+        "Ziqian Kou",
+        "Wenhao Li",
+        "Fei Wang",
+        "Yichao Cao",
+        "Xiu Su",
+        "Yi Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-22T12:05:43+00:00",
+      "link": "https://arxiv.org/pdf/2609.26293v1",
+      "tags": [
+        "keyword:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "when a world-model-guided agent decision can be trusted",
+      "llm_evidence_cn": "世界模型引导的智能体决策何时可信",
+      "llm_evidence": "世界模型引导的智能体决策何时可信",
+      "canonical_evidence": "世界模型引导的智能体决策何时可信",
+      "llm_tldr_en": "Learned world models support agent planning but make failure attribution ambiguous. The paper formalizes this as a counterfactual decomposition of return loss, proves non-identifiability under passive interaction, and proposes Dual-Frontier, admitting world-model decisions only under certified bounds.",
+      "llm_tldr_cn": "学习到的世界模型正成为通用智能体规划与决策的核心，但决策失败时难以判断责任来自决策规则还是世界模型本身。作者将该失效归因问题形式化为回报损失的反事实分解，并证明即使对有限时域规划器，其分量也无法仅从被动交互中辨识。基于此提出 Dual-Frontier 学习准则，仅当预测优势超过决策误差的认证界时才采纳世界模型引导的决策。该工作为可信世界模型引导的智能体决策提供了理论保证。",
+      "llm_tldr": "学习到的世界模型正成为通用智能体规划与决策的核心，但决策失败时难以判断责任来自决策规则还是世界模型本身。作者将该失效归因问题形式化为回报损失的反事实分解，并证明即使对有限时域规划器，其分量也无法仅从被动交互中辨识。基于此提出 Dual-Frontier 学习准则，仅当预测优势超过决策误差的认证界时才采纳世界模型引导的决策。该工作为可信世界模型引导的智能体决策提供了理论保证。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.22040v1",
+      "source": "arxiv",
+      "title": "PRIME: Perception Feedback with Situational Memory Embeddings in VLA Models",
+      "abstract": "Current Vision-Language-Action (VLA) models for autonomous driving operate primarily through feedforward inference across the perception--reasoning--planning hierarchy. While modern architectures maintain temporal recurrence within the perceptual module, early perception remains blind to downstream reasoning and navigation goals, processing visual inputs agnostically without prioritizing cues informed by prior decisions. To bridge this gap, this paper introduces PRIME, a learned feedback mechanism that conditions the VLA perceptual queries on a novel Situational Memory. By aggregating latent representations of past perception, reasoning, navigation goals, and predicted behaviors across an L-step window via cross-attention, PRIME enables intent-driven perceptual attention at minimal computational cost, adding only a maximum of 29.7M parameters (0.41% of the 7.3B-parameter base model). Evaluated on the Bench2Drive closed-loop benchmark, PRIME achieves a state-of-the-art Driving Score of 82.47 (+4.73 over ORION) and a Success Rate of 60.00% (+5.38 percentage points), the highest reported Driving Score among published VLAs trained on Think2Drive demonstrations.",
+      "authors": [
+        "Erik Deinzer",
+        "Naya Baslan",
+        "Luca Paparusso",
+        "Narunas Vaskevicius",
+        "Peter Knott",
+        "Luigi Palmieri"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-18T17:31:34+00:00",
+      "link": "https://arxiv.org/pdf/2609.22040v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "situational memory of latent representations supports driving perception-reasoning-planning",
+      "llm_evidence_cn": "情境记忆的潜在表示支持自动驾驶感知-推理-规划",
+      "llm_evidence": "情境记忆的潜在表示支持自动驾驶感知-推理-规划",
+      "canonical_evidence": "情境记忆的潜在表示支持自动驾驶感知-推理-规划",
+      "llm_tldr_en": "PRIME adds a learned feedback mechanism that conditions VLA perceptual queries on a situational memory aggregating past perception, reasoning, navigation goals, and predicted behaviors across an L-step window.",
+      "llm_tldr_cn": "自动驾驶VLA模型多采用前馈推理，早期感知对下游推理与导航目标不敏感，缺乏意图驱动。本文提出PRIME，通过交叉注意力用情境记忆聚合过去感知、推理、导航目标与预测行为的潜在表示，从而条件化感知查询。该机制使感知具备意图驱动特性，改善感知-推理-规划层级的一致性，为VLA模型引入反馈式情境记忆。",
+      "llm_tldr": "自动驾驶VLA模型多采用前馈推理，早期感知对下游推理与导航目标不敏感，缺乏意图驱动。本文提出PRIME，通过交叉注意力用情境记忆聚合过去感知、推理、导航目标与预测行为的潜在表示，从而条件化感知查询。该机制使感知具备意图驱动特性，改善感知-推理-规划层级的一致性，为VLA模型引入反馈式情境记忆。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.27455v1",
+      "source": "arxiv",
+      "title": "Latent evolving World Action Model",
+      "abstract": "World Action Models (WAMs) jointly model action generation and environment dynamics and are mostly built on pretrained Video Diffusion Models (VDMs). In VDM-based WAMs, observations are first encoded by a VAE, and the resulting compressed latents are then processed by large video diffusion backbones to extract effective features for action generation. However, this paradigm ties WAM performance and training cost to large-scale video generation pretraining, limiting WAM efficiency and scalability. In this paper, we theoretically and empirically investigate how visual representations affect action generation in WAMs. Our results show that predictive embeddings from Joint-Embedding Predictive Architecture (JEPA) encoders better support action generation than compressed VAE latents, with I-JEPA performing best in our encoder comparison. Based on these findings, we propose LeWAM, which conditions action generation on JEPA embeddings and models environment evolution by predicting future embeddings in the same space, without relying on a video diffusion backbone. We further find that imitation learning matches demonstrated actions but does not distinguish better actions from worse ones, even though small action deviations can greatly affect task success. To address this limitation without additional environment interaction or the human oversight required for resets and safety, we introduce Demonstration-Guided DPO (DemoDPO), an offline preference refinement stage that derives preference supervision directly from demonstrations.With only 0.4B trainable parameters, LeWAM achieves an average success rate of 92.28\\% on RoboTwin 2.0, comparable to that of state-of-the-art VLAs and WAMs, and maintains practical effectiveness on real-world manipulation tasks.",
+      "authors": [
+        "Xueji Fang",
+        "Boqiang Duan",
+        "Hua Wu",
+        "Jingdong Wang",
+        "Guo-Jun Qi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-23T07:22:43+00:00",
+      "link": "https://arxiv.org/pdf/2609.27455v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "JEPA predictive latent representations for world-action models",
+      "llm_evidence_cn": "面向世界-动作模型的JEPA预测性潜在表示",
+      "llm_evidence": "面向世界-动作模型的JEPA预测性潜在表示",
+      "canonical_evidence": "面向世界-动作模型的JEPA预测性潜在表示",
+      "llm_tldr_en": "This work shows that predictive JEPA embeddings better support action generation than compressed VAE latents in World Action Models, offering a more efficient and scalable design than video-diffusion pretraining.",
+      "llm_tldr_cn": "世界-动作模型联合建模动作生成与环境动力学，多基于预训练视频扩散模型，观测先经VAE编码为压缩潜变量再送入扩散骨干，导致性能与训练成本受限于大规模视频生成预训练。本文从理论与实证两方面研究视觉表示如何影响WAM中的动作生成，发现JEPA编码器的预测性嵌入比压缩VAE潜变量更能支持动作生成。该结果提示预测式表示有助于提升WAM的效率与可扩展性，为世界-动作模型设计提供新方向。",
+      "llm_tldr": "世界-动作模型联合建模动作生成与环境动力学，多基于预训练视频扩散模型，观测先经VAE编码为压缩潜变量再送入扩散骨干，导致性能与训练成本受限于大规模视频生成预训练。本文从理论与实证两方面研究视觉表示如何影响WAM中的动作生成，发现JEPA编码器的预测性嵌入比压缩VAE潜变量更能支持动作生成。该结果提示预测式表示有助于提升WAM的效率与可扩展性，为世界-动作模型设计提供新方向。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.22674v1",
+      "source": "arxiv",
+      "title": "Mask-Aware Execution for Efficient JEPA Training",
+      "abstract": "Joint Embedding Predictive Architectures (JEPAs) are becoming a core representation-learning primitive and a building block for latent world models across vision, video, audio, brain dynamics, and time series. Despite (potential of) wide deployment, current JEPA training pipelines are inefficient: each input is executed through multiple mask-specific branches, with redundant target-side work, and memory-bound token routing. These costs grow with the number of masks and limit GPU efficiency. We present M-JEPA, a mask-aware execution architecture that restructures JEPA training without changing the learning objective. M-JEPA separates mask-independent computation from mask-dependent routing, enabling shared context encoder execution, fused token routing and slicing with backward support, sparse target encoder execution over the union of target tokens, and masked patch embedding for sparse inputs. The resulting pipeline preserves training semantics while reducing computation, memory traffic, and synchronization overhead. We implement M-JEPA for five JEPA variants and evaluate it on NVIDIA A100 GPUs. Compared against the state-of-the-art baselines, M-JEPA achieves up to 1.7x end-to-end training speedup for 2-10 masks. Separately, with masked patch embedding, 4.75x patch-embedding speedup at high sparsity. These results show that execution restructuring, rather than changes to the JEPA objective, is a key lever for efficient JEPA training.",
+      "authors": [
+        "Md Musfiqur Rahman Sanim",
+        "Zhihao Shu",
+        "Bahram Afsharmanesh",
+        "Amirali Mirian",
+        "Wei Niu",
+        "Gagan Agrawal"
+      ],
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.LG"
+      ],
+      "published": "2026-09-19T01:07:25+00:00",
+      "link": "https://arxiv.org/pdf/2609.22674v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "efficient JEPA training for latent world models",
+      "llm_evidence_cn": "潜世界模型的JEPA高效训练",
+      "llm_evidence": "潜世界模型的JEPA高效训练",
+      "canonical_evidence": "潜世界模型的JEPA高效训练",
+      "llm_tldr_en": "This paper presents M-JEPA, a mask-aware execution architecture that restructures JEPA training without changing its objective, sharing context encoding and fusing token routing to cut redundant work in latent world-model representation learning.",
+      "llm_tldr_cn": "联合嵌入预测架构（JEPA）正成为视觉、视频、音频等领域的核心表示学习原语，也是潜世界模型的重要构件，但其训练需为每个掩码分支重复执行，存在冗余目标端计算与内存受限的令牌路由开销。本文提出M-JEPA，在不改变学习目标的前提下重构训练流程，将掩码无关计算与掩码相关路由分离，实现共享上下文编码器执行与融合的令牌路由切片。该工作显著提升JEPA训练效率，为潜世界模型的高效表示学习提供了可复用方法。",
+      "llm_tldr": "联合嵌入预测架构（JEPA）正成为视觉、视频、音频等领域的核心表示学习原语，也是潜世界模型的重要构件，但其训练需为每个掩码分支重复执行，存在冗余目标端计算与内存受限的令牌路由开销。本文提出M-JEPA，在不改变学习目标的前提下重构训练流程，将掩码无关计算与掩码相关路由分离，实现共享上下文编码器执行与融合的令牌路由切片。该工作显著提升JEPA训练效率，为潜世界模型的高效表示学习提供了可复用方法。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.24526v2",
+      "source": "arxiv",
+      "title": "ME-VLM: A Unified VLM for Embodied Cognition and Agent Coordination",
+      "abstract": "Physical AI requires models to ground visual and linguistic understanding in real-world environments while accounting for environmental constraints and execution feedback. We introduce MachEmbodied-VLM (ME-VLM), a unified vision-language model with two variants, 4B and 35B-A3B, that brings together embodied cognition and multimodal agent capabilities. Our work emphasizes physical perception and spatiotemporal reasoning, together with planning, interaction, and outcome assessment in both digital and physical environments. We construct training data spanning embodied and multimodal agent tasks, including execution observations and feedback to support outcome assessment and decision refinement. The training pipeline comprises embodied capability injection, separate reinforcement learning of embodied and multimodal-agent experts, and multi-teacher on-policy distillation that consolidates their complementary capabilities into a single model. Experiments show competitive performance on both embodied and agent benchmarks, as well as on autonomous-driving and embodied-navigation tasks. For edge deployment, visual token compression, W4A8 quantization, and hardware-software co-optimization enable on-device inference of the 4B variant on the M100, reducing prefill latency from 400 ms to 188 ms.   Project Page: https://machembodied.com/ME-Brain/ME-VLM.html Code Repository: https://github.com/MachEmbodied/ME-VLM",
+      "authors": [
+        "Foundation Model",
+        "Li Auto Inc"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-21T12:59:59+00:00",
+      "link": "https://arxiv.org/pdf/2609.24526v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified VLM for embodied cognition, planning and agent coordination",
+      "llm_evidence_cn": "面向具身认知、规划与智能体协同的统一视觉语言模型",
+      "llm_evidence": "面向具身认知、规划与智能体协同的统一视觉语言模型",
+      "canonical_evidence": "面向具身认知、规划与智能体协同的统一视觉语言模型",
+      "llm_tldr_en": "Physical AI needs models that ground visual-linguistic understanding in real environments with execution feedback. The paper introduces ME-VLM, a unified VLM with 4B and 35B-A3B variants covering embodied perception, spatiotemporal reasoning, planning, interaction and outcome assessment.",
+      "llm_tldr_cn": "物理人工智能要求模型将视觉语言理解落地到真实环境并考虑环境约束与执行反馈。本文提出 ME-VLM 统一视觉语言模型，提供 4B 与 35B-A3B 两种规模，融合具身认知与多模态智能体能力，强调物理感知、时空推理以及规划、交互与结果评估。作者构建覆盖具身与多模态智能体任务的训练数据，包含执行观测与反馈以支持结果评估与决策修正。该工作为具身智能体与多模态世界理解提供了统一建模方案。",
+      "llm_tldr": "物理人工智能要求模型将视觉语言理解落地到真实环境并考虑环境约束与执行反馈。本文提出 ME-VLM 统一视觉语言模型，提供 4B 与 35B-A3B 两种规模，融合具身认知与多模态智能体能力，强调物理感知、时空推理以及规划、交互与结果评估。作者构建覆盖具身与多模态智能体任务的训练数据，包含执行观测与反馈以支持结果评估与决策修正。该工作为具身智能体与多模态世界理解提供了统一建模方案。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

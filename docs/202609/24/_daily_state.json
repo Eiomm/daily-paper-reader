@@ -1,0 +1,233 @@
+{
+  "date": "20260924",
+  "date_label": "",
+  "generated_at": "2026-09-24 22:27:37 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.23184v2",
+      "route": "202609/24/2609.23184v2-causalwm-causal-chain-of-thought-reasoning-for-embodied-world-model",
+      "title": "CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "具身世界模型在潜在空间预测未来物理动态",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.27513v1",
+      "route": "202609/24/2609.27513v1-behavior-aligned-action-tokenization-for-robot-policy-learning",
+      "title": "Behavior-Aligned Action Tokenization for Robot Policy Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "跨任务对齐量化动作表示的动作分词",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.27747v1",
+      "route": "202609/24/2609.27747v1-less-language-more-latents-annotation-efficient-vlas-for-driving",
+      "title": "Less Language, More Latents: Annotation-Efficient VLAs for Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "驾驶的向量量化潜动作码本",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.19863v1",
+      "route": "202609/24/2609.19863v1-feeling-terrain-before-crossing-world-models-for-off-road-navigation",
+      "title": "Feeling Terrain Before Crossing: World Models for Off-Road Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "以本体感受为条件的越野导航世界模型",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.22332v2",
+      "route": "202609/24/2609.22332v2-affordancewam-affordance-aware-joint-world-action-modeling-for-robot-manipulation",
+      "title": "AffordanceWAM: Affordance-Aware Joint World-Action Modeling for Robot Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向操作的可供性感知生成式世界动作模型预测未来场景演化",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.22641v1",
+      "route": "202609/24/2609.22641v1-consistworld-evidence-routing-for-consistent-multi-agent-world-models",
+      "title": "ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多智能体自回归视频世界模型与token证据路由",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.26293v1",
+      "route": "202609/24/2609.26293v1-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "世界模型引导的智能体决策何时可信",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.27455v1",
+      "route": "202609/24/2609.27455v1-latent-evolving-world-action-model",
+      "title": "Latent evolving World Action Model",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向世界-动作模型的JEPA预测性潜在表示",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.18430v1",
+      "route": "202609/24/2609.18430v1-strucphysvideo-learning-physical-dynamics-from-structured-captions-and-robot-actions",
+      "title": "StrucPhysVideo: Learning Physical Dynamics from Structured Captions and Robot Actions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "结合结构化描述与动作的物理动态视频世界模型",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.19796v2",
+      "route": "202609/24/2609.19796v2-lifd-anchored-diffusion-for-3d-aware-scene-memory-in-robotic-manipulation",
+      "title": "LIFD: Anchored Diffusion for 3D-Aware Scene Memory in Robotic Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过多视图一致性学习场景token并从单视图补全的持久3D场景记忆",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.21228v1",
+      "route": "202609/24/2609.21228v1-focal-vla-subtask-guided-geometry-distillation-and-implicit-world-modeling-for-vision-language-action-models",
+      "title": "FOCAL-VLA: Subtask-Guided Geometry Distillation and Implicit World Modeling for Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向VLA模型的隐式世界建模与几何蒸馏",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.22040v1",
+      "route": "202609/24/2609.22040v1-prime-perception-feedback-with-situational-memory-embeddings-in-vla-models",
+      "title": "PRIME: Perception Feedback with Situational Memory Embeddings in VLA Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "情境记忆的潜在表示支持自动驾驶感知-推理-规划",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.22674v1",
+      "route": "202609/24/2609.22674v1-mask-aware-execution-for-efficient-jepa-training",
+      "title": "Mask-Aware Execution for Efficient JEPA Training",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "潜世界模型的JEPA高效训练",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    },
+    {
+      "paper_id": "2609.24526v2",
+      "route": "202609/24/2609.24526v2-me-vlm-a-unified-vlm-for-embodied-cognition-and-agent-coordination",
+      "title": "ME-VLM: A Unified VLM for Embodied Cognition and Agent Coordination",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向具身认知、规划与智能体协同的统一视觉语言模型",
+      "first_seen_at": "2026-09-24 22:27:37 UTC",
+      "updated_at": "2026-09-24 22:27:37 UTC"
+    }
+  ]
+}
