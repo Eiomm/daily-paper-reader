@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-25</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-26</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 15 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-25 22:12:03 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-26 21:37:53 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-25日报：扫完15篇世界模型论文，4篇精读、11篇速读，重点从生成式驾驶延伸到LLM智能体。</p>
-<p>最值得看的是9.0分《HelloWorld》推动生成式驾驶世界模型落地，以及8.0分《Agent-Editing World Model》重思LLM智能体建模；速读里越野导航与动作写法鲁棒性也值得留意。</p>
-<p>普通读者可先读这两篇精读，再顺带看速读中的多智能体一致性与机器人世界模型不变性，建立“世界模型+智能体”的整体认知。</p>
+<p>今天共收录15篇论文、精读4篇速读11篇，焦点集中在世界模型&quot;会遗忘&quot;与&quot;能否被信任&quot;两大问题上。 最值得看的是两篇8.0分精读：《Frozen Flows Forget》诊断并修复潜空间流世界模型的运动丢失，《Agent-Editing World Model》重新思考LLM智能体的世界建模方式。 普通读者可先从《Dual-Frontier: When Can an Agent Trust Its World Model?》这类速读切入，判断自己更关心修复机制还是信任评估，再回头深读精读篇目。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -83,7 +81,7 @@
     <strong class="dpr-home-dashboard-count">4 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="HelloWorld: Towards Practical Applications of Generative Driving World Models">HelloWorld: Towards Practical Applications of Generative Driving World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agent-Editing World Model: Rethinking World Modeling for LLM Agents">Agent-Editing World Model: Rethinking World Modeling for LLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Representation World Model: Learning States, Transition and Executable Plans in Representation">Representation World Model: Learning States, Transition and Executable Plans in Representation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Frozen Flows Forget: Diagnosing and Restoring Lost Motion in a Latent-flow World Model">Frozen Flows Forget: Diagnosing and Restoring Lost Motion in a Latent-flow World Model</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agent-Editing World Model: Rethinking World Modeling for LLM Agents">Agent-Editing World Model: Rethinking World Modeling for LLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Poster: FedWM-Guard: Thwarting Imagination Poisoning in Federated World Model-based Autonomous Driving">Poster: FedWM-Guard: Thwarting Imagination Poisoning in Federated World Model-based Autonomous Driving</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>3</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
@@ -96,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Feeling Terrain Before Crossing: World Models for Off-Road Navigation">Feeling Terrain Before Crossing: World Models for Off-Road Navigation</span></li><li><span class="dpr-home-dashboard-paper-title" title="ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models">ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Robot World Models Are Not Invariant to How the Actions Are Written">Robot World Models Are Not Invariant to How the Actions Are Written</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models">ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dual-Frontier: When Can an Agent Trust Its World Model?">Dual-Frontier: When Can an Agent Trust Its World Model?</span></li><li><span class="dpr-home-dashboard-paper-title" title="Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping">Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>8</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>7</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>4</strong></span></div>
 </section>
 </div>
 

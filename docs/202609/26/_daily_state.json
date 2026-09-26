@@ -1,0 +1,249 @@
+{
+  "date": "20260926",
+  "date_label": "",
+  "generated_at": "2026-09-26 21:37:53 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.28414v1",
+      "route": "202609/26/2609.28414v1-frozen-flows-forget-diagnosing-and-restoring-lost-motion-in-a-latent-flow-world-model",
+      "title": "Frozen Flows Forget: Diagnosing and Restoring Lost Motion in a Latent-flow World Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "隐流世界模型中的运动丢失与恢复",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.28416v1",
+      "route": "202609/26/2609.28416v1-agent-editing-world-model-rethinking-world-modeling-for-llm-agents",
+      "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向LLM智能体的世界模型，建模推理与动作而非工具响应",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.29178v1",
+      "route": "202609/26/2609.29178v1-poster-fedwm-guard-thwarting-imagination-poisoning-in-federated-world-model-based-autonomous-driving",
+      "title": "Poster: FedWM-Guard: Thwarting Imagination Poisoning in Federated World Model-based Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "联邦世界模型自动驾驶的防御",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.30198v1",
+      "route": "202609/26/2609.30198v1-beyond-compression-training-latent-representations-for-stable-long-horizon-rollout-in-neural-surrogate-solvers",
+      "title": "Beyond Compression: Training Latent Representations for Stable Long-Horizon Rollout in Neural Surrogate Solvers",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "潜动力学模型的长时程稳定推演训练",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.22641v1",
+      "route": "202609/26/2609.22641v1-consistworld-evidence-routing-for-consistent-multi-agent-world-models",
+      "title": "ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多智能体视频世界模型与一致证据路由",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.26293v2",
+      "route": "202609/26/2609.26293v2-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向智能体的世界模型信任与失败归因",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.26325v1",
+      "route": "202609/26/2609.26325v1-leveraging-vision-based-point-cloud-map-priors-for-camera-based-3d-object-detection-and-online-vectorized-hd-mapping",
+      "title": "Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "仅用相机的点云地图先验用于3D检测与在线矢量化HD建图",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.21228v1",
+      "route": "202609/26/2609.21228v1-focal-vla-subtask-guided-geometry-distillation-and-implicit-world-modeling-for-vision-language-action-models",
+      "title": "FOCAL-VLA: Subtask-Guided Geometry Distillation and Implicit World Modeling for Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向具身VLA模型的隐式世界建模与几何蒸馏",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.21404v1",
+      "route": "202609/26/2609.21404v1-stabilizing-trajectory-outputs-in-end-to-end-autonomous-driving-via-sc-imm-based-teacher-signals",
+      "title": "Stabilizing Trajectory Outputs in End-to-End Autonomous Driving via SC-IMM Based Teacher Signals",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用场景条件交互多模型教师信号稳定端到端驾驶轨迹输出",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.22746v1",
+      "route": "202609/26/2609.22746v1-processlight-process-supervision-for-large-language-model-based-traffic-signal-control",
+      "title": "ProcessLight: Process Supervision for Large Language Model Based Traffic Signal Control",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向交通信号控制的LLM智能体过程监督与强化学习",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.24862v1",
+      "route": "202609/26/2609.24862v1-when-tomorrow-becomes-today-self-evolving-policies-for-agentic-time-series-forecasting",
+      "title": "When Tomorrow Becomes Today: Self-Evolving Policies for Agentic Time-Series Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用延迟结果反馈的自演化智能体时间序列预测策略",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.25942v1",
+      "route": "202609/26/2609.25942v1-destination-support-restoration-for-finite-set-multimodal-trajectory-prediction",
+      "title": "Destination Support Restoration for Finite-Set Multimodal Trajectory Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向下游决策的有限集多模态轨迹预测",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.27275v1",
+      "route": "202609/26/2609.27275v1-branchdrive-a-branch-structured-dataset-for-action-conditioned-driving-prediction",
+      "title": "BranchDrive: A Branch-Structured Dataset for Action-Conditioned Driving Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向动作条件驾驶预测的分支结构驾驶数据集",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.27340v1",
+      "route": "202609/26/2609.27340v1-spatial-and-semantic-reasoning-for-llm-driven-robot-navigation-via-mcp",
+      "title": "Spatial and Semantic Reasoning for LLM-Driven Robot Navigation via MCP",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于 MCP 的 LLM 智能体工具化机器人导航",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    },
+    {
+      "paper_id": "2609.27467v1",
+      "route": "202609/26/2609.27467v1-kairos-grounded-forecasting-of-presence-and-directional-flow-in-4d-scene-graphs",
+      "title": "Kairos: Grounded Forecasting of Presence and Directional Flow in 4D Scene Graphs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "4D场景图对存在性与方向流动的预测性表示",
+      "first_seen_at": "2026-09-26 21:37:53 UTC",
+      "updated_at": "2026-09-26 21:37:53 UTC"
+    }
+  ]
+}
