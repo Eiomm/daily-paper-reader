@@ -1,0 +1,350 @@
+Title: RoadOcc Learns When to Persist, Transport, or Refresh Memory for Roadside Occupancy Prediction
+
+URL Source: https://arxiv.org/pdf/2609.27677v1
+
+Published Time: Thu, 24 Sep 2026 00:56:03 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+Published as a conference paper at ICLR 2027 
+
+# ROAD OCC LEARNS WHEN TO PERSIST , T RANSPORT ,
+
+# OR REFRESH MEMORY FOR ROADSIDE OCCUPANCY 
+
+# PREDICTION 
+
+Xiaokai Bai 1, Lei Yang 2, Songkai Wang 2, Lianqing Zheng 3, Siyuan Cao 1, Hui-liang Shen 1
+
+> 1
+
+College of Information Science and Electronic Engineering, Zhejiang University 
+
+> 2
+
+School of Mechanical and Aerospace Engineering, Nanyang Technological University 
+
+> 3
+
+School of Automotive Studies, Tongji University 
+
+email:shawnnnkb@gmail.com 
+
+ABSTRACT 
+
+Fixed roadside cameras repeatedly observe a stable scene overlaid by sparse mov-ing traffic. Temporal memory can recover weak observations, but reusing moving evidence at stale locations can corrupt occupancy predictions. Motion compensa-tion addresses displacement, while reliance on the resulting history remains a sep-arate learning problem. We introduce RoadOcc, which learns soft routing among fixed-coordinate history ( Persist ), velocity-addressed history ( Transport ), and cur-rent evidence ( Refresh ). Motion state and class-consistent historical support su-pervise these source choices. Dynamic-aware cross-attention (DCA) updates can-didate locations, multi-scale voxel velocity estimation (VVE) constructs transport addresses from multi-scale current–history correspondence, and velocity-guided dynamic sparse fusion (VDSF) combines routed evidence under fixed sparse-token budgets. On InfraOcc, RoadOcc reaches 65.29 mIoU and 32.37 dynamic mIoU, gains of 4.44 and 4.71 over STCOcc. Controlled address experiments show that VVE raises dynamic mIoU by 0.87 over fixed-coordinate reading. Across three seeds, supervised P/T/R adds 1.40 dynamic points over motion-corrected retrieval, while removing Refresh costs 0.32 points. Results from two transfer models, Occ3D-nuScenes, and longer intervals provide additional support. Code will be released. 
+
+1 INTRODUCTION 
+
+Semantic occupancy prediction reconstructs free space, static layout, and traffic participants in a common voxel volume. Camera-only methods have made this representation practical through sparse voxel queries, BEV lifting, tri-plane features, and unified panoptic volumes (Cao & de Charette, 2022; Li et al., 2023a; Wang et al., 2023; Tian et al., 2023; Li et al., 2025b; Huang et al., 2023; Wei et al., 2023; Tang et al., 2024; Huang et al., 2024b). However, these methods are predominantly developed for moving platforms, where each observation is interpreted in an ego-centric frame. A roadside sensor instead repeatedly observes a persistent scaffold overlaid by sparse, short-lived dynamics. History is most valuable for weak or occluded actors, yet stale footprints can overwrite exactly these targets. The fixed world frame therefore shifts the central temporal problem to local evidence management. Static history is already aligned, whereas dynamic history must be selectively relocated or rejected. The same history can provide either valid support or stale evidence. Fixed-coordinate memory preserves static layout and can recover weak or occluded vehicle boundaries, but it does not relocate an object that moved within the fixed coordinate system. Reading such memory from the former footprint can blur a dynamic boundary, duplicate an object, or attach it to nearby static layout. Discarding history avoids these errors but also removes useful support. The challenge is therefore not simply whether to use history, but to decide where temporal evidence is needed, where supporting history should be read, and how strongly to rely on each source. These cases can coexist within one scene or along a single object boundary, making a uniform temporal fusion rule insufficient. 1arXiv:2609.27677v1 [cs.CV] 23 Sep 2026 Published as a conference paper at ICLR 2027 Recent temporal methods demonstrate the value of multi-frame context for occupancy, flow, and 3D perception (Ma et al., 2024; Zheng et al., 2024; Wang et al., 2025; Chen et al., 2025a; Liao et al., 2025; Liu et al., 2025; Huang & Huang, 2022; Chang et al., 2024; Leng et al., 2025). Existing designs already incorporate temporal memory, motion alignment, and adaptive fusion. Motion align-ment addresses displacement, but a flow-proposed address may still lack class-consistent support for the current voxel. A stationary object may reuse fixed-coordinate memory, a moving object may re-trieve memory near x−∆t vt(x), and a newly appearing object may have to rely on current evidence. Adaptive weighting can represent these alternatives. Our focus is to supervise the source choice ex-plicitly using motion state and semantic support, giving temporal fusion a structured learning target. 
+
+Figure 1: Real-scene evidence for explicit source routing. The top row shows current views, camera FOVs, and current-aligned occupancy flow (a–c). The bottom row shows current/past occu-pancy and P/T/R targets (d–f), illustrating a persistent bus, trans-ported car, and newly visible cars assigned Refresh. We therefore formulate tem-poral occupancy as explicit evidence-source routing. Should each selected voxel Persist, Transport, or Refresh? Persist reuses the fixed-coordinate source, Transport applies backwarp sampling to velocity-addressed history, and Refresh uses no history, only current evidence. Flow proposes where history should be read, while P/T/R learns preferences over the three sources. The super-vision favors supported fixed history for stationary targets and supported transported history for moving targets, using Re-fresh when the corresponding candidate lacks support. RoadOcc realizes this principle through a DCA–VVE–VDSF chain. DCA localizes the dy-namic candidate and refines the current observation. VVE then combines current and temporal flow into dynamic flow, after which VDSF selects fixed-coordinate, backwarped, or current evidence. The stages therefore resolve where temporal reasoning is needed, where history should be read, and which source should enter fusion. Their intermediate outputs allow separate diagnostics of dynamic localization, historical addressing, and source selection. Figure 1 grounds the three evidence-source alternatives. Our contributions are summarized below. • We propose RoadOcc, which formulates roadside temporal occupancy as a Persist–Transport– Refresh source-selection problem. Motion state and class-consistent support supervise the source preferences, complementing motion-based historical addressing. • We implement this formulation in a sparse, multi-scale pipeline. DCA allocates image updates, VVE estimates transport addresses, and VDSF combines routed sources while retaining a short background memory path. • We report joint occupancy and motion improvements on InfraOcc, three-seed routing controls, and module transfer to two temporal models. Occ3D-nuScenes and temporal-gap evaluations further test the design beyond the primary roadside setting and training cadence. 
+
+2 RELATED WORK 
+
+2.1 CAMERA OCCUPANCY AND ROADSIDE PERCEPTION 
+
+Camera occupancy methods lift multi-view image evidence into volumetric representations. MonoScene Cao & de Charette (2022) and VoxFormer Li et al. (2023a) establish image-based semantic scene completion, while BEVDet, BEVDepth, and BEVFormer improve multi-2Published as a conference paper at ICLR 2027 view lifting and BEV reasoning (Huang et al., 2021; Li et al., 2023b; 2025b). Occupancy-specific designs span tri-plane, dense, sparse, Gaussian, and forward–backward represen-tations (Huang et al., 2023; Wei et al., 2023; Zhang et al., 2023; Tang et al., 2024; Huang et al., 2024b; Li et al., 2023c), as well as panoptic and instance-aware predic-tion (Wang et al., 2024; Li et al., 2025a). Unlike MC-BEVRO’s roadside BEV occupancy monitoring (Vaghela et al., 2025), RoadOcc routes evidence for class-aware 3D occupancy. (a) Static semantic persistence  (b) Dynamic transience  (c)  Occupied -frame (%) 
+
+Figure 2: Static-to-dynamic persistence in InfraOcc. 
+
+InfraOcc provides a roadside occupancy benchmark empha-sizing persistent infrastructure (Yang et al., 2026). Fig-ure 2 reveals its temporal asym-metry. Fixed roadway struc-ture provides broad, stable sup-port, while dynamic participants form sparse, short-lived trails. This asymmetry favors retaining static context while selectively relocating moving evidence. 2.2 TEMPORAL OCCUPANCY , M OTION , AND ALIGNMENT 
+
+Temporal occupancy methods improve memory through recurrent aggregation, motion-aware align-ment, and explicit association. Recurrent and video-based models maintain or forecast scene state (Huang & Huang, 2022; Chang et al., 2024; Huang et al., 2024a; Mohan et al., 2026), while occupancy–flow methods couple volumetric semantics with motion (Ma et al., 2024; Zheng et al., 2024; Wang et al., 2025; Chen et al., 2025a; Liao et al., 2025; Liu et al., 2025; Murhij & Yudin, 2024; Zheng et al., 2026). Other approaches organize temporal cues, learn semantic associations, or retrieve traversal priors (Leng et al., 2025; Chen et al., 2025b; Ouyang et al., 2025; Yuan et al., 2025). RoadOcc builds on temporal alignment and adaptive fusion by supervising a choice among fixed-coordinate history, transported history, and current evidence. Its emphasis is the motion- and support-based learning target for source selection, rather than the weighted-sum operation alone. Table 1: Generated GT-flow target at t + 0 .5 s. Zero-flow and GT-flow transport share the inter-frame transform and differ only by object displacement. Same/Dyn./Occ. denote unchanged se-mantics, dynamic class, and occupied class. Values are percent-ages and N counts valid queries in millions. 
+
+Speed N
+
+(M) Zero-flow transport GT-flow warp ∆ Same Same Dyn. Occ. Same Dyn. Occ. All 11.83 72.93 78.86 90.92 89.21 95.79 99.38 +16.28 Slow ( < 2 m/s) 7.87 85.19 94.08 98.80 86.51 96.25 99.70 +1.32 Med. (2–5 m/s) 1.16 71.08 71.38 87.50 96.65 97.64 99.53 +25.57 Fast ( ≥ 5 m/s) 2.80 39.57 39.59 70.41 93.73 93.75 98.43 +54.16 
+
+Figure 3: Motion compensation restores temporal consistency. 
+
+GT flow preserves dynamic sup-port across speed ranges, whereas fixed-coordinate retrieval be-comes increasingly misaligned as speed grows. 30 40 50 60 70 80 90 100         
+
+> Adjacent-frame same-class consistency (%) Slow (<2 m/s) (N= 7.87M) Medium (2--5 m/s) (N= 1.16M) Fast ( 5 m/s)
+> (N= 2.80M)
+> +1.32% +25.57% +54.16%
+> 85.19 86.51 71.08 96.65 39.57 93.73
+> Zero flow GT-flow warp
+> Motion Compensation Restores Temporal Consistency
+
+Flow-based alignment is closest to this problem. AsyncBEV aligns asynchronous cross-modal ob-servations with BEV feature flow (Wang et al., 2026). In the fixed roadside setting, Table 1 and Figure 3 show that GT-flow warping improves same-class agreement by 1.32 points for slow objects, but by 25.57 and 54.16 points for medium and fast objects, motivating selective motion compensa-tion. This is a diagnostic of the constructed targets. For candidates no faster than 2 m/s, low-speed target repair selects zero motion when its future same-class support score exceeds the transported score by at least 0.05. 
+
+3 METHOD 
+
+3.1 PRELIMINARY ANALYSIS 
+
+Let It = {Int }4 
+
+> n=1
+
+denote the synchronized roadside images at time t. RoadOcc predicts semantic occupancy yt over a voxel domain Ω and a planar velocity field vt : Ω → R2. Among the 18 occu-3Published as a conference paper at ICLR 2027 BEV Slot                           
+
+> View Transformation
+> Image Encoder
+> Four  Cameras
+> Depth 1/2
+> 1/4
+> 1/8
+> Multi -Scale
+> Voxel
+> Current History
+> DCA VVE
+> Voxel Flow VDSF
+> Up x2 Up x2
+> Feature Aggregation Scale 1/8
+> Height Compression
+> 1/2
+> 1/4
+> 1/8
+> Feature Aggregation Scale 1/4
+> Feature Aggregation Scale 1/2
+> Decoder
+> Dynamic -Aware Cross -Attention (DCA)
+> Occ
+> Predictor
+> Self -Attention
+> Norm & Add
+> Dynamic -guided
+> Cross Attention
+> Norm & Add
+> Up x2
+> Context Depth
+> BEV
+> Lower
+> Scale BEV
+> BEV Voxel Velocity Estimation (VVE )
+> Dynamic Candidate
+> Persist/Transport/Refresh
+> (a) 2D -to -3D Lifting
+> Router
+> P
+> T
+> R
+> Transport Persist Refresh
+> (b) Multi -Scale Feature Aggregation
+> Where needed? Where to read? Which source?
+> Roadside Occupancy
+> (c) Occupancy Decode
+> Velocity -guided Dynamic Sparse Fusion (VDSF )
+> Overview
+> History Features
+> BEV Slot
+> BEV Slot
+> Height
+> Collapse
+> Cost
+> Volume
+> Lower
+> Scale Flow Up x2
+> Tempor
+> al Flow
+> Current
+> Observation
+> Current
+> Flow
+> Flow Estimate
+> Fusion
+> Dynamic Flow
+> Backwarp Sampling Fixed Coordinate No History, only
+> Current
+> History Features
+
+…… T-N T-1
+
+> Fusion
+> Output
+
+Figure 4: RoadOcc framework. The image encoder and view transformation construct multi-scale voxel features. At each feature aggregation scale, DCA produces the current observation, VVE fuses current, temporal, and lower-scale flow into dynamic flow, and VDSF routes fixed-coordinate, backwarped, or current evidence to fusion. Coarse-to-fine outputs feed occupancy decoding for semantic occupancy and voxel flow. pancy states, the dynamic set is Cdyn = {bicycle, bus, car, motorcycle, pedestrian, truck }. Velocity is expressed in the common roadside horizontal frame. Because fixed roadside cameras share a persistent physical frame, cached history already lies on the current voxel grid at inference. We only reconcile relative BEV augmentations during training. Under a locally constant velocity approximation, history supporting a current voxel x is read from 
+
+eht−∆t(x) = Sample  ht−∆t, x − ∆t vt(x) , (1) where h is same-grid history and Sample is trilinear interpolation. The three candidates are fixed-coordinate history at x (Persist), flow-addressed history at x − ∆t vt(x) (Transport), and current evidence (Refresh). Equation 1 specifies an address, while VDSF learns how to combine these sources under motion- and support-based supervision. 3.2 OVERVIEW 
+
+RoadOcc decodes {Vst }s∈{ 1/8,1/4,1/2} from coarse to fine. As shown in Figure 4, the encoder lifts four camera views into multi-scale voxel features. At each aggregation stage, DCA determines where evidence is needed, VVE determines where history should be read, and VDSF determines which source should enter fusion. The output feature and dynamic flow seed the next finer stage before occupancy decoding. Coarse predictions establish scene layout, while finer stages restore object boundaries and sparse traffic participants before the full-resolution output. 3.3 DYNAMIC -AWARE CROSS -ATTENTION (DCA) Dynamic objects occupy few voxels, so uniformly repeating image cross-attention spends most com-putation on stable structure. After the first nonempty-guided image update, DCA combines the cur-rent representation with an upsampled lower-scale BEV to derive a dynamic candidate. Let πst, cur 
+
+and πst, sta denote the provisional distributions produced by the current and static prediction heads after the first image update, and let C+sta contain the static classes and free space. The mean semantic discrepancy δst, sta over C+sta and current dynamic probability pst, dyn form the candidate map 
+
+cst (x) = Norm  max δst, sta (x), p st, dyn (x)  . (2) Here Norm divides by the per-sample spatial maximum, clamped to 10 −6. Discrepancy recovers departures from the static hypothesis, while dynamic probability retains visible actors. Their maxi-mum also preserves early semantic misses detected through change evidence. 4Published as a conference paper at ICLR 2027 The candidate map controls a second image cross-attention rather than directly reweighting the voxel feature. Following projected deformable attention (Li et al., 2025b) and occupancy-aware reference sampling (Liao et al., 2025), let qst, x be the BEV query at x, Rn(x) its visible height anchors in camera n, and Fnt the corresponding image feature. DCA retains Rsn,c (x) = {r ∈ R n(x) : ur <cst (r)} and updates the query as 
+
+qs, + 
+
+> t, x
+
+= qst, x + Wo
+
+1
+
+|V x|
+
+X
+
+> n∈V x
+
+X
+
+> r∈R sn,c (x)
+
+βsn, r Adef 
+
+ qst, x, Pn(r), Fnt
+
+ , (3) where r = ( x, z r) indexes a voxel-height score shared across cameras, Vx contains valid cameras, and Pn projects anchors. Depth consistency βsn, r multiplies normalized deformable weights before camera averaging. During training, ur is sampled from a normal distribution with mean 0.5 and standard deviation 1, truncated to [0 , 1] . At inference, it is fixed to 0.5. The stochastic rule exposes uncertain boundary voxels during training, while deterministic thresholding keeps inference stable. Queries without retained support follow the residual path unchanged. The candidate gates a second cross-attention over image depth context and also allocates VDSF tokens. DCA therefore localizes where additional image and temporal evidence is needed without repeatedly updating the stable scene. 3.4 MULTI -SCALE VOXEL VELOCITY ESTIMATION (VVE) DCA refines the current observation but does not locate displaced history. VVE estimates its address from the DCA feature and nearest valid history. From the current occupancy distribution πst (x), it computes dynamic support dst = P 
+
+> c∈C dyn
+
+πst,c and nonempty support est = 1 − πst, free . Here dst
+
+guides height compression into the current BEV slot Bst , while est guides temporal token selection. Applying the same compression to history gives Bst−∆t.VVE next compares each current BEV slot with a small neighborhood in the historical slot, produc-ing the local cost volume 
+
+Kst (x, δ ) = 
+
+*
+
+Bst (x)
+
+∥Bst (x)∥2
+
+, Bst−∆t(x + δ)
+
+∥Bst−∆t(x + δ)∥2
+
++
+
+, δ ∈ [−r, r ]2, (4) where r = 2 yields a 5 × 5 neighborhood and both norms use an ϵ = 10 −6 floor. The cost-volume decoder converts this local correspondence evidence into temporal flow. VVE estimates flow recursively rather than solving each resolution in isolation. Let s− denote the preceding coarser stage and set the upsampled lower-scale flow vst, ↑ to zero at 1/8 and to Up s(vs−
+
+> t, cur
+
+)
+
+otherwise. This prior initializes the current flow. Current appearance and its semantic embedding 
+
+Sst predict a current-only correction, while the history feature and cost volume predict the temporal flow. Their fusion is 
+
+vst, cur = vst, ↑ + ∆ vst, cur , vst, tmp = ftmp (Bst , Bst−∆t, Kst ),
+
+bvst = (1 − αst )vst, cur + αst vst, tmp + ∆ vst, ref . (5) Here ftmp is the cost-volume decoder and αst = 0 .5 1hist max z dst gates history, becoming zero at sequence starts. The residual ∆vst, ref produces the dynamic flow, which is lifted across height as the VDSF address. Coarse stages capture motion structure and fine stages refine boundaries. 3.5 VELOCITY -GUIDED DYNAMIC SPARSE FUSION (VDSF) 
+
+Velocity-guided sparse fusion. Applying the full temporal memory after DCA and VVE would mostly repeat static context. VDSF makes gather–fuse–scatter (Liao et al., 2025) motion aware by combining DCA guidance with nonempty support under a fixed token budget 
+
+gst = clip( cst + η e st , 0, 1) , X st = TopK( gst ), (6) where η balances change evidence and occupied support. The selected set X st receives full stage-local history. Its complement uses a short fixed-coordinate path, preserving background context at lower cost. 5Published as a conference paper at ICLR 2027 Table 2: Main InfraOcc occupancy results.                                                                                                                                                                                                                                                                                                  
+
+> Method gIoU mIoU Bike Bus Car Motorcycle Pedestrian Truck Other Barrier Cone Driveable Sidewalk Terrain Manmade Vegetation Free all dyn sta BEVDet ’21 68.62 45.14 21.19 63.11 9.23 42.75 38.04 9.68 15.01 12.45 42.88 70.36 53.77 72.04 68.07 73.09 64.28 60.38 94.87 BEVFormer ’22 81.72 47.76 10.73 75.53 7.97 20.39 17.65 3.47 8.62 6.30 42.47 76.26 72.83 85.19 81.95 88.95 79.52 77.05 97.56 BEVDepth ’23 71.89 46.81 19.64 67.19 14.84 33.87 38.74 3.42 16.86 10.14 48.73 71.05 62.37 73.31 69.32 76.07 70.51 66.15 95.54 TPVFormer ’23 73.80 43.09 4.36 72.13 0.10 3.69 13.80 0.41 6.86 1.33 42.86 75.29 69.69 80.61 77.62 86.63 72.61 71.70 96.12 SurroundOcc ’23 83.78 50.77 11.37 80.32 12.66 21.90 18.54 2.06 9.50 3.55 65.09 79.04 72.70 86.38 83.99 91.10 83.16 81.09 97.80 CONet ’23 78.56 49.25 18.93 72.00 3.06 37.24 39.47 4.42 17.64 11.72 45.01 75.31 64.94 84.29 79.45 84.27 72.96 69.79 97.08 ALOcc ’25 75.66 43.31 5.86 71.40 8.41 4.04 8.52 0.00 4.48 9.71 63.90 68.97 63.40 90.09 77.77 78.16 65.07 63.85 97.12 Let Occ Flow ’24 87.18 51.38 8.78 83.34 11.27 11.53 14.07 4.34 8.12 3.34 62.06 75.06 85.56 92.55 85.63 92.98 87.10 85.74 98.56 SparseOcc ’24 71.61 45.42 9.41 72.42 1.50 20.94 24.87 0.00 4.60 4.57 67.68 76.37 61.51 74.67 76.59 88.54 68.79 65.19 96.31 GaussianFormer ’24 77.89 43.63 10.45 68.51 3.13 22.11 23.17 1.29 8.21 4.80 36.70 68.54 55.60 82.59 79.37 74.20 77.85 73.21 96.71 CRT-Fusion-S ’24 88.73 55.94 21.98 81.40 13.02 45.16 38.48 7.34 18.99 8.90 63.53 71.99 74.82 93.38 84.40 91.19 86.39 85.53 98.73 STCOcc-S ’25 78.54 50.71 23.48 71.14 13.43 47.83 39.62 10.21 17.83 11.93 50.18 71.54 58.33 90.30 78.78 84.90 67.72 67.32 97.47 CRT-Fusion ’24 80.35 53.83 27.02 73.94 32.58 46.63 39.49 12.22 20.81 10.41 53.08 72.27 68.15 89.06 79.09 84.48 72.06 73.30 97.68 STCOcc ’25 92.54 60.85 27.66 85.74 27.13 48.78 44.93 10.23 22.85 12.03 68.84 70.93 81.60 95.88 89.41 95.36 91.85 92.04 99.18
+> RoadOcc (ours) 94.03 65.29 32.37 89.98 37.60 55.46 49.36 13.01 22.66 16.13 87.66 72.05 86.03 97.85 92.81 96.90 92.91 93.66 99.35
+
+Each scale receives multi-frame history features and their VVE motion priors. For x ∈ X st , elapsed time converts dynamic flow into a voxel offset. Backwarp sampling produces the Transport candi-date hT , while the fixed-coordinate read produces the Persist candidate hP .
+
+Persist–Transport–Refresh routing. Dynamic flow proposes where to read history, but a cor-rected address may still lack semantic support. VDSF therefore decides which source should enter fusion. It retains hP and hT and defines the current-only Refresh candidate as hR = qt. During training, the route target is constructed from the current and nearest historical semantic occupancy labels together with the motion target, and assigns each current dynamic voxel according to its mo-tion state and class-consistent historical support as follows. 
+
+zt(x) = 
+
+
+
+P, ∥vt(x)∥ ≤ ϵ ∧ Supp( x),T, ∥vt(x)∥ > ϵ ∧ Supp( x − ∆t vt(x)) ,R, otherwise ,
+
+(7) where Supp tests same-class occupancy at the same height within the local correspondence radius. We use ϵ = 10 −3 m/s and a one-voxel radius to absorb discretization error. The construction follows the semantic occupancy label space used by InfraOcc and is evaluated at every execution scale using its physical cell size, with a native-grid endpoint for full-resolution supervision. The motion target selects which historical candidate is tested according to motion state. The fixed-coordinate candidate is used for stationary voxels and the transported candidate for moving voxels. If that candidate lacks support, the target is Refresh, even if the alternative historical address has same-class support. This is a motion-conditioned source preference. Targets use GT motion, while inference uses predicted VVE motion and learned route probabilities. Future occupancy is used only for offline target construction, never as model input. At each feature aggregation scale, the router combines the current observation, nearest fixed-coordinate history feature, normalized dynamic flow, and upsampled coarser P/T/R distribution. It predicts stage-local logits. A lightweight native head upsamples the finest context with full-resolution flow. Softmax gives αst = ( αP , α T , α R) and the routed candidate 
+
+hPTR 
+
+t = αP hP + αT hT + αRhR, (αP , α T , α R) = softmax( ψ(·)) . (8) P/T/R therefore compete as one route distribution rather than independent weights. Transport uses backwarp sampling, Persist uses the fixed-coordinate source, and Refresh uses no history, only cur-rent evidence. Fusion uses soft probabilities and reserves argmax for diagnostics. Let HPTR ,s
+
+t (x) concatenate the routed multi-frame history at scale s. VDSF combines this temporal evidence with the current observation and its semantic embedding through the fusion MLP 
+
+qst, fuse (x) = qst (x) + Φ s
+
+
+
+[qst (x), HPTR ,s
+
+t (x), Emb( πst (x))] 
+
+
+
+. (9) The output residual is scattered to X st and joined with the background path. The fused volume and dynamic flow feed the next scale and are retained for subsequent frames. The three stages use 
+
+K = [2000 , 512 , 128] sparse tokens and retain [8 , 4, 2] history samples, respectively; a historical source is valid when it has same-class support at the same height within a 3 × 3 XY neighborhood. 6Published as a conference paper at ICLR 2027 
+
+Figure 5: Qualitative comparison with STCOcc. RoadOcc more closely recovers dynamic-object presence, semantic identity, and geometry, including spurious pedestrian occupancy, vehicle-class confusion, bus-shape distortion, and an incomplete car footprint. Table 3: Joint occupancy–velocity comparison.                                                                   
+
+> Method Occupancy Velocity Diagnostics mIoU Dyn. Sta. gIoU RayIoU Direct MAVE TP-MAVE DSR CRT-Fusion (NIPS 2024) 53.83 27.02 73.94 80.35 48.08 2.227 1.839 57.56 + VDSF P/T/R 57.15 28.30 78.79 83.46 52.34 1.990 1.958 59.45
+> ∆+3.32 +1.28 +4.85 +3.11 +4.26 −0.237 +0.119 +1.89 STCOcc (CVPR 2025) 60.85 27.66 85.74 92.54 55.94 1.946 0.703 57.12 + VDSF P/T/R 61.81 28.80 86.56 93.59 58.07 1.770 0.648 58.78
+> ∆+0.96 +1.14 +0.82 +1.05 +2.13 −0.176 −0.055 +1.66
+> RoadOcc (ours) 65.29 32.37 89.98 94.03 65.44 1.669 0.661 61.11
+
+3.6 TRAINING OBJECTIVE 
+
+Training jointly optimizes four functional objectives. 
+
+L = λdepth Ldepth + Lsem + λmot Lmot + λroute Lroute . (10) 
+
+Ldepth supervises camera depth for view transformation, while Lsem covers full- and multi-scale occupancy together with the static, dynamic, and DCA auxiliaries. Lmot supervises the dynamic flow used for backwarp sampling, whereas Lroute supervises the P/T/R router on valid dynamic voxels. Together, they separate where history features are read from which source enters fusion. We set λdepth = 0 .5, λmot = 0 .1, and λroute = 0 .5. Multi-scale semantic and route losses use relative weights [1 , 0.5, 0.25 , 0.125] from native to 1/8 resolution. 
+
+4 EXPERIMENTS 
+
+Dataset and metrics. We evaluate camera-only roadside occupancy on InfraOcc (Xiang et al., 2024; Yang et al., 2026). Four synchronized views are mapped to 18 occupancy states. Under the InfraOcc protocol, semantic mIoU excludes construction vehicle, trailer, other flat, and Free. Free IoU is reported separately in the class-wise table. We report semantic and geometric IoU, next-frame dynamic IoU, and motion coverage. Direct MAVE covers all GT dynamic voxels, while TP-MAVE conditions on semantic matches and is paired with recall (DSR). InfraOcc is the primary fixed-roadside protocol. We additionally evaluate module transfer, Occ3D-nuScenes, and temporal-gap changes. The benchmark contains 290 temporally continuous roadside sequences: 215 for training and 75 for evaluation. 
+
+Implementation details. RoadOcc uses a ResNet-50 backbone, 256 × 704 images, and three aggre-gation scales at 3.2, 1.6, and 0.8 m, followed by 0.4 m output voxels over [−64 , 64] × [−64 , 64] ×
+
+[−4.8, 1.6] m. Frames are 0.5 s apart. AdamW training runs for 24 epochs from 5 × 10 −4 with 7Published as a conference paper at ICLR 2027 
+
+Figure 6: Velocity-guided historical retrieval. With queried dynamic targets fixed by current GT, the panels show the end-to-end occupancy prediction and compare a fixed-coordinate read with the VVE backtrace into aligned past GT. Black boxes are enlarged in the insets. same-class matches, unmatched targets, and other queried voxels are shown in green, red, and gray, respectively. The score is the same-class hit rate within the one-voxel matching radius. 
+
+10 −2 weight decay and cosine annealing. Comparisons share the voxel range, ignored classes, and evaluator. Controlled variants keep the backbone, data split, optimizer and other configuration fixed. 4.1 MAIN RESULTS 
+
+InfraOcc occupancy benchmark. Table 2 tests whether the proposed routing chain improves oc-cupancy under the InfraOcc evaluator. RoadOcc achieves the highest mIoU among the compared methods at 65.29, a +4.44 gain over STCOcc. Dynamic mIoU rises by +4.71 to 32.37, while static mIoU rises by +4.24 to 89.98. Five of six dynamic classes improve, led by Bike ( +10.47) and Bus ( +6.68), whereas Pedestrian changes by −0.19. Thus the aggregate gain covers both traffic participants and persistent structure, with variation by class. 
+
+Joint occupancy–velocity behavior. Table 3 evaluates motion accuracy and semantic coverage alongside occupancy. Direct MAVE measures velocity error over all GT dynamic voxels, while DSR measures dynamic semantic recall. Relative to STCOcc, RoadOcc lowers Direct MAVE from 1.946 to 1.669 and raises DSR from 57.12 to 61.11, improving motion accuracy alongside dynamic recov-ery. Adding VDSF P/T/R to CRT-Fusion and STCOcc likewise raises Dyn. by +1.28 and +1.14, respectively, while improving Direct MAVE and DSR. The consistent trend supports the module’s utility beyond the full RoadOcc architecture. TP-MAVE conditions on semantic matches and must be read with DSR. For CRT-Fusion, the +1.89 DSR gain indicates broader dynamic recovery even though the conditional error over matched voxels increases. 
+
+Qualitative occupancy recovery. Figure 5 supports the aggregate dynamic gain with representative matched scenes. STCOcc produces stale or spurious pedestrian occupancy, confuses a vehicle class, distorts a bus footprint, and incompletely recovers a car. RoadOcc more closely recovers the GT class and extent in these examples while preserving the roadway. Table 4: Component ablation.                        
+
+> Base Design Output ↑
+> DCA VVE VDSF P/T/R All Dyn. Nxt.
+> ✓60.85 27.66 26.74
+> ✓✓61.05 28.01 26.99
+> ✓✓61.69 28.55 27.64
+> ✓✓✓63.01 30.10 29.44
+> ✓✓✓✓64.17 30.97 30.78
+> ✓✓✓✓✓65.29 32.37 31.72
+
+Transfer and temporal gaps. On mask-trained Occ3D-nuScenes, RoadOcc reaches 45.01 overall and 39.80 dynamic mIoU, im-proving over STCOcc by 0.41 and 0.79 points, respectively. Without fine-tuning the 0.5 s-trained checkpoints, testing at 1.5 s yields 33.49 Dyn. for RoadOcc and 28.58 for STCOcc on the same 1,520 anchors. These results ex-tend the empirical support beyond the primary dataset and training cadence. They evaluate the complete model rather than isolate P/T/R. 4.2 ABLATION STUDIES 
+
+Using Liao et al. (2025) as the baseline, we hold the backbone, token budget, temporal-memory configuration, and training protocol fixed unless explicitly varied. Tables 4, 5, and 6 then examine component composition, historical-address correction, and P/T/R source selection, respectively. 
+
+Overall ablation. Table 4 follows the routing chain. VDSF alone adds only 0.20 mIoU. Adding VDSF to the DCA variant raises Dyn. by +1.55 and Nxt. by +1.80. VVE then adds +1.16 mIoU, 8Published as a conference paper at ICLR 2027 and P/T/R adds a further +1.12 mIoU. This progression supports combining candidate selection, motion-based retrieval, and source routing. Tables below examine latter two design in more detail. 
+
+Address correction and source selection. With capacity and token budget fixed, the fixed-coordinate and VVE reads in Table 5 differ only in historical address. VVE raises Dyn. by +0.87, lowers dMAVE from 2.146 to 1.690, and raises DSR by +1.51. P/T/R then adds +1.40 Dyn. and 
+
++1.76 DSR, showing that learned source selection improves on motion-corrected retrieval. Table 5: Controlled address and source se-lection. All variants use the same sparse-token budget and model capacity.              
+
+> Variant Design Output VVE P/T/R Dyn. ↑Nxt. ↑dM ↓DSR ↑
+> Fixed read 30.10 29.44 2.146 57.84 VVE read ✓30.97 30.78 1.690 59.35
+> Full ✓✓32.37 31.72 1.669 61.11
+
+Table 6: P/T/R routing controls. Mean ±
+
+standard deviation is reported for the multi-seed variants. w/o R denotes full w/o Refresh.                         
+
+> Variant Dyn. ↑Nxt. ↑DSR ↑dM ↓
+> None 30.97 ±.27 30.78 ±.34 59.35 ±.39 1.690 ±.019
+> Gate 31.25 ±.20 30.94 ±.30 59.75 ±.45 1.685 ±.018
+> State 31.88 ±.18 31.38 ±.25 60.52 ±.40 1.675 ±.017
+> w/o R 32.05 ±.12 31.41 ±.18 60.69 ±.05 1.679 ±.033
+> Full 32.37 ±.11 31.72 ±.26 61.11 ±.38 1.669 ±.020
+
+P/T/R routing controls. Table 6 compares routing variants within DCA–VVE–VDSF. None omits P/T/R. Gate adaptively mixes the same can-didates. State adds P/T/R supervision without ex-ecuting its probabilities. Full uses the supervised routes in fusion. Full w/o R masks αR and renor-malizes (αP , α T ). The complete control contract is given in the appendix. Across three seeds, Full reaches 32.37 ± 0.11 Dyn., compared with 30.97 ± 0.27 for None and 31.25 ± 0.20 for Gate. State and Full improve successively by 0.63 and 0.49 points over the preceding variant. The clear-est gain is in dynamic occupancy. The dMAVE change from None to Full is smaller (0.021 m/s), with standard deviations of 0.019 and 0.020 m/s. Removing Refresh from Full reduces Dyn., Nxt., and DSR by 0.32, 0.31, and 0.42 points, respec-tively, while increasing dMAVE by 0.010 m/s. Under the same three-seed protocol, the 0.32-point Dyn. gap exceeds either reported run-to-run standard deviation (0.11 and 0.12). We treat the other metric changes as supporting trends rather than standalone significance claims. 
+
+Routing scope. Equation 7 supervises motion-conditioned semantic preferences, not instance cor-respondence. Labels use the nearest history, and each scale shares its predicted route across valid memory slots. GT-conditioned routing visualizations separate source choices from occupancy de-tection. They do not measure candidate misses or guarantee support at every predicted historical address. Dyn., Nxt., Direct MAVE, and DSR provide complementary end-to-end metrics. 
+
+Figure 7: Predicted P/T/R on GT dynamic support. Visual analysis. Figure 6 compares zero-motion read-ing with VVE backtracing. Current GT fixes the queried dynamic voxels and their classes, while predicted occupancy provides the end-to-end context. Red-to-green changes show dynamic flow relocating queries through backwarp sampling onto same-class past GT, isolating address quality from the subsequent routing decision. On the same GT dynamic support, Figure 7 then shows Persist following fixed-coordinate sup-port, Transport following displacement, and Refresh favoring current evidence. Together, the visualizations inspect historical addresses and learned source preferences on dynamic targets. 
+
+5 CONCLUSION 
+
+In this work, we present RoadOcc, a voxel-level evidence-source routing framework for temporal roadside occupancy. Beyond implicit temporal aggregation, RoadOcc explicitly learns where history should be retrieved and how strongly it should be reused. The proposed DCA uses current image evidence to identify motion-sensitive voxels, while VVE estimates their historical source addresses, 9Published as a conference paper at ICLR 2027 and VDSF combines evidence through Persist, Transport, or Refresh routing. On the InfraOcc protocol, the unified formulation achieves the highest occupancy accuracy among the compared methods while improving dynamic recovery and velocity estimation. Extensive experiments further demonstrate the superiority of our design. Future work will extend this principle to broader moving-platform settings, longer temporal horizons, and instance-level modeling. 
+
+AI U SE STATEMENT 
+
+Generative AI tools were used for literature organization, reviewer-style feedback, and language editing. The authors verified all citations, technical descriptions, analyses, and revisions, and take responsibility for the final content of this work. 
+
+REFERENCES 
+
+Anh-Quan Cao and Raoul de Charette. MonoScene: Monocular 3D Semantic Scene Completion. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 3991–4001, 2022. Ming Chang, Xishan Zhang, Rui Zhang, Zhipeng Zhao, Guanhua He, and Shaoli Liu. Recurrent-BEV: A Long-term Temporal Fusion Framework for Multi-view 3D Detection. In European Conference on Computer Vision (ECCV) , pp. 131–147, 2024. Dubing Chen, Jin Fang, Wencheng Han, Xinjing Cheng, Junbo Yin, Chengzhong Xu, Fahad Shah-baz Khan, and Jianbing Shen. ALOcc: Adaptive Lifting-Based 3D Semantic Occupancy and Cost Volume-Based Flow Predictions. In IEEE/CVF International Conference on Computer Vi-sion (ICCV) , pp. 4156–4166, 2025a. Dubing Chen, Huan Zheng, Jin Fang, Xingping Dong, Xianfei Li, Wenlong Liao, Tao He, Pai Peng, and Jianbing Shen. Rethinking Temporal Fusion with a Unified Gradient Descent View for 3D Semantic Occupancy Prediction. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 1505–1515, 2025b. Junjie Huang and Guan Huang. BEVDet4D: Exploit Temporal Cues in Multi-camera 3D Object Detection. arXiv preprint arXiv:2203.17054 , 2022. Junjie Huang, Guan Huang, Zheng Zhu, Ye Yun, and Dalong Du. BEVDet: High-Performance Multi-Camera 3D Object Detection in Bird-Eye-View. arXiv preprint arXiv:2112.11790 , 2021. Yuanhui Huang, Wenzhao Zheng, Yunpeng Zhang, Jie Zhou, and Jiwen Lu. Tri-Perspective View for Vision-Based 3D Semantic Occupancy Prediction. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 9223–9232, 2023. Yuanhui Huang, Wenzhao Zheng, Borui Zhang, Jie Zhou, and Jiwen Lu. SelfOcc: Self-Supervised Vision-Based 3D Occupancy Prediction. In IEEE/CVF Conference on Computer Vision and Pat-tern Recognition (CVPR) , pp. 19946–19956, 2024a. Yuanhui Huang, Wenzhao Zheng, Yunpeng Zhang, Jie Zhou, and Jiwen Lu. GaussianFormer: Scene as Gaussians for Vision-Based 3D Semantic Occupancy Prediction. In European Conference on Computer Vision (ECCV) , pp. 376–393, 2024b. Ziyang Leng, Jiawei Yang, Wenlong Yi, and Bolei Zhou. Occupancy Learning with Spatiotemporal Memory. In IEEE/CVF International Conference on Computer Vision (ICCV) , pp. 26569–26578, 2025. Wuyang Li, Zhu Yu, and Alexandre Alahi. VoxDet: Rethinking 3D Semantic Scene Completion as Dense Object Detection. In Advances in Neural Information Processing Systems (NeurIPS) ,volume 38, 2025a. doi: 10.52202/085713-2707. Yiming Li, Zhiding Yu, Christopher Choy, Chaowei Xiao, Jose M. Alvarez, Sanja Fidler, Chen Feng, and Anima Anandkumar. VoxFormer: Sparse Voxel Transformer for Camera-Based 3D Seman-tic Scene Completion. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 9087–9098, 2023a. 10 Published as a conference paper at ICLR 2027 Yinhao Li, Zheng Ge, Guanyi Yu, Jinrong Yang, Zengran Wang, Yukang Shi, Jianjian Sun, and Zeming Li. BEVDepth: Acquisition of Reliable Depth for Multi-View 3D Object Detection. 
+
+Proceedings of the AAAI Conference on Artificial Intelligence , 37(2):1477–1485, 2023b. doi: 10.1609/aaai.v37i2.25233. Zhiqi Li, Zhiding Yu, David Austin, Mingsheng Fang, Shiyi Lan, Jan Kautz, and Jose M. Alvarez. FB-OCC: 3D Occupancy Prediction Based on Forward-Backward View Transformation. arXiv preprint arXiv:2307.01492 , 2023c. doi: 10.48550/arXiv.2307.01492. Technical report for the 3D Occupancy Prediction Challenge at the CVPR 2023 Workshops. Zhiqi Li, Wenhai Wang, Hongyang Li, Enze Xie, Chonghao Sima, Tong Lu, Yu Qiao, and Jifeng Dai. BEVFormer: Learning Bird’s-Eye-View Representation From LiDAR-Camera via Spatiotempo-ral Transformers. IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) , 47 (3):2020–2036, 2025b. doi: 10.1109/TPAMI.2024.3515454. Zhimin Liao, Ping Wei, Shuaijia Chen, Haoxuan Wang, and Ziyang Ren. STCOcc: Sparse Spatial-Temporal Cascade Renovation for 3D Occupancy and Scene Flow Prediction. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 1516–1526, 2025. Yili Liu, Linzhan Mou, Xuan Yu, Chenrui Han, Sitong Mao, Rong Xiong, and Yue Wang. Let Occ Flow: Self-Supervised 3D Occupancy Flow Prediction. In Proceedings of the 8th Conference on Robot Learning , volume 270 of Proceedings of Machine Learning Research , pp. 2895–2912. PMLR, 2025. Junyi Ma, Xieyuanli Chen, Jiawei Huang, Jingyi Xu, Zhen Luo, Jintao Xu, Weihao Gu, Rui Ai, and Hesheng Wang. Cam4DOcc: Benchmark for Camera-Only 4D Occupancy Forecasting in Autonomous Driving Applications. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 21486–21495, 2024. Riya Mohan, Juana Valeria Hurtado, Rohit Mohan, and Abhinav Valada. ForecastOcc: Vision-Based Semantic Occupancy Forecasting. In IEEE International Conference on Robotics and Automation (ICRA) , 2026. Youshaa Murhij and Dmitry Yudin. OFMPNet: Deep End-to-End Model for Occupancy and Flow Prediction in Urban Environment. Neurocomputing , 586:127649, 2024. doi: 10.1016/j.neucom. 2024.127649. Wenzhe Ouyang, Zenglin Xu, Bin Shen, Jinghua Wang, and Yong Xu. LinkOcc: 3D Semantic Occupancy Prediction With Temporal Association. IEEE Transactions on Circuits and Systems for Video Technology , 35(2):1374–1384, 2025. doi: 10.1109/TCSVT.2024.3486019. Pin Tang, Zhongdao Wang, Guoqing Wang, Jilai Zheng, Xiangxuan Ren, Bailan Feng, and Chao Ma. SparseOcc: Rethinking Sparse Latent Representation for Vision-Based Semantic Occupancy Prediction. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 15035–15044, 2024. Xiaoyu Tian, Tao Jiang, Longfei Yun, Yucheng Mao, Huitong Yang, Yue Wang, Yilun Wang, and Hang Zhao. Occ3D: A large-scale 3d occupancy prediction benchmark for autonomous driving. In Advances in Neural Information Processing Systems (NeurIPS) , volume 36, pp. 64318–64330, 2023. doi: 10.52202/075280-2809. Arpitsinh Vaghela, Duo Lu, Aayush Atul Verma, Bharatesh Chakravarthi, Hua Wei, and Yezhou Yang. MC-BEVRO: Multi-Camera Bird Eye View Road Occupancy Detection for Traffic Moni-toring. In IEEE International Conference on Intelligent Transportation Systems (ITSC) , pp. 4143– 4149, 2025. doi: 10.1109/ITSC60802.2025.11423511. Shiming Wang, Holger Caesar, Liangliang Nan, and Julian F. P. Kooij. AsyncBEV: Cross-modal Flow Alignment in Asynchronous 3D Object Detection. In International Conference on Learning Representations (ICLR) , 2026. URL https://openreview.net/forum?id= JINemP2BQP .11 Published as a conference paper at ICLR 2027 Xiaofeng Wang, Zheng Zhu, Wenbo Xu, Yunpeng Zhang, Yi Wei, Xu Chi, Yun Ye, Dalong Du, Jiwen Lu, and Xingang Wang. OpenOccupancy: A Large Scale Benchmark for Surrounding Semantic Occupancy Perception. In IEEE/CVF International Conference on Computer Vision (ICCV) , pp. 17850–17859, 2023. Yuping Wang, Xiangyu Huang, Xiaokang Sun, Mingxuan Yan, Shuo Xing, Zhengzhong Tu, and Jiachen Li. UniOcc: A Unified Benchmark for Occupancy Forecasting and Prediction in Au-tonomous Driving. In IEEE/CVF International Conference on Computer Vision (ICCV) , pp. 25560–25570, 2025. Yuqi Wang, Yuntao Chen, Xingyu Liao, Lue Fan, and Zhaoxiang Zhang. PanoOcc: Unified Occu-pancy Representation for Camera-based 3D Panoptic Segmentation. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 17158–17168, 2024. Yi Wei, Linqing Zhao, Wenzhao Zheng, Zheng Zhu, Jie Zhou, and Jiwen Lu. SurroundOcc: Multi-Camera 3D Occupancy Prediction for Autonomous Driving. In IEEE/CVF International Confer-ence on Computer Vision (ICCV) , pp. 21729–21740, 2023. Hao Xiang, Zhaoliang Zheng, Xin Xia, Runsheng Xu, Letian Gao, Zewei Zhou, Xu Han, Xinkai Ji, Mingxi Li, Zonglin Meng, Jin Li, Mingyue Lei, Zhaoyang Ma, Zihang He, Haoxuan Ma, Yunshuang Yuan, Yingqian Zhao, and Jiaqi Ma. V2X-Real: A Largs-Scale Dataset for Vehicle-to-Everything Cooperative Perception. In European Conference on Computer Vision (ECCV) , pp. 455–470, 2024. doi: 10.1007/978-3-031-72943-0 26. Lei Yang, Xiaokai Bai, Boqi Li, Chunmian Lin, Li Wang, Ziying Song, Jiahuan Zhang, Enhui Ma, Haibao Yu, Jiaqi Ma, et al. InfraOcc: An Infrastructure Occupancy Benchmark with Static-to-Dynamic Reasoning. arXiv preprint arXiv:2608.30657 , 2026. Shanshuai Yuan, Julong Wei, Muer Tie, Xiangyun Ren, Zhongxue Gan, and Wenchao Ding. LM-POcc: 3D Semantic Occupancy Prediction Utilizing Long-Term Memory Prior from Historical Traversals. arXiv preprint arXiv:2504.13596 , 2025. Yunpeng Zhang, Zheng Zhu, and Dalong Du. OccFormer: Dual-path Transformer for Vision-based 3D Semantic Occupancy Prediction. In IEEE/CVF International Conference on Computer Vision (ICCV) , pp. 9433–9443, 2023. Lianqing Zheng, Long Yang, Qunshu Lin, Wenjin Ai, Minghao Liu, Shouyi Lu, Jianan Liu, Hongze Ren, Jingyue Mo, Xiaokai Bai, Jie Bai, Zhixiong Ma, and Xichan Zhu. OmniHD-Scenes: A Next-Generation Multimodal Dataset for Autonomous Driving. IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) , 48(6):7032–7049, 2026. doi: 10.1109/TPAMI.2026.3663672. Wenzhao Zheng, Weiliang Chen, Yuanhui Huang, Borui Zhang, Yueqi Duan, and Jiwen Lu. Occ-World: Learning a 3D Occupancy World Model for Autonomous Driving. In European Confer-ence on Computer Vision (ECCV) , pp. 55–72, 2024. 12

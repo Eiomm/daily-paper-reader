@@ -1,0 +1,544 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-27T22:16:43.908692+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 13,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2609.22816v1",
+      "source": "arxiv",
+      "title": "FIRM-WM: State-factorized factual-interventional recurrent modeling for reward-free visual planning",
+      "abstract": "Reward-free latent world models can learn from offline videos and solve new image--goal tasks by optimizing actions through predicted latent futures. This setting places two demands on the planning state: its coordinates must be comparable with a goal image. Moreover, its dynamics must retain velocity, motion trend, contact, and other history--dependent information beyond those goal coordinates. Offline training creates a second mismatch: each recorded trajectory reveals one factual future, whereas a sampling--based planner compares many actions that were not taken from the same state. We introduce FIRM-WM (Factual--Interventional Recurrent World Model), a compact pixel world model designed around these two gaps. Its recurrent state separates a typed, goal--comparable configuration from a 128-dimensional dynamic fiber used for prediction but excluded from the terminal goal cost. Broad factual trajectories provide state coverage, while common--reset intervention branches provide observed outcomes for alternative action sequences. Before executing each branch, we reset the environment and restore the same recorded values exposed by the environment's state--setting interface. Under matched CEM planning and three independent full-pipeline seeds, FIRM-WM reaches 99.0$\\pm$1.0% on TwoRoom, 92.7$\\pm$2.1% on Reacher, and 88.0$\\pm$3.0% on OGBench-Cube, compared with 89.0%, 88.0%, and 70.0% for LeWM. The deployed model uses 2.98--3.42M parameters and records 2.13--11.60$\\times$ lower planning time on these tasks.",
+      "authors": [
+        "Yilun Wu",
+        "Yunjian Zhang",
+        "Aobo Li",
+        "Mujiangshan Wang",
+        "Haitao Wu",
+        "Aqiang Zhang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-19T06:32:56+00:00",
+      "link": "https://arxiv.org/pdf/2609.22816v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reward-free latent world model predicting latent futures for visual planning",
+      "llm_evidence_cn": "无奖励潜在世界模型预测潜在未来用于视觉规划",
+      "llm_evidence": "无奖励潜在世界模型预测潜在未来用于视觉规划",
+      "canonical_evidence": "无奖励潜在世界模型预测潜在未来用于视觉规划",
+      "llm_tldr_en": "Reward-free latent world models must keep goal-comparable states and history-dependent dynamics, and reconcile factual trajectories with interventional planning. FIRM-WM is a compact pixel world model with state-factorized factual-interventional recurrent modeling.",
+      "llm_tldr_cn": "无奖励潜在世界模型可从离线视频学习，并通过优化动作在预测的潜在未来中求解新的图像目标导航任务。该设定要求规划状态坐标与目标图像可比，且动力学需保留速度、运动趋势、接触等历史相关信息；离线训练还存在事实与干预不匹配的问题。本文提出FIRM-WM，一种紧凑的像素世界模型，针对上述两个差距设计状态分解与事实-干预循环建模。方法提升了从离线视频进行无奖励视觉规划的鲁棒性与一致性，是潜在动力学建模的代表性工作。",
+      "llm_tldr": "无奖励潜在世界模型可从离线视频学习，并通过优化动作在预测的潜在未来中求解新的图像目标导航任务。该设定要求规划状态坐标与目标图像可比，且动力学需保留速度、运动趋势、接触等历史相关信息；离线训练还存在事实与干预不匹配的问题。本文提出FIRM-WM，一种紧凑的像素世界模型，针对上述两个差距设计状态分解与事实-干预循环建模。方法提升了从离线视频进行无奖励视觉规划的鲁棒性与一致性，是潜在动力学建模的代表性工作。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.23753v1",
+      "source": "arxiv",
+      "title": "OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling",
+      "abstract": "Generative world models aim to predict future states conditioned on actions, where action controllability is fundamental for reliable dynamics modeling. While recent efforts leverage simulator-generated data to enhance this capability, existing training pipelines face two fundamental limitations. First, static offline data collection leads to a distribution misalignment between training sets and the model's evolving error patterns, failing to resolve critical long-tail scenarios where dynamics predictions remain unreliable. Second, the standard objective of minimizing observational discrepancy often encourages the model to exploit spurious correlations instead of capturing the underlying action-effect causality. To address these limitations, we propose OnlineWM, an online training framework that continuously improves world modeling through active simulator interaction and causality-aware optimization. OnlineWM introduces two key innovations: (1) Active Online Learning: Instead of using fixed datasets, OnlineWM adaptively queries the simulator for new interaction sequences that target the model's current predictive weaknesses, ensuring high-utility data acquisition. (2) Causality-Aware Fine-Tuning: We propose a counterfactual learning strategy that contrasts the outcomes of different actions from identical states, forcing the model to attribute state transitions to specific actions rather than ambient environmental evolution, thereby grounding its predictions in reliable causal mechanisms. By integrating active data acquisition with causal optimization, OnlineWM establishes a closed-loop refinement process that ensures the model is both robust to diverse scenarios and precise in its causal attribution. Extensive experiments demonstrate that OnlineWM significantly enhances action controllability and generalizes effectively to unseen domains.",
+      "authors": [
+        "Yikun Miao",
+        "Fangqi Zhu",
+        "Quanxin Shou",
+        "Xiaoyi Pang",
+        "Zhengyang Yan",
+        "Junhao Li",
+        "Haodong Wang",
+        "Zicong Hong",
+        "Song Guo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-20T17:05:37+00:00",
+      "link": "https://arxiv.org/pdf/2609.23753v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generative world models predicting future states conditioned on actions with causality-aware training",
+      "llm_evidence_cn": "以因果感知训练预测动作条件下未来状态的生成式世界模型",
+      "llm_evidence": "以因果感知训练预测动作条件下未来状态的生成式世界模型",
+      "canonical_evidence": "以因果感知训练预测动作条件下未来状态的生成式世界模型",
+      "llm_tldr_en": "OnlineWM tackles two training-pipeline flaws in generative world models: static offline data misaligned with evolving error patterns, and objectives that exploit spurious correlations instead of action-effect causality. It proposes causality-aware active online learning with dynamic simulator data collection to improve action controllability.",
+      "llm_tldr_cn": "针对生成式世界模型训练中静态离线数据与模型演化误差分布错位、以及仅最小化观测差异导致学习伪相关而非动作因果的问题，本文提出 OnlineWM，一种因果感知的主动在线学习框架，通过动态采集仿真数据并引入因果约束目标来增强动作可控性。该方法面向长尾场景中动力学预测不可靠的痛点，为可靠的世界建模提供了新的训练范式。",
+      "llm_tldr": "针对生成式世界模型训练中静态离线数据与模型演化误差分布错位、以及仅最小化观测差异导致学习伪相关而非动作因果的问题，本文提出 OnlineWM，一种因果感知的主动在线学习框架，通过动态采集仿真数据并引入因果约束目标来增强动作可控性。该方法面向长尾场景中动力学预测不可靠的痛点，为可靠的世界建模提供了新的训练范式。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.22641v1",
+      "source": "arxiv",
+      "title": "ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models",
+      "abstract": "Autoregressive video world models enable temporally coherent generation for a single observer. Extending them to multiple agents requires consistency across independently controlled views and temporal gaps under causal streaming. We present ConsistWorld, a multi-agent world model that generates camera-controlled video streams of a static scene from one shared image. We formulate consistency as routing evidence from committed multi-agent history and concurrently generated peer views to the tokens being generated. Pose Conditioned Memory Retrieval selects relevant historical observations from all agents, recovering evidence beyond the recent context window. Visibility-Gated Peer Sharing regulates current peer information according to estimated historical coverage and current-view overlap. Together, they determine which historical observations enter the context and where concurrent peer information contributes, supporting long-term recall and coordinated exploration. Both mechanisms use camera geometry and maintain a bounded active context for a fixed agent count and retrieval budget. Experiments on evidence sharing cases and video length and agent number generalizations show that ConsistWorld achieves a strong cross-time and cross-agent consistency while preserving competitive generation quality.",
+      "authors": [
+        "Qianxun Xu",
+        "Xianfang Zeng",
+        "Xinyao Liao",
+        "Wei Cheng",
+        "Gang Yu",
+        "Chi Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-18T23:31:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.22641v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "consistent multi-agent autoregressive video world model",
+      "llm_evidence_cn": "一致的多智能体自回归视频世界模型",
+      "llm_evidence": "一致的多智能体自回归视频世界模型",
+      "canonical_evidence": "一致的多智能体自回归视频世界模型",
+      "llm_tldr_en": "Autoregressive video world models generate coherent video for a single observer; ConsistWorld extends them to multiple agents by routing evidence from committed history and peer views to generated tokens for cross-view and temporal consistency.",
+      "llm_tldr_cn": "自回归视频世界模型能为单一观察者生成时间连贯的视频，但扩展到多个智能体时需要在独立控制的视角与因果流式时间间隙间保持一致。本文提出ConsistWorld，从一张共享图像生成相机可控的多智能体视频流，将一致性建模为从已提交历史与并发同伴视角向生成令牌路由证据。其中姿态条件记忆检索可召回超出近期窗口的历史观测，可见性门控按估计历史调节同伴信息。该工作以证据路由实现多智能体世界模型的跨视角与时序一致性。",
+      "llm_tldr": "自回归视频世界模型能为单一观察者生成时间连贯的视频，但扩展到多个智能体时需要在独立控制的视角与因果流式时间间隙间保持一致。本文提出ConsistWorld，从一张共享图像生成相机可控的多智能体视频流，将一致性建模为从已提交历史与并发同伴视角向生成令牌路由证据。其中姿态条件记忆检索可召回超出近期窗口的历史观测，可见性门控按估计历史调节同伴信息。该工作以证据路由实现多智能体世界模型的跨视角与时序一致性。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.23144v1",
+      "source": "arxiv",
+      "title": "Probabilistic Scene Graphs: Hierarchical Representation and Real-time System",
+      "abstract": "3D scene graphs provide semantically rich and hierarchical representations for robot perception. However, existing systems do not maintain uncertainty as an explicit belief or propagate it through the operations that construct and refine the graph. We introduce Probabilistic Scene Graph (PSG), a generalization of the conventional scene graph that represents a posterior over possible graphs, factorized into a discrete graph structure of entities, relations, and semantic attributes, and continuous states that ground them spatially, with uncertainty maintained over both components. Geometry is carried directly by the nodes rather than selected from a separately constructed metric map, so a metric map, where needed, follows from the graph rather than preceding it. We instantiate PSG's probabilistic spatial grounding with hierarchical graphs of Gaussians (HGG): each object primitive is represented by a full-covariance Gaussian under a Normal-Inverse-Wishart belief, and the same parametrization applied recursively within a node yields a geometry graph that resolves its surface at finer resolution. We then build a mapping pipeline that preserves these beliefs throughout graph construction and refinement: a purely graph-based coarse-to-fine alignment registers observations by comparing node beliefs, while a nested Expectation-Maximization and factor-graph optimization jointly refines poses, object parameters, and internal geometry. Across six datasets spanning indoor RGB-D, outdoor LiDAR, and cross-modality deployment, HGG operates at sensor rate with near-constant memory and achieves state-of-the-art object accuracy and zero-shot graph alignment.",
+      "authors": [
+        "Waqas Ali",
+        "Michele Antonazzi",
+        "Timon Homberger",
+        "Thien-Minh Nguyen",
+        "Lukas Rosenberger Schmid",
+        "Patric Jensfelt",
+        "Yixi Cai"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-19T17:21:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.23144v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "hierarchical probabilistic scene representation factorized into discrete graph structure and continuous spatial states",
+      "llm_evidence_cn": "分解为离散图结构与连续空间状态的层次化概率场景表示",
+      "llm_evidence": "分解为离散图结构与连续空间状态的层次化概率场景表示",
+      "canonical_evidence": "分解为离散图结构与连续空间状态的层次化概率场景表示",
+      "llm_tldr_en": "Existing 3D scene graphs cannot maintain or propagate uncertainty. The paper proposes Probabilistic Scene Graph (PSG), factorizing a posterior over discrete graph structure and continuous spatial states with geometry carried by nodes, enabling real-time probabilistic robot perception.",
+      "llm_tldr_cn": "针对现有3D场景图无法显式表达与传播不确定性的问题，论文提出概率场景图（PSG），将场景图的后验分解为离散的实体、关系与语义属性结构，以及连续的空间状态，并让几何直接由节点承载。系统支持实时构建与细化，在机器人与具身感知中同时保持结构与几何不确定性，为层次化空间表示提供了统一的概率推理框架。",
+      "llm_tldr": "针对现有3D场景图无法显式表达与传播不确定性的问题，论文提出概率场景图（PSG），将场景图的后验分解为离散的实体、关系与语义属性结构，以及连续的空间状态，并让几何直接由节点承载。系统支持实时构建与细化，在机器人与具身感知中同时保持结构与几何不确定性，为层次化空间表示提供了统一的概率推理框架。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.24033v1",
+      "source": "arxiv",
+      "title": "Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning",
+      "abstract": "Reliable action evaluation in contact-rich manipulation requires looking beyond the current observation to future visual and contact consequences. Existing noise-space reinforcement learning efficiently steers a frozen Vision-Language-Action (VLA) policy, but its critics largely ignore these consequences. We present Imagine-RL, which augments noise-space VLA post-training with action-conditioned visual-torque imagination. For each candidate action chunk, a frozen visual-torque latent world model (VTLWM) autoregressively predicts compact future representations without pixel reconstruction. A current image-state-action query attends to observed histories and predicted futures, while previous-window prediction residuals provide token-wise confidence priors that suppress unreliable future tokens. By combining current evidence with predicted consequences, the action critic better evaluates candidate actions and supervises the actor, while the VLA and VTLWM remain frozen. Across four real-robot tasks with 50 evaluation trials per task, Imagine-RL uses only 100 RL trajectories and improves the average success rate by (23.6%) over DSRL and by (60%) over VLA baselines.",
+      "authors": [
+        "Kejia Hu",
+        "Wentong Zhai",
+        "Bo Zhao",
+        "Shuai Liang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-21T02:59:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.24033v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "world-model-augmented VLA reinforcement learning with latent future representation prediction",
+      "llm_evidence_cn": "以潜在未来表示预测增强 VLA 强化学习的世界模型方法",
+      "llm_evidence": "以潜在未来表示预测增强 VLA 强化学习的世界模型方法",
+      "canonical_evidence": "以潜在未来表示预测增强 VLA 强化学习的世界模型方法",
+      "llm_tldr_en": "Imagine-RL augments noise-space VLA post-training with action-conditioned visual-torque imagination. For each candidate action chunk, a frozen visual-torque latent world model autoregressively predicts compact future representations without pixel reconstruction, and a cross-attention query attends to observed histories and predicted futures for better action evaluation.",
+      "llm_tldr_cn": "针对接触丰富操作中可靠动作评估需要超越当前观测、考虑未来视觉与接触后果，而现有噪声空间强化学习的评论家忽视这些后果的问题，本文提出 Imagine-RL。该方法用冻结的视觉-力矩潜在世界模型为每个候选动作块自回归预测紧凑的未来表示，避免像素重建，并以当前图像-状态-动作查询交叉注意力融合观测历史与预测未来。该工作展示了潜在世界模型预测未来表示可有效增强 VLA 策略的强化学习后训练。",
+      "llm_tldr": "针对接触丰富操作中可靠动作评估需要超越当前观测、考虑未来视觉与接触后果，而现有噪声空间强化学习的评论家忽视这些后果的问题，本文提出 Imagine-RL。该方法用冻结的视觉-力矩潜在世界模型为每个候选动作块自回归预测紧凑的未来表示，避免像素重建，并以当前图像-状态-动作查询交叉注意力融合观测历史与预测未来。该工作展示了潜在世界模型预测未来表示可有效增强 VLA 策略的强化学习后训练。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.24352v1",
+      "source": "arxiv",
+      "title": "Few-Shot Demonstrations Elicit the Use of In-Context World Representations in LLMs",
+      "abstract": "Large language models (LLMs), when acting as agents, are expected to take observed data in context, infer the latent state space underlying the world, and leverage it for downstream prediction. However, prior work demonstrated that LLMs struggle to use representations learned in context on a graph tracking task, where the model needs to construct a representation of the graph governing data generation process and use it for subsequent predictions. In this paper, we show that extending this to few-shot settings, where each demonstration is generated from a different world with either the same or different graph topologies, enhances its prediction on 6 models from 4 model families. To understand this improvement, we linearly probe a low-dimensional world representation that encodes graph information in the hidden states. Notably, we find that few-shot demonstrations relocate the world representation and increase its predictive use. Specifically, for each model, these world representations shift in directions nearly orthogonal to their original subspace, and interventions on these representations selectively impair performance more than interventions on other subspaces. Consistent with this insight, we show that few-shot demonstrations with observations from different worlds improve performance on ARC-AGI-1&2, web agent tasks, and Othello. Our findings elucidate the role and internal mechanisms of few-shot demonstrations in in-context world modeling. More broadly, our work advances our understanding of how LLM agents learn from in-context observations and provides implications for their further improvement.",
+      "authors": [
+        "Kohsei Matsutani",
+        "Gouki Minegishi",
+        "Core Francisco Park",
+        "Takeshi Kojima",
+        "Yusuke Iwasawa",
+        "Yutaka Matsuo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-21T09:44:24+00:00",
+      "link": "https://arxiv.org/pdf/2609.24352v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "LLM agents inferring in-context latent world representations for downstream prediction",
+      "llm_evidence_cn": "LLM智能体推断上下文潜在世界表示用于下游预测",
+      "llm_evidence": "LLM智能体推断上下文潜在世界表示用于下游预测",
+      "canonical_evidence": "LLM智能体推断上下文潜在世界表示用于下游预测",
+      "llm_tldr_en": "LLMs as agents are expected to infer latent world state and use it for prediction, yet prior work shows they struggle on graph-tracking tasks. Extending to few-shot settings with varied worlds and topologies improves prediction across six models, revealing usable in-context world representations.",
+      "llm_tldr_cn": "论文关注大语言模型作为智能体时能否在上下文中推断潜在世界状态并用于预测，先前工作表明LLM在图追踪任务上难以利用上下文学习到的表示。作者将设定扩展到少样本场景，每段示范来自不同世界或图拓扑，并线性探测低维表示以理解改进来源。实验在4个模型族6个模型上显示少样本示范显著提升预测，说明上下文世界表示可被激发并用于下游预测，对具身与世界模型智能体具有启发意义。",
+      "llm_tldr": "论文关注大语言模型作为智能体时能否在上下文中推断潜在世界状态并用于预测，先前工作表明LLM在图追踪任务上难以利用上下文学习到的表示。作者将设定扩展到少样本场景，每段示范来自不同世界或图拓扑，并线性探测低维表示以理解改进来源。实验在4个模型族6个模型上显示少样本示范显著提升预测，说明上下文世界表示可被激发并用于下游预测，对具身与世界模型智能体具有启发意义。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.26293v2",
+      "source": "arxiv",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "abstract": "Learned world models are becoming essential to general-purpose agents: by predicting action consequences, they support planning and decision-making while reducing reliance on costly trial and error. This reliance creates a fundamental ambiguity: when a world-model-guided decision fails, the trajectory alone may not reveal whether the agent's decision rule or the world model caused the loss. We formalize this failure-attribution problem as a counterfactual decomposition of return loss and prove that its components are not identifiable from passive interaction, even for finite-horizon planners. This obstruction motivates Dual-Frontier, a learning principle that admits a world-model-guided decision only when its predicted advantage exceeds a certified bound on decision-relevant world-model error; otherwise, evidence is allocated to world-model verification. Action-conditioned value bounds and a closed-loop extension guarantee non-decreasing return for admitted decisions. Calibrated gates and simultaneous confidence sequences support adaptive evidence reuse, with sufficient and necessary verification bounds. Controlled learned-model experiments validate the predicted failure modes and certification behavior, while cross-backbone tool-use benchmarks instantiate the same verify-then-promote rule in realistic agent world-model pipelines, consistently improving decision quality and reliability.",
+      "authors": [
+        "Huatai Zhu",
+        "Qiang Chen",
+        "Ziqian Kou",
+        "Wenhao Li",
+        "Fei Wang",
+        "Yichao Cao",
+        "Xiu Su",
+        "Yi Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-22T12:05:43+00:00",
+      "link": "https://arxiv.org/pdf/2609.26293v2",
+      "tags": [
+        "keyword:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "trust and failure attribution for world-model-guided agents",
+      "llm_evidence_cn": "世界模型引导决策的失败归因与可信度",
+      "llm_evidence": "世界模型引导决策的失败归因与可信度",
+      "canonical_evidence": "世界模型引导决策的失败归因与可信度",
+      "llm_tldr_en": "World-model-guided agents cannot tell whether failure came from the model or the decision rule; the paper formalizes failure attribution and proposes Dual-Frontier, admitting decisions only when predicted advantage exceeds a certified bound.",
+      "llm_tldr_cn": "针对学习型世界模型支撑智能体规划时决策失败难以归因的问题，本文将失败归因形式化为回报损失的因果分解，并证明其成分在被动交互下不可辨识。为此提出Dual-Frontier学习原则，仅在预测优势超过决策误差的认证界时才采纳世界模型引导的决策。该工作为可信世界模型决策提供了理论刻画与可操作准则，对具身与规划智能体的安全性有重要意义。",
+      "llm_tldr": "针对学习型世界模型支撑智能体规划时决策失败难以归因的问题，本文将失败归因形式化为回报损失的因果分解，并证明其成分在被动交互下不可辨识。为此提出Dual-Frontier学习原则，仅在预测优势超过决策误差的认证界时才采纳世界模型引导的决策。该工作为可信世界模型决策提供了理论刻画与可操作准则，对具身与规划智能体的安全性有重要意义。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.27677v1",
+      "source": "arxiv",
+      "title": "RoadOcc Learns When to Persist, Transport, or Refresh Memory for Roadside Occupancy Prediction",
+      "abstract": "Fixed roadside cameras repeatedly observe a stable scene overlaid by sparse moving traffic. Temporal memory can recover weak observations, but reusing moving evidence at stale locations can corrupt occupancy predictions. Motion compensation addresses displacement, while reliance on the resulting history remains a separate learning problem. We introduce RoadOcc, which learns soft routing among fixed-coordinate history (\\emph{Persist}), velocity-addressed history (\\emph{Transport}), and current evidence (\\emph{Refresh}). Motion state and class-consistent historical support supervise these source choices. Dynamic-aware cross-attention (DCA) updates candidate locations, multi-scale voxel velocity estimation (VVE) constructs transport addresses from multi-scale current--history correspondence, and velocity-guided dynamic sparse fusion (VDSF) combines routed evidence under fixed sparse-token budgets. On InfraOcc, RoadOcc reaches 65.29 mIoU and 32.37 dynamic mIoU, gains of 4.44 and 4.71 over STCOcc. Controlled address experiments show that VVE raises dynamic mIoU by 0.87 over fixed-coordinate reading. Across three seeds, supervised P/T/R adds 1.40 dynamic points over motion-corrected retrieval, while removing Refresh costs 0.32 points. Results from two transfer models, Occ3D-nuScenes, and longer intervals provide additional support. Code will be released.",
+      "authors": [
+        "Xiaokai Bai",
+        "Lei Yang",
+        "Songkai Wang",
+        "Lianqing Zheng",
+        "Si-Yuan Cao",
+        "Hui-liang Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-23T10:47:53+00:00",
+      "link": "https://arxiv.org/pdf/2609.27677v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "temporal memory routing for roadside occupancy prediction with motion compensation",
+      "llm_evidence_cn": "带运动补偿的路侧占据预测时序记忆路由",
+      "llm_evidence": "带运动补偿的路侧占据预测时序记忆路由",
+      "canonical_evidence": "带运动补偿的路侧占据预测时序记忆路由",
+      "llm_tldr_en": "RoadOcc learns to route among persistent, transported and refreshed temporal memory for roadside occupancy prediction, using velocity-aware transport and dynamic-aware cross-attention to avoid corrupting predictions with stale moving evidence.",
+      "llm_tldr_cn": "针对固定路侧摄像头场景中复用陈旧运动证据会污染占据预测的问题，本文提出RoadOcc。它学习在固定坐标历史、速度寻址历史与当前证据之间进行软路由，并通过动态感知交叉注意力和多尺度体素速度估计实现运动补偿。该方法提升了路侧占据预测对稀疏移动交通的鲁棒性，为驾驶场景动态表示与预测建模提供了可借鉴思路。",
+      "llm_tldr": "针对固定路侧摄像头场景中复用陈旧运动证据会污染占据预测的问题，本文提出RoadOcc。它学习在固定坐标历史、速度寻址历史与当前证据之间进行软路由，并通过动态感知交叉注意力和多尺度体素速度估计实现运动补偿。该方法提升了路侧占据预测对稀疏移动交通的鲁棒性，为驾驶场景动态表示与预测建模提供了可借鉴思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.27275v1",
+      "source": "arxiv",
+      "title": "BranchDrive: A Branch-Structured Dataset for Action-Conditioned Driving Prediction",
+      "abstract": "Most autonomous-driving datasets record only the action executed by a behavior policy and the single future that followed, providing limited supervision for comparing alternative ego decisions. We introduce BranchDrive, a branch-structured CARLA dataset and benchmark that pairs one canonical pre-decision history with one nominal expert future and twelve physically executed intervention futures spanning acceleration, braking, and left- and right-steering policies at three magnitudes. Each intervention lasts 2.5 s and is followed by expert recovery. Following control-compliance, modality-completeness, replay-fidelity, and action-leakage audits, the frozen benchmark contains 606 independent branch groups and 7,878 associated trajectories. We evaluate prediction of six continuous short-horizon outcomes and a ten-step ego trajectory using action-only, history-only, structured, visual, multimodal, and privileged bird's-eye-view models. On the held-out test split, the structured history-and-action model achieves a macro normalized mean absolute error of 0.5036 and an average displacement error of 2.2042 m, significantly outperforming both restricted baselines. In full-information offline evaluation, its outcome-derived selector increases balanced policy value from 0.5364 to 0.5704 and reduces normalized regret from 0.2674 to 0.1495 relative to the frozen action prior. However, a validation-calibrated minimum-separation guard rejects every intervention, showing that conservative execution remains unresolved. BranchDrive therefore supports action-conditioned short-horizon prediction and fixed-bank offline decision evaluation, but does not establish exact causal effects, binary safety prediction, or closed-loop safety improvement.",
+      "authors": [
+        "Feeza Khan Khanzada",
+        "Sudarshan Sridhar",
+        "Jaerock Kwon"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-23T03:02:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.27275v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "action-conditioned driving prediction benchmark with branch futures",
+      "llm_evidence_cn": "带分支未来的动作条件驾驶预测基准",
+      "llm_evidence": "带分支未来的动作条件驾驶预测基准",
+      "canonical_evidence": "带分支未来的动作条件驾驶预测基准",
+      "llm_tldr_en": "Driving datasets record only one executed action and its single future, limiting comparison of alternative ego decisions; BranchDrive pairs each pre-decision history with twelve physically executed intervention futures in CARLA.",
+      "llm_tldr_cn": "针对现有自动驾驶数据集只记录已执行动作及单一未来、无法监督反事实决策比较的问题，本文构建了BranchDrive分支结构数据集与基准。该数据集在CARLA中为同一决策前历史配对一个专家未来和十二个物理执行的分支未来，覆盖不同强度的加速、制动与左右转向，并经控制一致性等审计。冻结基准包含606个分支组与7878条轨迹，为动作条件预测与世界模型评估提供了标准化平台。",
+      "llm_tldr": "针对现有自动驾驶数据集只记录已执行动作及单一未来、无法监督反事实决策比较的问题，本文构建了BranchDrive分支结构数据集与基准。该数据集在CARLA中为同一决策前历史配对一个专家未来和十二个物理执行的分支未来，覆盖不同强度的加速、制动与左右转向，并经控制一致性等审计。冻结基准包含606个分支组与7878条轨迹，为动作条件预测与世界模型评估提供了标准化平台。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "world model for autonomous driving and traffic simulation",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.28366v1",
+      "source": "arxiv",
+      "title": "AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios",
+      "abstract": "Vision-language models (VLMs) offer a promising approach to long-tail autonomous driving, but existing driving datasets provide limited supervision for connecting decision-critical visual evidence with reasoning and planning. We introduce AnchorReasoning, a visually grounded reasoning dataset built on WOD-E2E, containing 416,119 annotated frames and 395,379 decision-critical elements across four major categories and 19 fine-grained types. Each frame is organized as a visually grounded chain-of-thought (VG-CoT) that links decision-critical element identification and localization, element attributes and implications, driving-action rationale, and action and trajectory planning. We further develop a curriculum supervised fine-tuning strategy that progressively learns these hierarchical capabilities, together with an object-size-aware grounding metric for evaluating localization quality. Experiments across eight general-purpose, embodied-AI, and AV-specific backbones show that VG-CoT supervision improves grounded reasoning and trajectory prediction. Across models, 5-s ADE and FDE decrease by 7.84 and 11.86, while RFS Frame and Cluster improve by 1.66 and 1.70. These gains are achieved with 18.5 fewer reasoning tokens and 0.32 s/frame lower inference latency on average, demonstrating the value of visually grounded, decision-focused supervision for VLM reasoning and planning in long-tail autonomous driving.",
+      "authors": [
+        "Zhipeng Bao",
+        "Wenjie Zhao",
+        "Tianle Zhu",
+        "Haohua Que",
+        "Chence Yang",
+        "Geng Yuan",
+        "Qianwen Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-23T16:38:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.28366v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "autonomous driving dataset linking visual evidence to reasoning and planning",
+      "llm_evidence_cn": "连接视觉证据、推理与规划的自动驾驶数据集",
+      "llm_evidence": "连接视觉证据、推理与规划的自动驾驶数据集",
+      "canonical_evidence": "连接视觉证据、推理与规划的自动驾驶数据集",
+      "llm_tldr_en": "Existing driving datasets poorly link decision-critical visual evidence with reasoning and planning; AnchorReasoning provides 416k frames with visually grounded chain-of-thought annotations for long-tail driving.",
+      "llm_tldr_cn": "针对现有驾驶数据集难以为决策关键视觉证据与推理规划提供监督的问题，本文构建了AnchorReasoning数据集。该数据集基于WOD-E2E，包含41万余帧与近40万个决策关键要素，以视觉定位思维链串联要素识别定位、属性含义、驾驶动作依据与轨迹规划，并配套课程监督训练方案。该资源为长尾场景下视觉语言模型的接地推理与规划研究提供了重要支撑。",
+      "llm_tldr": "针对现有驾驶数据集难以为决策关键视觉证据与推理规划提供监督的问题，本文构建了AnchorReasoning数据集。该数据集基于WOD-E2E，包含41万余帧与近40万个决策关键要素，以视觉定位思维链串联要素识别定位、属性含义、驾驶动作依据与轨迹规划，并配套课程监督训练方案。该资源为长尾场景下视觉语言模型的接地推理与规划研究提供了重要支撑。",
+      "llm_tags": [
+        "query:av-research:composite"
+      ],
+      "matched_query_tag": "query:av-research:composite",
+      "matched_query_text": "Papers central to 帮我查找国内外主流自动驾驶公司的技术论文, especially work that connects or combines: research papers on self-driving technology from industry; technical papers from global autonomous driving companies; machine learning research for autonomous driving; technical papers published by mainstream autonomous driving companies worldwide; research publications from leading self driving technology companies in China and abroad; academic and technical papers authored by autonomous vehicle companies.",
+      "matched_requirement_id": "req-composite-av-research",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.28416v1",
+      "source": "arxiv",
+      "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
+      "abstract": "Recent advances in large language models (LLMs) have enabled agents to tackle long-horizon tasks across diverse environments. To further improve agent performance, existing language world models typically predict environment observations, yet reconstructing high-entropy, execution-dependent tool responses offers limited value when real feedback is available. Meanwhile, agents suffer from \\emph{task-state contamination}, where unsupported assumptions and outdated plans persist in history and distort subsequent decisions. We propose the \\textbf{Agent-Editing World Model (AEWM)}, which models how reasoning and actions shape future task progress rather than simulating tool responses. AEWM combines \\textbf{Action Judge} to distinguish \\textsc{Critical}, \\textsc{Exploratory}, and \\textsc{Noisy} decisions with \\textbf{State Revision} to edit noisy reasoning--action continuations from the same observed history. \\textbf{EditAct} integrates these capabilities with real execution, directly changing the state underlying subsequent decisions rather than merely providing critiques. We train AEWM across Search, Terminal, and Software Engineering through mid-training and supervised fine-tuning. AEWM achieves 70.5\\% macro-F1 on our Action Judge benchmark, exceeding the strongest frontier baseline by 10.6 points. Across six benchmarks and three agent backbones, EditAct improves average scores by 3.2--6.7 points over the strongest baseline. Furthermore, rejection sampling fine-tuning on verified EditAct trajectories, termed \\textbf{AEWM-RFT}, improves over Self-RFT by 2.2--2.6 points across three domains without online AEWM guidance.",
+      "authors": [
+        "Shuang Sun",
+        "Guoxin Chen",
+        "Fanzhe Meng",
+        "Jia Deng",
+        "Huatong Song",
+        "Jinhao Jiang",
+        "Wayne Xin Zhao",
+        "Hongteng Xu",
+        "Ji-Rong Wen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-09-23T17:18:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.28416v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "world model for LLM agents modeling task progress rather than tool responses",
+      "llm_evidence_cn": "面向LLM智能体的世界模型，建模任务进展而非工具响应",
+      "llm_evidence": "面向LLM智能体的世界模型，建模任务进展而非工具响应",
+      "canonical_evidence": "面向LLM智能体的世界模型，建模任务进展而非工具响应",
+      "llm_tldr_en": "Existing language world models for LLM agents predict tool responses, which is low-value when real feedback exists and suffers task-state contamination. AEWM models how reasoning and actions shape task progress instead.",
+      "llm_tldr_cn": "针对LLM智能体长程任务中语言世界模型预测高熵工具响应价值有限、且历史中陈旧假设造成任务状态污染的问题，本文提出智能体编辑世界模型AEWM。它不再模拟工具响应，而是建模推理与动作如何塑造未来任务进展，并引入Action Judge区分关键信息。该工作重新思考了智能体世界建模的目标，为长程智能体决策提供了更有效的世界模型范式。",
+      "llm_tldr": "针对LLM智能体长程任务中语言世界模型预测高熵工具响应价值有限、且历史中陈旧假设造成任务状态污染的问题，本文提出智能体编辑世界模型AEWM。它不再模拟工具响应，而是建模推理与动作如何塑造未来任务进展，并引入Action Judge区分关键信息。该工作重新思考了智能体世界建模的目标，为长程智能体决策提供了更有效的世界模型范式。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.28969v1",
+      "source": "arxiv",
+      "title": "Sim-to-Real Aware End-to-End Learning Environment for Micromobility",
+      "abstract": "While end-to-end autonomous driving systems show promise, their application to micromobility vehicles is hindered by simulators failing to capture specific kinematics, such as differential drives and omni-wheels. This paper pro- poses a sim-to-real-aware, vehicle-specific end-to-end learning environment for the WHILL Model CR on AWSIM and ROS 2. To minimize the sim-to-real gap, physical parameters are optimized via Bayesian optimization using real-world data, reducing trajectory errors across various driving scenarios. Additionally, this study introduces a synchronized architecture tailored for the stable training of world model-based agents. An end-to-end policy trained with DreamerV3 exhibited learning progress and achieved task completion in a simulated obstacle avoidance setting. Furthermore, this policy demonstrated direct sim-to-real transfer to the physical vehicle, enabling the vehicle to navigate around a cardboard box in a real-world corridor replica without fine-tuning. This paper provides a practical foundation for sim-to-real micromobility policy studies.",
+      "authors": [
+        "Shouma Amano",
+        "Takuya Azumi"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-24T03:35:30+00:00",
+      "link": "https://arxiv.org/pdf/2609.28969v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "sim-to-real end-to-end driving environment training DreamerV3 world-model agents",
+      "llm_evidence_cn": "端到端驾驶仿真环境，训练DreamerV3世界模型智能体",
+      "llm_evidence": "端到端驾驶仿真环境，训练DreamerV3世界模型智能体",
+      "canonical_evidence": "端到端驾驶仿真环境，训练DreamerV3世界模型智能体",
+      "llm_tldr_en": "Micromobility end-to-end driving is limited by simulators that miss differential-drive kinematics. This paper builds a sim-to-real-aware learning environment on AWSIM/ROS 2 with Bayesian parameter tuning and a synchronized world-model training architecture.",
+      "llm_tldr_cn": "端到端自动驾驶在微型出行车辆上的应用受限于仿真器难以刻画差速驱动、全向轮等运动学特性。本文在AWSIM与ROS 2上为WHILL Model CR提出面向仿真的端到端学习环境，用真实数据通过贝叶斯优化调整物理参数以缩小sim-to-real差距，并设计同步架构以稳定训练基于世界模型的智能体。实验表明采用DreamerV3训练的端到端策略取得学习进展并在仿真中完成任务。该工作将世界模型智能体与驾驶仿真环境结合，对自动驾驶世界模型训练环境有参考价值。",
+      "llm_tldr": "端到端自动驾驶在微型出行车辆上的应用受限于仿真器难以刻画差速驱动、全向轮等运动学特性。本文在AWSIM与ROS 2上为WHILL Model CR提出面向仿真的端到端学习环境，用真实数据通过贝叶斯优化调整物理参数以缩小sim-to-real差距，并设计同步架构以稳定训练基于世界模型的智能体。实验表明采用DreamerV3训练的端到端策略取得学习进展并在仿真中完成任务。该工作将世界模型智能体与驾驶仿真环境结合，对自动驾驶世界模型训练环境有参考价值。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "driving world model",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.29773v1",
+      "source": "arxiv",
+      "title": "Breaking the Environment Wall: Evolving LLM Agent Environments for Recursive Self-Improvement",
+      "abstract": "Many real-world tasks (e.g., office workflows, scientific experimentation) require LLM agents to interact repeatedly with their environments for context-dependent operations. However, such environments are often not agent-ready. First, information is often scattered and fragmented across the environment. Second, relevant evidence in the environment is often mixed with misleading information and conflicting versions. Third, environments evolve over time, introducing new noise and more challenging tasks. These challenges can substantially degrade performance for state-of-the-art AI agents (e.g., from 83.9% to 57.6%). To address these challenges, we propose Env-Rethink (a system with 27B post-trained model) that supports three main capabilities: (1) It adaptively builds Collection Maps (for organizing related files) and Event Logs (for contextualizing cross-data relationships) to supplement necessary context; (2) It further leverages the post-trained model (through offline trajectory learning) to identify underlying noise issues in the environment; (3) It ultimately evolves environments through virtual event histories that alter environmental states and evidence relationships, producing more tricky ones for further agent improvement. Experiments show that Env-Rethink can effectively improve downstream task performance (with over 15.1% rubric pass rate improvement across nine models on 30 tasks).",
+      "authors": [
+        "Yukai Wu",
+        "Yuanjing Yang",
+        "Le Zhou",
+        "Shaokun Han",
+        "Haoyu Wang",
+        "Zirui Tang",
+        "Weihuang Zheng",
+        "Maxm Pan",
+        "Xuanhe Zhou",
+        "Fan Wu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-24T13:17:57+00:00",
+      "link": "https://arxiv.org/pdf/2609.29773v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "LLM agent environments and recursive self-improvement",
+      "llm_evidence_cn": "LLM智能体环境与递归自我改进",
+      "llm_evidence": "LLM智能体环境与递归自我改进",
+      "canonical_evidence": "LLM智能体环境与递归自我改进",
+      "llm_tldr_en": "Real LLM-agent environments are fragmented, misleading and evolving, degrading performance; Env-Rethink is a 27B post-trained system that restructures such environments to support recursive self-improvement.",
+      "llm_tldr_cn": "办公流程、科学实验等真实任务要求LLM智能体反复与环境交互，但环境常常并非为智能体准备：信息分散、证据夹杂误导与冲突版本，且会随时间演化带来新噪声。本文提出 Env-Rethink 系统，基于27B后训练模型支持三项关键能力以应对这些挑战。实验表明，这类环境问题会使先进智能体性能从83.9%骤降至57.6%，而该方法能显著缓解退化。该工作为智能体的环境构建与递归自我改进提供了新范式。",
+      "llm_tldr": "办公流程、科学实验等真实任务要求LLM智能体反复与环境交互，但环境常常并非为智能体准备：信息分散、证据夹杂误导与冲突版本，且会随时间演化带来新噪声。本文提出 Env-Rethink 系统，基于27B后训练模型支持三项关键能力以应对这些挑战。实验表明，这类环境问题会使先进智能体性能从83.9%骤降至57.6%，而该方法能显著缓解退化。该工作为智能体的环境构建与递归自我改进提供了新范式。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

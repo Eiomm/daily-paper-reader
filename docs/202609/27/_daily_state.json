@@ -1,0 +1,217 @@
+{
+  "date": "20260927",
+  "date_label": "",
+  "generated_at": "2026-09-27 22:24:40 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.22816v1",
+      "route": "202609/27/2609.22816v1-firm-wm-state-factorized-factual-interventional-recurrent-modeling-for-reward-free-visual-planning",
+      "title": "FIRM-WM: State-factorized factual-interventional recurrent modeling for reward-free visual planning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "无奖励潜在世界模型预测潜在未来用于视觉规划",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.23753v1",
+      "route": "202609/27/2609.23753v1-onlinewm-causality-aware-active-online-learning-for-effective-world-modeling",
+      "title": "OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "以因果感知训练预测动作条件下未来状态的生成式世界模型",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.22641v1",
+      "route": "202609/27/2609.22641v1-consistworld-evidence-routing-for-consistent-multi-agent-world-models",
+      "title": "ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "一致的多智能体自回归视频世界模型",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.24033v1",
+      "route": "202609/27/2609.24033v1-imagine-rl-residual-confidence-guided-cross-attention-for-world-model-augmented-vla-reinforcement-learning",
+      "title": "Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "以潜在未来表示预测增强 VLA 强化学习的世界模型方法",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.26293v2",
+      "route": "202609/27/2609.26293v2-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "世界模型引导决策的失败归因与可信度",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.27275v1",
+      "route": "202609/27/2609.27275v1-branchdrive-a-branch-structured-dataset-for-action-conditioned-driving-prediction",
+      "title": "BranchDrive: A Branch-Structured Dataset for Action-Conditioned Driving Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "带分支未来的动作条件驾驶预测基准",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.28416v1",
+      "route": "202609/27/2609.28416v1-agent-editing-world-model-rethinking-world-modeling-for-llm-agents",
+      "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向LLM智能体的世界模型，建模任务进展而非工具响应",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.29773v1",
+      "route": "202609/27/2609.29773v1-breaking-the-environment-wall-evolving-llm-agent-environments-for-recursive-self-improvement",
+      "title": "Breaking the Environment Wall: Evolving LLM Agent Environments for Recursive Self-Improvement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "LLM智能体环境与递归自我改进",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.23144v1",
+      "route": "202609/27/2609.23144v1-probabilistic-scene-graphs-hierarchical-representation-and-real-time-system",
+      "title": "Probabilistic Scene Graphs: Hierarchical Representation and Real-time System",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分解为离散图结构与连续空间状态的层次化概率场景表示",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.24352v1",
+      "route": "202609/27/2609.24352v1-few-shot-demonstrations-elicit-the-use-of-in-context-world-representations-in-llms",
+      "title": "Few-Shot Demonstrations Elicit the Use of In-Context World Representations in LLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "LLM智能体推断上下文潜在世界表示用于下游预测",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.27677v1",
+      "route": "202609/27/2609.27677v1-roadocc-learns-when-to-persist-transport-or-refresh-memory-for-roadside-occupancy-prediction",
+      "title": "RoadOcc Learns When to Persist, Transport, or Refresh Memory for Roadside Occupancy Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "带运动补偿的路侧占据预测时序记忆路由",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.28366v1",
+      "route": "202609/27/2609.28366v1-anchorreasoning-a-visual-grounding-and-causal-reasoning-dataset-in-long-tail-autonomous-driving-scenarios",
+      "title": "AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "连接视觉证据、推理与规划的自动驾驶数据集",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    },
+    {
+      "paper_id": "2609.28969v1",
+      "route": "202609/27/2609.28969v1-sim-to-real-aware-end-to-end-learning-environment-for-micromobility",
+      "title": "Sim-to-Real Aware End-to-End Learning Environment for Micromobility",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "端到端驾驶仿真环境，训练DreamerV3世界模型智能体",
+      "first_seen_at": "2026-09-27 22:24:40 UTC",
+      "updated_at": "2026-09-27 22:24:40 UTC"
+    }
+  ]
+}

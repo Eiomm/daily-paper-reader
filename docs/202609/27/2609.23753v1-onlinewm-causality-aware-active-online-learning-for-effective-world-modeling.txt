@@ -1,0 +1,964 @@
+Title: OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling
+
+URL Source: https://arxiv.org/pdf/2609.23753v1
+
+Published Time: Tue, 22 Sep 2026 02:17:55 GMT
+
+Number of Pages: 23
+
+Markdown Content:
+# OnlineWM : Causality-Aware Active Online Learning for Effective World Modeling 
+
+Yikun Miao , Fangqi Zhu , Quanxin Shou , Xiaoyi Pang , Zhengyang Yan , Junhao Li , Haodong Wang ,
+
+Zicong Hong , Song Guo †
+
+Department of Computer Science and Engineering The Hong Kong University of Science and Technology Hong Kong SAR, China  
+
+> †
+
+# Correspondence: songguo@cse.ust.hk 
+
+Generative world models aim to predict future states conditioned on actions, where action controllability is fundamental for reliable dynamics modeling. While recent efforts leverage simulator-generated data to enhance this capability, existing training pipelines face two fundamental limitations. First, static offline data collection leads to a distribution misalignment between training sets and the model’s evolving error patterns, failing to resolve critical long-tail scenarios where dynamics predictions remain unreliable. Second, the standard objective of minimizing observational discrepancy often encourages the model to exploit spurious correlations instead of capturing the underlying action-effect causality. To address these limitations, we propose OnlineWM , an online training framework that continuously improves world modeling through active simulator interaction and causality-aware optimization. OnlineWM introduces two key innovations: (1) Active Online Learning : Instead of using fixed datasets, OnlineWM adaptively queries the simulator for new interaction sequences that target the model’s current predictive weaknesses, ensuring high-utility data acquisition. (2) Causality-Aware Fine-Tuning : We propose a counterfactual learning strategy that contrasts the outcomes of different actions from identical states, forcing the model to attribute state transitions to specific actions rather than ambient environmental evolution, thereby grounding its predictions in reliable causal mechanisms. By integrating active data acquisition with causal optimization, OnlineWM establishes a closed-loop refinement process that ensures the model is both robust to diverse scenarios and precise in its causal attribution. Extensive experiments demonstrate that OnlineWM significantly enhances action controllability and generalizes effectively to unseen domains, suggesting the learning of physically-grounded causal dynamics rather than simple visual patterns. 
+
+ Project Page: https://OnlineWM.github.io 
+
+# 1 Introduction 
+
+Recent advances in video generation have enabled the synthesis of controllable, high-fidelity, and temporally coherent visual content (Wan et al., 2025; Wu et al., 2025; Zheng et al., 2024; Lin et al., 2024), opening a promising avenue toward modeling the physical world directly in pixel space. Building upon this progress, generative world models (Bruce et al., 2024; Zhu et al., 2025a; Yu et al., 2025; He et al., 2025; Team et al., 2026; Ha & Schmidhuber, 2018) have emerged as a promising route for forward dynamics prediction, which formulates world modeling as an action-conditioned video prediction problem: given a history of frames and an executed action ( e.g ., player movements or camera rotations), the model is expected to synthesize future frames that are consistent with the underlying transition dynamics. This paradigm shows broad applicability in robotics (Zhu et al., 2025b; Shou et al., 2026), autonomous driving (Agarwal et al., 2025), and game development (Yu et al., 2025; He et al., 2025). Despite their potential, state-of-the-art world models still exhibit significant inaccuracies in action controllability (i.e ., the model’s ability to precisely manifest the visual consequences of a specific control signal while maintaining temporal consistency), particularly when the model encounters actions that are underrepresented in its training distribution or represent out-of-distribution (OOD) pairings of actions and scene contexts. 1arXiv:2609.23753v1 [cs.CV] 20 Sep 2026 Response    
+
+> Interact
+> Train
+> (b) OnlineWM
+> (a) Offline Training
+> 𝓦𝓦𝐛𝐛𝐛𝐛𝐛𝐛𝐛𝐛
+> 𝓦𝓦𝜽𝜽 𝓦𝓦� 𝜽𝜽
+> EMA Update
+> Static Dataset
+> Online Buffer
+> Train
+> Update
+> Curate Response
+> Action: look up
+> Condition State
+> camera tilts up
+> camera stays static
+> Static Offline Data
+> Online Interactive Training
+> Rollout Fig. 1 Offline vs. online training of action-controllable world models.
+
+Given a condition state and an action ( look up ), a world model is tasked to predict the next observation. (a) Prior work trains Wbase on a static dataset curated offline from simulators, which suffers from inherent action imbalance and leaves long-tail action–scene pairings undersampled, causing the prediction to ignore the action. (b) OnlineWM (ours) maintains an EMA copy W¯θ that actively interacts with the simulator; the resulting rollouts are pushed into an online buffer that drives the training of Wθ , whose updates flow back to W¯θ via EMA, yielding correct action grounding. 
+
+For example, as illustrated in Fig. 1, a world model may fail to faithfully simulate a look up command not because the action itself is inherently difficult to model, but because it is rarely co-observed with walking trajectories in the training distribution. Such failures are largely rooted in the inherent biases of large-scale real-world datasets used for pre-training, where action distributions are highly imbalanced and sparse, and action annotations can be noisy or inaccurate. To alleviate these data-driven biases, recent methods have increasingly relied on supervised fine-tuning on controllable simulator-generated data (Team et al., 2026; He et al., 2025; Yu et al., 2025; Sun et al., 2025). However, this “collect-then-train” paradigm faces two inherent structural bottlenecks that limit its effectiveness in complex dynamics modeling. First, existing data collection pipelines typically rely on offline datasets generated via fixed heuristics, such as uniform (Yu et al., 2025) or quality-biased sampling (He et al., 2025). While they provide broad coverage of collected trajectories, such a decoupling of data acquisition from the model’s learning state leads to a misalignment between fixed training distributions and the model’s evolving error patterns. Consequently, the training process suffers from redundant transitions while the critical long-tail scenarios—where the model’s current dynamics prediction remains unreliable—remain undersampled. Second, the reliance on standard visual prediction loss functions induces a causal ambiguity during optimization. That is, the model may generate high-fidelity videos that nonetheless ignore the action control signals and follow common motion patterns, failing to achieve true action controllability. Ultimately, these limitations underscore a critical gap: the lack of an interactive mechanism that can adaptively align data acquisition with the model’s evolving weaknesses while enforcing rigorous causal grounding. To bridge the gap, we propose OnlineWM , an online training framework that transforms world model learning from static supervision to a closed-loop, active and causality-driven process. The core of OnlineWM lies in two synergistic components. First, we introduce Active Online Learning (AOL) that proactively queries simulators for high-gain samples with balanced difficulty ( i.e ., novel to the current model while remaining learnable (Hughes et al., 2024)). To this end, we propose a difficulty decomposition strategy that separates the model’s predictive errors into scene-level and action-level components, which allows the framework to explicitly identify and prioritize scenarios where learning is effective for both scene context modeling and transition dynamics. By maintaining a balanced contribution from both dimensions during data acquisition, OnlineWM ensures that the training process does not become biased toward pure visual complexity, and remains focused on the critical task of grounding actions within appropriate physical contexts. Second, to ensure accurate learning of causal dynamics from the crafted dataset, we develop Causality-Aware Fine-Tuning (CFT). By constructing explicit counterfactual scenarios and optimizing for the model’s ability to discriminate (Miao et al., 2024) between divergent action outcomes within identical states, CFT ensures that the latent space disentangles action-induced perturbations from common ambient scene evolution. Together, these components enable OnlineWM to achieve superior action controllability and robust generalization in complex scenarios. 2To conclude, our contributions can be summarized as: • We propose OnlineWM, an online training framework that shifts world model training from passive supervision to an interactive, causality-driven refinement process. By establishing a dynamic feedback loop between the world model’s current state and the simulator, OnlineWM actively aligns the model’s internal dynamics with the causal laws of the environment. • We design two synergistic components that expose and rectify the model’s causal deficiencies: AOL isolates action-specific failures from environmental complexity, enabling the targeted identification of samples with high epistemic value; and CFT leverages these samples for counterfactual training, forcing the model to learn the reliable causal relationship between actions and visual changes. • Extensive experiments prove that OnlineWM effectively improves state-of-the-art world models (Sun et al., 2025) in both action controllability and visual quality. The results also demonstrate OnlineWM’s effectiveness in general domains with long-tail or rare action-scene pairings, suggesting that it can learn generalizable knowledge about action-conditioned world dynamics. 
+
+# 2 Related Work  
+
+> Generative World Models.
+
+Breakthroughs in visual generative modeling (Peebles & Xie, 2023; Lipman et al., 2022; Podell et al., 2023) have enabled the synthesis of high-quality visual content and motivated early attempts to simulate interactive environments with generative models (Valevski et al., 2024; Alonso et al., 2024; Bruce et al., 2024). Recent advances in video generation (Wu et al., 2025; Wan et al., 2025; Zheng et al., 2024; Lin et al., 2024) further improve temporal coherence, visual fidelity, and controllability, providing a strong foundation for generative world models to continuously improve generation quality (Bruce et al., 2024; Parker-Holder et al., 2024; Ball et al., 2025). Unlike general video generation, generative world models aim to predict future observations conditioned on both past visual states and agent actions, requiring the model to capture action-conditioned transition dynamics. More recent works (Yu et al., 2025; He et al., 2025; Team et al., 2026; Mao et al., 2025; Li et al., 2025a; Tang et al., 2025; Hong et al., 2025) further improve generative world models by constructing or selecting datasets with accurate action annotations, balanced action distributions, and high-quality action trajectories. These efforts substantially improve the data foundation for action-conditioned generation, but the resulting models still often struggle with precise action following under rare or out-of-distribution actions, or in visually complex scenes.  
+
+> Improving Action Controllability for Generative World Models.
+
+Since generated future states should faithfully reflect the executed actions to support downstream applications (Zhu et al., 2025b), accurate action control is central to generative world modeling. Recent works improve action controllability either by strengthening the action representation or through dedicated post-training procedures. For instance, WorldCam (Nam et al., 2026) adopts camera pose as a unifying geometric representation to align user actions with 3D camera motion, while WorldCompass (Wang et al., 2026) introduces reward-based post-training built upon the DiffusionNFT framework (Zheng et al., 2025) to jointly improve action accuracy and visual quality. While effective, these methods treat the training data and learning process as fixed, leaving the model passive with respect to its own learning dynamics. A complementary perspective from active world model learning (Kim et al., 2020) emphasizes that accurate world modeling benefits from adapting data acquisition to the model’s current learning state, directing exploration toward dynamics that are complex yet learnable. It is also relevant to generative world models: action-controllability errors can vary across scenes, actions, and training stages, making fixed offline data collection less effective for targeting the model’s current deficiencies. Building on this perspective, OnlineWM combines closed-loop simulator interaction with causality-aware training to improve action-conditioned dynamics modeling. 3Scene: 0.5  
+
+> Action: 0.1
+> Scene: 0.5
+> Action: -0.1
+> ①
+
+Parallel Simulation   
+
+> 𝑵𝑵 Worlds
+> ……
+> ②
+
+Scoring  ③ Active Sample Selection  
+
+> ⑥
+
+EMA Update        
+
+> Move Actions View Actions
+> Mainline
+> Counterfactual
+> Online Buffer
+> 𝑩𝑩 Forks per World
+> Action Sequence 𝒂𝒂𝟏𝟏
+> Action Sequence 𝒂𝒂𝟐𝟐
+> ……
+> Action Sequence 𝒂𝒂𝒃𝒃 ④
+
+Counterfactual Pair Construction    
+
+> Too Easy!
+> Too
+> Hard!
+> Scene Diff.
+> Action Diff.
+> Effective Region
+> Forward & Decompose via
+> Eq. (2) & Eq. (3)
+> 𝓦𝓦� 𝜽𝜽
+> 𝓦𝓦𝜽𝜽
+> EMA Model
+> World Model
+> (𝒄𝒄 ,𝒂𝒂 ,𝒛𝒛+ ,𝒛𝒛− )
+
+�𝒛𝒛 = 1 − 𝜎𝜎 𝒛𝒛+ + 𝜎𝜎𝝐𝝐 + 𝛾𝛾 (𝒛𝒛− − 𝒛𝒛+ ) 
+
+> ⑤
+
+Optimize 𝜽𝜽 via FM loss (Eq. (1)) and CFT loss (Eq. (6)) 
+
+> Eq. (4)
+> Update Buffer
+> World 1
+> World N
+> World 2
+> ……
+
+## 𝒛𝒛+ 
+
+## 𝒛𝒛− Fig. 2 OnlineWM trains a world model with active, causality-aware online interaction with a simulator. In each collection round, all N simulators generate B forks from the current state. Then, the world model evaluates each fork sample and decomposes the difficulties into scene- and action-level components to select the most effective one in each world along with its most similar negative sample. The selected fork is then continued for Lmain steps and pushed into the buffer. In each training round, the world model draws samples from the buffer and optimizes with standard generation and causality-aware losses. 
+
+# 3 Methodology 
+
+3.1 Preliminaries 
+
+World Modeling Following representative works such as Genie (Bruce et al., 2024), we frame world modeling as an autoregressive video prediction problem p(z1: N ) = QNt=1 p(zt|z≤t−1, at, c ), where zt and at represent the latent representation of the world state and the action taken at time t, while c represents shared global conditioning information such as the textual prompt. 
+
+Autoregressive Generation with Flow-based Models We adopt the autoregressive Diffusion Transformer (DiT) (Peebles & Xie, 2023) architecture of HY-World 1.5 (Sun et al., 2025; Wu et al., 2025) as our base world model, which learns to generate the latent video chunk by chunk (4 latent frames per chunk, corresponding to 16 raw frames) with chunk-wise causal attention. The model is optimized by the flow matching (FM) objective (Lipman et al., 2022) with velocity prediction: 
+
+LFM (θ) = Et, zt,ϵ,k, ct
+
+h
+
+vθ (zkt , k, ct) − (ϵ − zt) 22
+
+i
+
+, zkt = (1 − σk) zt + σk ϵ. (1) In Eq. 1, t ∈ { 1, . . . , N } denotes the chunk index and zt denotes the clean video latent chunk encoded by the 3D VAE (Kingma & Welling, 2013) at index t. The clean latent is corrupted by Gaussian noise ϵ ∼ N (0, I),and σk is drawn from a shifted logit-normal schedule (Wu et al., 2025) with timestep k. The condition 
+
+ct = ( z≤t−1, at, c ) includes previous latent chunks z≤t−1, current action at, and the shared global conditioning 
+
+c. Here, action is represented by both discrete tokens (movement actions w, a, s, d , view actions left, right, up, down , or any combination) and continuous camera poses. More detailed architecture information can be found in Appendix A.1. 43.2 Active Online Learning 
+
+Active online learning (AOL) aims to actively acquire the most effective training samples by directing the simulator to generate rollouts according to the world model’s current state. We characterize such samples as both novel and learnable (Hughes et al., 2024), which allows the model to continuously acquire new information about the world while avoiding the “white noise problem” (Schmidhuber, 2010), i.e ., endlessly fixating on unlearnable stimuli (Kim et al., 2020). As mentioned, the learning value of a training sample for generative world models depends on two complementary aspects: the scene context and the action-conditioned transition, both of which should provide learnable novelty for the current model. Motivated by this observation, we decompose sample acquisition into scene- and action-level components and select samples that maintain a balanced contribution from both.  
+
+> Building AOL Samples
+
+As shown in Fig. 2, we launch N parallel interactive simulators during training. At each collection round, we randomly sample B candidate action sequences of length Lfork from the action space 
+
+A to create forks in each world. For each fork in world n, we then run the simulator for Lfork chunks with the corresponding action and obtain the ground-truth rollouts zn,b . Note that these rollouts share the same conditioning state c but differ in the resulting outcomes due to executed actions. We then score the difficulty of each sample using the standard FM loss at a fixed noise timestep with one forward pass. An exponential moving average (EMA) copy ¯θ of the world model is used for scoring to stabilize online training: 
+
+sn,b = v¯θ (˜ zn,b , k ⋆, cn,b ) − (ϵ − zn,b ) 22 , ˜zn,b = (1 − σ⋆) zn,b + σ⋆ ϵ. (2) Here, σ⋆ is a fixed scoring noise level with scheduler index k⋆. The per-fork condition cn,b extends the shared scene state c with the fork-specific action an,b , and ϵ ∼ N (0, I) is a single noise tensor shared across all B
+
+forks within the scoring round, so that the resulting ranking is driven purely by content differences. The score variability arises from differences in average scores across scenes and action-dependent variation within each scene. By the law of total variance, the score variability decomposes as Var n,b [sn,b ] = Var n[Eb[sn,b |
+
+n]]+ En[Var b[sn,b | n]] , corresponding to between-scene variation and within-scene action variation, respectively. This motivates us to decompose sn,b into a scene-level mean dn and an action-level residual δn,b :
+
+dn = mean 
+
+
+
+{sn,b }Bb=1 
+
+
+
+, δn,b = sn,b − dn. (3) Within each world, we select the fork whose action-level difficulty rank is inversely aligned with the world’s scene-level difficulty rank , pairing visually demanding scenes with relatively easier actions and visually simpler scenes with harder actions. This complementary pairing balances the contributions of the two difficulty dimensions in each acquired sample, preventing the training signal from being dominated by pure visual complexity while keeping every selected transition novel yet learnable for the model’s current state. Starting from the selected fork, we roll out an additional Lmain chunks in the simulator to obtain a full training trajectory from this high-utility branch. 
+
+3.3 Causality-Aware Fine-Tuning 
+
+Building on the trajectories acquired by AOL, we further construct counterfactual branches for causality-aware fine-tuning (CFT), which aims to force the model to attribute observed state transitions to the executed action rather than to common ambient scene evolution. For the selected branch b+ in each world, we choose the most visually similar branch as the counterfactual branch b−, yielding rollouts z+ ← zn,b + and z− ← zn,b −
+
+that share an identical conditioning state c. 
+
+> Learning Objectives
+
+Following WorldCompass (Wang et al., 2026), we adopt DiffusionNFT (Zheng et al., 2025), a forward-process post-training objective to optimize the world model with counterfactual supervision. Unlike reward-based optimization, our formulation operates on explicit positive–negative sample pairs, where the positive z+ denotes the ground-truth continuation under the executed action and the negative z−
+
+denotes a counterfactual alternative from the same conditioning state c. To enhance causality awareness during optimization, we perturb the forward-noised latent state by injecting the negative sample with a noise-level-adaptive weight: 
+
+˜zk = (1 − σk) z+ + σk ϵ + γk (z− − z+), (4) 5where γk = λ h σ k(1 − σk) controls the weight that tilts the noise toward z− while keeping the boundary unchanged at σk ∈ { 0, 1}, and h is a similarity metric ( e.g ., cosine similarity, SSIM) to modulate sample hardness. From this counterfactually perturbed state, the model is then trained to recover the positive trajectory z+ and repel z−, forcing it to attribute the predicted dynamics to the executed action rather than to the visual cues shared between z+ and z−.Following DiffusionNFT, we denote vθ and vold as the current and EMA model velocity predictions (conditioned on c and timestep k), and define implicit positive and negative policies along with their predictions for causality-aware fine-tuning: (v+ = (1 − β) vold + β vθ , ˆz+ = ˜ zk − σk v+,
+
+v− = (1 + β) vold − β vθ , ˆz− = ˜ zk − σk v−. (5) The final CFT loss combines the two reconstructions with a similarity-based weight that allocates more supervision to similar negatives and avoids learning from samples with large discrepancies: 
+
+LCFT (θ) = (1 − α) ˆz+ − z+ 
+
+> 2
+> w
+
++ α ˆz− − z−
+
+> 2
+> w
+
+, α = h/ 2. (6) To stabilize the training process across noise levels and pair difficulties, each reconstruction term adopts adaptive normalization with the stop-gradient operation (Wang et al., 2026; Zheng et al., 2025): 
+
+ˆz − z 2 
+
+> w
+
+= mean (ˆ z − z)2
+
+sg  mean  |ˆz − z|  + ε
+
+!
+
+. (7)  
+
+> Remark
+
+Ignoring scalar factors from the reconstruction norm, the gradient of LCFT with respect to the current velocity can be written as 
+
+∇vθ LCFT ∝ − σkβ
+
+h
+
+(1 − α)(ˆ z+ − z+) − α(ˆ z− − z−)
+
+i
+
+. (8) The two branches provide complementary learning signals. The positive branch pulls the predicted velocity toward reconstructing z+ from the augmented noisy state ˜zk, which is tilted toward the counterfactual outcome. In contrast, the negative branch provides a repulsive signal that pushes the velocity away from 
+
+z−. Consequently, CFT converts counterfactual rollouts into causal learning signals, forcing the model to distinguish the causally correct outcome from its counterfactual alternative. 
+
+3.4 Overall Learning Objective  
+
+> Training Buffer
+
+To improve sample efficiency for online training, we maintain a fixed-capacity replay buffer D
+
+of size Smax and only run the collection round every Ncollect iterations. Each sample is assigned a priority 
+
+p initialized as its FM score sn,b at collection time, together with a usage counter ntrain that increments after each draw. When D exceeds its capacity, we evict the sample with the smallest effective priority 
+
+˜p = p · max(0 .01 , 1 − ntrain /N max ) to retain high-score but under-trained samples. Training samples are drawn 
+
+uniformly from D.For each sample drawn from the training buffer, we calculate the total loss by the weighted combination of FM (Eq. 1) and CFT (Eq. 6) losses and perform joint optimization: 
+
+Ltotal = LFM + λCFT · L CFT . (9) 
+
+# 4 Experiments 
+
+4.1 Experimental Setup  
+
+> Overall Setting
+
+We use HY-World 1.5 (Sun et al., 2025; Wu et al., 2025) (with 8B parameters) as our base world model. We initialize it from the WorldCompass (Wang et al., 2026) RL post-training checkpoint. The simulator backend uses MineStudio (Cai et al., 2024) built on MineRL (Guss et al., 2019), which offers flexible Minecraft environment control and distributed interaction based on Ray (Moritz et al., 2018). We use 4
+
+6Tab. 1 Evaluation on visual generation quality between different methods. Best results are in bold .                                                           
+
+> Method SSIM ↑LPIPS ↓VBench
+> Subject ↑Background ↑Motion ↑Aesthetic ↑Imaging ↑Overall ↑
+> GT 1.000 0.000 0.901 0.961 0.974 0.545 0.695 0.815
+> Base Model 10.458 0.506 0.895 0.965 0.977 0.549 0.713 0.820
+> +Random 0.531 0.453 0.876 0.967 0.981 0.537 0.639 0.800 +AOL 0.538 0.419 0.890 0.970 0.982 0.541 0.644 0.805 Full Model ( w/ CFT )0.531 0.411 0.890 0.968 0.979 0.543 0.681 0.812
+
+compute nodes, each equipped with 8 GPUs, running N = 32 parallel Minecraft worlds to generate rollouts of resolution 832 × 480 at 20 FPS with per-frame GT camera poses. The valid action space A contains 9
+
+keyboard movements ( idle , w, a, s, d, and the four diagonals), 5 camera primitives ( idle , left , right , up ,
+
+down ) and their combinations, resulting in 45 discrete compound action tokens per tick. Each sampled action is held fixed for a short duration to prevent overly abrupt visual changes (see Appendix A.2 for details).  
+
+> Training Parameters
+
+We train the world model for 3,000 steps with the Muon optimizer (Liu et al., 2025a). The peak learning rate is set to 2×10 −5 with a one-cycle schedule. We use sequence parallelism (SP) with 8
+
+SP groups and 2 gradient accumulation steps, equivalent to an effective batch size of 16 per iteration. In each AOL collection round, we fork B = 8 candidate branches with random override probability prand = 0 .2
+
+to prevent overfitting fixed patterns. The selected fork of length Lfork = 1 is unrolled for another Lmain = 8 
+
+chunks. The maximum size of the replay buffer is set to Smax = 96 with Nmax = Ncollect = 6 . Both the scoring and old-policy networks for CFT are EMA copies with decay factor 0.99 . We set the scoring noise level to 
+
+σ⋆ = 0 .5 and λ = 0 .1, β = 1 , λ CFT = 0 .2 for the CFT loss. Full training details are listed in Appendix A.3.  
+
+> Evaluation Metrics
+
+We evaluate all methods on a held-out Minecraft set, consisting of manually curated challenging scenes of 61 frames each, paired with action trajectories in which actions change more frequently than in training. We evaluate the world model from two perspectives: (i) visual quality and (ii) action controllability . For visual quality , we use both VBench (Huang et al., 2024) metrics and conventional visual metrics, including SSIM and LPIPS (Zhang et al., 2018), to comprehensively evaluate generation quality. For action controllability , we first use Depth Anything V3 (Lin et al., 2025) with Sim(3) Umeyama alignment (Umeyama, 1991) to estimate normalized camera poses, and then compute discrete-token control accuracy and relative pose error (RPE) against the ground truth following Nam et al. (2026); Wang et al. (2026) (see Appendix A.4 for details).  
+
+> Inference Settings
+
+At inference time, the world model autoregressively generates the latent video in chunks of 4 latent frames. Within each chunk, we run 50 Euler steps under the flow-matching scheduler with time-shift 5, and apply classifier-free guidance with scale 6 using a precomputed null-prompt embedding for the unconditional branch. Across chunks, the key-value features of past chunks are cached and a temporally aligned 12 -frame context is selected from a 20 -frame sliding memory window for additional conditioning. All evaluations share the same inference configuration to ensure a fair comparison across method variants. 
+
+4.2 Main Results 
+
+We compare our proposed method against Random , which samples training data without active acquisition or counterfactual supervision. Tab. 1 reports the visual generation results. Visual-quality metrics are relatively close across model variants, but clear trends can still be observed. Compared with Random , AOL improves reconstruction fidelity and perceptual similarity, achieving higher SSIM and lower LPIPS. It also brings consistent gains across all VBench dimensions. Adding CFT further improves LPIPS and gives the best VBench Imaging and Overall scores. This suggests that counterfactual supervision complements reconstruction-based learning by improving perceptual and imaging quality. In our experiments, we observed that selecting the 
+
+> 1As the base model cannot effectively follow actions or produce Minecraft-style outputs, general visual metrics without reference videos ( i.e ., VBench scores) are not directly comparable and are listed for reference only.
+
+7Subsequent Rollout Frames 
+
+# OnlineWM 
+
+# →
+
+w/o CFT 
+
+→
+
+w/o AOL 
+
+→     
+
+> Condition Frame Fig. 3 Visual comparison of all method variants in a challenging scenario. The first row shows the ground-truth video, and subsequent rows denote the generation results of three variants: OnlineWM ,OnlineWM w/o the CFT loss and
+> OnlineWM removing the whole AOL and CFT design .
+
+most difficult fork in each scene leads to significant instability during training, which confirms the need for selecting samples with balanced difficulty. The improvement is clearer in terms of action controllability, which is the central objective of generative world modeling. Compared with Random , AOL improves both Combined and Fine-grained action accuracy, while reducing both rotational and translational trajectory errors. This shows that active acquisition selects samples that are more useful for learning action-conditioned transitions. With CFT, the full model achieves the best results on all controllability metrics. Relative to Random , it improves Combined accuracy by 19 .4% 
+
+and Fine-grained accuracy by 12 .5% , while reducing RPE rot by 36 .3% and RPE trans by 20 .1% . These gains indicate that AOL provides more effective supervision, and CFT further uses counterfactual samples to effectively strengthen the model’s understanding of action transition dynamics.       
+
+> Tab. 2 Evaluation on action controllability between different methods. Best results are in bold .
+> Method Action Accuracy Camera Control
+
+Combined ↑ Fine-grained ↑ RPE rot ↓ RPE trans ↓
+
+Base Model 0.240 0.490 0.6906 0.0235 + Random 0.356 0.569 0.6393 0.0199 + AOL 0.393 0.610 0.5033 0.0166 Full Model ( w/ CFT ) 0.425 0.640 0.4072 0.0159 
+
+4.3 Qualitative Results and Analysis 
+
+We further provide a qualitative evaluation of OnlineWM. Fig. 3 shows a challenging scenario where the agent moves into tree leaves, causing strong occlusion and a large visual distribution shift. OnlineWM handles this case accurately: it preserves the spatial relation between the camera, the tree trunk, and the surrounding leaves, and follows the commanded action to produce the correct collision-like transition. Removing CFT weakens this spatial reasoning, leading to less accurate alignment between the predicted motion and the scene geometry. When AOL is also removed, the model struggles with this rare and difficult transition, and the rollout collapses to a more common trajectory under the tree instead of correctly modeling the interaction with the leaves. This comparison shows that AOL helps expose the model to informative failure-prone cases, while CFT improves the learning of action-conditioned spatial dynamics. Refer to Appendix D for more 8RPE trans = 𝟎𝟎 . 𝟐𝟐 𝟎𝟎 , RPE rot = 𝟎𝟎 . 𝟖𝟖𝟖𝟖 
+
+Baseline 
+
+Ours   
+
+> RPE trans = 0.37, RPE rot = 2.30
+
+## up-3 
+
+Baseline 
+
+Ours 
+
+## w-4  wd-4 w-4 START RPE trans = 𝟎𝟎 . 𝟏𝟏𝟏𝟏 , RPE rot = 𝟎𝟎 . 𝟒𝟒𝟒𝟒 
+
+Baseline   
+
+> RPE trans = 0.39, RPE rot = 2.09
+
+## up-3 
+
+Ours 
+
+## w-4  wd-4 w-4 START 
+
+Ours 
+
+Baseline Fig. 4 Visual comparison of action controllability on general domains. For each scene, the top rows show rollouts conditioned on the same action sequence (denoted by the labels at the top of each column, e.g ., w-4 , up-3 ) under the baseline and our model. The bottom row visualizes the corresponding 3D Gaussian Splatting reconstruction and the recovered camera trajectory, with relative pose errors RPE trans and RPE rot reported below. 
+
+qualitative examples. 
+
+4.4 Generalization to General Domains 
+
+OnlineWM learns action control through online interaction with simulators. An important question is whether the learned action-conditioned dynamics are specific to the simulator domain, or can transfer to visually different general domains. To examine this, we directly evaluate the world model trained with OnlineWM on Minecraft using general-domain images as the conditioning input, without any further training or adaptation. We compare it with the RL post-training checkpoint from WorldCompass (Wang et al., 2026). To better stress-test action controllability, we use an action sequence with faster view changes than the default setting in WorldCompass. We report camera RPE and present the generated video alongside 3D Gaussian reconstruction results from WorldMirror (Liu et al., 2025b), annotated with the estimated camera trajectory. 9As shown in Fig. 4, the baseline model struggles to follow the conditioning actions, particularly the up 
+
+action, which is relatively uncommon in the training data. In contrast, the model trained with OnlineWM produces view changes that are more consistent with the input actions. This improvement is reflected in both the qualitative visual comparison and the quantitative action-control metrics, where OnlineWM achieves lower translational and rotational RPE. These results demonstrate that OnlineWM does not merely improve in-domain simulator performance, but also learns action-conditioned transition knowledge that can transfer to general visual domains. It also suggests that learning effective causality-aware action control from simulators is a promising direction towards building effective general world models. Refer to Appendix D for more qualitative examples on general domains. 
+
+# 5 Conclusion 
+
+In conclusion, OnlineWM presents a new paradigm for world model training, shifting from passive supervision to a closed-loop, active, and causality-driven refinement process. It delivers notable improvements in both action controllability and visual quality, demonstrating the fundamental benefits of online training over existing offline paradigms for world models. The generalization results further indicate that OnlineWM can serve as an effective and universal training paradigm for distilling action control from simulators into various domains. We believe this closed-loop, causality-aware perspective offers a promising path toward world models whose dynamics are grounded in reliable causal mechanisms rather than spurious visual correlations, and we hope OnlineWM can inspire future research on interactive and causally grounded learning for generative world models. 
+
+# References 
+
+[1] Agarwal, N., Ali, A., Bala, M., Balaji, Y., Barker, E., Cai, T., Chattopadhyay, P., Chen, Y., Cui, Y., Ding, Y., et al. Cosmos world foundation model platform for physical ai. arXiv preprint arXiv:2501.03575 , 2025. [2] Alonso, E., Jelley, A., Micheli, V., Kanervisto, A., Storkey, A., Pearce, T., and Fleuret, F. Diffusion for world modeling: Visual details matter in atari. Advances in Neural Information Processing Systems , 37:58757–58791, 2024. [3] Ball, P. J., Bauer, J., Belletti, F., Brownfield, B., Ephrat, A., Fruchter, S., Gupta, A., Holsheimer, K., Holynski, A., Hron, J., Kaplanis, C., Limont, M., McGill, M., Oliveira, Y., Parker-Holder, J., Perbet, F., Scully, G., Shar, J., Spencer, S., Tov, O., Villegas, R., Wang, E., Yung, J., Baetu, C., Berbel, J., Bridson, D., Bruce, J., Buttimore, G., Chakera, S., Chandra, B., Collins, P., Cullum, A., Damoc, B., Dasagi, V., Gazeau, M., Gbadamosi, C., Han, W., Hirst, E., Kachra, A., Kerley, L., Kjems, K., Knoepfel, E., Koriakin, V., Lo, J., Lu, C., Mehring, Z., Moufarek, A., Nandwani, H., Oliveira, V., Pardo, F., Park, J., Pierson, A., Poole, B., Ran, H., Salimans, T., Sanchez, M., Saprykin, I., Shen, A., Sidhwani, S., Smith, D., Stanton, J., Tomlinson, H., Vijaykumar, D., Wang, L., Wingfield, P., Wong, N., Xu, K., Yew, C., Young, N., Zubov, V., Eck, D., Erhan, D., Kavukcuoglu, K., Hassabis, D., Gharamani, Z., Hadsell, R., van den Oord, A., Mosseri, I., Bolton, A., Singh, S., and Rocktäschel, T. Genie 3: A new frontier for world models. 2025. [4] Bruce, J., Dennis, M. D., Edwards, A., Parker-Holder, J., Shi, Y., Hughes, E., Lai, M., Mavalankar, A., Steigerwald, R., Apps, C., et al. Genie: Generative interactive environments. In Forty-first International Conference on Machine Learning , 2024. [5] Cai, S., Mu, Z., He, K., Zhang, B., Zheng, X., Liu, A., and Liang, Y. Minestudio: A streamlined package for minecraft ai agent development. arXiv preprint arXiv:2412.18293 , 2024. [6] Guss, W. H., Houghton, B., Topin, N., Wang, P., Codel, C., Veloso, M., and Salakhutdinov, R. Minerl: A large-scale dataset of minecraft demonstrations. arXiv preprint arXiv:1907.13440 , 2019. [7] Ha, D. and Schmidhuber, J. World models. arXiv preprint arXiv:1803.10122 , 2018. [8] He, X., Peng, C., Liu, Z., Wang, B., Zhang, Y., Cui, Q., Kang, F., Jiang, B., An, M., Ren, Y., et al. Matrix-game 2.0: An open-source real-time and streaming interactive world model. arXiv preprint arXiv:2508.13009 , 2025. [9] Hong, Y., Mei, Y., Ge, C., Xu, Y., Zhou, Y., Bi, S., Hold-Geoffroy, Y., Roberts, M., Fisher, M., Shechtman, E., et al. Relic: Interactive video world model with long-horizon memory. arXiv preprint arXiv:2512.04040 , 2025. 
+
+10 [10] Huang, Z., He, Y., Yu, J., Zhang, F., Si, C., Jiang, Y., Zhang, Y., Wu, T., Jin, Q., Chanpaisit, N., et al. Vbench: Comprehensive benchmark suite for video generative models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pp. 21807–21818, 2024. [11] Hughes, E., Dennis, M., Parker-Holder, J., Behbahani, F., Mavalankar, A., Shi, Y., Schaul, T., and Rocktaschel, T. Open-endedness is essential for artificial superhuman intelligence. arXiv preprint arXiv:2406.04268 , 2024. [12] Kim, K., Sano, M., De Freitas, J., Haber, N., and Yamins, D. Active world model learning with progress curiosity. In International conference on machine learning , pp. 5306–5315. PMLR, 2020. [13] Kingma, D. P. and Welling, M. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114 , 2013. [14] Li, J., Tang, J., Xu, Z., Wu, L., Zhou, Y., Shao, S., Yu, T., Cao, Z., and Lu, Q. Hunyuan-gamecraft: High-dynamic interactive game video generation with hybrid history condition. arXiv preprint arXiv:2506.17201 , 2(3):6, 2025a. [15] Li, R., Yi, B., Liu, J., Gao, H., Ma, Y., and Kanazawa, A. Cameras as relative positional encoding. arXiv preprint arXiv:2507.10496 , 2025b. [16] Lin, B., Ge, Y., Cheng, X., Li, Z., Zhu, B., Wang, S., He, X., Ye, Y., Yuan, S., Chen, L., et al. Open-sora plan: Open-source large video generation model. arXiv preprint arXiv:2412.00131 , 2024. [17] Lin, H., Chen, S., Liew, J., Chen, D. Y., Li, Z., Shi, G., Feng, J., and Kang, B. Depth anything 3: Recovering the visual space from any views. arXiv preprint arXiv:2511.10647 , 2025. [18] Lipman, Y., Chen, R. T., Ben-Hamu, H., Nickel, M., and Le, M. Flow matching for generative modeling. arXiv preprint arXiv:2210.02747 , 2022. [19] Liu, J., Su, J., Yao, X., Jiang, Z., Lai, G., Du, Y., Qin, Y., Xu, W., Lu, E., Yan, J., et al. Muon is scalable for llm training. arXiv preprint arXiv:2502.16982 , 2025a. [20] Liu, Y., Min, Z., Wang, Z., Wu, J., Wang, T., Yuan, Y., Luo, Y., and Guo, C. Worldmirror: Universal 3d world reconstruction with any-prior prompting. arXiv preprint arXiv:2510.10726 , 2025b. [21] Mao, X., Li, Z., Li, C., Xu, X., Ying, K., He, T., Pang, J., Qiao, Y., and Zhang, K. Yume-1.5: A text-controlled interactive world generation model. arXiv preprint arXiv:2512.22096 , 2025. [22] Miao, Y., Wu, M., Lam, S.-K., Li, C., and Srikanthan, T. Hierarchical object-aware dual-level contrastive learning for domain generalized stereo matching. Advances in Neural Information Processing Systems , 37:132050–132076, 2024. [23] Moritz, P., Nishihara, R., Wang, S., Tumanov, A., Liaw, R., Liang, E., Elibol, M., Yang, Z., Paul, W., Jordan, M. I., et al. Ray: A distributed framework for emerging {AI } applications. In 13th USENIX symposium on operating systems design and implementation (OSDI 18) , pp. 561–577, 2018. [24] Nam, J., Hong, Y., Huang, C.-H. P., Liu, F., Lee, J., Kim, J., Jin, S., Lee, Y., Jung, J., Choi, S., et al. Worldcam: Interactive autoregressive 3d gaming worlds with camera pose as a unifying geometric representation. arXiv preprint arXiv:2603.16871 , 2026. [25] Parker-Holder, J., Ball, P., Bruce, J., Dasagi, V., Holsheimer, K., Kaplanis, C., Moufarek, A., Scully, G., Shar, J., Shi, J., Spencer, S., Yung, J., Dennis, M., Kenjeyev, S., Long, S., Mnih, V., Chan, H., Gazeau, M., Li, B., Pardo, F., Wang, L., Zhang, L., Besse, F., Harley, T., Mitenkova, A., Wang, J., Clune, J., Hassabis, D., Hadsell, R., Bolton, A., Singh, S., and Rocktäschel, T. Genie 2: A large-scale foundation world model. 2024. URL 
+
+https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model/ .[26] Peebles, W. and Xie, S. Scalable diffusion models with transformers. In Proceedings of the IEEE/CVF international conference on computer vision , pp. 4195–4205, 2023. [27] Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T., Müller, J., Penna, J., and Rombach, R. Sdxl: Improving latent diffusion models for high-resolution image synthesis. arXiv preprint arXiv:2307.01952 , 2023. [28] Schmidhuber, J. Formal theory of creativity, fun, and intrinsic motivation (1990–2010). IEEE transactions on autonomous mental development , 2(3):230–247, 2010. [29] Shou, Q., Zhu, F., Chen, S., Yan, P., Yan, Z., Miao, Y., Pang, X., Hong, Z., Shi, R., Huang, H., et al. Halo: A unified vision-language-action model for embodied multimodal chain-of-thought reasoning. arXiv preprint arXiv:2602.21157 ,2026. 
+
+11 [30] Sun, W., Zhang, H., Wang, H., Wu, J., Wang, Z., Wang, Z., Wang, Y., Zhang, J., Wang, T., and Guo, C. Worldplay: Towards long-term geometric consistency for real-time interactive world modeling. arXiv preprint arXiv:2512.14614 , 2025. [31] Tang, J., Liu, J., Li, J., Wu, L., Yang, H., Zhao, P., Gong, S., Yuan, X., Shao, S., Zhang, L., et al. Hunyuan-gamecraft-2: Instruction-following interactive game world model. arXiv preprint arXiv:2511.23429 , 2025. [32] Team, R., Gao, Z., Wang, Q., Zeng, Y., Zhu, J., Cheng, K. L., Li, Y., Wang, H., Xu, Y., Ma, S., et al. Advancing open-source world models. arXiv preprint arXiv:2601.20540 , 2026. [33] Umeyama, S. Least-squares estimation of transformation parameters between two point patterns. IEEE Transactions on Pattern Analysis and Machine Intelligence , 13(4):376–380, 1991. doi: 10.1109/34.88573. [34] Valevski, D., Leviathan, Y., Arar, M., and Fruchter, S. Diffusion models are real-time game engines. arXiv preprint arXiv:2408.14837 , 2024. [35] Wan, T., Wang, A., Ai, B., Wen, B., Mao, C., Xie, C.-W., Chen, D., Yu, F., Zhao, H., Yang, J., et al. Wan: Open and advanced large-scale video generative models. arXiv preprint arXiv:2503.20314 , 2025. [36] Wang, Z., Wang, T., Zhang, H., Zuo, X., Wu, J., Wang, H., Sun, W., Wang, Z., Cao, C., Zhao, H., et al. Worldcompass: Reinforcement learning for long-horizon world models. arXiv preprint arXiv:2602.09022 , 2026. [37] Wu, B., Zou, C., Li, C., Huang, D., Yang, F., Tan, H., Peng, J., Wu, J., Xiong, J., Jiang, J., et al. Hunyuanvideo 1.5 technical report. arXiv preprint arXiv:2511.18870 , 2025. [38] Yu, J., Qin, Y., Wang, X., Wan, P., Zhang, D., and Liu, X. Gamefactory: Creating new games with generative interactive videos. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pp. 11590–11599, 2025. [39] Zhang, R., Isola, P., Efros, A. A., Shechtman, E., and Wang, O. The unreasonable effectiveness of deep features as a perceptual metric. In Proceedings of the IEEE conference on computer vision and pattern recognition , pp. 586–595, 2018. [40] Zheng, K., Chen, H., Ye, H., Wang, H., Zhang, Q., Jiang, K., Su, H., Ermon, S., Zhu, J., and Liu, M.-Y. Diffusionnft: Online diffusion reinforcement with forward process. arXiv preprint arXiv:2509.16117 , 2025. [41] Zheng, Z., Peng, X., Yang, T., Shen, C., Li, S., Liu, H., Zhou, Y., Li, T., and You, Y. Open-sora: Democratizing efficient video production for all. arXiv preprint arXiv:2412.20404 , 2024. [42] Zhu, F., Wu, H., Guo, S., Liu, Y., Cheang, C., and Kong, T. Irasim: A fine-grained world model for robot manipulation. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pp. 9834–9844, 2025a. [43] Zhu, F., Yan, Z., Hong, Z., Shou, Q., Ma, X., and Guo, S. Wmpo: World model-based policy optimization for vision-language-action models. arXiv preprint arXiv:2511.09515 , 2025b. 
+
+12 A More Implementation Details 
+
+A.1 Model Architecture 
+
+We provide additional details on the HY-World 1.5 backbone (Sun et al., 2025; Wu et al., 2025) used as our base world model, focusing on how discrete actions and continuous camera poses are injected into the DiT. Tab. 3 summarizes the key architectural and VAE parameters; the rest of this section describes the conditioning mechanisms.                            
+
+> Tab. 3 Architecture parameters of the HY-World 1.5 backbone (Sun et al., 2025; Wu et al., 2025).
+> Component Configuration
+> Diffusion transformer
+> Block depth (dual-stream) 54
+> Hidden dim / heads / head dim 2048 /16 /128
+> MLP expansion ratio 4×
+> Patch size (3D conv) 1×1×1
+> Positional encoding 3-axis RoPE on (T, H, W ), dims (16 ,56 ,56)
+> 3D causal VAE
+> Spatial / temporal compression factor 16 ×/4×
+> Latent channels 32
+> Latent length Tz=⌊(T−1) /4⌋+ 1
+> Action Injection
+
+Each latent frame is associated with a compound action token from the 45 -token vocabulary defined in our experimental setup. The token is embedded through the same sinusoidal-then-2-layer-MLP module that lifts the diffusion timestep, summed into the global AdaLN conditioning vector together with the timestep and pooled text embeddings, and broadcast across the visual tokens of the frame so that action information modulates every dual-stream block via AdaLN rather than entering the attention sequence as a token. The final MLP layer of the action embedder is zero-initialized, so action conditioning behaves as a no-op when adapting from a pretrained text-to-video backbone.  
+
+> Camera Injection
+
+Per-frame camera poses (a 4×4 extrinsic and a 3×3 intrinsic) are injected through projective rotary positional encoding (PRoPE) (Li et al., 2025b), which HY-World 1.5 adopts as a parallel visual attention branch attached to each dual-stream block. Conceptually, PRoPE conditions attention on the per-frame camera projection so that geometrically corresponding rays across frames are aligned within the camera-conditioned attention space, complementing the standard 3-axis RoPE that encodes spatio-temporal position. The PRoPE branch is fused back into the visual stream through a zero-initialized linear projection and is applied only to the visual stream, while text tokens retain the standard RoPE attention.  
+
+> Autoregressive Rollout with History
+
+The noisy latent chunk to be denoised is channel-wise concatenated with the latents of previously generated chunks together with a binary mask indicating observed positions, and the concatenated tensor is processed by the patch-embedding 3D convolution whose conditioning-side input channels are zero-initialized. The attention mask is bidirectional within a chunk and strictly causal across chunks, enforcing autoregressive generation while preserving full intra-chunk dependencies, and the key-value features of past chunks are cached at inference time so that only the current chunk is recomputed per rollout step. Text conditioning is processed through a separate stream within each dual-stream block and joins the visual tokens via concatenated joint attention, with separate output projections and MLPs for each modality. 
+
+A.2 Online Data Collection and Processing Details  
+
+> Simulator and Action Sampling
+
+Each parallel Minecraft world is initialized in creative mode with a unique random map seed and a spawn biome uniformly drawn from a fixed pool. To keep visual transitions smooth and temporally consistent with the model’s chunked latent representation, the action agent samples a compound 13 action token and holds it for a contiguous block of latent frames—roughly 0.8–3.2 seconds at 20 FPS—before re-sampling. Longer trajectories can be composed from these action primitives. Tab. 4 summarizes the simulator and data conventions adopted throughout our online data collection.  
+
+> Tab. 4
+
+Simulator and data conventions for online data collection in OnlineWM.  
+
+> Setting Value
+
+World and rendering 
+
+Game mode creative 
+
+Spawn biomes (uniform draw) {plains , forest , desert , taiga , savanna }Field of view (FoV) 70 ◦ horizontal 
+
+Action and timing 
+
+View delta per simulator tick 3◦
+
+Action hold duration 4–16 latent frames ( 0.8–3.2 s at 20 FPS) World reset cadence every ∼ 96 latent frames 
+
+Pose and conditioning 
+
+Camera extrinsic 4×4 world-to-camera, first-frame normalized Camera intrinsic 3×3, derived from 70 ◦ FoV at 832 ×480 
+
+Caption (fixed) "Minecraft first-person gameplay." 
+
+Sample Format Each collected sample stores everything required to compute both the flow-matching and the CFT losses without re-running the simulator. Raw RGB frames are encoded into VAE latents on the fly and discarded, and every buffer entry consists of three parts: (i) the long mainline trajectory of Lmain chunks together with its per-latent-frame action tokens and camera poses, used for the flow-matching loss; (ii) the short positive–negative fork pair (z+, z−) of Lfork chunks each, sharing the same conditioning state c and used for the causality-aware loss; and (iii) the conditioning first-frame latent together with the precomputed text-encoder features for the fixed caption and vision-encoder features for the conditioning frame. Camera extrinsics are normalized to the first-frame pose so that every rollout shares a canonical origin, while intrinsics stay constant within a sample. Tab. 5 summarizes the corresponding tensor shapes.  
+
+> Tab. 5
+
+Per-sample replay buffer layout in OnlineWM. Shapes use the latent spatial size Hz ×Wz = 30 ×52 (at 832 ×480 
+
+raw resolution) and 4 latent frames per chunk.   
+
+> Field Shape Description
+
+Mainline trajectory ( Lmain = 8 chunks) 
+
+latents [32 , 4Lmain , H z , W z ] post-fork mainline VAE latents 
+
+action_tokens [4 Lmain ] one compound token per latent frame 
+
+w2c [4 Lmain , 4, 4] first-frame-normalized world-to-camera 
+
+intrinsic [4 Lmain , 3, 3] derived from 70 ◦ FoV 
+
+Counterfactual fork pair ( Lfork = 1 chunk each) 
+
+short_latents [32 , 4Lfork , H z , W z ] chosen-fork prefix, used as z+ in CFT 
+
+neg_latents [32 , 4Lfork , H z , W z ] counterfactual fork, used as z− in CFT Other neg_* fields shapes as in mainline per-frame action token and pose for z−
+
+Shared conditioning 
+
+image_cond [32 , 1, H z , W z ] VAE latent of the conditioning frame 
+
+prompt_embed [1 ,000 , 3584] LLM embedding of the fixed caption 
+
+vision_states [729 , 1152] SigLIP embedding of the conditioning frame 
+
+14 A.3 Training 
+
+We expand on the training procedure of OnlineWM in three parts: the hyperparameter configuration, the algorithmic skeleton of the closed-loop training pipeline, and the distributed architecture used to scale the framework across multiple nodes. 
+
+Hyperparameters Tab. 6 reports the full hyperparameter configuration used throughout our experiments, organized into optimization, distributed setup, active online learning, replay buffer, and causality-aware fine-tuning.  
+
+> Tab. 6
+
+Training hyperparameters and distributed setup of OnlineWM.  
+
+> Hyperparameter Value
+
+Optimization 
+
+Optimizer Muon (Liu et al., 2025a) (AdamW for ≤ 1D parameters) Peak learning rate 2×10 −5
+
+LR schedule / warmup steps one-cycle with cosine annealing / 100 
+
+Total training steps 3,000 
+
+Weight decay / max grad norm 10 −4 / 1.0
+
+Mixed precision (forward / master) bf16 / fp32 
+
+Distributed setup 
+
+Compute 4 nodes × 8 GPUs = 32 GPUs Sequence-parallel groups (size per group) 8 (4)Gradient accumulation steps 2
+
+Effective batch size 16 
+
+Parallel simulators ( N ) 32 
+
+Active online learning 
+
+Fork branches per world ( B) 8
+
+Fork length / main rollout ( Lfork / L main ) 1 / 8 chunks Random override probability ( prand ) 0.2
+
+Scoring noise level ( σ⋆) 0.5
+
+EMA decay (scoring & old policy) 0.99 
+
+AOL warmup steps 100 
+
+Replay buffer 
+
+Capacity ( Smax ) 96 
+
+Collection interval ( Ncollect ) 6
+
+Max usage per sample ( Nmax ) 6
+
+Causality-aware fine-tuning 
+
+Counterfactual mixing weight ( λ) 0.1
+
+NFT advantage scaling ( β) 1.0
+
+CFT loss weight ( λCFT ) 0.2
+
+Training noise schedule shifted logit-normal (μ = 0 , σ = 1 , time-shift 3)
+
+Algorithmic Skeleton We summarize the OnlineWM training procedure as three interleaved algorithms. Algorithm 1 describes the closed-loop main pipeline, which alternates between an active online collection round and a gradient update; the collection round invokes AOL_Select (Algorithm 2) to score all N × B
+
+candidate forks under the EMA model, decompose their difficulty into scene- and action-level components, and select a chosen fork together with a counterfactual fork for each world. At each gradient step, CFT_Loss 
+
+(Algorithm 3) is computed alongside the standard flow-matching loss on the long mainline trajectory and combined as Ltotal = LFM + λCFT LCFT .15 Algorithm 1 OnlineWM: closed-loop active online training.  
+
+> Require:
+
+Pretrained world model θ with EMA copy ¯θ, parallel simulators {Env n}Nn=1 at conditioning state cn,replay buffer D ← ∅ , total training steps T  
+
+> 1: for
+
+t = 1 , 2, . . . , T do   
+
+> 2: if
+
+|D| < S max or t mod Ncollect = 0 then ▷ collection round   
+
+> 3: for
+
+n = 1 , . . . , N do  
+
+> 4:
+
+sample B candidate compound action sequences and roll out for Lfork chunks  
+
+> 5:
+
+encode each fork to a latent zn,b sharing the conditioning state cn 
+
+> 6: end for
+> 7:
+
+  b(n)+ , b (n)
+
+> −
+
+ Nn=1 , {sn,b } ← AOL_Select (Algorithm 2)   
+
+> 8: for
+
+n = 1 , . . . , N do  
+
+> 9:
+
+z(n)+ ← zn, b (n)+
+
+, z(n) 
+
+> −
+
+← zn, b (n)
+
+> −
+
+▷ short positive / negative forks  
+
+> 10:
+
+continue b(n)+ in Env n for Lmain chunks → z(n) 
+
+> main
+
+▷ long mainline rollout  
+
+> 11:
+
+push  z(n)
+
+> main
+
+, z(n)+ , z(n) 
+
+> −
+
+, cn
+
+ to D with priority sn, b (n)+
+
+, evicting low-priority entries    
+
+> 12: end for
+> 13: end if
+> 14:
+
+draw (zmain , z+, z−, c) ∼ Uniform( D) and increment its usage counter ▷ training step  
+
+> 15:
+
+LFM ← flow-matching loss on zmain (Eq. 1)  
+
+> 16:
+
+LCFT ← CFT_Loss  z+, z−, c (Algorithm 3)  
+
+> 17:
+
+θ ← θ − η ∇θ
+
+ LFM + λCFT LCFT 
+
+ 
+
+> 18:
+
+¯θ ← γ ¯θ + (1 − γ) θ ▷ EMA update    
+
+> 19: end for
+> 20: return
+
+θ 
+
+> Distributed Architecture
+
+Training runs on 4 compute nodes with 8 GPUs each, for a total of 32 GPUs. The 
+
+8B-parameter backbone is distributed via hybrid sharded data parallelism (HSDP)—sharded within each node and replicated across nodes—and combined with sequence parallelism over 8 groups, each spanning 4
+
+GPUs; together with 2 gradient accumulation steps, this yields an effective batch size of 16 per optimizer update. The N = 32 Minecraft simulators are evenly distributed across the four nodes, where the leader rank on each node drives its assigned simulators and broadcasts the resulting raw rollout frames to its peers, so that VAE encoding and EMA scoring run in parallel on every rank within an SP group. After each collection round, the new samples are merged into a globally synchronized replay buffer, ensuring that the uniform draw at the training step sees a consistent buffer view across all nodes. 
+
+A.4 Inference and Evaluation  
+
+> Action Accuracy via Estimated Camera Poses
+
+To assess action controllability, we recover discrete action tokens from the generated video and compare them against the ground truth. We first apply Depth Anything V3 (Lin et al., 2025) to both the generated and the ground-truth videos to estimate per-frame world-to-camera poses, subsample the estimates to the latent rate, and compute the relative camera motion between consecutive latent frames. The relative translation and rotation are then independently quantized—using fixed magnitude thresholds—into a 9-way movement label and a 5-way view label, and combined into a single compound token ˆan in the same 45 -entry space as our action vocabulary. Action controllability is measured by two complementary token-level accuracies: 
+
+Acc combined = 1
+
+N − 1 
+
+> N−1
+
+X
+
+> n=1
+
+1[ˆ an = an] , Acc fine = 12
+
+ Acc move + Acc view 
+
+, (10) where Acc combined requires both the movement and the view label to be recovered correctly (Combined in Tab. 2), while Acc fine averages the two axis-wise accuracies (Fine-grained in Tab. 2). For each method, we sweep the translation threshold over a small candidate set and report the configuration with the highest 
+
+Acc combined following WorldCompass (Wang et al., 2026), which compensates for the per-scene scale ambiguity inherited from the depth estimator. 16 Algorithm 2 AOL_Select : scoring, scene/action decomposition, and rank-inverted fork selection.  
+
+> Require:
+
+fork latents {zn,b }n,b with shared conditioning {cn}, EMA model ¯θ, scoring noise σ⋆ at timestep index k⋆, override probability prand  
+
+> 1:
+
+sample shared noise ϵ ∼ N (0, I)  
+
+> 2: for all
+
+(n, b ) do ▷ single EMA forward per fork  
+
+> 3:
+
+˜zn,b ← (1 − σ⋆) zn,b + σ⋆ ϵ 
+
+> 4:
+
+sn,b ← v¯θ
+
+ ˜zn,b , k ⋆, cn,b 
+
+ − (ϵ − zn,b ) 22  
+
+> 5: end for
+> 6:
+
+dn ← mean b sn,b , δn,b ← sn,b − dn ▷ scene / action decomposition   
+
+> 7: for
+
+n = 1 , . . . , N do   
+
+> 8: if
+
+rand() < p rand then  
+
+> 9:
+
+b(n)+ ← uniform random in {1, . . . , B }  
+
+> 10: else
+> 11:
+
+rn ← percentile rank of dn in {d1, . . . , d N } ▷ lower ⇔ easier scene  
+
+> 12:
+
+b(n)+ ← fork in world n whose action rank (by δn,b ) matches 1 − rn  
+
+> 13: end if
+> 14:
+
+b(n) 
+
+> −
+
+← arg max b̸=b(n)+
+
+sim  zn, b (n)+
+
+, zn,b 
+
+ ▷ counterfactual fork    
+
+> 15: end for
+> 16: return
+
+  b(n)+ , b (n)
+
+> −
+
+ Nn=1 and the score table {sn,b }
+
+Algorithm 3 CFT_Loss : causality-aware fine-tuning loss on a counterfactual sample pair.  
+
+> Require:
+
+positive–negative pair (z+, z−) sharing condition c, current model vθ, EMA model vold , hyperpa-rameters λ and β 
+
+> 1:
+
+h ← sim( z+, z−), α ← h/ 2 ▷ visual similarity (e.g., SSIM) and reconstruction weight  
+
+> 2:
+
+sample ϵ ∼ N (0, I) and timestep k from the shifted logit-normal schedule, with noise level σk 
+
+> 3:
+
+γk ← λ h σ k(1 − σk) 
+
+> 4:
+
+˜zk ← (1 − σk) z+ + σk ϵ + γk (z− − z+) ▷ counterfactual perturbation, Eq. 4  
+
+> 5:
+
+forward both networks at (˜ zk, k, c) to obtain vθ and vold  
+
+> 6:
+
+v+ ← (1 − β) vold + β vθ , v− ← (1 + β) vold − β vθ 
+
+> 7:
+
+ˆz+ ← ˜zk − σk v+, ˆz− ← ˜zk − σk v− 
+
+> 8:
+
+LCFT ← (1 − α) ˆz+ − z+ 
+
+> 2
+> w
+
++ α ˆz− − z− 
+
+> 2
+> w
+
+▷ Eq. 6   
+
+> 9: return
+
+LCFT  
+
+> Relative Pose Error
+
+For trajectory-level controllability, we report the relative pose error (RPE) between the predicted and the ground-truth camera trajectories. The predicted trajectory is first registered to the ground truth through a closed-form Sim(3) Umeyama alignment (Umeyama, 1991) on the camera centers, which absorbs the estimator’s per-scene scale and any global frame offset. We then compare the predicted and ground-truth incremental motions of consecutive frame pairs, and report two trajectory-averaged numbers: the translational RPE, computed as the mean Euclidean norm of the residual translation between aligned and ground-truth motions, and the rotational RPE, computed as the mean geodesic angle of the residual rotation, reported in degrees. 
+
+# B Additional Experiments 
+
+B.1 Additional Ablation Experiments for AOL and CFT 
+
+We extend Tab. 2 with two variants: Random + CFT , which applies CFT to randomly acquired training branches, and AOL + CFT (random negative) , which replaces the most visually similar counterfactual branch with a random alternative from the same conditioning state. All variants use the same optimizer settings, EMA decay, buffer size, inference settings, and evaluation protocol reported in Sec. 4.1 and Tab. 6. 17 Tab. 7 Additional ablations on action controllability . Best results are in bold .  
+
+> Method Action Accuracy Camera Control
+
+Combined ↑ Fine-grained ↑ RPE rot ↓ RPE trans ↓
+
+Base Model 0.240 0.490 0.6906 0.0235 + Random 0.356 0.569 0.6393 0.0199 + Random + CFT 0.369 0.596 0.5023 0.0172 + AOL 0.393 0.610 0.5033 0.0166 + AOL + CFT (random negative) 0.410 0.622 0.4670 0.0163 Full Model ( w/ CFT ) 0.425 0.640 0.4072 0.0159 CFT without Active Acquisition CFT improves all four metrics under random acquisition, while yielding larger action-accuracy gains with AOL. The full model performs best across all four metrics, supporting the complementary roles of active acquisition and counterfactual supervision. 
+
+Counterfactual Negative Selection Random negatives improve all four metrics over AOL , while visually similar negatives yield further gains. This supports using similar counterfactual outcomes to better distinguish the effects of different actions. 
+
+B.2 Sensitivity to the Scoring Noise Level 
+
+The scoring noise level σ⋆ in Eq. 2 directly affects the difficulty estimates used for AOL selection. We vary σ⋆
+
+from 0.3 to 0.7 and evaluate the stability of the resulting branch rankings relative to the default σ⋆ = 0 .5.Tab. 8 reports Kendall’s τb and the percentages of rank differences within one or two positions. The ranking is stable around the default setting, with most changes occurring among branches with very similar scores, suggesting that our ranking mechanism is not overly sensitive to the particular choice of σ⋆. 
+
+> Tab. 8
+
+Stability of AOL acquisition rankings across scoring noise levels, measured relative to the default σ⋆ = 0 .5.
+
+σ⋆ Kendall’s τb ↑ (p-value) Rank difference ≤ 1 ↑ Rank difference ≤ 2 ↑
+
+0.3 0.8867 ( ≈ 10 −5) 86.72% 99.22% 0.4 0.9386 ( ≈ 10 −5) 92.97% 100.00% 0.5 1.0000 (N.A.) 100.00% 100.00% 0.6 0.9263 ( ≈ 10 −5) 92.97% 99.22% 0.7 0.8320 ( ≈ 10 −5) 75.78% 91.41% 
+
+B.3 Using the Most Difficult Fork for AOL 
+
+We also conduct a separate sampling ablation comparing random acquisition with Hardest , which selects the highest-scoring training fork in each scene, b(n)+ = arg max b sn,b . However, it significantly underperforms random acquisition on all six metrics and shows high training instability at early training stage (Tab. 9), suggesting that prioritizing prediction error alone is insufficient for determining useful training data.  
+
+> Tab. 9
+
+Comparison of random and hardest-fork acquisition.   
+
+> Method SSIM
+
+↑ LPIPS ↓ Combined ↑ Fine-grained ↑ RPE rot ↓ RPE trans ↓
+
+Random 0.485 0.480 0.486 0.693 1.3642 0.2191 
+
+Hardest 0.457 0.561 0.404 0.604 2.0324 0.3530 
+
+18 C Limitations and Future Directions 
+
+In this work, we build OnlineWM on top of Minecraft, which offers flexibility, efficiency, and rich action coverage well-suited for studying causally grounded action control. While Minecraft already supports the diverse scenarios and interactions explored in this work, modern game engines such as Unity and Unreal Engine 5 further provide photorealistic rendering, finer-grained physics, and richer motion patterns including articulated character dynamics, deformable objects, and complex environmental interactions. Bringing OnlineWM into these engines holds substantial promise for scaling up the learning of world transition dynamics and improving visual fidelity. However, it’s worth noting that efficient engineering design of the online training infrastructure is also crucial to support the practicability of OnlineWM when using these advanced game engines. Beyond modeling scene-level transition dynamics, the closed-loop and causality-driven nature of OnlineWM also points toward learning physical dynamics through embodied interaction. Since the active online learning loop and causality-aware fine-tuning are agnostic to the specific form of action, they could in principle be extended to settings where custom agents continuously interact with the environment in pursuit of informative experience .For instance, a robotic manipulator might autonomously probe a simulated workspace, actively seeking states whose contact outcomes are novel yet learnable for the current world model, and constructing counterfactual rollouts— e.g ., grasping versus pushing, or applying different forces from the same configuration—to anchor its predictions in genuine physical causality rather than visual co-occurrence. We see such an extension as a promising avenue for moving from passive observation of dynamics toward an interactive, embodied paradigm of physical world understanding, and leave its concrete realization to future work. 
+
+# D More Visualization 
+
+We include more qualitative visualization results in this appendix, including comparisons of action controllability for different method variants (Fig. 5) and generalization results to general domains (Fig. 6, 9, 7, 8). 19 OnlineWM 
+
+## →
+
+w/o CFT 
+
+→
+
+w/o AOL 
+
+→
+
+> Subsequent Rollout Frames Condition Frame
+
+(a) OnlineWM 
+
+## →
+
+w/o CFT 
+
+→
+
+w/o AOL 
+
+→
+
+> Subsequent Rollout Frames Condition Frame
+
+(b) OnlineWM 
+
+## →
+
+w/o CFT 
+
+→
+
+w/o AOL 
+
+→ 
+
+> Condition Frame Subsequent Rollout Frames
+
+(c) Fig. 5 More visual comparison of all method variants for action controllability with environmental collisions. The first row shows the ground-truth video, and subsequent rows denote the generation results of three variants: OnlineWM ,
+
+OnlineWM w/o the CFT loss , and OnlineWM removing the whole AOL and CFT design .
+
+20 RPE trans = 𝟎𝟎 . 𝟏𝟏𝟏𝟏 , RPE rot = 𝟎𝟎 . 𝟏𝟏𝟏𝟏 
+
+# Baseline 
+
+RPE trans = 0.40, RPE rot = 0.31 
+
+# w-5 
+
+# Ours 
+
+# wa-5  wd-5 START 
+
+# Ours 
+
+# Baseline Fig. 6 Visual comparison of the generalization ability of learned action control on general domains. RPE trans = 𝟎𝟎 . 𝟏𝟏 𝟒𝟒 , RPE rot = 𝟎𝟎 . 𝟖𝟖𝟎𝟎 
+
+# Baseline 
+
+RPE trans = 0.27, RPE rot = 3.25 
+
+# left-5 
+
+# Ours 
+
+# w-5  w-5 START 
+
+# Ours 
+
+# Baseline  
+
+> Fig. 7
+
+Visual comparison of the generalization ability of learned action control on general domains. 
+
+21 RPE trans = 𝟎𝟎 . 𝟏𝟏𝟏𝟏 , RPE rot = 𝟎𝟎 . 𝟒𝟒𝟖𝟖 
+
+Baseline 
+
+Ours 
+
+RPE trans = 0.39, RPE rot = 2.32 
+
+## right-3 
+
+Baseline 
+
+Ours 
+
+## w-4  w-4 wd-4 START Fig. 8 Visual comparison of the generalization ability of learned action control on general domains. 
+
+22 RPE trans = 𝟎𝟎 . 𝟏𝟏𝟏𝟏 , RPE rot = 𝟎𝟎 . 𝟔𝟔 𝟒𝟒 
+
+# Baseline 
+
+RPE trans = 0.22, RPE rot = 2.75 
+
+# left-5 
+
+# Ours 
+
+# w-5  w-5 START 
+
+# Ours 
+
+# Baseline Fig. 9 Visual comparison of the generalization ability of learned action control on general domains. 
+
+23

@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-26</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-27</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 15 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 13 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-26 21:37:53 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-27 22:24:40 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今天共收录15篇论文、精读4篇速读11篇，焦点集中在世界模型&quot;会遗忘&quot;与&quot;能否被信任&quot;两大问题上。 最值得看的是两篇8.0分精读：《Frozen Flows Forget》诊断并修复潜空间流世界模型的运动丢失，《Agent-Editing World Model》重新思考LLM智能体的世界建模方式。 普通读者可先从《Dual-Frontier: When Can an Agent Trust Its World Model?》这类速读切入，判断自己更关心修复机制还是信任评估，再回头深读精读篇目。</p>
+<p>2026-09-27 日报精选13篇世界模型论文，精读2篇、速读11篇。最值得看的是精读两篇8分工作：FIRM-WM用状态分解的因果-干预循环建模实现无奖励视觉规划，OnlineWM用因果感知的主动在线学习提升世界建模效率。建议普通读者优先从这两篇入手，理解“世界模型如何自我纠错”这一主线，再按兴趣浏览速读中的一致性路由与可信度评估方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">4 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Frozen Flows Forget: Diagnosing and Restoring Lost Motion in a Latent-flow World Model">Frozen Flows Forget: Diagnosing and Restoring Lost Motion in a Latent-flow World Model</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agent-Editing World Model: Rethinking World Modeling for LLM Agents">Agent-Editing World Model: Rethinking World Modeling for LLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Poster: FedWM-Guard: Thwarting Imagination Poisoning in Federated World Model-based Autonomous Driving">Poster: FedWM-Guard: Thwarting Imagination Poisoning in Federated World Model-based Autonomous Driving</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="FIRM-WM: State-factorized factual-interventional recurrent modeling for reward-free visual planning">FIRM-WM: State-factorized factual-interventional recurrent modeling for reward-free visual planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling">OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>3</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models">ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dual-Frontier: When Can an Agent Trust Its World Model?">Dual-Frontier: When Can an Agent Trust Its World Model?</span></li><li><span class="dpr-home-dashboard-paper-title" title="Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping">Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models">ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning">Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dual-Frontier: When Can an Agent Trust Its World Model?">Dual-Frontier: When Can an Agent Trust Its World Model?</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>7</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>4</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>5</strong></span><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>1</strong></span></div>
 </section>
 </div>
 
