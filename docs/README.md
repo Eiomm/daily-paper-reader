@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-28</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-29</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 13 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-29 00:01:50 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-29 23:47:39 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日日报：13篇论文中精读2篇，WALT（9.0）领跑，世界模型在自动驾驶、LLM智能体与具身智能方向集中出现。首选精读WALT和Agent-Editing World Model，前者聚焦自动驾驶世界模型对齐隐轨迹，后者重思LLM智能体的世界建模。普通读者先看两篇精读摘要，再按兴趣速读Imagine-RL、WorldCrafter与MachEmbodied-U0，把握“世界模型+智能体/具身”主线。</p>
+<p>2026-09-29 日报速览：17 篇论文中精读 6 篇、速读 11 篇，重点集中在长程智能体记忆与视觉规划可靠性。最值得看的是两篇 9.0 分精读——《ActiveMem》用动态潜在记忆树支撑长程智能体，《Beyond One-Step Accuracy》以状态仿射潜在转移提升视觉规划可靠性。普通读者可先从这两篇入手，再按兴趣浏览速读中 VLA 与世界模型结合的方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving">WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agent-Editing World Model: Rethinking World Modeling for LLM Agents">Agent-Editing World Model: Rethinking World Modeling for LLM Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents">ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Beyond One-Step Accuracy: State-Affine Latent Transition for Reliable Visual Planning">Beyond One-Step Accuracy: State-Affine Latent Transition for Reliable Visual Planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving">MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span><span class="dpr-home-dashboard-tag">world-models <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning">Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory">WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory</span></li><li><span class="dpr-home-dashboard-paper-title" title="MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence">MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Devol-ONE: One Autoregressive Mixture of Transformers to Unify Vision-Language-Action and Latent World Modeling">Devol-ONE: One Autoregressive Mixture of Transformers to Unify Vision-Language-Action and Latent World Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="World SLAM Model: Joint World Modeling for SLAM and Navigation">World SLAM Model: Joint World Modeling for SLAM and Navigation</span></li><li><span class="dpr-home-dashboard-paper-title" title="DeltaWAM: Change-Centric Visual Foresight via Delta Tokens for an Efficient World-Action Model">DeltaWAM: Change-Centric Visual Foresight via Delta Tokens for an Efficient World-Action Model</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>7</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>4</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>9</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>2</strong></span></div>
 </section>
 </div>
 

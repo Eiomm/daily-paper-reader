@@ -1,0 +1,281 @@
+{
+  "date": "20260929",
+  "date_label": "",
+  "generated_at": "2026-09-29 23:47:39 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.33244v1",
+      "route": "202609/29/2609.33244v1-activemem-dynamic-latent-memory-trees-for-long-horizon-agents",
+      "title": "ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "长程智能体的分层记忆",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.33595v1",
+      "route": "202609/29/2609.33595v1-beyond-one-step-accuracy-state-affine-latent-transition-for-reliable-visual-planning",
+      "title": "Beyond One-Step Accuracy: State-Affine Latent Transition for Reliable Visual Planning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "潜在动态世界模型的多步预测",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.33737v1",
+      "route": "202609/29/2609.33737v1-momworld-momentum-aware-latent-world-model-for-long-horizon-autonomous-driving",
+      "title": "MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长时域自动驾驶规划的动量感知隐世界模型",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.33854v1",
+      "route": "202609/29/2609.33854v1-redrive-shaping-representations-with-world-modeling-for-end-to-end-driving",
+      "title": "ReDrive: Shaping Representations with World Modeling for End-to-End Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "端到端驾驶的世界建模",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.34085v1",
+      "route": "202609/29/2609.34085v1-ad-e2e-jepa-a-joint-embedding-predictive-architecture-for-end-to-end-autonomous-driving",
+      "title": "AD-E2E-JEPA: A Joint-Embedding Predictive Architecture For End-to-End Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "评估用于端到端自动驾驶的JEPA世界模型",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.34749v1",
+      "route": "202609/29/2609.34749v1-codrive-cross-vehicle-world-consistent-video-generation-with-precise-trajectory-control-for-cooperative-driving",
+      "title": "CoDrive: Cross-Vehicle World-Consistent Video Generation with Precise Trajectory Control for Cooperative Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多视角驾驶世界模型视频生成",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.32193v1",
+      "route": "202609/29/2609.32193v1-devol-one-one-autoregressive-mixture-of-transformers-to-unify-vision-language-action-and-latent-world-modeling",
+      "title": "Devol-ONE: One Autoregressive Mixture of Transformers to Unify Vision-Language-Action and Latent World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在单一自回归框架内统一潜在世界动力学预测与动作生成",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.32626v1",
+      "route": "202609/29/2609.32626v1-world-slam-model-joint-world-modeling-for-slam-and-navigation",
+      "title": "World SLAM Model: Joint World Modeling for SLAM and Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "预测未来视觉状态并维护持续更新的空间世界状态以支持导航",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.33177v1",
+      "route": "202609/29/2609.33177v1-deltawam-change-centric-visual-foresight-via-delta-tokens-for-an-efficient-world-action-model",
+      "title": "DeltaWAM: Change-Centric Visual Foresight via Delta Tokens for an Efficient World-Action Model",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "以紧凑delta token作为潜在世界模型的未来预测单元",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.33264v1",
+      "route": "202609/29/2609.33264v1-vehdyn-a-driving-world-model-benchmark-for-vehicle-dynamics",
+      "title": "VehDyn: A Driving World Model Benchmark for Vehicle Dynamics",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向车辆动力学的驾驶世界模型基准",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.24862v1",
+      "route": "202609/29/2609.24862v1-when-tomorrow-becomes-today-self-evolving-policies-for-agentic-time-series-forecasting",
+      "title": "When Tomorrow Becomes Today: Self-Evolving Policies for Agentic Time-Series Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "具备自适应编排与延迟反馈的自演化智能体策略",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.26293v2",
+      "route": "202609/29/2609.26293v2-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "决策智能体对所学世界模型的可信度",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.32921v1",
+      "route": "202609/29/2609.32921v1-adaptive-latent-capacity-for-world-models",
+      "title": "Adaptive Latent Capacity for World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "JEPA世界模型中把预测信息集中于前缀的自适应隐容量",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.33000v1",
+      "route": "202609/29/2609.33000v1-tridrive-joint-driver-vehicle-and-road-modeling-for-forecasting-and-driver-monitoring",
+      "title": "TriDrive: Joint Driver, Vehicle, and Road Modeling for Forecasting and Driver Monitoring",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "融合V-JEPA 2道路潜变量的人-车-路联合预测",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.29813v1",
+      "route": "202609/29/2609.29813v1-s2planner-multi-scale-semantic-planner-for-end-to-end-autonomous-driving",
+      "title": "S2Planner: Multi-Scale Semantic Planner for End-to-End Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用多尺度语义场景表征进行轨迹规划的端到端自动驾驶规划器",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.31162v1",
+      "route": "202609/29/2609.31162v1-worldts-world-modeling-for-multimodal-covariate-aware-time-series-forecasting",
+      "title": "WorldTS: World Modeling for Multimodal Covariate-aware Time Series Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合多模态协变量的隐空间世界模型时间序列预测",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    },
+    {
+      "paper_id": "2609.31325v1",
+      "route": "202609/29/2609.31325v1-more-sensors-only-one-field-rethinking-continual-spatio-temporal-forecasting",
+      "title": "More Sensors Only One Field: Rethinking Continual Spatio-Temporal Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "传感器扩展下面向交通的时空预测表示学习",
+      "first_seen_at": "2026-09-29 23:47:39 UTC",
+      "updated_at": "2026-09-29 23:47:39 UTC"
+    }
+  ]
+}

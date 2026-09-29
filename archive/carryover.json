@@ -1,12 +1,200 @@
 {
-  "generated_at": "2026-09-28T23:52:15.854492+00:00",
-  "updated_date": "20260928",
+  "generated_at": "2026-09-29T23:34:34.213786+00:00",
+  "updated_date": "20260929",
   "carryover_days": 9,
   "tag_states": {
     "world-models": {
-      "updated_date": "20260928",
+      "updated_date": "20260929",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2609.34981v1",
+          "source": "arxiv",
+          "title": "What Makes World Action Models Generalize? An Empirical Study of Test-Time Future Modeling",
+          "abstract": "World action models (WAMs) predict the future alongside actions during \\emph{training}. Due to the heavy computation cost of video denoising, whether the future must still be generated during \\emph{inference} is disputed: Explicit WAMs denoise it into clean frames along with every action chunk, whereas Latent WAMs discard it entirely for acceleration. We find that latent WAMs, despite matching explicit ones on in-distribution tasks, fail to retain the generalization benefits that originally motivated WAMs. To demonstrate this, we evaluate generalization along three axes: \\emph{environmental perturbation}, \\emph{data efficiency}, and \\emph{task generalization}. Controlled comparisons with a matched backbone, training data, and budget reveal consistent degradation across all three axes when the action expert no longer conditions on future representations. Further analysis shows that the gap arises almost entirely from the first denoising step: the benefit comes from \\emph{preparing} the future, not \\emph{generating} it. We therefore propose \\textbf{Simple-WAM}, which simplifies future modeling into a single forward pass of fully noised video tokens and adapts the training-time noise schedule to this inference behavior. Across simulation and real-world tasks, Simple-WAM achieves the best of both worlds, leading explicit WAMs in generalization performance with efficiency comparable to Latent WAMs. Project Page: \\href{https://zrporz.github.io/Simple-WAM-Web/}{\\textcolor{panton}{\\texttt{https://zrporz.github.io/Simple-WAM-Web}}}",
+          "authors": [
+            "Renping Zhou",
+            "Zanlin Ni",
+            "Zihao Fan",
+            "Guohao Fu",
+            "Zeyu Liu",
+            "Hao Shi",
+            "Jie Zhang",
+            "Chi Bene Chen",
+            "Yang Yue",
+            "Xueyang Fu",
+            "Gao Huang"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.RO"
+          ],
+          "published": "2026-09-28T11:56:57+00:00",
+          "link": "https://arxiv.org/pdf/2609.34981v1",
+          "tags": [
+            "keyword:world-models",
+            "query:world-models"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "empirical study of world action models and latent future modeling generalization",
+          "llm_evidence_cn": "世界动作模型与潜在未来建模泛化性的实证研究",
+          "llm_evidence": "世界动作模型与潜在未来建模泛化性的实证研究",
+          "canonical_evidence": "世界动作模型与潜在未来建模泛化性的实证研究",
+          "llm_tldr_en": "This empirical study evaluates whether world action models must generate futures at inference, comparing explicit and latent WAMs across environmental perturbation, data efficiency and task generalization, finding latent WAMs lose the generalization benefits.",
+          "llm_tldr_cn": "世界动作模型训练时预测未来与动作，但推理时是否仍需生成未来存在争议，显式与潜在WAM各有取舍。论文沿环境扰动、数据效率与任务泛化三个维度系统评估显式与潜在WAM的泛化能力，并进行受控对比。结果发现潜在WAM虽在分布内任务与显式WAM相当，却丧失了最初驱动WAM的泛化优势。该研究揭示测试时未来建模对泛化的重要性，为世界动作模型设计提供实证指导。",
+          "llm_tldr": "世界动作模型训练时预测未来与动作，但推理时是否仍需生成未来存在争议，显式与潜在WAM各有取舍。论文沿环境扰动、数据效率与任务泛化三个维度系统评估显式与潜在WAM的泛化能力，并进行受控对比。结果发现潜在WAM虽在分布内任务与显式WAM相当，却丧失了最初驱动WAM的泛化优势。该研究揭示测试时未来建模对泛化的重要性，为世界动作模型设计提供实证指导。",
+          "llm_tags": [
+            "query:world-models"
+          ],
+          "matched_query_tag": "query:world-models",
+          "matched_query_text": "latent dynamics models for predicting future states",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2609.34981v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2609.35469v1",
+          "source": "arxiv",
+          "title": "Rethinking Causal Action Tokenization with Conditional Annealing in Flow Matching",
+          "abstract": "Autoregressive Vision-Language-Action (VLA) models offer a scalable path to robot learning, yet existing action tokenizers treat tokenization as a compression problem, producing representations that are semantically misaligned with the autoregressive backbone. We propose CATok, a causal action tokenizer that reframes tokenization as a causally structured generative process. CATok introduces a conditional annealing mechanism that extracts action tokens by progressively annealing a flow-matching process: each token is conditioned on all preceding tokens and encodes the residual reconstruction signal at a specific noise level, establishing a coarse-to-fine causal token space whose generative semantics are structurally aligned with autoregressive modeling. A token-conditioned flow-matching decoder built on Multimodal Diffusion Transformer (MMDiT) reconstructs continuous action chunks from these discrete tokens with the precision of hybrid diffusion-head architectures. This discrete bottleneck enforces knowledge insulation by design, cleanly separating high-level semantic reasoning from low-level motor execution without requiring explicit attention masking. Extensive evaluations across three simulation benchmarks and real-world robotic manipulation tasks demonstrate that CATok consistently surpasses existing tokenization methods in both reconstruction fidelity-compression tradeoff and inference efficiency, while improving VLA task success rate and training efficiency, establishing a high-performance, scalable foundation for purely autoregressive VLA systems.",
+          "authors": [
+            "Chenyu Zhang",
+            "Yuhang Cao",
+            "Daru Du",
+            "Yingxi Lu",
+            "Jing Shao",
+            "Ruoqu Chen",
+            "Jiajun Liu",
+            "Liu Cao",
+            "Yicheng Liu",
+            "Hang Zhao",
+            "Mengdi Xu"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "published": "2026-09-28T15:52:55+00:00",
+          "link": "https://arxiv.org/pdf/2609.35469v1",
+          "tags": [
+            "keyword:world-models",
+            "query:world-models"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "causal action tokenization for autoregressive models",
+          "llm_evidence_cn": "面向自回归模型的因果动作分词",
+          "llm_evidence": "面向自回归模型的因果动作分词",
+          "canonical_evidence": "面向自回归模型的因果动作分词",
+          "llm_tldr_en": "CATok reframes action tokenization as a causally structured generative process using conditional annealing in flow matching, producing coarse-to-fine causal token spaces semantically aligned with autoregressive VLA backbones.",
+          "llm_tldr_cn": "自回归视觉-语言-动作模型需要与骨干语义对齐的动作分词，但现有分词器将分词视为压缩问题，导致表示语义错位。论文提出CATok因果动作分词器，将分词重构为因果结构化生成过程，通过条件退火机制逐步退火流匹配过程提取动作令牌。每个令牌以前序令牌为条件并编码特定噪声水平下的残差重建信号，形成粗到细的因果令牌空间。该方法使令牌生成语义与自回归骨干结构对齐。",
+          "llm_tldr": "自回归视觉-语言-动作模型需要与骨干语义对齐的动作分词，但现有分词器将分词视为压缩问题，导致表示语义错位。论文提出CATok因果动作分词器，将分词重构为因果结构化生成过程，通过条件退火机制逐步退火流匹配过程提取动作令牌。每个令牌以前序令牌为条件并编码特定噪声水平下的残差重建信号，形成粗到细的因果令牌空间。该方法使令牌生成语义与自回归骨干结构对齐。",
+          "llm_tags": [
+            "query:world-models"
+          ],
+          "matched_query_tag": "query:world-models",
+          "matched_query_text": "motion tokenization",
+          "matched_requirement_id": "req-2",
+          "selection_source": "carryover_cache",
+          "paper_id": "2609.35469v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2609.33464v1",
+          "source": "arxiv",
+          "title": "VIDEAS: Distilling Explicit Action Semantics from Demonstration Videos for World Models via Prior-Guided Simulation",
+          "abstract": "World models learn internal representations of environment dynamics to predict future states, enabling agents to optimize action plans without physical interactions. However, developing world models that genuinely internalize underlying causal physical laws to explicitly reason about action preconditions and subsequent state transitions remains an open challenge. In this paper, we propose VIDEAS, a data distillation framework that transforms continuous physical dynamics from operational videos into explicit action semantics for foundation models. Specifically, it deconstructs visual demonstrations into discrete action trajectories and utilizes advanced vision-language models (VLMs) to extract structured knowledge encapsulating action preconditions and effects. To ensure physical consistency, we introduce a prior-guided trajectory simulation mechanism grounded within a text-based environment to rigorously validate the extracted knowledge. Notably, we incorporate negative trajectories to enrich knowledge completeness and enhance data diversity to mitigate cognitive bias. Furthermore, we present VIDEAS-WM, an 8B/9B-parameter suite of language-based world models trained on 34K high-quality samples derived from AgiBot-World dataset. Extensive experiments demonstrate that VIDEAS-WM establishes state-of-the-art performance in high-level embodied action semantic reasoning, exhibiting profound physical understanding and robust generalization across unseen scenarios.",
+          "authors": [
+            "Jianan Wang",
+            "Haoquan Zhai",
+            "Siyang Zhang",
+            "Bin Li",
+            "Juan Chen",
+            "Jingtao Qi",
+            "Zhuo Zhang",
+            "Enze Wang",
+            "Haoxiang Jin",
+            "Chen Qian"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-09-27T11:19:17+00:00",
+          "link": "https://arxiv.org/pdf/2609.33464v1",
+          "tags": [
+            "keyword:world-models",
+            "query:world-models"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "world models with discrete action trajectory tokenization",
+          "llm_evidence_cn": "世界模型与离散动作轨迹token化",
+          "llm_evidence": "世界模型与离散动作轨迹token化",
+          "canonical_evidence": "世界模型与离散动作轨迹token化",
+          "llm_tldr_en": "VIDEAS distills explicit action semantics for world models by deconstructing demonstration videos into discrete action trajectories and using VLMs to extract structured knowledge, helping foundation models internalize causal physical dynamics.",
+          "llm_tldr_cn": "世界模型虽能预测未来状态以支持规划，却难以真正内化因果物理规律并显式推理动作前提与状态转移。本文提出VIDEAS数据蒸馏框架，将操作视频中连续物理动态解构为离散动作轨迹，并借助视觉语言模型提取结构化知识，转化为显式动作语义。该工作为世界模型注入可解释的动作语义，有助于提升基础模型对物理动态的推理与迁移能力。",
+          "llm_tldr": "世界模型虽能预测未来状态以支持规划，却难以真正内化因果物理规律并显式推理动作前提与状态转移。本文提出VIDEAS数据蒸馏框架，将操作视频中连续物理动态解构为离散动作轨迹，并借助视觉语言模型提取结构化知识，转化为显式动作语义。该工作为世界模型注入可解释的动作语义，有助于提升基础模型对物理动态的推理与迁移能力。",
+          "llm_tags": [
+            "query:world-models"
+          ],
+          "matched_query_tag": "query:world-models",
+          "matched_query_text": "latent dynamics models for predicting future states",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2609.33464v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2609.34414v1",
+          "source": "arxiv",
+          "title": "From World Models to World Action Models: Rethinking Next-State Prediction",
+          "abstract": "Predicting the next state is a core paradigm of World Models for modeling physical dynamics, emphasizing prediction fidelity. As World Models evolve into World-Action Models (WAMs), existing methods still fix the next state before training as RGB, a single latent feature, or a static combination of predefined targets, thereby constraining action learning to the inductive biases preserved by a particular representation. To address this limitation, we propose CF-WAM, a dynamic next-state prediction framework that samples visual, semantic, geometric, and interaction projections of the same future, standardizes them into a common video form, and supervises a unified WAM across these projections. The action-relevant constraints exposed by these projections accumulate across training steps, forcing WAM to capture the underlying state-transition structure that supports multiple projections of the same action-conditioned future. This dynamic mechanism also provides a natural cross-embodiment dynamics reference frame for Human and Robot learning. By jointly learning across different next-state parameterizations, heterogeneous Human and Robot experience can bypass appearance differences and directly contribute to shared state-transition learning, improving cross-embodiment generalization. Experiments show that CF-WAM improves both training efficiency and final control performance, while translating Human experience effectively into policy gains. CF-WAM achieves state-of-the-art performance on RoboCasa-GR1 with an average success rate of 82.50%, while reaching 82.65% on LIBERO-Plus and up to 84.00% in real-world evaluations.",
+          "authors": [
+            "Tingyu Yuan",
+            "Ziming Ji",
+            "Biaoliang Guan",
+            "Wen Ye",
+            "Wenrui Tian",
+            "Zhaopeng Gu",
+            "Feihong Zhang",
+            "Xu Yang",
+            "Yan Huang",
+            "Zhaowen Li",
+            "Chaoyang Zhao",
+            "Jinqiao Wang"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-09-28T06:30:21+00:00",
+          "link": "https://arxiv.org/pdf/2609.34414v1",
+          "tags": [
+            "keyword:world-models",
+            "query:world-models"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "world models with semantic, geometric and interaction projections",
+          "llm_evidence_cn": "语义几何交互投影的世界模型",
+          "llm_evidence": "语义几何交互投影的世界模型",
+          "canonical_evidence": "语义几何交互投影的世界模型",
+          "llm_tldr_en": "CF-WAM is a dynamic next-state prediction framework for world-action models that samples visual, semantic, geometric and interaction projections of the same future, standardizes them into video form, and supervises a unified model.",
+          "llm_tldr_cn": "世界模型以预测下一状态为核心，但现有方法在训练前将下一状态固定为RGB、单一潜在特征或预设目标组合，使动作学习受限于特定表示的归纳偏置。本文提出CF-WAM动态下一状态预测框架，对同一未来的视觉、语义、几何与交互投影进行采样，统一为标准视频形式并联合监督统一的世界-动作模型。该工作揭示了多投影约束对动作学习的价值，推动世界模型向世界-动作模型演进。",
+          "llm_tldr": "世界模型以预测下一状态为核心，但现有方法在训练前将下一状态固定为RGB、单一潜在特征或预设目标组合，使动作学习受限于特定表示的归纳偏置。本文提出CF-WAM动态下一状态预测框架，对同一未来的视觉、语义、几何与交互投影进行采样，统一为标准视频形式并联合监督统一的世界-动作模型。该工作揭示了多投影约束对动作学习的价值，推动世界模型向世界-动作模型演进。",
+          "llm_tags": [
+            "query:world-models"
+          ],
+          "matched_query_tag": "query:world-models",
+          "matched_query_text": "Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling",
+          "matched_requirement_id": "req-8",
+          "selection_source": "carryover_cache",
+          "paper_id": "2609.34414v1",
+          "carry_days": 1
+        }
+      ]
     },
     "av-research": {
       "updated_date": "20260910",
