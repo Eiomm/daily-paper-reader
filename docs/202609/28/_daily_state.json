@@ -1,0 +1,217 @@
+{
+  "date": "20260928",
+  "date_label": "",
+  "generated_at": "2026-09-29 00:01:50 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.30436v1",
+      "route": "202609/28/2609.30436v1-walt-learning-world-model-aligned-latent-trajectories-for-autonomous-driving",
+      "title": "WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "驾驶世界模型对齐的紧凑隐轨迹空间用于规划",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.28416v1",
+      "route": "202609/28/2609.28416v1-agent-editing-world-model-rethinking-world-modeling-for-llm-agents",
+      "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向LLM智能体建模任务进展的世界模型",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.24033v1",
+      "route": "202609/28/2609.24033v1-imagine-rl-residual-confidence-guided-cross-attention-for-world-model-augmented-vla-reinforcement-learning",
+      "title": "Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "潜世界模型自回归预测紧凑未来表示",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.24984v1",
+      "route": "202609/28/2609.24984v1-worldcrafter-consistent-video-world-model-with-implicit-3d-aware-memory",
+      "title": "WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "具隐式三维感知记忆token的视频世界模型",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.25627v1",
+      "route": "202609/28/2609.25627v1-machembodied-u0-unified-understanding-and-generation-model-for-embodied-intelligence",
+      "title": "MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "耦合场景动态与动作的世界-动作具身模型",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.28466v1",
+      "route": "202609/28/2609.28466v1-the-past-frames-the-future-memory-for-autoregressive-video-generation",
+      "title": "The Past Frames the Future: Memory for Autoregressive Video Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "自回归视频世界模型的记忆机制",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.30667v1",
+      "route": "202609/28/2609.30667v1-starwm-self-supervised-trained-attention-routing-for-robust-world-models",
+      "title": "StarWM: Self-Supervised Trained Attention Routing for Robust World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用自监督注意力路由的鲁棒世界模型，平衡重建保真与动态抽象",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.30722v1",
+      "route": "202609/28/2609.30722v1-trafficimag-a-benchmark-for-counterfactual-roadside-traffic-video-generation",
+      "title": "TrafficImag: A Benchmark for Counterfactual Roadside Traffic Video Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向仿真的反事实路边交通视频生成基准",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.24526v1",
+      "route": "202609/28/2609.24526v1-me-vlma-unified-vlm-for-embodied-cognition-and-agent-coordination",
+      "title": "ME-VLM:A Unified VLM for Embodied Cognition and Agent Coordination",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向具身认知与多模态智能体规划交互的统一视觉语言模型",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.24631v1",
+      "route": "202609/28/2609.24631v1-from-semantic-decisions-to-feasible-trajectories-self-evolving-llm-guided-optimal-control-for-narrow-space-parking",
+      "title": "From Semantic Decisions to Feasible Trajectories: Self-Evolving LLM-Guided Optimal Control for Narrow-Space Parking",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "自演化LLM引导的自动驾驶规划",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.26293v2",
+      "route": "202609/28/2609.26293v2-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "形式化智能体何时可信任其学习到的世界模型",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.28064v1",
+      "route": "202609/28/2609.28064v1-slackdrive-reclaiming-runtime-slack-for-adaptive-driving-inference",
+      "title": "SlackDrive: Reclaiming Runtime Slack for Adaptive Driving Inference",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "驾驶世界-动作模型推理加速",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    },
+    {
+      "paper_id": "2609.29175v1",
+      "route": "202609/28/2609.29175v1-a-human-like-pedestrian-model-for-automated-driving-simulations",
+      "title": "A Human-Like Pedestrian Model for Automated Driving Simulations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "自动驾驶仿真的类人行人模型",
+      "first_seen_at": "2026-09-29 00:01:50 UTC",
+      "updated_at": "2026-09-29 00:01:50 UTC"
+    }
+  ]
+}

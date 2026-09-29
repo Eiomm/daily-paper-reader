@@ -1,0 +1,1336 @@
+Title: StarWM: Self-Supervised Trained Attention Routing for Robust World Models
+
+URL Source: https://arxiv.org/pdf/2609.30667v1
+
+Published Time: Mon, 28 Sep 2026 00:32:35 GMT
+
+Number of Pages: 43
+
+Markdown Content:
+Preprint. Accepted by NeurIPS 2026. 
+
+# STAR WM: S ELF -S UPERVISED TRAINED ATTENTION 
+
+# ROUTING FOR ROBUST WORLD MODELS 
+
+Zeqiang Zhang 1, Fabian Wurzberger 1, Maximilian Otte 1, Daniel Schmid 1,Sebastian Gottwald 1, Arne Peter Raulf 2, Daniel Alexander Braun 11Ulm University 2German Aerospace Center (DLR) 
+
+ABSTRACT 
+
+A robust world model must strike the balance between faithfully capturing en-vironmental dynamics and abstracting away from irrelevant content. While reconstruction-based world models ensure faithful supervision, they misallocate representational capacity by pixel area rather than dynamics relevance for visual tasks, which can cause task-irrelevant content to dominate the learned representa-tion. Alternatively, reconstruction-free methods avoid this bias but risk discarding possibly relevant information. We propose S TAR WM, which uses a cross-attention module trained on self-supervised dynamics to decide where reconstruction ap-plies. A dual-stream decoder then restricts reconstruction to the attended regions, with stop-gradient barriers preventing interference between the two objectives. These components allows reconstruction to supervise the visual content of at-tended regions without contaminating the latent with non-predictive information. On DeepMind Control with dynamic video backgrounds, default (reward-free) STAR WM achieves the strongest performance under random-frame distractors and substantially outperforms reconstruction-based baselines under sequential video. In addition, its reward-augmented variant matches or exceeds reconstruction-free methods on sequential video, achieving the highest overall return across all dis-tractor regimes. Mechanistic probing confirms S TAR WM preserves state attributes with near-perfect fidelity through long-horizon imagination while systematically discarding distractors. 
+
+1 INTRODUCTION 
+
+World models in the context of model-based reinforcement learning ideally allow simulating envi-ronmental dynamics in a compact latent space, enabling sample-efficient policy optimization (Ha & Schmidhuber, 2018). Intuitively, a world model should capture environment dynamics with tem-poral coherence over long horizons, remain unaffected by task-irrelevant distractors, and align its representation with the overall objective, if available. Realizing these properties depends on how the representation is learned. Reconstruction-based world models such as DreamerV3 (Hafner et al., 2025) ground their representations through dense pixel reconstruction, but the gradient scales with pixel area rather than dynamical relevance, biasing the encoder toward whatever covers most of the frame (reconstruction bias) (Deng et al., 2022; Fu et al., 2021). Reconstruction-free methods (DreamerPro (Deng et al., 2022), R2-Dreamer (Morihira et al., 2026)) replace reconstruction with auxiliary objectives such as latent consistency, contrastive prediction, or redundancy reduction. Self-supervised signals, such as inverse dynamics (Pathak et al., 2017) and contrastive learning (Laskin et al., 2020; Schwarzer et al., 2021), provide meaningful gradients on action-conditional or temporally predictable regions, but capture only specific aspects of the underlying reality without pixel-level grounding (Rakelly et al., 2021). In the literature there have been multiple attempts to combine the pixel-level grounding of recon-struction with the flexibility of reconstruction-free methods that avoid the reconstruction bias in favor of a priori chosen auxiliary objectives. For example, latent-level decomposition methods (TIA (Fu et al., 2021), DenoisedMDP (Wang et al., 2022), Iso-Dream (Pan et al., 2022)) allocate both reconstruction-based and -free signals to a shared latent representation. But this puts the two signals 1arXiv:2609.30667v1 [cs.CV] 25 Sep 2026 Preprint. Accepted by NeurIPS 2026. 
+
+in constant gradient tension: reconstruction pushes the encoder to preserve all content, while the auxiliary objective pushes specific content into specific subspaces. The resulting allocation depends on carefully balancing these conflicting gradients. We propose S TAR WM ( Self-supervised Trained Attention Routing World Model), which resolves the conflict between the two signals by architectural separation. S TAR WM performs the decomposition on the encoder’s spatial feature map and isolates the supervision sources at the parameter level through attention routing. Our contributions are: • A dual-stream architecture with self-supervised attention routing that separates the where-to-attend decision from the what-to-extract decision. A cross-attention module produces a spatial mask, supervised exclusively by auxiliary objectives, with stop-gradient barriers ensuring that the two supervision sources update disjoint parameter subsets. The dual-stream decoder uses the spatial mask to route relevant content to the latent dynamics model, while the rest is passed to a residual stream that absorbs irrelevant content. • NoisyShape, a diagnostic environment for mechanistic analysis of learned representations under visual distractions, providing controllable, easily interpreted dynamics and randomized video distractors. Ground-truth labels for color, shape, size, and position enable probe analysis of both immediate encoding and long-horizon imagination. • Comprehensive qualitative and quantitative evaluations of S TAR WM’s behavior under visual distractions. With the same hyperparameters, S TAR WM on average outperforms all baselines across distractor setups. On NoisyShape (reward-free), attention-based routing remains effective while alternatives degrade. Probe analysis confirms that S TAR WM retains task-relevant attributes while discarding irrelevant ones, achieving near-perfect temporal coherence over long horizons. Cross-sample image composition directly visualizes the three components’ specialization without any explicit disentanglement objective. 
+
+2 PRELIMINARIES 
+
+Problem Setting. We consider a visual control task where the observation ot ∈ RH×W ×3 is generated from two unobserved state components: a relevant state that the world model should faithfully capture, and an irrelevant state that should be filtered out. What counts as relevant depends on the chosen objective. Given any such objective, our goal is a general world model whose latent dynamics capture the relevant state while remaining uncontaminated by the irrelevant state. 
+
+Reconstruction-Based World Models. Reconstruction-based world models learn a latent dynamics model by training an encoder–decoder architecture to reconstruct observations while predicting forward in latent space. A representative example is DreamerV3 (Hafner et al., 2025), a world model centered on the Recurrent State Space Model (RSSM): Sequence model: ht = fθ (ht−1, z t−1, a t−1), (1) Posterior: zt ∼ qθ (zt | ht, o t), (2) Prior: ˆzt ∼ pθ (ˆ zt | ht), (3) where ht is a deterministic recurrent state and zt a stochastic posterior inferred from the observation. The model is trained by maximizing an Evidence Lower Bound:                                        
+
+> LWM =E
+> h
+> −ln pθ(ot|ht, z t)
+> |{z }
+> Image loss (Limg )
+> −ln pθ(rt|ht, z t)
+> |{z }
+> Reward loss (Lreward )
+> −ln pθ(ct|ht, z t)
+> |{z }
+> Cont. loss (Lcont )
+> +βKL qθ(· | ht, o t)∥pθ(· | ht)|{z }
+> LRSSM KL
+> i
+> .
+
+(4) To learn a policy, DreamerV3 trains an actor-critic agent on latent trajectories imagined by the RSSM. The actor maximizes the critic’s estimated return over rollouts from encoded states. 
+
+3 METHOD : S TAR WM 
+
+STAR WM addresses the reconstruction bias with a minimal modification to existing reconstruction-based world models: only the encoder and decoder are changed, while the latent dynamics model and 2Preprint. Accepted by NeurIPS 2026. Enc  
+
+> Feature X-Attn
+> Predictive
+> Feature
+> Dynamics
+> Model
+> Non-Predictive
+> Feature
+> Spatial
+> Composition
+> Dynamics Stream
+> Residual Stream
+
+// 
+
+//     
+
+> Trained only by self-supervised signals
+> //: Stop Gradient
+> where to attend
+> Dec
+> Reconstruction
+> what to
+> extract
+
+Figure 1: STAR WM disentangles where-to-attend (X-Attn) from what-to-extract (reconstruction 
+
+ˆot). Left: Self-supervised objective signals train a cross-attention module to localize predictable, action-conditional content, while the content of the attended regions is shaped by a reconstruction objective through a dual-stream decoder. Stop-gradient barriers (//) keep the two objectives from interfering. For detailed architecture diagram see Appendix B.1. Right: Interquartile mean (IQM) aggregated across 6 DMC tasks under sequential (VH) and random (VHR) video distractors, nor-malized by DreamerV3 clean performance (recovery ratio). S TAR WM and its variant are the only methods robust to both distractor types. policy learning procedure are inherited unchanged. The modification realizes two design principles, illustrated in Figure 1: (1) Dual-stream routing. A cross-attention module splits the encoder’s spatial features into a dynamics stream (entering the latent dynamics model) and a residual stream (auxiliary reconstruction only, discarded during imagination), preventing the dynamics latent from encoding objective-irrelevant content. (2) Self-supervised location/content separation. Self-supervised signals train the attention to decide where to route, while reconstruction trains the decoder to decide 
+
+what to extract. Stop-gradient barriers keep the two objectives from interfering. Though we instantiate them on DreamerV3, these principles are independent of the specific dynamics backbone. Specifically, instead of applying the RSSM to the raw observations ot, our approach applies it to the attention gated features et. The following subsections detail each component. 3.1 CROSS -A TTENTION SPATIAL ROUTING 
+
+STAR WM intercepts the encoder at an intermediate feature map of shape C × H × W (see Ap-pendix B.1), flattened into L = HW spatial tokens Ft ∈ RL×C . As attention is permutation-invariant, we form keys by adding 2D sinusoidal positional encodings Epos ∈ RL×C (Carion et al., 2020) to enable location-aware attention, and values by appending normalized spatial coordinates 
+
+Ecoord ∈ RL×2 (Locatello et al., 2020; Liu et al., 2018) to preserve explicit positional information for the dynamics model. Specifically, we set Kt = Ft + Epos and Vt = [ Ft; Ecoord ].To track distinct entities or articulated body parts independently, we employ N learnable query vectors Q ∈ RN ×C . The queries attend over these features via scaled dot-product attention: 
+
+At = Softmax 
+
+ (QW Q)( KtWK )⊤
+
+√C
+
+
+
+∈ RN ×L, (5) where WQ, W K ∈ RC×C are learnable projections. Each row of At is a soft spatial probability mask localizing one entity. We use a multi-head implementation in practice (Appendix B.1). Crucially, At routes the visual features into two complementary streams: a dynamics stream of attended entities passed to the RSSM, and a residual stream (handled by an auxiliary VAE) that aids reconstruction but is discarded during imagination. The following sections detail how this attention is trained (§3.2) and decoded (§3.3). 3Preprint. Accepted by NeurIPS 2026. 
+
+3.2 SELF -S UPERVISED LOCATION /C ONTENT SEPARATION 
+
+We train the cross-attention module using self-supervised signals that each instantiate a notion of relevance grounded in environment dynamics. To compute these losses, we extract coordinate-free attention-pooled features eattn  
+
+> t
+
+= flatten( AtFt). Omitting spatial coordinates forces it to localize entities based purely on visual dynamics rather than absolute positions. 
+
+Inverse dynamics. A learnable inverse dynamics mapping (Pathak et al., 2017) ϕinv predicts the action at from consecutive attention-pooled features, trained by optimizing 
+
+Linv = ℓ ϕinv (eattn  
+
+> t
+
+, e attn 
+
+> t+1
+
+), a t
+
+, (6) where ℓ denotes cross-entropy or squared error depending on the action space. This objective guides attention to regions whose visual changes are caused by the agent’s actions, while action-independent content produces no useful gradient. 
+
+Temporal contrastive learning. A learnable projection mapping ϕctr is trained by temporal contrastive learning (Oord et al., 2018; Laskin et al., 2020), pulling consecutive features together and pushing apart random negatives, resulting in the loss 
+
+Lctr = − log σ
+
+ ϕctr (eattn  
+
+> t)⊤ϕctr (eattn
+> t+1 )
+> τ
+
+
+
+− log σ
+
+
+
+− ϕctr (eattn  
+
+> t)⊤ϕctr (˜ eattn )
+> τ
+
+
+
+, (7) where τ a temperature, and ˜eattn a random negative. This guides attention toward temporally pre-dictable content. Together, these signals route attention toward controllable and predictable entities, leaving the rest as irrelevant. While they serve as our default, the cross-attention pathway is agnostic to the choice of signal; for instance, adding reward prediction yields S TAR WM-R, which routes by task-relevance and better tracks passively moving task-relevant entities (see Appendix E.1). 
+
+Gradient isolation. All downstream components access a stop-gradiented copy of the atten-tion map ¯At = sg( At), numerically identical to At but carrying no gradient. The entity tokens 
+
+edyn  
+
+> t
+
+∈ RN ×(C+2) entering the RSSM are computed as edyn  
+
+> t
+
+= ¯AtVt, as the model’s estimate of rel-evant state. Additionally, the dual-stream decoder (§3.3) uses ¯At as the spatial routing mask. The attention parameters {Q, W Q, W K } are trained purely by the self-supervised signals above, while the encoder continues to receive gradients from all three sources: self-supervised losses through At,RSSM losses through Vt, and reconstruction losses through the decoder. 3.3 DUAL -S TREAM DECODER 
+
+With the attention map fixed by the stop-gradient barrier, the decoder composes the two streams into a reconstruction target that allows gradients to shape only entity content without altering the routing. 
+
+Dynamics stream via spatial broadcast. Following the spatial broadcast decoder design (Watters et al., 2019), we first decode the dynamics features into predicted representations ˆet = ϕfg ([ ht; zt]) .We then render each representation back to its attended spatial positions by inverse broadcasting, computing ˆF fg  
+
+> t
+
+= ¯A⊤ 
+
+> t
+
+ˆet with ¯At as the composition mask. This “paints” each attended region back onto its spatial positions. The decoder reads the content entirely from dynamic features, while the attention map specifies only where to draw. This forces the RSSM to retain rich attribute information. 
+
+Residual stream. Parallel to the dynamics stream, the full encoder output Ft is passed through a residual mapping ϕbg producing the background features ˆF bg  
+
+> t
+
+. In our implementation ϕbg uses a Gaussian bottleneck regularized by unit Gaussian prior minimizing βbg Lbg KL similar to a VAE. The stochastic bottleneck prevents the residual stream from encoding the entire scene. Instead, it absorbs objective-irrelevant background details to satisfy the dense reconstruction objective. The background latent is not fed into the RSSM and is discarded during imagination rollouts. The dynamics latent handles only attended content, while the reconstruction of objective-irrelevant content is absorbed by the residual stream. 4Preprint. Accepted by NeurIPS 2026. 
+
+Spatial composition. The aggregate coverage mask Mt = clamp( P 
+
+> n
+
+¯At,n , 0, 1) measures total objective-relevant content presence at each spatial location by summing over the N queries. Because the attention in Eq. 5 is normalized over spatial tokens rather than over queries, individual query maps are not mutually exclusive and can place attention on shared locations; clamping ensures Mt
+
+remains a valid blending weight in [0 , 1] . The two streams are merged at the feature level: 
+
+ˆFt = ˆF fg  
+
+> t
+
+⊙ Mt + ˆF bg  
+
+> t
+
+⊙ (1 − Mt). (8) A shared transposed convolution upsamples ˆFt back into observation space, resulting in the recon-struction loss Limg . Composing at the feature level rather than at pixel level prevents the soft mask from implicitly encoding shape through its spatial extent (Locatello et al., 2020). Combining all components, the overall training objective for S TAR WM is: 
+
+L = Limg + Lreward + Lcont + LRSSM KL 
+
+| {z }
+
+> Dreamer backbone
+
++ λinv Linv + λctr Lctr 
+
+| {z }
+
+> X-Attention guidance
+
++ βbg Lbg KL 
+
+| {z }
+
+> Residual regularization
+
+. (9) 
+
+4 EXPERIMENTS 
+
+Our evaluation tests three claims about S TAR WM’s design: that the latent representation cleanly separates objective-relevant from objective-irrelevant content (§4.1); that this separation translates into policy robustness across distractor types (§4.2); and that the cross-attention routing and self-supervised guidance, together with their gradient isolation, are each necessary for these properties (§4.3). 
+
+Figure 2: Evaluation environments. Left: Deep-Mind Control Suite with three background condi-tions: clean, Video Hard Sequential, and Video Hard Random. Right: NoisyShape: a geometric shape with controllable attributes (shape, color, size) on DAVIS video backgrounds, used for mech-anistic analysis with ground-truth attribute probing; position is randomly re-sampled each step. Arrows denote the four possible actions. 
+
+Baselines and implementation setup. We compare S TAR WM against four baselines repre-senting distinct distraction-handling paradigms: 
+
+DreamerV3 (Hafner et al., 2025), our reconstruction-based backbone; Denoised-MDP (Wang et al., 2022), latent decompo-sition based on controllability and reward-relevance; Iso-Dream++ (Pan et al., 2024), which splits the RSSM into controllable and non-controllable branches via inverse dynamics; and 
+
+R2-Dreamer (Morihira et al., 2026), a concur-rent reconstruction-free approach replacing the pixel decoder with a redundancy-reduction ob-jective. Our evaluation uses two complementary environments: a controlled NoisyShape diag-nostic environment with ground-truth attribute labels for mechanistic analysis, and the Deep-Mind Control Suite with video distractors for policy benchmarking. All methods use identi-cal observation resolutions and training budgets (see Appendix B.3); all results report mean and standard deviation across 3 random seeds. 4.1 LATENT SEPARATION : P ROBE ANALYSIS ON NOISY SHAPE 
+
+We propose NoisyShape as a diagnostic environment for mechanistic analysis of representation learning under controlled distractors (Figure 2; Appendix C.1). For each state, a geometric shape appears across randomly sampled DAVIS (Perazzi et al., 2016) video backgrounds. The environment is constructed around three properties targeting distinct challenges: (i) objective-relevant attributes ,where shape and size are coupled while color cycles independently, all driven by action; (ii) objective-irrelevant noise , including randomly re-sampled spatial positions and random video backgrounds that carry no predictive information; and (iii) a reward-free setup that isolates representation learning from policy optimization. Combined with ground-truth labels for probing, these properties make NoisyShape suitable for two complementary analyses: evaluating baseline representation paradigms, and conducting incremental architectural ablations on the DreamerV3 backbone. 5Preprint. Accepted by NeurIPS 2026. Attention 
+
+> module
+> Dual -
+> stream
+> Self -supervised
+> signal (SS)
+> ü
+> ü
+> üü
+> üü
+> üüü
+
+Figure 3: Latent probe results on NoisyShape. Probe accuracy for objective-relevant attributes (color, shape, size) from H0 (encoding) through H15 (15 steps of imagination), and objective-irrelevant attribute (position MSE) at H0 (H15 omitted as ground-truth position at t+15 is independent of the state at t; higher MSE indicates correct irrelevant treatment); dashed line = chance level. We train probes on the RSSM latent to predict color, shape, and size at two stages: the encoding step (H0) and after 15 steps of open-loop imagination (H15). H0 measures whether the encoder captures objective-relevant attributes from observations; H15 tests whether the dynamics model preserves these attributes in latent space without further visual input. A representation contaminated by irrelevant content typically encodes well at H0 but loses the relevant signal during long-horizon rollouts, since the dynamics model cannot predict irrelevant noise. As NoisyShape is reward-free, our cross-method comparison here is at the level of latent-probe accuracy rather than policy return; policy comparisons are conducted on DMC (§4.2). Full evaluation protocol is in Appendix C.2 and evaluation on the variants of the NoisyShape is in Appendix E.5. 
+
+Objective-relevant attribute retention. Figure 3 shows that S TAR WM achieves near-perfect reten-tion across all relevant attributes through imagination, while every baseline degrades. DreamerV3’s shape retention collapses through imagination, confirming the reconstruction bias; R2-Dreamer degrades already at encoding, since its redundancy-reduction objective lacks signal under random backgrounds; Iso-Dream++’s action-driven separation operates at the latent level and likewise fails to filter irrelevant content; and DenoisedMDP cannot be evaluated here as its decomposition strictly re-quires reward signals. To isolate which architectural component closes this gap, we evaluate ablations of S TAR WM that progressively add self-supervised attention guidance, the dual-stream decoder, and cross-attention routing to the DreamerV3 backbone. Every ablation configuration degrades on at least one attribute, indicating that all three components are necessary for distraction-robust representation learning in this reward-free setting. 
+
+Position as a diagnostic feature. The position attribute provides a test of selective encoding: an ideal dynamics latent should encode position only when it is dynamically predictable. Though position is sampled uniformly at each step, DreamerV3 faithfully encodes position at H0 (near-zero MSE), driven by its dense reconstruction objective. S TAR WM discards most of this information (high MSE), correctly treating the random noise as irrelevant (Fig. 3, right). This filtering is driven by the dual-stream decoder: ablations without it retain position precisely. To rule out that S TAR WM simply drops spatial information regardless of its predictability, we evaluate on a variant where the object follows a predictable trajectory (Appendix E.4). In this variant, S TAR WM successfully retains object’s position through 15 steps of imagination, confirming that the RSSM preserves spatial features when they are dynamically meaningful. 
+
+Cross-sample composition. To directly show how the three architectural components specialize, we decode composite images that mix each component across two source frames (Figure 4). Each substitution cleanly swaps the corresponding visual factor while leaving the others intact, revealing an emergent three-way factorization: the residual stream carries background context, the dynamics stream carries entity content, and the attention map carries spatial location. This factorization arises from the architectural design alone, without any explicit disentanglement objective. 4.2 POLICY PERFORMANCE : DMC UNDER VIDEO DISTRACTORS 
+
+Figure 5 reports per-task evaluation returns on DMC under both video distractor settings, and Figure 1 (right) summarizes cross-condition robustness via IQM aggregated across the six tasks, normalized 6Preprint. Accepted by NeurIPS 2026. (a). Input Image                          
+
+> Input Source X Input Source Y
+> (b). Reconstruction From Single Stream
+> Reconstruction From Only 𝐹 ෠௑௕௚
+> Residual Stream
+> Reconstruction From Only 𝐴̅௒் ⋅ 𝑒̂௒
+> Dynamics Stream (c). Swap
+> Combine 𝐹 ෠ଡ଼ୠ୥ and 𝐴̅௑் ̇ 𝑒̂௒ with 𝐴̅௑
+> Combine 𝐹 ෠ଡ଼ୠ୥ and 𝐴̅௒் ̇ 𝑒̂௒ with 𝐴̅௒
+> Expect: Background X+ Shape Y+ Position XExpect: Background X+ Shape Y+ Position YWhat-to-extract Residual Stream
+> 𝐹 ෠௕௚ : Background
+> Dynamics Stream
+> 𝑒̂ : Geometric Shape
+> Where-to-attend Cross Attention
+> 𝐴̅ : Position
+> Content Location
+
+Figure 4: Cross-sample composition reveals emergent factorization. (a.) Input frames from sources X and Y, with (b.) each stream’s isolated reconstruction beneath. The residual stream renders only background context, while the dynamics stream renders entity content. (c.) Swapping components across X and Y produces controlled outputs: Y’s entity on X’s background, with position determined by whichever attention mask ( ¯AX or ¯AY ) is used. The three components specialize into distinct emergent roles, mapping onto the content and location separation of §3 without any explicit disentanglement objective. 0 1 2 30250 500 750                                 
+
+> VH Return
+> Ball In Cup Catch
+> 01230250 500 750
+> Cartpole Swingup
+> 01230200 400
+> Cheetah Run
+> 01230200 400 600
+> Finger Spin
+> 01230200 400 600
+> Walker Run
+> 01230500 1000
+> Walker Walk
+> 00.5 1Steps (M) 0200 400
+> VHR Return
+> 00.5 1Steps (M) 0200 400 600 00.5 1Steps (M) 0200 400 00.5 1Steps (M) 0200 400 00.5 1Steps (M) 0200 400 600 00.5 1Steps (M) 0250 500 750
+> Orig DreamerV3 R2Dreamer DenoisedMDP IsoDreamer StarWM-R StarWM
+
+Figure 5: DMC learning curves. STAR WM and S TAR WM-R are the only methods that perform strongly under both sequential (VH) and random (VHR) video backgrounds. to DreamerV3 clean performance, yielding a recovery ratio measuring how much of the clean-task return each method retains under distractors. S TAR WM’s additional architectural components do not come at a cost in clean environments, where it matches DreamerV3. Full numerical results, together with aggregate statistics under 95% stratified bootstrap CIs, performance profiles, and pairwise probability-of-improvement heatmaps following Agarwal et al. (2021), are in Appendix D. See Appendix E.3 for hyperparameter sensitivity. 
+
+Figure 6: Learned attention maps on DMC. STAR WM’s cross-attention con-sistently localizes the agent through 4 queries under both clean and distracting settings. Figure 6 visualizes S TAR WM’s attention maps under both clean and distractor (VH) settings: queries lock to the agent’s body parts and do not drift to the visually dominant background. This is direct mechanistic evidence that the routing decision is governed by self-supervised signals rather than reconstruction’s pixel. Appendix F.3 confirms that routing stays stable across matched textures, low-contrast agents, and photorealistic scenes. Under random distractors (VHR), where temporal coher-ence is destroyed, default S TAR WM achieves the strongest performance on 5 of 6 tasks with substantial margins. This demonstrates the robustness of purely self-supervised cross-attention routing under unstructured noise, where baseline representations struggle to isolate the agent. Un-der sequential distractors (VH), R2-Dreamer leads on most tasks, since temporally coherent back-7Preprint. Accepted by NeurIPS 2026. 
+
+grounds align well with redundancy reduction. This same coherence partially co-opts S TAR WM’s contrastive guidance, which rewards any temporally consistent feature and cannot by itself disam-biguate agent from background (Appendix E.3.1); despite this, default S TAR WM remains competitive on high-DOF locomotion (Walker Walk, Cheetah Run), where inverse dynamics provides a strong agent-localizing signal. In this regime where self-supervised signals underdetermine the routing target, the modular attention pathway becomes useful. As our core routing architecture is inherently agnostic to the supervision source, it naturally accommodates the task reward already available in any RL setting. S TAR WM-R adds a reward prediction head that directs the reward gradient to guide the spatial mask, matching or exceeding R2-Dreamer on the tasks where default S TAR WM most strongly underperformed. Across the six tasks, S TAR WM and S TAR WM-R are the only methods that achieve high returns under both VH and VHR (Figure 1, right), and on the combined VH+VHR pool S TAR WM-R attains the highest IQM and lowest optimality gap among all evaluated methods (Appendix D). 4.3 COMPONENT ANALYSIS 0 500 1000 Steps (K) 0200 400 600 800 1000 Eval Return     
+
+> Clean Walker Walk
+> 0500 1000 Steps (K) 0200 400 600 800 Eval Return
+> VHR Walker Walk
+> 1 (SS+RSSM+Recon.) 3 (RSSM) (SS)
+
+Figure 7: Ablation study of sources of the attention signal. Self-supervised guidance and gradient isolation are jointly necessary. 
+
+The source of the attention signal. The cross-attention parameters can be trained by three signals: self-supervised losses, reconstruction gradients through the decoder, and RSSM gradients through the entity tokens. STAR WM (★) uses stop-gradient barriers to leave the self-supervised losses as the sole signal training the attention parameters. We assess whether this combination is necessary by com-paring against two ablations: one ( ✩1) that removes the stop-gradients so all three sources reach the attention, and one ( ✩3) that removes the self-supervised loss and makes RSSM gradients the only signal. On NoisyShape, all three configurations yield near-optimal shape retention: the ob-ject easiest to reconstruct (the geometric shape) coincides with the action-conditional one, so reconstruction-based gradients guide attention to the correct target without further supervision. On DMC with video distractors, this alignment breaks down and self-supervised guidance becomes critical. Figure 7 shows that both ablations collapse under VHR while STAR WM maintains performance; the two design choices are jointly necessary because they together restrict the attention signal to a dynamics-grounded source. Full ablations are in Appendix E.2. 
+
+The role of each self-supervised signal. Decomposing the guidance into its two components, we find that inverse dynamics alone is sufficient for near-optimal attention routing on NoisyShape, while contrastive learning alone fails to localize the foreground. The two differ in what they supervise: inverse dynamics points attention to regions whose visual changes are explained by the agent’s action, an unambiguous target; temporal contrastive learning only requires consecutive features to be more similar than random pairs, which fails to single out the agent from any other temporally smooth region of the scene. This is consistent with Schneider et al. (2021), who find that purely temporal objectives approach supervised quality only under uniform backgrounds. On DMC, contrastive supervision helps under VHR, where the agent is the only temporally coherent feature, but is partially co-opted under VH. Full decomposition is in Appendix E.3.1. 
+
+5 RELATED WORK 
+
+World models and distraction-robust representation learning. Visual world models divide broadly into reconstruction-based approaches (e.g., the Dreamer family (Hafner et al., 2020; 2021; 2025)) and reconstruction-free methods (e.g., TD-MPC (Hansen et al., 2022; 2024)). While recon-struction provides dense visual grounding, it suffers from reconstruction bias toward dominant pixel areas; conversely, reconstruction-free methods eliminate this bias but discard pixel-level ground-ing. S TAR WM bridges this divide by retaining dense reconstruction for content supervision while redirecting capacity away from distractors via self-supervised attention routing. 8Preprint. Accepted by NeurIPS 2026. 
+
+To tackle visual distractions, prior reconstruction-based methods either substitute reconstruction with auxiliary objectives (DreamerPro (Deng et al., 2022), R2-Dreamer (Morihira et al., 2026)) or decom-pose a shared latent space (TIA (Fu et al., 2021), DenoisedMDP (Wang et al., 2022), Iso-Dream (Pan et al., 2022)), but the latter introduces gradient tension across objectives. Spatial approaches localize relevant regions via unsupervised keypoints (Wang et al., 2021), simulator masks (Kim et al., 2025), or SAM-based foundation models (Wang et al., 2023), yet rely on external supervision. SMG (Zhang et al., 2024) uses a dual-branch structure to isolate task-relevant reconstruction, but it is model-free (built on DrQ-v2 (Yarats et al., 2022)) and requires per-task image augmentations. In contrast, STAR WM derives its spatial routing endogenously from environment dynamics, requiring neither external priors nor task-specific augmentations while preserving dense reconstruction for attended content. 
+
+Object-centric learning and cross-attention. Slot Attention (Locatello et al., 2020) finds objects using repeated attention steps guided by image reconstruction, and it rebuilds scenes using spatial broadcast decoding. DETR (Carion et al., 2020) finds objects using learned query vectors in a single attention step. S TAR WM combines this single-step attention with spatial broadcast decoding. In Slot Attention, pixel reconstruction guides the attention weights, which easily leads the model to focus on large or complex backgrounds. In contrast, S TAR WM trains its attention using self-supervised dynamics and blocks all gradients from reconstruction. In addition, using a single attention step makes it easy to add stop-gradient barriers between attention routing and feature extraction, which repeated attention steps cannot do. 
+
+Self-supervised methods for RL. Prior self-supervised RL methods often use inverse dynam-ics (Pathak et al., 2017), contrastive learning (Laskin et al., 2020; Oord et al., 2018), or predictive objectives (Schwarzer et al., 2021) to learn whole-image representations, which drops spatial layout. In contrast, S TAR WM uses these dynamics signals to train a spatial attention module that routes information, while keeping image reconstruction to supervise the visual details of attended parts. The attention gating mechanism is also supervision-agnostic. We default to inverse dynamics and contrastive learning for reward-free applicability, but task-specific signals such as reward prediction (§4.2) can be added. 
+
+6 CONCLUSION 
+
+A central challenge in robust world model learning is the tension between reconstruction-based objectives, which provide pixel-level grounding to the observation space but overemphasize irrelevant detail, and reconstruction-free objectives, which ignore noise but can lose key environment informa-tion. We introduced S TAR WM, which unites the strengths of both approaches. By using learned attention to guide reconstruction only to relevant regions, S TAR WM stops background distractors from entering the latent dynamics model. This prevents the model from wasting capacity on large irrelevant areas, enabling accurate predictions over long horizons. Our default setup uses inverse dynamics and contrastive learning to find controllable and predictable objects without any task re-wards, clearly outperforming reconstruction-based baselines under visual distractions. Moreover, this attention design is modular and can easily include other signals, such as task reward in S TAR WM-R. More broadly, the dual stream decomposition in S TAR WM echoes the classical what-versus-where pathways in visual neuroscience (Mishkin et al., 1983), hinting at the possibility of a more general design principle. 
+
+Limitations. Our experiments focus on single-agent continuous control from images. Settings with multiple agents, non-spatial inputs, or real-world domain shifts remain untested, although preliminary tests (Appendix F.2) show that attention queries can separate across multiple objects. Additionally, the 8×8 attention grid can be too coarse for tiny objects (Appendix F.1). Our default attention signals also have trade-offs: inverse dynamics gives weak guidance for passively moving objects (such as the ball in Ball-in-Cup), static targets under coherent backgrounds (Appendix F.4), or delayed action effects (Appendix F.5), while contrastive learning can be fooled by moving video backgrounds. While adding reward prediction fixes these issues in S TAR WM-R, finding a single self-supervised signal that works in every setting remains an open question (Appendix E.1.1). Finally, keeping an image decoder requires more compute than reconstruction-free methods like R2-Dreamer, though the training cost matches the original DreamerV3 backbone (Appendix B.3). 9Preprint. Accepted by NeurIPS 2026. 
+
+REFERENCES 
+
+Rishabh Agarwal, Max Schwarzer, Pablo Samuel Castro, Aaron Courville, and Marc G Bellemare. Deep reinforcement learning at the edge of the statistical precipice. Advances in Neural Information Processing Systems , 2021. Abdulaziz Almuzairee, Nicklas Hansen, and Henrik I Christensen. A recipe for unbounded data augmentation in visual reinforcement learning. Reinforcement Learning Journal , 1:130–157, 2024. Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-end object detection with transformers. In Andrea Vedaldi, Horst Bischof, Thomas Brox, and Jan-Michael Frahm (eds.), Computer Vision – ECCV 2020 , pp. 213–229, Cham, 2020. Springer International Publishing. ISBN 978-3-030-58452-8. Fei Deng, Ingook Jang, and Sungjin Ahn. DreamerPro: Reconstruction-free model-based reinforce-ment learning with prototypical representations. In Kamalika Chaudhuri, Stefanie Jegelka, Le Song, Csaba Szepesvari, Gang Niu, and Sivan Sabato (eds.), Proceedings of the 39th International Con-ference on Machine Learning , volume 162 of Proceedings of Machine Learning Research , pp. 4956–4975. PMLR, 17–23 Jul 2022. URL https://proceedings.mlr.press/v162/ deng22a.html .Yonathan Efroni, Dylan J Foster, Dipendra Misra, Akshay Krishnamurthy, and John Langford. Sample-efficient reinforcement learning in the presence of exogenous information. In Po-Ling Loh and Maxim Raginsky (eds.), Proceedings of Thirty Fifth Conference on Learning Theory , volume 178 of Proceedings of Machine Learning Research , pp. 5062–5127. PMLR, 02–05 Jul 2022. URL 
+
+https://proceedings.mlr.press/v178/efroni22a.html .Stefano Ferraro, Pietro Mazzaglia, Tim Verbelen, and Bart Dhoedt. Focus: object-centric world models for robotic manipulation. Frontiers in Neurorobotics , Volume 19 - 2025, 2025. ISSN 1662-5218. doi: 10.3389/fnbot.2025.1585386. URL https://www.frontiersin.org/ journals/neurorobotics/articles/10.3389/fnbot.2025.1585386 .Xiang Fu, Ge Yang, Pulkit Agrawal, and Tommi Jaakkola. Learning task informed abstractions. In Marina Meila and Tong Zhang (eds.), Proceedings of the 38th International Conference on Machine Learning , volume 139 of Proceedings of Machine Learning Research , pp. 3480–3491. PMLR, 18–24 Jul 2021. URL https://proceedings.mlr.press/v139/fu21b.html .David Ha and J¨ urgen Schmidhuber. World models. CoRR , abs/1803.10122, 2018. URL http: //arxiv.org/abs/1803.10122 .Danijar Hafner, Timothy Lillicrap, Jimmy Ba, and Mohammad Norouzi. Dream to control: Learning behaviors by latent imagination. In International Conference on Learning Representations , 2020. Danijar Hafner, Timothy P Lillicrap, Mohammad Norouzi, and Jimmy Ba. Mastering atari with discrete world models. In International Conference on Learning Representations , 2021. URL 
+
+https://openreview.net/forum?id=0oabwyZbOu .Danijar Hafner, Jurgis Pasukonis, Jimmy Ba, and Timothy Lillicrap. Mastering diverse control tasks through world models. Nature , 640(8059):647–653, 2025. Nicklas Hansen and Xiaolong Wang. Generalization in reinforcement learning by soft data aug-mentation. In 2021 IEEE International Conference on Robotics and Automation (ICRA) , pp. 13611–13617. IEEE Press, 2021. doi: 10.1109/ICRA48506.2021.9561103. URL https: //doi.org/10.1109/ICRA48506.2021.9561103 .Nicklas Hansen, Hao Su, and Xiaolong Wang. TD-MPC2: Scalable, robust world models for continuous control. In The Twelfth International Conference on Learning Representations , 2024. URL https://openreview.net/forum?id=Oxh5CstDJU .Nicklas A Hansen, Hao Su, and Xiaolong Wang. Temporal difference learning for model predictive control. In Kamalika Chaudhuri, Stefanie Jegelka, Le Song, Csaba Szepesvari, Gang Niu, and Sivan Sabato (eds.), Proceedings of the 39th International Conference on Machine Learning ,volume 162 of Proceedings of Machine Learning Research , pp. 8387–8406. PMLR, 17–23 Jul 2022. URL https://proceedings.mlr.press/v162/hansen22a.html .10 Preprint. Accepted by NeurIPS 2026. 
+
+Kaichen Huang, Shenghua Wan, Minghao Shao, Hai-Hang Sun, Le Gan, Shuai Feng, and De-Chuan Zhan. Leveraging separated world model for exploration in visually dis-tracted environments. In A. Globerson, L. Mackey, D. Belgrave, A. Fan, U. Pa-quet, J. Tomczak, and C. Zhang (eds.), Advances in Neural Information Processing Sys-tems , volume 37, pp. 82350–82374. Curran Associates, Inc., 2024. doi: 10.52202/ 079017-2618. URL https://proceedings.neurips.cc/paper_files/paper/ 2024/file/96189e90e599ccc43f00434ff3ed0312-Paper-Conference.pdf .Kyungmin Kim, JB Lanier, and Roy Fox. Make the pertinent salient: Task-relevant reconstruction for visual control with distractions. Reinforcement Learning Journal , 6:1334–1364, 2025. Michael Laskin, Aravind Srinivas, and Pieter Abbeel. CURL: Contrastive unsupervised repre-sentations for reinforcement learning. In Hal Daum´ e III and Aarti Singh (eds.), Proceed-ings of the 37th International Conference on Machine Learning , volume 119 of Proceed-ings of Machine Learning Research , pp. 5639–5650. PMLR, 13–18 Jul 2020. URL https: //proceedings.mlr.press/v119/laskin20a.html .Rosanne Liu, Joel Lehman, Piero Molino, Felipe Petroski Such, Eric Frank, Alex Sergeev, and Jason Yosinski. An intriguing failing of convolutional neural networks and the coordconv solution. In 
+
+Proceedings of the 32nd International Conference on Neural Information Processing Systems ,NIPS’18, pp. 9628–9639, Red Hook, NY, USA, 2018. Curran Associates Inc. Francesco Locatello, Dirk Weissenborn, Thomas Unterthiner, Aravindh Mahendran, Georg Heigold, Jakob Uszkoreit, Alexey Dosovitskiy, and Thomas Kipf. Object-centric learning with slot attention. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin (eds.), Ad-vances in Neural Information Processing Systems , volume 33, pp. 11525–11538. Curran Asso-ciates, Inc., 2020. URL https://proceedings.neurips.cc/paper_files/paper/ 2020/file/8511df98c02ab60aea1b2356c013bc0f-Paper.pdf .Mortimer Mishkin, Leslie G. Ungerleider, and Kathleen A. Macko. Object vision and spatial vision: two cortical pathways. Trends in Neurosciences , 6:414–417, 1983. ISSN 0166-2236. doi: https://doi.org/10.1016/0166-2236(83)90190-X. URL https://www.sciencedirect. com/science/article/pii/016622368390190X .Naoki Morihira, Amal Nahar, Kartik Bharadwaj, Yasuhiro Kato, Akinobu Hayashi, and Tatsuya Harada. R2-dreamer: Redundancy-reduced world models without decoders or augmentation. In The Fourteenth International Conference on Learning Representations , 2026. URL https: //openreview.net/forum?id=Je2QqXrcQq .Aaron van den Oord, Yazhe Li, and Oriol Vinyals. Representation learning with contrastive predictive coding. arXiv preprint arXiv:1807.03748 , 2018. Minting Pan, Xiangming Zhu, Yunbo Wang, and Xiaokang Yang. Iso-dream: Isolating and leveraging noncontrollable visual dynamics in world models. Advances in neural information processing systems , 35:23178–23191, 2022. Minting Pan, Xiangming Zhu, Yitao Zheng, Yunbo Wang, and Xiaokang Yang. Model-based reinforcement learning with isolated imaginations. IEEE Transactions on Pattern Analysis and Machine Intelligence , 46(5):2788–2803, 2024. doi: 10.1109/TPAMI.2023.3335263. Deepak Pathak, Pulkit Agrawal, Alexei A. Efros, and Trevor Darrell. Curiosity-driven exploration by self-supervised prediction. In Doina Precup and Yee Whye Teh (eds.), Proceedings of the 34th International Conference on Machine Learning , volume 70 of Proceedings of Machine Learning Research , pp. 2778–2787. PMLR, 06–11 Aug 2017. URL https://proceedings.mlr. press/v70/pathak17a.html .F. Perazzi, J. Pont-Tuset, B. McWilliams, L. Van Gool, M. Gross, and A. Sorkine-Hornung. Abenchmark dataset and evaluation methodology for video object segmentation. In 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 724–732, 2016. doi: 10.1109/CVPR.2016.85. 11 Preprint. Accepted by NeurIPS 2026. 
+
+Kate Rakelly, Abhishek Gupta, Carlos Florensa, and Sergey Levine. Which mutual-information rep-resentation learning objectives are sufficient for control? In Proceedings of the 35th International Conference on Neural Information Processing Systems , NIPS ’21, Red Hook, NY, USA, 2021. Curran Associates Inc. ISBN 9781713845393. Felix Schneider, Xia Xu, Markus R. Ernst, Zhengyang Yu, and Jochen Triesch. Contrastive learning through time. In SVRHM 2021 Workshop @ NeurIPS , 2021. URL https://openreview. net/forum?id=HTCRs8taN8 .Max Schwarzer, Ankesh Anand, Rishab Goel, R Devon Hjelm, Aaron Courville, and Philip Bach-man. Data-efficient reinforcement learning with self-predictive representations. In International Conference on Learning Representations , 2021. URL https://openreview.net/forum? id=uCQfPZwRaUu .Gautam Singh, Fei Deng, and Sungjin Ahn. Illiterate DALL-e learns to compose. In International Conference on Learning Representations , 2022. URL https://openreview.net/forum? id=h0OYV0We3oh .Ruixiang Sun, Hongyu Zang, Xin Li, and Riashat Islam. Learning latent dynamic robust representa-tions for world models. In Proceedings of the 41st International Conference on Machine Learning ,ICML’24. JMLR.org, 2024. Saran Tunyasuvunakool, Alistair Muldal, Yotam Doron, Siqi Liu, Steven Bohez, Josh Merel, Tom Erez, Timothy Lillicrap, Nicolas Heess, and Yuval Tassa. dm control: Software and tasks for continuous control. Software Impacts , 6:100022, 2020. ISSN 2665-9638. doi: https://doi. org/10.1016/j.simpa.2020.100022. URL https://www.sciencedirect.com/science/ article/pii/S2665963820300099 .Tongzhou Wang, Simon Du, Antonio Torralba, Phillip Isola, Amy Zhang, and Yuandong Tian. Denoised MDPs: Learning world models better than the world itself. In Kamalika Chaudhuri, Stefanie Jegelka, Le Song, Csaba Szepesvari, Gang Niu, and Sivan Sabato (eds.), Proceedings of the 39th International Conference on Machine Learning , volume 162 of Proceedings of Machine Learning Research , pp. 22591–22612. PMLR, 17–23 Jul 2022. URL https://proceedings. mlr.press/v162/wang22c.html .Xudong Wang, Long Lian, and Stella X. Yu. Unsupervised visual attention and invariance for rein-forcement learning. In 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 6673–6683, 2021. doi: 10.1109/CVPR46437.2021.00661. Ziyu Wang, Yanjie Ze, Yifei Sun, Zhecheng Yuan, and Huazhe Xu. Generalizable visual reinforcement learning with segment anything model. arXiv preprint arXiv:2312.17116 , 2023. Nick Watters, Loic Matthey, Chris P. Burgess, and Alexander Lerchner. Spatial broadcast de-coder: A simple architecture for disentangled representations in VAEs, 2019. URL https: //openreview.net/forum?id=S1x7WjnzdV .Ziyi Wu, Nikita Dvornik, Klaus Greff, Thomas Kipf, and Animesh Garg. Slotformer: Unsupervised visual dynamics simulation with object-centric models. In The Eleventh International Confer-ence on Learning Representations , 2023. URL https://openreview.net/forum?id= TFbwV6I0VLg .Denis Yarats, Rob Fergus, Alessandro Lazaric, and Lerrel Pinto. Mastering visual continuous control: Improved data-augmented reinforcement learning. In International Conference on Learning Representations , 2022. URL https://openreview.net/forum?id=_SJ-_yyes8 .Amy Zhang, Rowan Thomas McAllister, Roberto Calandra, Yarin Gal, and Sergey Levine. Learning invariant representations for reinforcement learning without reconstruction. In International Conference on Learning Representations , 2021. URL https://openreview.net/forum? id=-2FCwDKRREu .Di Zhang, Bowen Lv, Hai Zhang, Feifan Yang, Junqiao Zhao, Hang Yu, Chang Huang, Hongtu Zhou, Chen Ye, and changjun jiang. Focus on what matters: Separated models for visual-based RL generalization. In The Thirty-eighth Annual Conference on Neural Information Processing Systems , 2024. URL https://openreview.net/forum?id=wz2KvvEk44 .12 Preprint. Accepted by NeurIPS 2026. 
+
+# Appendix: Table of Contents 
+
+A Extended Related Work 14 
+
+A.1 Taxonomy of Observation Components . . . . . . . . . . . . . . . . . . . . . . . 14 A.2 Self-Supervised Signals and Their Limitations . . . . . . . . . . . . . . . . . . . . 15 A.3 DreamerV3’s Built-in Noise Handling . . . . . . . . . . . . . . . . . . . . . . . . 15 A.4 Comparison with Object-Centric and Slot-Based Methods . . . . . . . . . . . . . . 16 
+
+B Method & Implementation Details 16 
+
+B.1 Algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 B.2 Hyperparameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 B.3 Implementation of Baseline Algorithms and Compute Resources . . . . . . . . . . 19 
+
+C Environments & Evaluation Protocols 20 
+
+C.1 Shape Environments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 C.2 Probe Analysis Methodology for NoisyShape . . . . . . . . . . . . . . . . . . . . 22 C.3 DeepMind Control Suite Environments . . . . . . . . . . . . . . . . . . . . . . . 23 
+
+D Full results & Aggregate Metrics 23 
+
+D.1 Full results in NoisyShape Environment . . . . . . . . . . . . . . . . . . . . . . . 23 D.2 Full results in DMC Environments . . . . . . . . . . . . . . . . . . . . . . . . . . 24 D.2.1 Per-task results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 D.2.2 Aggregate Statistical Analysis . . . . . . . . . . . . . . . . . . . . . . . . 24 
+
+E Ablation Studies & Core Mechanistic Analysis 25 
+
+E.1 Reward as Additional Attention Routing Signal . . . . . . . . . . . . . . . . . . . 25 E.1.1 Case Analysis: Attention Drift on Cartpole Swingup VH . . . . . . . 27 E.2 Gradient Isolation Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 E.3 Hyperparameter Sensitivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 E.3.1 Decomposition of Self-Supervised Objectives (Inv vs. Ctr) . . . . . . . . . 31 E.3.2 Query count N . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 E.4 Selective Spatial Encoding Analysis . . . . . . . . . . . . . . . . . . . . . . . . . 33 E.5 Progressive Distraction Analysis across NoisyShape Variants . . . . . . . . . . . . 34 
+
+F Stress Testing, Generalization & Boundary Cases 36 
+
+F.1 Spatial Granularity & Small Objects . . . . . . . . . . . . . . . . . . . . . . . . . 36 F.2 Multi-Object Extension: NoisyTwoShape . . . . . . . . . . . . . . . . . . . . . . 36 F.3 Texture, Low Contrast, and Photorealistic Scenes . . . . . . . . . . . . . . . . . . 38 F.4 Passive and Non-Action-Driven Task-Relevant Objects . . . . . . . . . . . . . . . 40 F.5 Delayed Action Effects . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42 13 Preprint. Accepted by NeurIPS 2026. 
+
+A EXTENDED RELATED WORK 
+
+This section provides an in-depth discussion of how S TAR WM relates to and differs from existing methods across several research axes. A.1 TAXONOMY OF OBSERVATION COMPONENTS 
+
+A visual observation in a typical RL environment contains multiple types of information, which can be classified along three orthogonal axes: • Predictable vs. unpredictable. Can the component’s future values be predicted from past states and actions? The agent’s body dynamics are predictable; randomly sampled background textures are not. • Controllable vs. uncontrollable. Is the component’s transition function conditionally dependent on the agent’s action? The agent’s joint angles are controllable; a moving cloud in the background is not. • Task-relevant vs. task-irrelevant. Does the component affect the reward function? The ball’s position in a catching task is task-relevant; wall texture is not. Different prior methods implicitly target different subsets of this taxonomy: • DBC (Zhang et al., 2021): separates task-relevant from task-irrelevant via bisimulation metrics. Requires a meaningful reward signal. • TIA (Fu et al., 2021): separates task-relevant from task-irrelevant via reward-prediction adversarial learning. Brittle under sparse rewards and non-transferable across tasks. • DenoisedMDP (Wang et al., 2022): provides a four-way decomposition based on controlla-bility × reward-relevance via information-theoretic objectives. Operates at the final encoder output without explicit spatial reasoning. • Iso-Dream / Iso-Dream++ (Pan et al., 2022; 2024): separate controllable from noncontrol-lable latent transitions using inverse dynamics, then roll out the two branches separately for behavior learning. Like S TAR WM, uses inverse dynamics as the separation signal, but applies it at the latent level rather than the spatial level. • HRSSM (Sun et al., 2024): combines spatio-temporal cube masking with bisimulation-based similarity to learn compact reward-aware representations, using a hybrid RSSM where a mask branch and an EMA raw branch share history. Operates at the global feature level rather than spatially, and the bisimulation component requires reward signals. • SeeX (Huang et al., 2024): targets unsupervised exploration with a dual-branch world model that mirrors S TAR WM’s relevant/irrelevant split at the architectural level. Separation is driven by an exogenous reconstruction loss that requires s− to reconstruct the full observation, exploiting the prior that task-relevant content occupies a small portion of pixels. Unlike S TAR WM, the two branches operate on entire images without spatial routing, and the policy is learned via intrinsic reward maximization rather than task reward. • ExoRL (Efroni et al., 2022): formally defines the ExoMDP framework, separating en-dogenous (action-affected) from exogenous (action-independent) state factors. It provides theoretical regret guarantees but does not address the pixel-level representation challenges in visual RL. STAR WM differs from these methods on two axes. First, the decomposition operates at spatial resolution through explicit cross-attention, rather than at the latent level as in DenoisedMDP and Iso-Dream/Iso-Dream++. Second, S TAR WM is a framework rather than a fixed objective: any differentiable signal applied to the live attention path trains the routing without interfering with reconstruction, by virtue of the stop-gradient isolation. Our default instantiation combines inverse dynamics (controllability axis) with temporal contrastive learning (predictability axis), neither of which requires reward; when reward is available, it can be added as an additional attention-guidance signal along the task-relevance axis (§E.1). The choice of attention loss thus becomes a modular design decision based on task characteristics, rather than a fixed architectural commitment. 14 Preprint. Accepted by NeurIPS 2026. 
+
+A.2 SELF -S UPERVISED SIGNALS AND THEIR LIMITATIONS 
+
+Self-supervised signals provide an attractive alternative to reward-based supervision because they are derived from the agent’s interaction with the environment without requiring task labels. The most popular such signals fall into three families: state-only contrastive learning (e.g., CURL (Laskin et al., 2020)), forward-dynamics prediction (e.g., SPR (Schwarzer et al., 2021)), and inverse-dynamics prediction (Pathak et al., 2017). Rakelly et al. (2021) analyze these three families theoretically and show that none of them is a reliable representation learner for control alone. State-only contrastive objectives can yield representations that alias states with different optimal actions. Inverse-dynamics objectives can discard task-relevant state information that is not necessary for predicting actions. Forward-dynamics objectives are the most robust of the three, but retain any state information that is temporally correlated. These results motivate S TAR WM’s design. Rather than rely on any single self-supervised objective as the primary representation learner, we use them as attention guidance signals: inverse dynamics steers attention toward action-conditional regions, and contrastive learning provides complementary temporal supervision in transitions where inverse dynamics is silent. The visual content of attended regions is supervised separately by reconstruction through the dual-stream decoder, and stop-gradient isolation prevents reconstruction gradients from corrupting the attention parameters or vice versa. In this way, each signal operates within the regime where its inductive bias is robust, and no single signal carries the full burden of representation learning. A.3 DREAMER V3’ S BUILT -IN NOISE HANDLING 
+
+DreamerV3 already incorporates several features designed to handle stochastic environments: • Dual latent variables. The RSSM maintains both a deterministic recurrent state ht (en-coding history) and a stochastic categorical state zt (capturing single-step uncertainty). In principle, the stochastic component can absorb unpredictable variation, while the determin-istic component tracks persistent dynamics. • KL balancing and free nats. KL balancing prevents posterior collapse by asymmetrically scaling the KL divergence between the posterior and prior. The free nats mechanism sets a minimum KL threshold, allowing the model to maintain a minimum level of stochasticity in 
+
+zt without being penalized. • Symlog scaling. Symlog transformations handle varying signal magnitudes, improving stability across diverse domains. These mechanisms are effective for latent-level noise handling: the stochastic zt can represent uncertainty over globally unpredictable factors, and the prior p(zt|ht) can learn to “ignore” unpre-dictable components whose KL cost exceeds their reconstruction benefit. However, they operate after the encoder has already compressed the full 64 × 64 observation into a single vector. Three core vulnerabilities remain upstream: • The encoder bottleneck. The dense image decoder requires the encoder to faithfully encode all visual content. The RSSM’s noise-handling mechanisms cannot undo this upstream encoding pressure; they can only attempt to filter the already-contaminated latent. • Spatially entangled representations. Without spatial attention, attended and background features are entangled in the same latent vector. The stochastic zt lacks the expressivity to cleanly separate spatially localized entities from distributed background patterns. Even with free nats, the KL budget is shared between genuine action-induced uncertainty and background stochasticity. • Imagination rollouts. During imagination, the world model generates zt from the prior 
+
+p(zt|ht). If the posterior zt was contaminated by background information during encoding, the prior must also model this contamination to match. This leads to hallucinated background dynamics in imagined trajectories, directly degrading policy quality. STAR WM addresses this gap by intervening before the RSSM: the cross-attention module spatially separates attended entities from backgrounds at the feature map level, feeding only objective-relevant 15 Preprint. Accepted by NeurIPS 2026. 
+
+entity features into the RSSM. The dual-stream decoder removes the reconstruction pressure on the RSSM by handling background reconstruction through a separate VAE pathway that is discarded during imagination. The RSSM’s built-in noise handling mechanisms can then focus entirely on the dynamics of endogenous entities, rather than wasting capacity on filtering background contamination. A.4 COMPARISON WITH OBJECT -C ENTRIC AND SLOT -B ASED METHODS 
+
+Object-centric methods. Among object-centric methods, Slot Attention (Locatello et al., 2020) is the most closely related line to S TAR WM in mechanism, sharing the use of attention to extract entity-level representations from spatial feature maps. However, the two approaches differ fundamentally in what trains the attention: 
+
+Slot Attention STAR WM 
+
+Attention supervision Reconstruction Self-supervised Signals Attention refinement Iterative Single-pass Slot competition Softmax over slots Independent softmax per query Gradient from recon. Flows through attention Blocked by stop-gradient For reconstruction-supervised attention, the mechanism is trained to minimize reconstruction error, which is proportional to the number of pixels covered. This incentivizes slots to attend to visually complex, spatially dominant regions, such as the distractor backgrounds that should be ignored. Additionally, Slot Attention’s iterative refinement couples the attention weights to the decoder, making it infeasible to apply a simple stop-gradient fix without breaking the iterative convergence. STAR WM’s self-supervised attention training is immune to this bias: inverse dynamics provides gradients only for action-conditional regions, while the stop-gradient ensures that reconstruction gradients never reach the attention parameters. This makes the attention mechanism robust to arbitrary background complexity without requiring any modification to the loss functions. 
+
+Object-centric world models. The broader landscape of object-centric world models includes both slot-attention-based methods (e.g., SlotFormer (Wu et al., 2023), SLATE (Singh et al., 2022)) and methods relying on external segmentation supervision (e.g., FOCUS (Ferraro et al., 2025), which uses ground-truth masks from simulators or SAM). These methods aim at scene decomposition into discrete objects for prediction or control, typically in environments with well-defined object boundaries. S TAR WM addresses a different regime: distractor robustness in visual control, where the failure mode is the reconstruction trap rather than object decomposition. It is not designed for full multi-object scene parsing; nevertheless, our two-object experiment (Appendix F.2) shows that attention queries spontaneously partition across relevant entities even in this distractor regime, suggesting compatibility with multi-object settings as a future direction. 
+
+B METHOD & I MPLEMENTATION DETAILS 
+
+B.1 ALGORITHM 
+
+Algorithm 1 presents the complete training procedure for one batch. Below we detail implementation choices omitted from the main text for brevity. 
+
+Encoder interception. Standard DreamerV3 compresses a 64 ×64 image through four convolu-tional stages to a 4×4 feature map ( 16 spatial tokens) before the RSSM. S TAR WM intercepts the encoder after its third convolutional stage, retaining an intermediate 8×8 feature map F8 with 128 
+
+channels ( L=64 spatial tokens). A 1×1 convolution projects F8 to C = 256 channels. The fourth stage continues normally to produce F4 (256 channels, 4×4), which is flattened to a 4096 -dimensional vector for the background VAE stream (§3.3). 
+
+Multi-head attention aggregation. The cross-attention module (§3.1) uses H=4 heads with head dimension C/H =64 . Query and key projections WQ, W K operate per-head; attention logits are computed independently per head and are softmaxed. The final attention map At ∈ RN ×L is the 16 Preprint. Accepted by NeurIPS 2026. Encoder   
+
+> Feature
+> Dreamer
+> World Model feat
+> Encoder
+> Feature
+> Dreamer
+> World Model feat
+> Predictive
+> Feature
+> X-Attn
+> Non-predictive
+> Feature
+> Spatial
+> Composition
+
+//  //     
+
+> Encoder
+> X-Attn
+> RSSM
+> (,)
+> (,)
+> Next Step
+> RSSM
+> Inverse Loss
+> Contrastive Loss
+> VAE
+
+//  
+
+> Original DreamerV3 StarWM
+> StarWM in detail
+> : Spatial Composition
+> : Matrix Product
+> //: Stop Gradient
+
+//  
+
+> detach B
+> detach A
+> Decoder Decoder
+> Decoder
+
+Figure 8: STAR WM architecture. Top: comparison with DreamerV3. STAR WM splits the encoder output via cross-attention into an attended stream (entering the RSSM) and a residual stream (auxiliary VAE, discarded during imagination). Bottom: detailed architecture. The cross-attention module (red) extracts entity tokens guided by self-supervised losses; the dual-stream decoder (green) composes attended foreground content with residual background content for reconstruction. Blue components are inherited from DreamerV3. Stop-gradient barriers (//) isolate attention parameters from reconstruction gradients. 17 Preprint. Accepted by NeurIPS 2026. 
+
+Algorithm 1 STAR WM World Model Training (one batch) 
+
+Require: Batch of sequences {(ot, a t, r t, c t)}Tt=1 
+
+1: // Encoder interception 
+
+2: F 8 
+
+> t
+
+← Encoder layers 1-3(ot) ▷ Intermediate 8 ×8 features 
+
+3: Ft ← flatten(Conv 1×1(F 8 
+
+> t
+
+)) ▷ Project to L × C
+
+4: F 4 
+
+> t
+
+← Encoder layer 4(F 8 
+
+> t
+
+) ▷ Full encoder output at 4 ×4
+
+5: 6: // Cross-attention spatial routing 
+
+7: Kt ← Ft + Epos ▷ Keys with positional encoding 
+
+8: Vt ← [Ft; E coord ] ▷ Values with coordinate grid 
+
+9: At ← MultiHeadAttn( Q, K t) ▷ Attention weights ∈ RN ×L
+
+10: eattn  
+
+> t
+
+← flatten( AtFt) ▷ Entity features (live A)
+
+11: 12: // Self-supervised attention training (gradient flows through A)
+
+13: Linv = ℓ ϕinv ([ eattn  
+
+> t
+
+; eattn 
+
+> t+1
+
+]) , a t
+
+
+
+14: Lctr = − log σ
+
+ ϕctr (eattn  
+
+> t)⊤ϕctr (eattn
+> t+1 )
+> τ
+
+
+
+− log σ
+
+
+
+− ϕctr (eattn  
+
+> t)⊤ϕctr (˜ eattn )
+> τ
+
+
+
+15: 16: // Stop-gradient decoupled pathway (gradient blocked at ¯A)
+
+17: ¯At ← sg( At) ▷ Block gradients to attention params 
+
+18: edyn  
+
+> t
+
+← ϕdyn ( ¯AtVt) ▷ RSSM input 
+
+19: feat t ([ht, z t]), ← RSSM ▷ Latent dynamics 
+
+20: LRSSM KL ← RSSM( edyn  
+
+> t
+
+, a t−1) ▷
+
+21: Lreward ← − ln pθ (rt | feat t)
+
+22: Lcont ← − ln pθ (ct | feat t)
+
+23: 24: // Dual-stream decoder 
+
+25: ˆF fg  
+
+> t
+
+← ¯A⊤ 
+
+> t
+
+· ϕfg (feat t) ▷ attended: inverse broadcast 
+
+26: zbg  
+
+> t
+
+∼ qψ (zbg  
+
+> t
+
+| flatten( F 4 
+
+> t
+
+)) ▷ Background: VAE encoding 
+
+27: ˆF bg  
+
+> t
+
+← ϕbg (zbg  
+
+> t
+
+)
+
+28: M ← clamp( P 
+
+> n
+
+¯At,n , 0, 1) ▷ Coverage mask 
+
+29: ˆot ← Decode( ˆF fg  
+
+> t
+
+⊙ M + ˆF bg  
+
+> t
+
+⊙ (1 −M )) 
+
+30: Limg ← ∥ ˆot − ot∥2
+
+31: 32: // Joint optimization (stop-gradient prevents conflicting gradients) 
+
+33: L = Limg + Lreward + Lcont + LRSSM KL 
+
+| {z }
+
+> Dreamer backbone
+
++ λinv Linv + λctr Lctr 
+
+| {z }
+
+> X-Attention guidance
+
++ βbg Lbg KL 
+
+| {z }
+
+> Residual regularization
+
+.
+
+34: Update all parameters with ∇L 
+
+arithmetic mean across heads. Entity tokens are then extracted by applying this averaged map to the unprojected values, i.e. edyn t = ¯At · Vt.
+
+Image loss. STAR WM uses per-pixel MSE loss summed over spatial dimensions, replacing Dream-erV3’s symlog-discretized distribution head for the image decoder. This simplification is sufficient because the dual-stream architecture handles signal magnitude differences between foreground and background through explicit spatial routing rather than output normalization. 
+
+Inverse dynamics for continuous vs. discrete actions. The inverse dynamics loss Linv (Eq. 6) uses cross-entropy for discrete action spaces (NoisyShape, 4 actions) and mean squared error for continuous action spaces (DMC). 
+
+Contrastive negative sampling. The temporal contrastive loss (Eq. 7) uses binary InfoNCE with one positive (the temporally adjacent frame) and one negative (a randomly sampled frame from the same batch). This is computationally lightweight and empirically sufficient given that the primary attention guidance comes from inverse dynamics. 18 Preprint. Accepted by NeurIPS 2026. 
+
+Background VAE KL annealing. The background KL scale βbg is annealed linearly from βinit bg =5.0 to βfinal bg = 0 .5 over the first 15 ,000 training steps. The high initial value encourages the background VAE to produce near-prior samples early in training, preventing it from encoding foreground content before the attention module has learned to localize entities. After annealing, the lower βbg permits the background stream to reconstruct richer background detail without competing with the dynamics pathway. B.2 HYPERPARAMETERS 
+
+Table 1 lists the key hyperparameters of S TAR WM used throughout all experiments. Table 1: Hyperparameters of S TAR WM.                                                                   
+
+> Component Hyperparameter Value
+> Cross-attention Number of queries N4Number of heads H4Head dimension d/H 64 Projected channels d256 Intercept resolution 8×8
+> Positional encoding 2D sinusoidal Background VAE Latent dimension Dbg 128 KL free bits κ1.0 KL scale βbg (final) 0.5 KL scale βbg (initial) 5.0 Anneal steps Tanneal 15,000 Self-supervised Inverse dynamics scale λinv 1.0 Contrastive scale λctr 1.0 Contrastive temperature τ0.1 Projection dimension Dp128 Decoder Upsampling stages 3 ( 8→64 )Channel progression 256 →128 →64 →3
+> Kernel size 4DreamerV3 backbone RSSM deterministic units 512 Discrete latents z32 classes ×32 categories Encoder CNN depth 32 (channels: 32 →64 →128 →256 )RSSM KL scale β0.5 KL free bits 1.0
+
+B.3 IMPLEMENTATION OF BASELINE ALGORITHMS AND COMPUTE RESOURCES 
+
+We compare our method against three representative model-based reinforcement learning baselines: DreamerV3 (Hafner et al., 2025), R2-Dreamer (Morihira et al., 2026), DenoisedMDP (Wang et al., 2022), and Iso-Dream++ (Pan et al., 2024). Original implementation of DreamerV3 is in JAX, and We use the PyTorch reimplementation on GitHub[NM512/dreamerv3-torch]. For other baselines, we use the official open-source implementation and adopt the recommended default hyperparameters. To ensure that all methods are evaluated under identical observation conditions, we make minimal modifications to integrate a unified Video Hard background distractor wrapper, while leaving the underlying agent architecture, optimization procedure, and learning hyperparameters untouched. For dmc tasks, We use the dmc vision configuration as provided in the official codebase for each baseline. All baselines and our method are run within the same conda environment, on a single NVIDIA A100 / H100 GPU per training run. Each training run uses three random seeds; for each task–method combination, the three seeds are packed onto a single GPU and trained concurrently. Training budgets are set to 3M environment steps for the VH variant and 1M environment steps for the VHR variant. Table 2 reports the resulting average GPU-hours per task. The reported wall-clock numbers should be interpreted as approximat as the same GPU model exhibits speed variation depending on cluster load and concurrent jobs, and A100/H100 differ in raw throughput. 19 Preprint. Accepted by NeurIPS 2026. 
+
+Table 2: Average GPU-hours per task on a single NVIDIA H100/A100 (one training run packs 3 random seeds onto the same GPU). Numbers are total wall-clock time to reach the target step budget (1M for Clean and VHR; 3M for VH). Algorithm Clean (1M) VH (3M) VHR (1M) StarWM (ours) 35 94 34 Orig DreamerV3 30 104 37 Iso-Dream++ — 103 37 DenoisedMDP — 37 15 R2-Dreamer — 26 10 STAR WM runs at comparable speed to other reconstruction-based world models (DreamerV3, Iso-Dream++) and is slower than R2-Dreamer, which forgoes the image decoder. This is consistent with our limitations discussion: retaining reconstruction provides visual grounding at the cost of higher per-step compute. The cross-attention and self-supervised auxiliary heads add minor overhead relative to the DreamerV3 backbone S TAR WM builds on. 
+
+C ENVIRONMENTS & E VALUATION PROTOCOLS 
+
+C.1 SHAPE ENVIRONMENTS 
+
+The Shape family of environments provides a controlled and interpretable testbed for analyzing how world models encode and retain objective-relevant attributes under visual distractions. • Shape and Scale: There are four geometric shapes (circle, triangle, square, and pentagon) arranged in a fixed cycle. Each shape appears in one of three sizes: small, medium, or large. When the agent applies the forward shape action, the object increases in size; once it reaches the largest size, it transitions to the next shape in its smallest form. The backward shape 
+
+action reverses this progression. • Color: The object color cycles through red → green → blue → black and vice versa, controlled by the other two discrete actions ( forward color and backward color ). • Position: The spatial location of the object is randomized independently at each time step and does not respond to agent actions. • Noise: Noisy backgounds. The agent’s action space is thus composed of four discrete actions, corresponding to the for-ward/backward transitions of shape and color. 
+
+Shape environment details. The observations in the Shape environment are rendered as images with an initial resolution of 64 × 64 pixels and 3 channels (RGB). The position of the geometric shape in each image is randomized using a uniform distribution, constrained to ensure that the shape is fully contained within the image boundaries. Every shape, whether a circle, triangle, square, or pentagon, uses the same radius value for each size, meaning small, medium, and large mean the same thing across all of them. However, due to their differing geometries, the resulting areas vary across shape types. The mapping between shape type, size, and the corresponding radius and area is summarized in Table 3. 
+
+Features of the environment. The Shape environment contains diverse observational features that differ in predictability and semantic relevance. Noise is entirely stochastic and neither predictable nor reconstructable, acting as irrelevant variation that should ideally be ignored by the representation. Position, though fully reconstructable from the observation, is unpredictable due to random sampling at each step. It is often retained by reconstruction-based methods despite being semantically unin-formative. Shape and size form a coupled, action-dependent dynamic; size changes more rapidly 20 Preprint. Accepted by NeurIPS 2026. 
+
+Figure 9: C.1: Illustration of NoisyShape Environments. 
+
+Table 3: Parameters for shapes. Small, r = 6 .4 Medium, r = 11 .52 Large, r = 16 .64 
+
+Circle S = 129 (3.14% ) S = 417 (10 .18% ) S = 870 (21 .24% )Triangle S = 53 (1.30% ) S = 172 (4.21% ) S = 360 (8.78% )Square S = 82 (2.00% ) S = 265 (6.48% ) S = 554 (13 .52% )Pentagon S = 97 (2.38% ) S = 316 (7.70% ) S = 658 (16 .07% )and triggers shape transitions, making both features highly predictable and essential for modeling controllable structure. However, note that only size information is essential to predict actions between neighbor observations. In contrast, color evolves independently of shape and size. Its small discrete state space and weak temporal continuity make it harder to reliably model using temporal objectives such as contrastive learning. This decomposition illustrates the challenges in disentangling useful dynamics from distractors and guides the design of robust representation objectives. 
+
+Chance level calculation. For categorical attributes, chance accuracy follows directly from the number of classes: 1/4 for color (4 colors), 1/4 for shape (4 shapes), and 1/3 for size (3 sizes). For position, the target object’s normalized coordinates (x, y ) are sampled independently and uni-formly within [m, 1 − m]2, where m is the object-size-dependent margin that prevents the object from extending outside the frame. Since both coordinates are symmetrically distributed around 0.5,the optimal constant predictor (in MSE) is ˆx = ˆ y = 0 .5, and its expected squared error equals the sum of the variances of x and y:
+
+E (x − 0.5) 2 + ( y − 0.5) 2 = 2 · Var( x) = (1 − 2m)2
+
+6 . (10) The margin m is determined by the object’s radius (Table 3): m = r/ 64 ∈ { 0.10 , 0.18 , 0.26 } for small, medium, and large sizes respectively. Since the environment cycles through sizes deterministi-cally with equal long-run frequency 1/3, the chance-level position MSE is 
+
+13
+
+X
+
+> m∈{ 0.10 ,0.18 ,0.26 }
+
+(1 − 2m)2
+
+6 ≈ 0.0711 . (11) We use this value as the dashed chance line in Figure 3. 
+
+Design rationale. The object occupies 2% ∼ 20% of pixels while the background covers 80% ∼
+
+98% , creating a direct test of pixel-area bias. Rewards are uniform random noise, ensuring that no reward signal can guide representation learning. This forces the model to rely entirely on its inductive biases and training objectives for entity identification. 
+
+Variants. We have four background conditions: 21 Preprint. Accepted by NeurIPS 2026. 
+
+• Shape Env (clean): Solid white background. Position is randomized each step. This isolates the dynamics model’s ability to encode shape under minimal distraction. • Shape Env-Fixed (clean, fixed position): shape at a fixed screen position on a plain background. This baseline removes all sources of variation except the objective-relevant attributes (color, shape, size), establishing that DreamerV3 can perfectly encode these attributes when no confounding information competes for representational capacity. • Noisy Shape Env (random noise): Each step independently samples a DAVIS (Perazzi et al., 2016) video frame as the background ( 64 × 64 , drawn from a pool of >10,000 frames). Both position and background are resampled every step, creating maximal stochasticity. • Noisy Shape Sequential Env (sequential noise): Similar to Noisy Shape Env, but the background video frames advance sequentially within each episode (one frame per step from a DAVIS video) rather than being independently sampled. This creates a more realistic but also more challenging distraction pattern: the background has temporal autocorrelation, which may cause the contrastive loss to reward encoding background dynamics. • Noisy Shape Env with Uniform Motion (random noise, positions are predictable): The shape moves in uniform linear motion: at each step, position advances by a fixed velocity vector, reflecting off the image boundaries on contact. Initial position and velocity are sampled once per episode and held constant thereafter. All other attributes (color, shape, size, action space, reward noise) follow the NoisyShape setup. Background frames are sampled from a pool of 20 DAVIS clips and switched independently at each step, providing a clean test of objective-irrelevant signal suppression while position becomes a dynamically predictable attribute. See Appendix E.4 for results and discussion. C.2 PROBE ANALYSIS METHODOLOGY FOR NOISY SHAPE 
+
+The diagnostic probe analysis in §4.1 evaluates how well the RSSM latent state encodes ground-truth environment attributes. We describe the data collection, probe architecture, and training protocol below. 
+
+Data collection. We collect trajectories by running a random policy in the target environment. For each experiment, we gather 500 episodes (each 200 steps) for training the probe classifiers, and a separate set of 200 episodes for evaluating imagined rollouts. Both sets are collected once and cached across all models to ensure fair comparison. Actions are sampled uniformly from the discrete action space (4 actions). 
+
+Feature extraction. For each model, we encode the collected trajectories step-by-step through the frozen world model’s encoder and RSSM. At each timestep, we extract the RSSM feature vector 
+
+feat t = [ ht; zt ] ∈ R1536 (512 deterministic + 32 × 32 stochastic). For S TAR WM, encoding follows the cross-attention pathway: the encoder produces F8, which is projected by the 1×1 convolution, pooled via cross-attention, and passed through proj dyn before entering the RSSM. For imagined evaluation, we additionally perform open-loop imagination from each encoded state: starting from the posterior latent, we apply H=15 consecutive img step calls with random actions, extracting the imagined feature at each horizon. 
+
+Probe architecture. Each probe is a 3-layer MLP: Linear(1536 , 256) → ReLU →
+
+Dropout(0 .2) → Linear(256 , 256) → ReLU → Dropout(0 .2) → Linear(256 , C ), where C
+
+is the number of classes for classification (4 for color, 4 for shape, 3 for size) or 1 for regression (position). 
+
+Training protocol. The dataset is split 70/30 into training and test sets (stratified by label for classification). We train with Adam (learning rate 10 −3, weight decay 10 −4), batch size 512, cross-entropy loss for classification and MSE loss for regression, for up to 100 epochs with early stopping (patience = 10 epochs on validation loss). The best checkpoint by validation loss is restored for final evaluation. Test accuracy (classification) or test MSE (regression) is reported. 
+
+Imagined label computation. Ground-truth labels at imagination horizon h are computed determin-istically from the starting labels and the sequence of imagined actions, following the environment’s 22 Preprint. Accepted by NeurIPS 2026. 
+
+action logic. For NoisyShape environments, actions 0/1 cycle the color backward/forward among 4 options, and actions 2/3 cycle the combined shape-size index backward/forward among 12 options ( 4
+
+shapes × 3 sizes). For NoisyShape with uniform motion, position additionally follows linear motion with elastic boundary reflection, independent of actions; position labels at each horizon are computed by simulating this dynamics forward. C.3 DEEP MIND CONTROL SUITE ENVIRONMENTS 
+
+We evaluate on six continuous control tasks from the DeepMind Control Suite (Tunyasuvunakool et al., 2020), standard in prior distraction-robust RL work (Fu et al., 2021; Wang et al., 2022; Deng et al., 2022): Walker Walk , Walker Run , Cheetah Run , Cartpole Swingup ,
+
+Ball-in-cup Catch , and Finger Spin . All tasks use 64 × 64 RGB observations and action repeat 2. We train for 1M environment steps under Clean and VHR settings, and 3M steps under the VH setting to allow convergence under temporally coherent distractors. 
+
+Clean. Standard DMC rendering with the default background. This serves as a regression test to verify that S TAR WM’s additional modules do not degrade performance when no distractions are present. 
+
+Video Hard Sequential (VH). The background is replaced by a DAVIS (Perazzi et al., 2016) video clip that plays sequentially within each episode: each environment step advances the video by one frame, creating a temporally coherent but uncontrollable background distraction. This setting tests robustness to structured, predictable but action-independent visual dynamics. The temporally coherent background is particularly challenging because methods that exploit temporal consistency (e.g., contrastive learning) may inadvertently attend to the background. Rendering details are described below. 
+
+Video Hard Random (VHR). Same video pool as VH, but each step independently samples a random frame from DAVIS videos, destroying all temporal structure. This creates i.i.d. high-entropy distractions that are unpredictable by the dynamics model. VHR isolates the effect of spatial visual clutter from temporal distractor dynamics: any method that succeeds under VHR must be filtering distractors based on spatial or action-conditional cues rather than temporal prediction. 
+
+Rendering details. Our video background settings are based on the DMControl Generalization Benchmark (Hansen & Wang, 2021; Almuzairee et al., 2024). The original benchmark defines two difficulty levels: video easy , which retains the ground plane and composites the video behind scene geometry, and video hard , which removes the ground plane so that the video covers the entire background. We adopt the video hard setting for both VH and VHR, as the absence of the ground plane prevents the agent from exploiting a fixed texture as a stable spatial reference. We use the DAVIS 2017 training set. For VH, a video is selected uniformly at random at episode start and played from its first frame; if the episode exceeds the video length, the video loops. For VHR, at each step we first sample a video uniformly and then sample a frame uniformly from that video. All methods use the same video sampling sequence within each seed to ensure fair comparison. 
+
+D FULL RESULTS & A GGREGATE METRICS 
+
+This section provides the full numerical results underlying the main text’s figures and tables, including standard deviations across seeds. D.1 FULL RESULTS IN NOISY SHAPE ENVIRONMENT 
+
+Table 4 reports Probe accuracy on the NoisyShape diagnostic environment (§4.1) with standard errors across 3 seeds. 23 Preprint. Accepted by NeurIPS 2026. 
+
+Table 4: D.1: Latent probe accuracy on Noisy Shape. H0 = encoding step; H15 = 15 steps of open-loop imagination. Each ablation isolates one component of S TAR WM. 
+
+H0 (Encoding) H15 (Imagination) Model Color Shape Size Position MSE ↑ Color Shape Size DreamerV3 99.92 ±0.01 69.37 ±2.41 98.92 ±0.93 0.006 ±0.001 99.73 ±0.11 28.95 ±1.65 87.49 ±14.10 
+
++ dual-stream only 100.0 ±0.00 40.01 ±1.13 51.55 ±2.49 0.068 ±0.001 99.98 ±0.00 25.04 ±0.10 33.31 ±0.29 
+
++ SS only 99.97 ±0.01 74.15 ±2.59 99.65 ±0.12 0.006 ±0.000 99.90 ±0.02 29.04 ±1.08 97.69 ±0.92 
+
++ dual-stream + SS 100.0 ±0.00 38.37 ±1.30 50.20 ±2.75 0.069 ±0.000 99.99 ±0.01 24.86 ±0.16 33.28 ±0.29 
+
++ attention only 99.97 ±0.01 92.95 ±1.21 99.92 ±0.02 0.061 ±0.001 99.94 ±0.01 56.22 ±4.35 99.71 ±0.13 
+
+STAR WM 99.99 ±0.00 99.92 ±0.02 100.0 ±0.00 0.066 ±0.004 100.0 ±0.00 99.57 ±0.18 99.99 ±0.01 
+
+R2-Dreamer 97.75 ±1.42 37.46 ±1.36 73.67 ±6.63 0.036 ±0.007 46.20 ±9.72 24.82 ±0.24 33.17 ±0.15 
+
+D.2 FULL RESULTS IN DMC E NVIRONMENTS 
+
+D.2.1 PER -TASK RESULTS 
+
+Table 5 reports full evaluation returns with standard errors across 3 seeds for all DMC tasks and settings. For the Clean setting, we report two DreamerV3 reference values. DreamerV3 (Original Paper) lists the scores reported in Hafner et al. (2025). DreamerV3 (PyTorch) lists the scores obtained by running the widely-used open-source PyTorch reimplementation under identical training budgets. STAR WM is also built on top of this PyTorch codebase. Table 5: D.2.1: DMC evaluation returns. VH: sequential video (3M steps). VHR: random video (1M steps). Best per (task, setting) in bold .
+
+Walker Walk Walker Run Cheetah Run Cartpole Finger Spin Ball-in-cup 
+
+Clean 
+
+DreamerV3 (Original Paper) 966 797 846 843 886 975 DreamerV3 (Pytorch) 954.40 ±3.15 749.93 ±10.64 984.54 ±3.08 840.10 ±31.89 554.74 ±97.56 964.65 ±1.53 
+
+STAR WM 944.06 ±2.57 686.81 ±39.45 762.77 ±54.33 863.66 ±5.62 559.35 ±92.24 948.07 ±9.50 
+
+VH 
+
+DreamerV3 327.39 ±68.25 95.36 ±40.38 73.30 ±8.46 160.13 ±12.17 217.50 ±119.63 118.26 ±23.78 
+
+DenoisedMDP 93.14 ±24.69 39.70 ±2.91 60.93 ±25.55 161.14 ±7.17 53.96 ±36.57 168.34 ±46.43 
+
+Iso-Dream++ 98.16 ±12.49 43.79 ±6.89 28.01 ±14.61 139.92 ±5.77 6.35 ±0.71 15.76 ±4.05 
+
+R2-Dreamer 936.49 ±8.87 471.63 ±39.33 426.69 ±70.67 652.00 ±82.78 600.12 ±50.34 358.53 ±405.18 
+
+STAR WM 904.66 ±33.78 378.60 ±190.65 452.77 ±22.76 308.50 ±10.44 464.76 ±28.24 114.21 ±27.46 
+
+STAR WM-R 856.98 ±98.32 502.63 ±146.12 405.28 ±53.30 770.81 ±52.29 390.72 ±25.92 303.74 ±99.62 
+
+VHR 
+
+DreamerV3 517.48 ±68.05 191.37 ±2.64 147.53 ±0.00 143.89 ±3.23 390.74 ±21.53 23.12 ±11.97 
+
+DenoisedMDP 183.85 ±79.73 90.49 ±20.30 54.64 ±35.79 141.36 ±18.50 44.08 ±60.37 137.53 ±52.80 
+
+Iso-Dream++ 209.89 ±41.89 92.45 ±24.10 56.02 ±53.80 122.07 ±7.67 95.86 ±134.01 52.18 ±38.04 
+
+R2-Dreamer 158.39 ±16.06 56.80 ±4.20 150.12 ±30.88 139.85 ±6.57 97.99 ±17.11 239.40 ±34.30 
+
+STAR WM 851.24 ±51.07 435.41 ±73.46 468.81 ±44.04 562.96 ±50.04 414.15 ±70.40 97.64 ±35.66 
+
+STAR WM-R 872.66 ±23.07 536.26 ±30.91 432.32 ±41.24 650.64 ±102.31 459.80 ±25.19 302.88 ±33.24 
+
+D.2.2 AGGREGATE STATISTICAL ANALYSIS 
+
+To complement the per-task learning curves and tables in Appendices D.2.1, we report aggregate performance using the reliable RL evaluation framework of Agarwal et al. (2021). All scores are normalized by DreamerV3’s clean-environment performance on each task as a recovery ratio, then aggregated across the six DMC tasks and three random seeds (18 runs per method per setting). We report four point estimates, namely Median, Interquartile Mean (IQM), Mean, and Optimality Gap, each with 95% stratified bootstrap confidence intervals (Figure 10a); performance profiles giving the fraction of runs exceeding each score threshold (Figure 10b); and pairwise probability-of-improvement heatmaps P (A > B ) (Figure 10c). We provide each visualization separately for VH, VHR, and the combined VH +VHR pool. 24 Preprint. Accepted by NeurIPS 2026. 
+
+Sequential video (VH). Under temporally coherent backgrounds, R2-Dreamer attains the highest aggregate scores across all four point estimates, with S TAR WM-R second and default S TAR WM third; the remaining baselines (DreamerV3, DenoisedMDP, Iso-Dream++) cluster at low IQM with large optimality gaps. The performance profile shows R2-Dreamer dominating S TAR WM across most score thresholds, while S TAR WM-R closes much of this gap. The pairwise heatmap reflects the same picture: P (STAR WM-R > R2-Dreamer ) = 0 .46 , statistically near the indifference threshold of 0.5, while P (STAR WM > R2-Dreamer ) = 0 .22 . As discussed in §4.2, the temporally coherent backgrounds in VH align well with R2-Dreamer’s redundancy-reduction objective and partially co-opt S TAR WM’s contrastive guidance; reward prediction in S TAR WM-R substantially mitigates this gap. 
+
+Random video (VHR). Destroying the temporal coherence of the background reverses the ranking. STAR WM and S TAR WM-R lead on every aggregate metric, while R2-Dreamer collapses to scores comparable to DreamerV3 and the latent-decomposition baselines. The performance profile shows both S TAR WM variants stochastically dominating all other methods across the full range of τ . The pairwise heatmap confirms strong dominance: P (STAR WM-R > B ) = 1 for every non-S TAR WM baseline B, and P (STAR WM > B ) ≥ 0.85 for every baseline except S TAR WM-R. R2-Dreamer’s redundancy-reduction objective offers little robustness when the temporal structure it relies on is destroyed. 
+
+Cross-condition pool (VH +VHR). Pooling all 36 runs per method gives the cleanest measure of cross-condition robustness, since methods specialized to one distractor type are penalized for failing on the other. S TAR WM-R attains the highest aggregate score on all four point estimates and the lowest optimality gap, and stochastically dominates every baseline in the performance profile. S TAR WM is second on IQM, Mean, and Optimality Gap, behind only S TAR WM-R. R2-Dreamer’s pool-level performance reflects its asymmetry: strong VH offset by weak VHR places it close to DreamerV3 in the IQM and Mean panels. The pairwise heatmap quantifies this: P (STAR WM-R > B ) ≥ 0.73 
+
+for every non-S TAR WM baseline, and P (STAR WM-R > B ) ≥ 0.54 except S TAR WM-R. Together, these pool-level results support the claim made in §4.2 that S TAR WM and S TAR WM-R are the only methods robust across both distractor types. 
+
+E ABLATION STUDIES & C ORE MECHANISTIC ANALYSIS 
+
+E.1 REWARD AS ADDITIONAL ATTENTION ROUTING SIGNAL 
+
+The default S TAR WM configuration uses inverse dynamics and contrastive learning to guide attention. Both signals target action-conditional or temporally predictable features. However, some task-relevant entities are neither directly action-conditional nor temporally distinctive: in Ball-in-cup Catch , the ball moves as a passive consequence of the cup’s motion, and in Cartpole Swingup ,the pole’s angle is reward-critical but only indirectly controlled. Inverse dynamics provides weak gradients for such entities because their visual changes are not directly explained by the agent’s action at a single timestep. To address this, we augment the attention guidance with a reward prediction head that operates on the attention-pooled features eattn  
+
+> t
+
+:
+
+Lattn reward = ∥MLP rwd (eattn  
+
+> t
+
+) − rt∥2, (12) with gradients flowing through the live attention map At into the attention parameters, analogously to the inverse dynamics and contrastive losses. This directly incentivizes attention to cover regions whose visual content is informative of reward. We report the results in the Figure 5 and the Table 5. Reward prediction produces substantial improvements on tasks involving passive objects. On 
+
+Ball-in-cup Catch VHR , the reward-augmented variant improves from 98 to 303, surpassing R2-Dreamer (239). On Cartpole Swingup VH , it improves from 308 to 756, also surpassing R2-Dreamer (652). In both cases, the passive object (ball, pole) is reward-critical but only indirectly action-conditional, and reward prediction provides the attention signal that inverse dynamics alone cannot. 25 Preprint. Accepted by NeurIPS 2026. 0.2 0.4 0.6 0.8 
+
+IsoDreamer DenoisedMDP R2Dreamer Orig DreamerV3 StarWM-R StarWM 
+
+> VH
+
+Median 
+
+0.2 0.4 0.6 0.8 
+
+IQM 
+
+0.2 0.4 0.6 0.8 
+
+Mean 
+
+0.4 0.6 0.8 
+
+Optimality Gap 
+
+0.2 0.4 0.6 
+
+IsoDreamer DenoisedMDP R2Dreamer Orig DreamerV3 StarWM-R StarWM 
+
+> VHR
+
+0.2 0.4 0.6 0.2 0.4 0.6 0.4 0.6 0.8 0.2 0.4 0.6 
+
+Norm. score IsoDreamer DenoisedMDP R2Dreamer Orig DreamerV3 StarWM-R StarWM 
+
+> VH + VHR
+
+0.2 0.4 0.6 
+
+Norm. score 
+
+0.2 0.4 0.6 
+
+Norm. score 
+
+0.4 0.6 0.8 
+
+Norm. score 
+
+(a) Aggregate point estimates with 95% stratified bootstrap confidence intervals. Higher Median/IQM/Mean and lower Optimality Gap indicate stronger performance. Scores are normalized by DreamerV3 clean-environment performance. 0.0 0.5 1.0 Normalized score ( )
+
+0.00 0.25 0.50 0.75 1.00 
+
+> Fraction of runs with score >
+
+VH 
+
+0.0 0.5 1.0 Normalized score ( )
+
+VHR 
+
+0.0 0.5 1.0 Normalized score ( )
+
+VH + VHR 
+
+StarWM StarWM-R Orig DreamerV3 R2Dreamer DenoisedMDP IsoDreamer 
+
+(b) Performance profiles. Each curve plots the fraction of runs achieving normalized score above τ ; curves further to the upper right indicate stronger and more reliable performance. Shaded regions show 95% stratified bootstrap confidence bands. StarWM StarWM-R Orig DreamerV3 R2Dreamer DenoisedMDP IsoDreamer 
+
+vs (B)                               
+
+> StarWM StarWM-R Orig DreamerV3 R2Dreamer DenoisedMDP IsoDreamer
+> Method (A)
+> 0.50 0.35 0.83 0.22 0.85 1.00 0.65 0.50 0.98 0.46 0.98 1.00 0.17 0.02 0.50 0.09 0.70 0.96 0.78 0.54 0.91 0.50 0.89 1.00 0.15 0.02 0.30 0.11 0.50 0.74 0.00 0.00 0.04 0.00 0.26 0.50
+
+VH 
+
+> StarWM StarWM-R Orig DreamerV3 R2Dreamer DenoisedMDP IsoDreamer
+
+vs (B)                               
+
+> 0.50 0.31 0.94 0.85 0.91 0.96 0.69 0.50 1.00 1.00 1.00 1.00 0.06 0.00 0.50 0.70 0.72 0.87 0.15 0.00 0.30 0.50 0.52 0.63 0.09 0.00 0.28 0.48 0.50 0.63 0.04 0.00 0.13 0.37 0.37 0.50
+
+VHR 
+
+> StarWM StarWM-R Orig DreamerV3 R2Dreamer DenoisedMDP IsoDreamer
+
+vs (B)                               
+
+> 0.50 0.33 0.89 0.54 0.88 0.98 0.67 0.50 0.99 0.73 0.99 1.00 0.11 0.01 0.50 0.40 0.71 0.92 0.46 0.27 0.60 0.50 0.70 0.81 0.12 0.01 0.29 0.30 0.50 0.69 0.02 0.00 0.08 0.19 0.31 0.50
+
+VH + VHR 
+
+0.0 0.2 0.4 0.6 0.8 1.0 P(A > B) 
+
+(c) Pairwise probability of improvement P (A > B ), computed as the fraction of (run-of-A, run-of-B) pairs in which A achieves a strictly higher score. Values above 0.5 indicate A is more likely to outperform B on a randomly drawn pair of runs. 
+
+Figure 10: D.2.2: Aggregate statistical analysis on DMC under video distractors, following Agar-wal et al. (2021). Each row reports VH, VHR, and the combined VH +VHR pool, computed over six DMC tasks and three random seeds (18 runs per method per setting; 36 in the pool). 26 Preprint. Accepted by NeurIPS 2026. StarWM StarWM -R 
+
+Figure 11: E.1.1: Default S TAR WM’s attention drifts on Cartpole VH; reward prediction recovers it. Each row shows the input observation followed by the attention maps for the four queries. Default S TAR WM (top right) concentrates attention near the track endpoints without query specialization. STAR WM-R (bottom right) localizes the cart and pole accurately, with queries specializing to distinct object regions. These results demonstrate that S TAR WM’s architecture is agnostic to the specific attention loss: the gradient isolation mechanism ensures that any differentiable signal applied to the live attention path trains the routing without interfering with reconstruction. Reward prediction is one instance of a domain-specific signal that can be composed with or substituted for the default self-supervised objectives. The choice of attention loss thus becomes a modular design decision, selectable based on task characteristics: inverse dynamics for directly controlled entities, contrastive learning for temporally coherent entities, and reward prediction for passively task-relevant entities. E.1.1 CASE ANALYSIS : A TTENTION DRIFT ON CA R T P O L E SW I N G U P VH Cartpole Swingup VH is the task where S TAR WM most strongly underperforms S TAR WM-R. Figure 11 visualizes attention maps for default S TAR WM and S TAR WM-R on Cartpole Swingup VH . Default S TAR WM’s four queries concentrate near the left and right endpoints of the track rather than on the cart itself, and exhibit little specialization across queries. S TAR WM-R locates the cart and pole accurately, with queries specializing to distinct object regions. Several factors plausibly contribute to this failure: the small size of the cart-and-pole assembly relative to the 8 × 8 attention resolution, the temporal coherence of the sequential video background that competes with the cart for the contrastive objective’s attention, and the lack of corrective signal from inverse dynamics in this configuration. When self-supervised proxies (controllability, temporal coherence) do not point unambiguously at the task-relevant object, attention can drift to other plausible regions. This pattern motivates the reward-augmented variant S TAR WM-R (Appendix E.1): when self-supervised signals underdetermine the routing target, reward provides a direct task-relevance signal that breaks the ambiguity. The same mechanism explains the Ball-in-cup improvement, where the passive ball is weakly supervised by inverse dynamics until reward fills the gap. Practitioners can consider adding reward prediction whenever the default configuration’s attention maps appear to drift or fail to specialize on a particular task. E.2 GRADIENT ISOLATION ANALYSIS 
+
+The stop-gradient operator in S TAR WM serves two roles: blocking reconstruction gradients from the decoder pathway ( detach B : ¯At used in inverse broadcasting and spatial composition) and blocking RSSM gradients from the dynamics pathway ( detach A : ¯At used in computing entity tokens edyn t ); see Figure 8 for where we apply detach. We evaluate configurations that remove these independently, with and without self-supervised attention guidance (SS), across environments of different distractor characteristics. The five configurations and the signals reaching the attention parameters in each are summarized in Table 6. 
+
+All configurations succeed on NoisyShape. We first evaluate all five configurations in Table 6 on NoisyShape. Figure 12 shows that shape, color, and size retention at H15 remain near optimal across 27 Preprint. Accepted by NeurIPS 2026. 
+
+Table 6: E.2: Configurations evaluated in the gradient isolation analysis. Each row indicates which gradient pathways reach the attention parameters. detach A blocks RSSM gradients (via ¯At
+
+in entity tokens); detach B blocks reconstruction gradients (via ¯At in the dual-stream decoder); SS denotes self-supervised attention guidance (inverse dynamics + contrastive). A check mark indicates the gradient or signal reaches the attention parameters. 
+
+Symbol Configuration SS RSSM grad. Recon. grad. 
+
+★ STAR WM (full) ✓ — —
+
+✩1 no detach A/B, with SS ✓ ✓ ✓
+
+✩2 no detach A/B, no SS — ✓ ✓
+
+✩3 only detach B, no SS — ✓ —
+
+✩4 only detach B, with SS ✓ ✓ —0 5 10 15 Imagination Horizon 0.96 0.97 0.98 0.99 1.00 Accuracy           
+
+> Color
+> 0510 15 Imagination Horizon
+> Shape
+> 0510 15 Imagination Horizon
+> Size
+> 0.050 0.055 0.060 0.065 0.070 0.075 MSE
+> 0.071 0.072 0.070 0.067 0.066
+> Position (H0)
+> 1 (SS+RSSM+Recon.) 2 (RSSM+Recon.) 3 (RSSM) 4 (SS+RSSM) (SS)
+
+Figure 12: E.2: Probe accuracy on NoisyShape under five gradient isolation configurations. 
+
+NoisyShape probe accuracy is invariant to gradient isolation choice. all configurations: whether attention is trained by self-supervised signals alone, by reconstruction and RSSM gradients alone, or by any combination, the resulting attention reliably localizes the foreground shape. This invariance is consistent with the analysis in §4.3: in NoisyShape, the easiest object to reconstruct (a geometric shape on a stochastic background) through RSSM pathway coincides with the action-conditional and temporally predictable object, so reconstruction gradients and self-supervised signals push attention toward the same target. The architecture’s structural capacity for spatial routing is sufficient on its own; gradient isolation does not become necessary until reconstruction gradients and self-supervised signals start to disagree. 
+
+Detach B is critical under visual distractors. On DMC with video backgrounds, the alignment between reconstruction gradients and self-supervised signals breaks down: the visually dominant region (the video background) is no longer the same as the action-conditional region (the agent body). We evaluate three configurations from Table 6 that test the necessity of each component: ★: full STAR WM (SS as the sole attention signal), ✩1: “no detach A/B with SS” (SS competing with both RSSM and reconstruction gradients on the attention path), and ✩3: “only detach B, no SS” (RSSM gradient as the sole attention signal). Table 7 reports evaluation returns on Walker Walk and Cheetah Run under Clean and VHR settings. Removing detach B (no detach A/B with SS; ✩1) causes substantial degradation under VHR despite the presence of self-supervised signals. With reconstruction gradients reaching the attention parame-ters, the dense pixel loss pushes attention toward spatial coverage that minimizes reconstruction error, dragging attention toward the visually dominant background. SS gradients alone cannot counter this pull when reconstruction gradients are not blocked. Removing SS while keeping detach B (only detach B, no SS; ✩3) also fails under VHR. Without explicit dynamics-grounded guidance, RSSM gradients are the sole attention signal; while RSSM does favor predictable features, this preference alone cannot reliably distinguish a controllable foreground from a temporally coherent background when both are reconstructable. Notably, this configuration performs comparably to or even better than full S TAR WM on Clean environments, where there is no background distractor to disambiguate, and adding SS introduces minor optimization overhead. Under distractors, however, the SS guidance becomes essential. 28 Preprint. Accepted by NeurIPS 2026. 
+
+Table 7: E.2: Gradient isolation ablation on DMC. Episode return (mean over 3 seeds) for Walker Walk and Cheetah Run under Clean and VHR settings. Configurations are defined in Table 6. Best per column in bold. 
+
+Walker Walk Cheetah Run Symbol Configuration Clean VHR Clean VHR 
+
+★ STAR WM (full) 952.37 ±3.06 872.94 ±50.99 752.37 ±34.84 466.03 ±53.00 
+
+✩1 no detach A/B, with SS 810.66 ±157.94 181.08 ±17.72 641.66 ±52.40 181.75 ±31.91 
+
+✩3 only detach B, no SS 943.42 ±18.18 135.02 ±20.74 880.96 ±6.10 199.37 ±94.74 0 500 1000 Steps (K) 0200 400 600 800 1000 Eval Return         
+
+> Clean Walker Walk
+> 0500 1000 Steps (K) 0200 400 600 800 Eval Return
+> Clean Cheetah Run
+> 0500 1000 Steps (K) 0200 400 600 800 Eval Return
+> VHR Walker Walk
+> 0500 1000 Steps (K) 0100 200 300 400 500 Eval Return
+> VHR Cheetah Run
+> 1 (SS+RSSM+Recon.) 3 (RSSM) (SS)
+
+Figure 13: E.2: Learning curves for the gradient isolation ablation on DMC. Episode return over training for the three configurations of Table 7. Removing detach B causes attention to be co-opted by reconstruction gradients; removing SS leaves RSSM gradients as the only attention signal, insufficient to disambiguate foreground from background under video distractors. Full S TAR WM combines detach B with SS guidance. The two failure modes together establish that detach B and SS are jointly necessary, not redundant: detach B prevents reconstruction from co-opting the attention parameters, and SS provides the dynamics-grounded signal that correctly steers them. The cross-attention architecture provides the structural capacity for spatial routing, but the choice of what routes the attention requires both elements together when reconstruction and attention objectives compete. 
+
+Attention maps reveal the mechanism. To directly observe how each gradient pathway shapes attention behavior, we visualize the learned attention maps and quantify them via two statistics: the entropy of the attention distribution (lower = sharper) and the maximum attention weight (higher = more localized). Figure 14 shows attention maps for the four learned queries on Walker Walk, and Table 8 reports the corresponding quantitative statistics for Q0 on Cheetah Run. 
+
+✩1 (no detach A/B with SS) produces nearly uniform attention. When all three gradient pathways (SS, RSSM, reconstruction) reach the attention parameters simultaneously, the dense pixel loss dominates: it pulls attention toward broad spatial coverage, defeating the routing mechanism entirely. Queries lose specialization, and the architecture’s spatial bottleneck is bypassed. 
+
+✩3 (Only detach B, no SS) produces moderately structured attention. RSSM gradients alone favor temporally predictable regions, but this signal is too weak to specialize the four queries: under video distractors, only one of the four queries reliably localizes the agent, while the remaining three drift across various background regions. RSSM gradients identify some predictable region but cannot disambiguate among the multiple predictable regions present in a structured-video scene. On Clean Cheetah, though attention is even less focused, all of queries localize on the agent. This explains why this configuration’s Clean Cheetah return exceeds S TAR WM. When there is nothing to filter, defocused attention loses no information and may benefit from broader feature coverage. 
+
+Full STAR WM produces sharply focused attention. The attention sharpness on Clean and VHR is nearly identical, indicating that SS guidance with stop-gradient isolation produces a routing decision that is independent of the visual complexity of the background. Equally important, three of the four queries reliably specialize to distinct agent body regions under video distractors, with only one query 29 Preprint. Accepted by NeurIPS 2026. ✩1 (SS+RSSM+Recon .) ✩3 (RSSM) ★ StarWM (SS) 
+
+Figure 14: E.2: Gradient isolation determines attention focus on DMC. Attention maps from the four learned queries on Walker Walk under VHR, comparing the three configurations of Table 7. Top row: input observation. Rows 2–5: attention map for each of the four queries. Left ( ✩1: SS+RSSM+Recon., no detach): attention collapses to a nearly uniform distribution. Middle ( ✩3: RSSM only, detach B without SS): attention shows weak focus (1/4 queries specializing to agent body in VH). Right ( ★ STAR WM: SS with detach A/B): attention is sharply localized on the agent’s body parts (3/4 queries specializing to agent body in VH). Table 8: E.2: Attention map statistics under three gradient isolation configurations on Cheetah Run. Average entropy and maximum attention weight of query Q0, computed over evaluation trajectories. Lower entropy and higher max weight indicate sharper, more focused attention. The maximum possible entropy is log(64) ≈ 4.16 (uniform over the 64 spatial tokens), and the uniform floor for max attention is 1/64 ≈ 0.016 .
+
+Clean VHR Symbol Configuration Entropy ↓ Max ↑ Entropy ↓ Max ↑
+
+★ STAR WM (full) 0.14 0.92 0.15 0.94 
+
+✩1 no detach A/B, with SS 3.90 0.04 4.15 0.02 
+
+✩3 only detach B, no SS 3.12 0.14 1.27 0.52 attending to the background. Compared to 1:3 under RSSM-only guidance, this directly reflects the role of self-supervised signals. E.3 HYPERPARAMETER SENSITIVITY 
+
+Default configuration. All hyperparameters remain fixed across every evaluated DMC task and distractor regime without per-task tuning. We set self-supervised loss weights to λinv = λctr = 1 .0
+
+with temperature τ = 0 .1, and apply a fixed βbg annealing schedule across all experiments. The sweeps reported below evaluate stability under post-hoc variations rather than serving as a parameter search. 
+
+Loss weights and KL schedule perturbations. We evaluate single-parameter perturbations on Walker Walk VHR at 1M steps across 3 seeds. 30 Preprint. Accepted by NeurIPS 2026. 
+
+Table 9: E.3: One-at-a-time hyperparameter perturbations (S TAR WM, Walker Walk VHR, matched 1M steps, mean ± SE, 3 seeds). 
+
+Perturbation Return @ 1M 
+
+λinv = 0 .3 (3× reduction) 925 ±1
+
+βbg : annealing removed entirely 918 ±12 
+
+λinv = 3 .0 (3× increase) 856 ±34 
+
+βfinal bg = 2 .0 (4× increase) 787 ±77 0 5 10 15 Imagination Horizon 0.2 0.4 0.6 0.8 1.0 Accuracy           
+
+> Color
+> 0510 15 Imagination Horizon
+> Shape
+> 0510 15 Imagination Horizon
+> Size
+> 0.060 0.065 0.070 0.075 MSE
+> 0.066 0.070 0.065
+> Position (H0)
+> StarWM (inv + InfoNCE) inv only InfoNCE only chance
+
+Figure 15: E.3.1: Inverse dynamics is the primary attention signal. Probe accuracy on the RSSM latent for full S TAR WM (inverse + contrastive), inverse-only, and contrastive-only variants on NoisyShape. Inverse dynamics alone is sufficient for near-perfect attribute retention; contrastive alone fails to localize the foreground. Across all variations, performance remains solid between 787 and 925 (Table 9). Removing βbg 
+
+annealing entirely yields 918, showing that training does not depend strictly on schedule design. Higher penalties ( λinv = 3 .0 and βfinal bg = 2 .0) slow convergence speed within the 1M budget, but all configurations remain functional without diverging. E.3.1 DECOMPOSITION OF SELF -S UPERVISED OBJECTIVES (I NV VS . C TR )STAR WM’s default attention guidance combines inverse dynamics and contrastive learning. While Appendix E.2 established that gradient isolation and self-supervised guidance are jointly necessary, this section asks a finer question: how do the two self-supervised signals divide the work? We characterize each signal’s contribution on NoisyShape and across DMC, and identify a regime where contrastive learning introduces a partial conflict. On NoisyShape, we ablate the two attention guidance signals independently: inverse dynamics alone, contrastive alone, and the full combination. Figure 15 reports probe accuracy on the RSSM latent. Full S TAR WM and the inverse-dynamics-only variant achieve indistinguishable performance across all attribute probes (color, shape, size at H15 ), while the contrastive-only variant fails to guide attention toward the foreground: shape and size retention degrades through imagination. This contrast reveals the qualitative difference between the two signals. Inverse dynamics provides direct supervision: the gradient points to regions whose visual changes are explained by the agent’s action, an unambiguous target. Temporal contrastive learning provides only indirect supervision: it rewards features that are temporally consistent. In a randomized-background environment like NoisyShape, this indirect signal is too weak to specify the correct target. On DMC, we explore whether the contrastive signal is indeed helpful. Figure 16 compares full STAR WM with the inverse-only variant across Clean, VH, and VHR settings. Under VHR, contrastive learning is clearly beneficial: removing it substantially degrades performance. With independently sampled background frames at every step, the only feature with reliable temporal coherence is the agent itself. Contrastive learning exploits exactly this signal, providing dense temporal supervision in transitions where the agent’s action is small or nearly action-independent (and thus where inverse dynamics gradient is weak). The two signals act complementarily: inverse dynamics identifies controllable regions, contrastive identifies temporally coherent regions, and under VHR these two sets coincide on the agent. 31 Preprint. Accepted by NeurIPS 2026. 0 250 500 750 1000 0200 400 600 800                               
+
+> Clean Return
+> Cartpole Swingup
+> 0250 500 750 1000 0200 400 600 800
+> Cheetah Run
+> 0250 500 750 1000 0200 400 600
+> Walker Run
+> 01000 2000 3000
+> Steps (K)
+> 0100 200 300 400
+> Video Hard (VH) Return
+> 01000 2000 3000
+> Steps (K)
+> 0100 200 300 400 500 01000 2000 3000
+> Steps (K)
+> 0100 200 300 400 500 600 0250 500 750 1000 0100 200 300 400 500 600
+> Video Hard Random (VHR) Return
+> 0250 500 750 1000 0100 200 300 400 500 0250 500 750 1000 0100 200 300 400 500
+> StarWM StarWM noNCE
+
+Figure 16: E.3.1: Episode return for full S TAR WM (inverse + contrastive) versus inverse-only across Clean, VH (sequential video), and VHR (random video). Contrastive supervision is essential under VHR, neutral under Clean and under VH. Under Clean and VH, the two configurations perform comparably.The inverse-only variant is even slightly better than full S TAR WM under VH. This is the regime where contrastive learning introduces a partial signal conflict: video frames played sequentially produce a temporally coherent background, satisfying the contrastive objective just as well as the agent does. Contrastive gradients then split ambiguously between agent and background, slightly diluting the otherwise correct routing established by inverse dynamics. 
+
+The fundamental tension: predictability without task information. The VH result reflects an epistemic limitation that is not specific to contrastive learning, but inherent to the self-supervised setting itself. When a background is temporally predictable, it is genuinely ambiguous whether the agent should encode it. In a task where reward depends on a moving landmark, the predictable background is task-relevant and should be retained; in a task where the agent must navigate around a distractor that happens to move predictably, it should be filtered. The agent has no way to tell these cases apart from self-supervised observation alone. The weight of contrastive learning therefore encodes a prior held by the designer rather than a fact recoverable from the environment. A high weight reflects a prior that predictable structure should be preserved; a low weight reflects a prior that it should be filtered. This is a structural feature of self-supervision rather than a defect of the contrastive objective. Resolving it requires information beyond observation dynamics, such as a reward signal. We discuss in Appendix E.1 how reward prediction can be added as an additional attention-guidance signal that breaks the ambiguity. E.3.2 QUERY COUNT N .We evaluate the number of routing queries N ∈ { 1, 2, 4, 8} on three DMC tasks under Video Hard Sequential (VH) distractors at 3M steps (Table 10 and Figure 17). 32 Preprint. Accepted by NeurIPS 2026. 
+
+Table 10: E.3: Effect of query count N on DMC VH (episode return at 3M steps, mean ± SE, 3 seeds). 
+
+N Walker Walk Cheetah Run Cartpole Swingup 1 170.48 ±24.59 181.22 ±63.81 191.54 ±6.46 
+
+2 928.73 ±34.39 461.71 ±15.09 268.62 ±60.34 
+
+4 902.31 ±37.20 452.77 ±22.76 308.00 ±12.04 
+
+8 585.14 ±72.84 387.97 ±78.67 394.90 ±98.07 0 500 1000 1500 2000 2500 3000                
+
+> Steps (K)
+> 0200 400 600 800 1000
+> Train Return
+> Walker Walk
+> 0500 1000 1500 2000 2500 3000
+> Steps (K)
+> 0100 200 300 400 500
+> Cheetah Run
+> 0500 1000 1500 2000 2500 3000
+> Steps (K)
+> 0100 200 300 400 500
+> Cartpole Swingup
+> N=1 N=2 N=4 [main] N=8
+
+Figure 17: E.3: Return curves across varying query counts N on DMC VH (mean ± SE, 3 seeds). A single query ( N =1 ) underperforms across all tasks because a single attention mask cannot resolve distinct parts of an articulated body simultaneously. Increasing to N =2 and N =4 provides sufficient expressive capacity, achieving strong returns across tasks. Setting N =8 improves Cartpole Swingup but adds variance on Walker Walk. We use N =4 as a balanced default across all benchmarks. E.4 SELECTIVE SPATIAL ENCODING ANALYSIS 
+
+The main NoisyShape experiments (Figure 3 and Table 4) randomize position independently at each step, making it a purely non-predictable attribute that an ideal world model should discard. A natural concern is whether S TAR WM’s low position probe accuracy (MSE = 0 .066 , near chance) reflects a correct identification of position as an irrelevant feature, or an architectural inability to encode spatial information at all. To disambiguate, we construct a variant in which position follows a deterministic trajectory and evaluate whether S TAR WM’s latent correctly encodes position in this setting. The results are shown in Figure 18 and Table 11. 
+
+Probing protocol. We follow the same probe protocol as Appendix C.2, extended with two additional probes: position (regression, MSE) and background ID (20-way classification, chance 
+
+= 0 .05 ). All numbers are mean ± standard error across 3 seeds. 
+
+STAR WM encodes predictable position. In contrast to the random-position setting where STAR WM retains position only coarsely (MSE ≈ 0.066 , near chance), under predictable motion STAR WM’s position MSE drops by two orders of magnitude to ∼ 0.0008 at encoding and remains well below chance after 15 imagination steps. This confirms that the architecture does not blindly discard spatial information: when position is dynamically predictable, it is preserved by the RSSM latent. The slight gap to DreamerV3 at H15 reflects a reasonable trade-off, as S TAR WM routes spatial information through a bottleneck of N = 4 attention queries rather than a dense feature map, introducing mild quantization at the price of filtering objective-irrelevant content. 
+
+Background ID separates the two methods cleanly. The background ID probe provides a direct readout of objective-irrelevant contamination. DreamerV3’s latent classifies the background with 
+
+82 .4% accuracy over 20 classes, confirming that its dense reconstruction objective forces the en-coder to preserve background identity even when the background carries no predictive information. STAR WM’s latent achieves 5.0% (exactly chance level), demonstrating that the dual-stream archi-tecture successfully routes background content to the auxiliary VAE stream. This holds regardless 33 Preprint. Accepted by NeurIPS 2026. 
+
+Figure 18: E.4: Latent space probing under predictable object motion. Left: Position MSE across a 15-step imagination horizon. When position follows a deterministic trajectory, S TAR WM successfully tracks and rolls out spatial coordinates well below chance level. Right: Background identification accuracy at the encoding step (H0). DreamerV3 suffers from severe objective-irrelevant contamination, while S TAR WM perfectly drops background identity. Table 11: E.4: Probe accuracy under predictable position. Position follows uniform linear motion with boundary reflection. Background ID is a 20-way classification over DAVIS clips. H0 = encoding; H15 = 15 steps of open-loop imagination. 
+
+Stage Model Color Shape Size Position MSE BG ID ↓
+
+H0 (Encoding) DreamerV3 100.00 ±0.00 99.70 ±0.03 99.96 ±0.04 0.0003 ±0.0002 82.44 ±2.07 
+
+STAR WM 100.00 ±0.00 99.88 ±0.06 99.99 ±0.01 0.0008 ±0.0002 5.02 ±0.17 
+
+H15 (Imagination) DreamerV3 99.98 ±0.03 97.46 ±1.56 99.99 ±0.00 0.0034 ±0.0002 —STAR WM 100.00 ±0.00 99.71 ±0.18 99.99 ±0.01 0.0150 ±0.0046 —Chance level 25.00 25.00 33.33 0.0711 5.00 
+
+of position predictability, indicating that S TAR WM’s filtering is driven by the architectural routing rather than by the motion pattern of the specific entity. 
+
+Summary. The two NoisyShape variants together establish the correct dual behavior: S TAR WM discards position when it is irrelevant and encodes position when it is relevant. DreamerV3 encodes position in both settings, and encodes background identity in both settings. E.5 PROGRESSIVE DISTRACTION ANALYSIS ACROSS NOISY SHAPE VARIANTS 
+
+To understand how irrelevant visual complexity affects latent representations, we compare probe accuracy across NoisyShape variants of increasing difficulty, plus a distraction-free baseline. The results are shown in Figure 19 and Table 12. 
+
+DreamerV3 degrades progressively with distraction complexity. The Shape (fixed) baseline confirms that DreamerV3’s architecture is fully capable of encoding objective-relevant attributes: with no position variation and no background, all probes achieve 100% accuracy through H15. However, performance degrades as irrelevant complexity increases. In Shape (clean), where the only irrelevant factor is random position, shape H15 already drops to 67.6%. Adding random video backgrounds (NoisyShape) further reduces shape H0 from 99.9% to 69.4% and H15 to 29.0%. This progressive collapse demonstrates that DreamerV3’s dense reconstruction objective forces the RSSM to allocate representational capacity to objective-irrelevant content, and this allocation scales with the visual complexity and temporal structure of the distraction. 
+
+STAR WM is invariant to distraction complexity. Across all three distraction levels, S TAR WM maintains near-perfect probe accuracy: shape H15 ≥ 99 .6% , size H15 ≥ 99 .99% , and color H15 
+
+= 100 .0% . The consistency from Shape (clean) through NoisyShape (Seq) confirms that the dual-stream architecture with attention-based routing effectively isolates objective-relevant from objective-irrelevant content regardless of the distraction’s visual complexity or temporal structure. 34 Preprint. Accepted by NeurIPS 2026. 
+
+Table 12: E.5: Probe accuracy across NoisyShape variants. H0 = encoding step; H15 = 15-step open-loop imagination. All values: mean ± std over 3 seeds. Accuracies in %, position in MSE. 
+
+Environment Model Color Shape Size Pos. MSE ↑
+
+H0 (Encoding) 
+
+Shape (fixed) DreamerV3 100.00 100.00 100.00 —Shape (clean) DreamerV3 100.00 ±0.01 99.87 ±0.05 99.96 ±0.01 0.002 STAR WM 100.00 ±0.00 100.00 ±0.00 100.00 ±0.00 0.072 NoisyShape DreamerV3 99.92 ±0.01 69.37 ±2.41 98.92 ±0.93 0.006 STAR WM 99.99 ±0.00 99.92 ±0.02 100.00 ±0.00 0.066 NoisyShape (Seq) DreamerV3 99.88 ±0.05 78.02 ±5.63 98.94 ±0.18 0.005 STAR WM 100.00 ±0.00 99.82 ±0.04 99.99 ±0.00 0.070 Chance level 25.00 25.00 33.33 0.071 
+
+H15 (Imagination) 
+
+Shape (fixed) DreamerV3 100.00 100.00 100.00 —Shape (clean) DreamerV3 99.93 ±0.06 67.63 ±6.60 92.48 ±3.79 —STAR WM 100.00 ±0.00 99.98 ±0.01 99.99 ±0.01 —NoisyShape DreamerV3 99.73 ±0.11 28.95 ±1.65 87.49 ±14.10 —STAR WM 100.00 ±0.00 99.57 ±0.18 99.99 ±0.01 —NoisyShape (Seq) DreamerV3 93.88 ±5.11 27.00 ±0.87 81.25 ±3.36 —STAR WM 100.00 ±0.00 99.63 ±0.15 99.99 ±0.00 —Chance level 25.00 25.00 33.33 —
+
+Figure 19: E.5: Latent space probing across NoisyShape variants. DreamerV3’s performance degrades as irrelevant complexity increases, while S TAR WM is invariant to distraction complexity. 
+
+Position MSE confirms objective-irrelevant filtering. In all variants with random position, STAR WM’s position MSE remains near the chance level, while DreamerV3 encodes position with high precision. 35 Preprint. Accepted by NeurIPS 2026. 0 250 500 750 1000 0200 400 600 800                     
+
+> Cheetah Run Return
+> Clean
+> 01000 2000 3000 050 100 150 200 250 300
+> VH
+> 0250 500 750 1000 050 100 150 200 250 300
+> VHR
+> 0250 500 750 1000
+> Steps (K)
+> 0200 400 600 800 1000
+> Walker Walk Return
+> 01000 2000 3000
+> Steps (K)
+> 0100 200 300 400 500 600 0250 500 750 1000
+> Steps (K)
+> 0100 200 300 400 500 600
+> StarWM Orig Dreamer R2Dreamer
+
+Figure 20: F.1: Small-object stress test. Left: Learning curves for Cheetah Run and Walker Walk with the agent rescaled to half its default linear size (one quarter pixel area), under Clean, VH (3M steps), and VHR (1M steps) settings. Right: Illustration of the environment setup. 
+
+F STRESS TESTING , G ENERALIZATION & B OUNDARY CASES 
+
+F.1 SPATIAL GRANULARITY & S MALL OBJECTS 
+
+Our default attention resolution of 8×8 spatial tokens (Appendix B.1) balances spatial granularity with the computational cost of cross-attention. As flagged in §6, this resolution may be insufficient when task-relevant objects occupy very few pixels. To test this directly, we rescale Cheetah Run and Walker Walk so that the agent’s body occupies approximately one quarter of the pixel area in the default rendering (i.e., linear half-size), and re-evaluate S TAR WM, DreamerV3, and R2-Dreamer under Clean, VH, and VHR settings. In clean environments, S TAR WM and DreamerV3 reach returns comparable to the original-scale clean setting, indicating that smaller object size alone does not prevent learning. Under distractors, all three methods degrade relative to their original-scale numbers; for example, S TAR WM’s VHR Walker Walk return drops from approximately 850 to 350. The shared degradation across methods suggests a regime where the visual signal-to-distractor ratio approaches the limits of these architectures, rather than a S TAR WM-specific failure mode. The relative ordering between methods is largely preserved. Under VHR, S TAR WM continues to lead on both tasks despite the reduced absolute returns. Under VH, the result is split: S TAR WM dominates on Walker Walk while R2-Dreamer leads on Cheetah Run. Based on the original-scale results in §4.2, we expect reward-augmented attention to mitigate the small-object VH degradation, but verification remains for future work. These results empirically confirm the limitation discussed in §6: spatial granularity matters when objects shrink below what 8 × 8 attention can localize cleanly. A natural architectural extension is to intercept the encoder one stage earlier to expose 16 × 16 spatial tokens, trading compute for finer routing. We expect this together with reward-augmented attention to partially recover the small-object regime, with the relative contribution of each remaining an open empirical question. F.2 MULTI -O BJECT EXTENSION : N OISY TWO SHAPE 
+
+We extend NoisyShape to a two-object setting to test (i) whether S TAR WM’s attention queries spontaneously partition across multiple foreground entities without architectural modification, and (ii) whether the resulting representation cleanly retains both objects through long-horizon imagination under visual distractors. The NoisyTwoShape environment renders two non-overlapping geometric shapes, one large and one small, on DAVIS video backgrounds re-sampled each step, with positions also re-sampled each step. Each shape has its own shape and color attributes controlled by an 8-action 36 Preprint. Accepted by NeurIPS 2026. 0 5 10 15 0.2 0.4 0.6 0.8 1.0            
+
+> NoisyTwoShape Accuracy
+> Large color
+> 0510 15
+> Small color
+> 0510 15
+> Large shape
+> 0510 15
+> Small shape
+> 0.00 0.01 0.02 0.03 0.04 0.05
+> MSE
+> Large pos (H0)
+> 0.000 0.025 0.050 0.075 0.100 0.125 0.150 0.175
+> Small pos (H0)
+> Imagination Horizon
+> StarWM Orig Dreamer chance
+
+Figure 21: F.2: Latent probe results on NoisyTwoShape. Probe accuracy for color, shape of the large and small object across H0 to H15 imagination horizon, and position MSE at H0. Higher MSE on position indicates correct irrelevant treatment (positions are re-sampled each step). Dashed lines indicate per-object chance levels for position MSE, computed via Monte Carlo simulation over each object’s position distribution under its size-dependent margin: 0.038 (large) and 0.150 (small). 
+
+Figure 22: F.2: S TAR WM attention maps on NoisyTwoShape. Columns show the input image followed by the four query attention maps. discrete space. We use the same S TAR WM configuration as in NoisyShape (4 attention queries, no hyperparameter tuning) and probe color, shape, and position for both objects. 
+
+Queries partition across objects. Figure 22 shows that S TAR WM’s four attention queries dis-tribute across the two foreground objects without per-object supervision, extending the emergent specialization observed in single-object NoisyShape to multi-object scenes. Across samples, queries reliably cover both the larger and the smaller object, and none drift to the video background despite the changing distractor. 
+
+Both objects retained through long-horizon imagination. Figure 21 shows that this spatial partitioning translates into attribute retention through imagination. S TAR WM preserves color and shape of both objects with ≥99% accuracy at the encoding step (H0), and retains them through 15-step open-loop imagination: both colors and the larger object’s shape remain near 100%, while the smaller object’s shape degrades only modestly (from ∼99% to ∼85%). DreamerV3 by contrast fails on the smaller object from the encoding step itself: its small-shape probe is at chance throughout, indicating that the encoder, which is forced by reconstruction to allocate capacity by pixel area, does not retain a usable representation of the smaller object even at the moment of observation. The reconstruction bias, mild for the larger object whose pixel signature dominates, becomes severe for the smaller one. 
+
+Position is correctly treated as objective irrelevant. The position MSE at H0 confirms that STAR WM treats both object positions as objective-irrelevant, with MSE matching the chance ref-erence for both the larger and the smaller object (chance levels differ across objects due to size-dependent position sampling ranges; computed by Monte Carlo simulation, see Figure 21 caption). DreamerV3 by contrast encodes both positions with high precision, reflecting the dense reconstruction objective’s tendency to retain spatially-localized identifiers regardless of their predictive value. 37 Preprint. Accepted by NeurIPS 2026. 
+
+F.3 TEXTURE , L OW CONTRAST , AND PHOTOREALISTIC SCENES 
+
+The main paper evaluates setups where the foreground visually stands out from the video background. Here, we test whether S TAR WM’s routing relies on this visual contrast or truly learns from the underlying dynamics. We evaluate three settings with reduced foreground–background contrast: (i) a texture ladder that matches foreground and background visual distributions while keeping ground-truth labels; (ii) a desaturated Walker agent on DMC; and (iii) CALVIN, a photorealistic manipulation dataset where the robot, objects, table, and kitchen share the same visual render. 
+
+(i) Textured foreground ladder. We replace the solid color of the NoisyShape object with textures of increasing difficulty: L1 adds procedural textures from an external domain; L2 samples textures directly from the DAVIS background videos, sharing the same visual domain; L3 alpha-blends the L2 texture into the background ( α = 0 .5), removing clear boundaries. All other factors remain unchanged, allowing direct use of our probe protocol (Appendix C.2). L1 procedural Texture 1 Texture 2 Texture 3 Texture 4 
+
+> L2 same-domain
+> L3 blended
+> Textured NoisyShape: foreground-complexity ladder
+
+Figure 23: F.3: Foreground texture ladder. The same underlying state rendered across levels for the four texture IDs (replacing color). Only foreground appearance changes: L1 uses external procedural textures, L2 uses crops from DAVIS background videos, and L3 alpha-blends these crops into the background ( α=0 .5, feathered edges). Table 13: F.3: Probe accuracy on the texture ladder (3 seeds, 400k steps). H0 = encoding step, H15 = 15-step rollout. Chance is 0.25 for texture and shape, 0.33 for size; chance position MSE is 
+
+≈0.071. 
+
+texture-id shape size pos. MSE Level Model H0 H15 H0 H15 H0 H15 H0 L1 STAR WM 1.000 1.000 0.984 0.866 1.000 1.000 0.065 DreamerV3 0.999 0.999 0.598 0.259 0.996 0.987 0.011 L2 STAR WM 0.999 0.999 0.896 0.579 0.999 0.999 0.067 DreamerV3 0.997 0.993 0.600 0.262 0.996 0.980 0.010 L3 STAR WM 0.959 0.929 0.354 0.251 0.786 0.698 0.065 DreamerV3 0.523 0.252 0.347 0.250 0.857 0.395 0.041 
+
+As shown in Figure 23, Figure 24, and Table 13, both models maintain texture identity at L1 and L2 because the object still has defined boundaries. However, differences emerge on shape : S TAR WM retains shape features over 15 imagined steps (0.866 at L1, 0.579 at L2), whereas DreamerV3 drops to chance ( ≈0.25). At L3 , where the boundary is blended, the difference in texture tracking is pronounced: DreamerV3 falls to chance (0.252) at H15, while S TAR WM maintains 0.929. Blending removes sharp contours, 38 Preprint. Accepted by NeurIPS 2026. L1 L2 L3 
+
+Complexity 
+
+0.25 0.50 0.75 1.00 
+
+> Accuracy
+
+Texture-ID 
+
+L1 L2 L3 
+
+Complexity 
+
+Shape 
+
+L1 L2 L3 
+
+Complexity 
+
+Size 
+
+L1 L2 L3 
+
+Complexity 
+
+0.00 0.02 0.04 0.06 0.08 
+
+> MSE
+
+Position (H0) 
+
+StarWM H0 StarWM H15 DreamerV3 H0 DreamerV3 H15 
+
+Figure 24: F.3: Latent probe accuracy across the ladder (mean ± SE, 3 seeds, 400k steps). Solid lines/filled markers denote the encoding step (H0); dashed lines/open markers denote 15-step open-loop rollouts (H15). Grey dashed lines show chance performance. For position MSE (right panel), higher values indicate that task-irrelevant position details are successfully filtered out. S TAR WM stays at chance, whereas DreamerV3 encodes exact position. so shape accuracy drops for both models. Across all levels, S TAR WM retains object size better (0.698 vs. 0.395 at L3, H15) and keeps position MSE near chance (0.065 vs. 0.071), confirming that it ignores task-irrelevant spatial information. In contrast, DreamerV3 tracks position closely (0.041). 
+
+Attention routing vs. representation. The attention mass on the object ( ≈12% of total pixels) shifts from 0.82 to 0.57 and 0.37 across L1–L3 (7.0 ×, 4.9 ×, and 3.2 × above uniform attention). Because entity tokens use soft spatial weighting, S TAR WM tracks foreground identity reliably even when visual boundaries blur. 
+
+(ii) Low-contrast agent on DMC. We desaturate the Walker body colors to match the video background tone, evaluating performance across both distractor settings over 3 seeds. Table 14: F.3: Low-contrast Walker Walk return (mean ± SE, 3 seeds). VH = coherent video background, VHR = per-step randomized frames. Setting STAR WM DreamerV3 R2-Dreamer Walker VH (3M steps) 893 ±41 799 ±53 895 ±41 
+
+Walker VHR (1M steps) 890 ±17 394 ±34 118 ±13 0.0 0.5 1.0 1.5 2.0 2.5 3.0       
+
+> Steps (M)
+> 0200 400 600 800
+> return
+> StarWM DreamerV3 R2-Dreamer
+> Walker · VH
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Steps (M)
+> 0200 400 600 800
+> return
+> StarWM DreamerV3 R2-Dreamer
+> Walker · VHR
+> DMC low-contrast Walker return
+
+Figure 25: F.3: Return curves for low-contrast Walker Walk (mean ± SE, 3 seeds). Under random frame distractors (VHR), S TAR WM reaches 890, substantially outperforming Dream-erV3 (394) and R2-Dreamer (118). Under coherent video backgrounds (VH), all three methods perform similarly (893 vs. 799 and 895). Removing color contrast does not impair S TAR WM’s robustness under rapid visual shifts. 39 Preprint. Accepted by NeurIPS 2026. 
+
+(iii) Photorealistic manipulation (CALVIN). We evaluate S TAR WM on the CALVIN benchmark (task D D , 512k frames of teleoperated play, static camera, 7-DOF actions) for 200k offline steps. Here, the robot, table, blocks, and environment are part of a unified photorealistic render. We project the gripper and block centers into image space using camera calibration and measure the attention allocated to each region. To account for workspace framing, we evaluate each region against a shuffled null baseline (the same attention map applied to a different frame). Table 15: F.3: Spatial attention concentration on CALVIN. Measured on frames where a block moves ( n = 204 ). Active blocks are identified by ground-truth movement.                      
+
+> Region Frame share Attention share Concentration Shuffled null Gripper tip ( r= 5 px) 1.9% 16.6% 8.69 ×2.83 ×
+> Active block 0.7% 4.2% 6.09 ×2.56 ×
+> Static blocks 1.4% 2.1% 1.52 ×2.03 ×
+> Gripper + all blocks 3.3% 18.8% 5.63 ×2.48 ×
+
+Figure 26: F.3: Attention routing on CALVIN. Input frame and corresponding attention maps from four queries. Attention targets the controllable objects and gripper over background structures. Attention focuses heavily on the gripper and the active block (8.69 × and 6.09 × concentration, compared to 2.83 × and 2.56 × nulls). In contrast, static blocks remain at chance levels (1.52 ×
+
+vs. 2.03 × null), reflecting only spatial priors. Across all validation frames, gripper concentration averages 9.71 × (2.84 × null). Even without visual separation between foreground and background, STAR WM routes attention based on controllability. F.4 PASSIVE AND NON -A CTION -D RIVEN TASK -R ELEVANT OBJECTS 
+
+STAR WM trains its router using inverse dynamics and a temporal contrastive loss. Because both objectives favor directly controlled entities, we investigate whether the model retains task-relevant objects that are passive (i.e., unaffected by agent actions). We evaluate two cases: a diagnostic environment with an explicitly static object, and DMC Reacher, where the target is a fixed goal rather than an actuated joint. 40 Preprint. Accepted by NeurIPS 2026. 
+
+(i) Diagnostic environment: PassiveShapeEnv . We augment NoisyShape with a second object 
+
+B alongside the controllable object A. Object B’s color and position are sampled once per episode and remain fixed regardless of agent actions (Figure 27). Because actions never alter B, it provides no inverse-dynamics gradient. We evaluate whether B’s properties are preserved in the latent state using the probing protocol in Appendix C.2, evaluating continuous position via regression ( R2). random-frame 
+
+t = 0 t = 1 t = 2 t = 3 t = 4 
+
+sequential video 
+
+PassiveShapeEnv: passive object B (cyan ring) vs action-driven object A
+
+Figure 27: F.4: PassiveShapeEnv . Five consecutive steps under each background setting. The active object A changes attributes based on actions and moves at each step; the passive object B
+
+(cyan circle) maintains fixed attributes throughout the episode. Top: per-step randomized background frames. Bottom: sequential video background. Table 16: F.4: Latent probe recovery for passive object B (mean ± SE, 3 seeds, 212k steps). 
+
+b colour is 4-way classification accuracy (chance = 0.25); b position reports held-out R2.
+
+b colour (acc) b x (R2) b y (R2)Background H0 H15 H0 H15 H0 H15 random-frame 1.000 ±.000 1.000 ±.000 0.80 ±.09 0.78 ±.09 0.84 ±.04 0.76 ±.08 
+
+sequential video 0.998 ±.000 0.994 ±.003 0.13 ±.03 −0.23 ±.02 0.08 ±.02 −0.18 ±.04 H0 H15 0.0 0.2 0.4 0.6 0.8 1.0 
+
+> Accuracy
+> chance
+
+Identity (b_colour)  
+
+> H0 H15 0.25
+> 0.00 0.25 0.50 0.75 1.00
+> R2
+
+Position b_x  
+
+> H0 H15 0.25
+> 0.00 0.25 0.50 0.75 1.00
+> R2
+
+Position b_y  
+
+> random-frame sequential video
+
+Figure 28: F.4: Probe results for passive object B (mean ± SE, 3 seeds, 212k steps). Object identity reaches ceiling accuracy across both regimes. Position is recovered on randomized backgrounds, but drops to or below R2=0 under sequential video. As shown in Table 16 and Figure 28, object identity is fully preserved under both backgrounds through 15 rollout steps. However, position recovery depends directly on the background regime: it is accurately decoded under random-frame backgrounds ( R2 ≈ 0.8), but drops under sequential video ( R2 ≤ 0.13 at H0, dropping below zero after imagination). 41 Preprint. Accepted by NeurIPS 2026. 
+
+This difference stems from the temporal contrastive objective. Because InfoNCE samples negative pairs uniformly across frames, negatives typically come from different episodes. Encoding B lowers negative pair similarity because its attributes vary across episodes while remaining static within each episode. When the background is randomized, B serves as the primary cross-step identifier. On sequential video, however, the temporally coherent background already identifies the episode, diminishing the contrastive utility of encoding B’s position. 
+
+(ii) Fixed target control: DMC Reacher. In DMC Reacher, the target is a stationary disc that the agent must reach without directly manipulating it (Figure 29, left). We evaluate performance across all baselines under both distractor types. Table 17: F.4: DMC Reacher episode returns (mean ± SE, 3 seeds). VH = temporally coherent video background, VHR = per-step randomized frames. Setting STAR WM STAR WM-R DreamerV3 R2-Dreamer Reacher VH (3M steps) 391 ±136 789 ±33 585 ±146 947 ±3
+
+Reacher VHR (1M steps) 690 ±70 657 ±1 450 ±37 66 ±9VH         
+
+> Observation
+> VHR 02Steps (M) 0500 1000 return
+> Reacher · VH
+> 0.0 0.5 1.0 Steps (M) 0250 500 750
+> Reacher · VHR Reacher (passive fixed target) episode return
+> StarWM StarWM-R DreamerV3 R2-Dreamer
+
+Figure 29: F.4: DMC Reacher performance. Left: observation frames showing the two-link arm and static target disc against DAVIS backgrounds (VH: coherent video, VHR: per-step random frames). 
+
+Right: learning curves (mean ± SE, 3 seeds). On VH, reward augmentation (S TAR WM-R) recovers default S TAR WM’s deficit. On VHR, S TAR WM and S TAR WM-R lead while R2-Dreamer drops. Under coherent video (VH), standard S TAR WM scores 391 because the static target lacks both inverse-dynamics gradients and distinct contrastive signals. Adding reward supervision (S TAR WM-R; Appendix E.1) recovers this gap to 789. Under random backgrounds (VHR), S TAR WM and STAR WM-R lead at 690 and 657, while R2-Dreamer drops to 66 (Table 17). 
+
+(iii) Conditions for object retention. Together with the Ball-in-Cup results (Appendix E.1), these experiments identify when self-supervised routing retains a task-relevant factor: Default routing preserves features that are episode-static and cross-episode distinctive, unless a coherent video background already acts as a dominant episode identifier (Table 18). When self-supervised objectives do not isolate passive elements, reward-conditioned routing incorporates the missing task signals. F.5 DELAYED ACTION EFFECTS 
+
+The inverse-dynamics loss in Eq. 6 relies on adjacent frames (t, t +1) , assuming actions take imme-diate visual effect. When action outcomes are delayed, this adjacent window forces the model to explain a transition before its true cause appears. Here, we show that this sensitivity stems strictly from the supervision window rather than the routing mechanism itself. 42 Preprint. Accepted by NeurIPS 2026. 
+
+Table 18: F.4: Determinants of task-relevant object retention. Default routing retains features that remain static within an episode and distinct across episodes, provided no competing signal (such as coherent video) already satisfies that criterion. 
+
+Task-relevant factor Episode-static & distinctive? Competing signal? Default S TAR WM outcome Passive B position, random bg ✓ None Encoded ( R2 ≈ 0.8)Passive B position, seq. bg ✓ Video Suppressed ( R2 ≤ 0.13 )Reacher target, VHR ✓ None Solved (690) Reacher target, VH ✓ Video Low return (391); benefits from reward Ball in flight (Ball-in-Cup) ✗ None Requires reward routing 
+
+The ActionDelay (k) environment. We extend NoisyShape such that observations at step t
+
+reflect the delayed action at−k for k ∈ { 1, 2, 4}, keeping all other task parameters unchanged. We evaluate two supervision windows at each delay k: Adjacent (mismatched) uses (t, t +1) , targeting an action at whose effects are not yet visible. Shifted (matched) aligns the window to (t+k, t +k+1) ,capturing the frame pair directly modified by at (recovering the standard objective when k=0 ). 
+
+Evaluation metrics. We evaluate two held-out metrics on fresh rollouts: attention mass on the object (the fraction and uniform concentration of the top query’s attention mask inside the object boundary) and attribute decodability from the latent state [h; z] (Appendix C.2). We omit training accuracy of the inverse model, as memorizing static frame–action pairs on the replay buffer easily inflates this metric without reflecting genuine representation quality. Table 19: F.5: Delayed action effects at 180k steps (mean ± SE, 3 seeds). Object coverage is ≈6.7% of the frame; ×uniform denotes attention concentration. Color decodability remains near ceiling (≈1.00) across all settings and is omitted. The k=0 row serves as an un-delayed reference point probed at its final checkpoint ( ≈145k steps). 
+
+k Supervision window Attn. mass ×Uniform Shape Size 0 Reference (no delay) 0.846 11.2 × 0.999 1.000 1 Adjacent (mismatched) 0.439 ±.033 6.6 × 0.385 ±.027 0.476 ±.029 
+
+1 Shifted (matched) 0.824 ±.026 12.3 × 0.998 ±.001 1.000 ±.000 
+
+2 Adjacent 0.352 ±.093 5.3 × 0.654 ±.153 0.722 ±.143 
+
+2 Shifted 0.755 ±.010 11.3 × 0.997 ±.000 0.999 ±.000 
+
+4 Adjacent 0.357 ±.009 6.2 × 0.448 ±.039 0.504 ±.028 
+
+4 Shifted 0.725 ±.020 12.5 × 0.994 ±.001 0.996 ±.001 
+
+Results. As shown in Table 19, mismatched supervision disperses attention (object mass drops to 0.35–0.44 vs. 0.85 without delay), significantly lowering shape and size decodability. Aligning the window to the actual action outcome fully restores both metrics : attention mass recovers to 0.73–0.82 (11–13 × uniform, matching the un-delayed baseline), and probe accuracy for shape and size returns above 0.99 across all delays k.While mismatched windows induce high variance across runs (e.g., shape decodability at k=2 is 
+
+0.654 ± 0.153 ), their performance consistently lags behind the matched setup. These results confirm that delayed effects do not hinder the routing mechanism itself; aligning the supervision window to the true transition dynamics fully preserves representation learning. 43

@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-27</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-28</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 13 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-27 22:24:40 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-29 00:01:50 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-27 日报精选13篇世界模型论文，精读2篇、速读11篇。最值得看的是精读两篇8分工作：FIRM-WM用状态分解的因果-干预循环建模实现无奖励视觉规划，OnlineWM用因果感知的主动在线学习提升世界建模效率。建议普通读者优先从这两篇入手，理解“世界模型如何自我纠错”这一主线，再按兴趣浏览速读中的一致性路由与可信度评估方向。</p>
+<p>今日日报：13篇论文中精读2篇，WALT（9.0）领跑，世界模型在自动驾驶、LLM智能体与具身智能方向集中出现。首选精读WALT和Agent-Editing World Model，前者聚焦自动驾驶世界模型对齐隐轨迹，后者重思LLM智能体的世界建模。普通读者先看两篇精读摘要，再按兴趣速读Imagine-RL、WorldCrafter与MachEmbodied-U0，把握“世界模型+智能体/具身”主线。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -81,9 +81,9 @@
     <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="FIRM-WM: State-factorized factual-interventional recurrent modeling for reward-free visual planning">FIRM-WM: State-factorized factual-interventional recurrent modeling for reward-free visual planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling">OnlineWM: Causality-Aware Active Online Learning for Effective World Modeling</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving">WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="Agent-Editing World Model: Rethinking World Modeling for LLM Agents">Agent-Editing World Model: Rethinking World Modeling for LLM Agents</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span><span class="dpr-home-dashboard-tag">world-models <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,9 +94,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models">ConsistWorld: Evidence Routing for Consistent Multi-Agent World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning">Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dual-Frontier: When Can an Agent Trust Its World Model?">Dual-Frontier: When Can an Agent Trust Its World Model?</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning">Imagine-RL: Residual-Confidence-Guided Cross-Attention for World-Model-Augmented VLA Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory">WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory</span></li><li><span class="dpr-home-dashboard-paper-title" title="MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence">MachEmbodied-U0: Unified Understanding and Generation Model for Embodied Intelligence</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agent-memory <strong>5</strong></span><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>7</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>4</strong></span></div>
 </section>
 </div>
 
