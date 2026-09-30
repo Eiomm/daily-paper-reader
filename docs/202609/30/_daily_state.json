@@ -1,0 +1,281 @@
+{
+  "date": "20260930",
+  "date_label": "",
+  "generated_at": "2026-09-30 22:53:53 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.33244v1",
+      "route": "202609/30/2609.33244v1-activemem-dynamic-latent-memory-trees-for-long-horizon-agents",
+      "title": "ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长程智能体的分层潜在记忆树",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.32512v1",
+      "route": "202609/30/2609.32512v1-what-do-latent-predictive-vehicle-representations-retain-measuring-state-geometry-and-local-response",
+      "title": "What Do Latent Predictive Vehicle Representations Retain? Measuring State, Geometry, and Local Response",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "车辆动力学潜在世界模型及其表示保真度评估",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.33563v1",
+      "route": "202609/30/2609.33563v1-ma-jepa-joint-embedding-world-models-for-multi-agent-reinforcement-learning",
+      "title": "MA-JEPA: Joint-Embedding World Models for Multi-Agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "带类别隐状态与动作条件动力学预测的随机世界模型",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.33844v1",
+      "route": "202609/30/2609.33844v1-vibr-wm-visual-bayesian-regression-for-world-modeling",
+      "title": "ViBR-WM: Visual Bayesian Regression for World Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "视觉贝叶斯回归世界模型预测未来状态",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.34375v1",
+      "route": "202609/30/2609.34375v1-lrc-jepa-disentangling-dynamics-and-residual-context-for-efficient-world-models",
+      "title": "LRC-JEPA: Disentangling Dynamics and Residual Context for Efficient World Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "紧凑JEPA世界模型中解耦动力学与残差上下文",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.34414v1",
+      "route": "202609/30/2609.34414v1-from-world-models-to-world-action-models-rethinking-next-state-prediction",
+      "title": "From World Models to World Action Models: Rethinking Next-State Prediction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "跨视觉、语义、几何与交互投影的动态下一状态预测",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.34981v2",
+      "route": "202609/30/2609.34981v2-what-makes-world-action-models-generalize-an-empirical-study-of-test-time-future-modeling",
+      "title": "What Makes World Action Models Generalize? An Empirical Study of Test-Time Future Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "潜在世界动作模型与显式未来建模的泛化对比",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.35138v1",
+      "route": "202609/30/2609.35138v1-flexiworld-learning-and-planning-via-flexible-action-chunks-across-multiple-time-scales",
+      "title": "FlexiWorld: Learning and Planning via Flexible Action Chunks Across Multiple Time Scales",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于JEPA的潜在世界模型，用可变长动作块预测未来状态以规划",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.35603v1",
+      "route": "202609/30/2609.35603v1-control-geometry-straightening-for-sampling-based-latent-planning",
+      "title": "Control-Geometry Straightening for Sampling-Based Latent Planning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "为潜在世界模型提供面向规划采样的辅助损失",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.35704v1",
+      "route": "202609/30/2609.35704v1-dynatokens-teaching-dynamics-to-camera-controlled-video-models-at-test-time",
+      "title": "DynaTokens: Teaching Dynamics to Camera-Controlled Video Models at Test Time",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "可学习场景 token 为相机控制世界模型注入动态",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.31137v1",
+      "route": "202609/30/2609.31137v1-interact-interactive-planning-for-autonomous-driving-via-anchor-conditioned-prediction-and-trust-region-refinement",
+      "title": "INTERACT: Interactive Planning for Autonomous Driving via Anchor-Conditioned Prediction and Trust-Region Refinement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "交互式驾驶中交通智能体的预测与规划联合建模",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.31161v1",
+      "route": "202609/30/2609.31161v1-i-act-therefore-i-am-when-is-jepas-action-conditioning-enough-to-learn-causal-mechanisms",
+      "title": "I Act Therefore I Am: When Is JEPA's Action-Conditioning Enough to Learn Causal Mechanisms?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "JEPA 动作条件何时能恢复未来动力学的潜在因果状态",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.32626v1",
+      "route": "202609/30/2609.32626v1-world-slam-model-joint-world-modeling-for-slam-and-navigation",
+      "title": "World SLAM Model: Joint World Modeling for SLAM and Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在不断演化的潜在空间世界状态中预测未来视觉状态",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.32657v1",
+      "route": "202609/30/2609.32657v1-world-models-with-predictable-long-horizon-marginals",
+      "title": "World Models with Predictable Long-Horizon Marginals",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "潜动力学世界模型并保持长时程推演分布",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.26293v2",
+      "route": "202609/30/2609.26293v2-dual-frontier-when-can-an-agent-trust-its-world-model",
+      "title": "Dual-Frontier: When Can an Agent Trust Its World Model?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向决策智能体的世界模型可信度与失败归因",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.32681v1",
+      "route": "202609/30/2609.32681v1-rcvla-4d-radar-grounded-semantic-reasoning-and-trajectory-arbitration-for-autonomous-driving",
+      "title": "RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向驾驶场景推理与轨迹规划的雷达-相机视觉-语言-动作框架",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    },
+    {
+      "paper_id": "2609.33190v1",
+      "route": "202609/30/2609.33190v1-focusdrive-reasoning-with-visual-focus-for-autonomous-driving",
+      "title": "FocusDrive: Reasoning with Visual Focus for Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以显式视觉聚焦组织驾驶规划的多模态推理",
+      "first_seen_at": "2026-09-30 22:53:53 UTC",
+      "updated_at": "2026-09-30 22:53:53 UTC"
+    }
+  ]
+}

@@ -48,7 +48,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-29</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-30</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -58,7 +58,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-29 23:47:39 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-30 22:53:53 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,10 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-29 日报速览：17 篇论文中精读 6 篇、速读 11 篇，重点集中在长程智能体记忆与视觉规划可靠性。最值得看的是两篇 9.0 分精读——《ActiveMem》用动态潜在记忆树支撑长程智能体，《Beyond One-Step Accuracy》以状态仿射潜在转移提升视觉规划可靠性。普通读者可先从这两篇入手，再按兴趣浏览速读中 VLA 与世界模型结合的方向。</p>
+<p>今日共生成 17 篇推荐（精读 6 篇，速读 11 篇）</p>
+<p>精读：《ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents》（9.0/10）, 《What Do Latent Predictive Vehicle Representations Retain? Measuring State, Geometry, and Local Response》（8.0/10）</p>
+<p>速读：《What Makes World Action Models Generalize? An Empirical Study of Test-Time Future Modeling》（8.0/10）, 《FlexiWorld: Learning and Planning via Flexible Action Chunks Across Multiple Time Scales》（8.0/10）, 《Control-Geometry Straightening for Sampling-Based Latent Planning》（8.0/10）</p>
+<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -81,7 +84,7 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents">ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Beyond One-Step Accuracy: State-Affine Latent Transition for Reliable Visual Planning">Beyond One-Step Accuracy: State-Affine Latent Transition for Reliable Visual Planning</span></li><li><span class="dpr-home-dashboard-paper-title" title="MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving">MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents">ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="What Do Latent Predictive Vehicle Representations Retain? Measuring State, Geometry, and Local Response">What Do Latent Predictive Vehicle Representations Retain? Measuring State, Geometry, and Local Response</span></li><li><span class="dpr-home-dashboard-paper-title" title="MA-JEPA: Joint-Embedding World Models for Multi-Agent Reinforcement Learning">MA-JEPA: Joint-Embedding World Models for Multi-Agent Reinforcement Learning</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
@@ -94,9 +97,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Devol-ONE: One Autoregressive Mixture of Transformers to Unify Vision-Language-Action and Latent World Modeling">Devol-ONE: One Autoregressive Mixture of Transformers to Unify Vision-Language-Action and Latent World Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="World SLAM Model: Joint World Modeling for SLAM and Navigation">World SLAM Model: Joint World Modeling for SLAM and Navigation</span></li><li><span class="dpr-home-dashboard-paper-title" title="DeltaWAM: Change-Centric Visual Foresight via Delta Tokens for an Efficient World-Action Model">DeltaWAM: Change-Centric Visual Foresight via Delta Tokens for an Efficient World-Action Model</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="What Makes World Action Models Generalize? An Empirical Study of Test-Time Future Modeling">What Makes World Action Models Generalize? An Empirical Study of Test-Time Future Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="FlexiWorld: Learning and Planning via Flexible Action Chunks Across Multiple Time Scales">FlexiWorld: Learning and Planning via Flexible Action Chunks Across Multiple Time Scales</span></li><li><span class="dpr-home-dashboard-paper-title" title="Control-Geometry Straightening for Sampling-Based Latent Planning">Control-Geometry Straightening for Sampling-Based Latent Planning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>9</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>10</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 </div>
 
