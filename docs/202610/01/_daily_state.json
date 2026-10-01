@@ -1,0 +1,233 @@
+{
+  "date": "20261001",
+  "date_label": "",
+  "generated_at": "2026-10-01 23:36:33 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.33244v1",
+      "route": "202610/01/2609.33244v1-activemem-dynamic-latent-memory-trees-for-long-horizon-agents",
+      "title": "ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "将智能体经验组织为依赖感知潜在树的分层记忆框架",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.32921v1",
+      "route": "202610/01/2609.32921v1-adaptive-latent-capacity-for-world-models",
+      "title": "Adaptive Latent Capacity for World Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "具有自适应隐容量的JEPA世界模型预测",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.33497v1",
+      "route": "202610/01/2609.33497v1-hamiltonian-jepa-action-conditioned-world-models-with-an-inherited-control-state",
+      "title": "Hamiltonian JEPA: Action-Conditioned World Models with an Inherited Control State",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "具有结构化潜在控制状态的动作条件世界模型用于规划",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.32367v1",
+      "route": "202610/01/2609.32367v1-stride-state-transition-representation-via-increment-dynamics-and-evolution",
+      "title": "STRIDE: State-Transition Representation via Increment Dynamics and Evolution",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于连续预测的潜在动力学与状态转移表示",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.33148v1",
+      "route": "202610/01/2609.33148v1-dronewam-efficient-world-action-model-for-drone-visual-navigation",
+      "title": "DroneWAM: Efficient World Action Model for Drone Visual Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于JEPA的世界动作模型在潜在表示空间预测未来状态",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.33218v1",
+      "route": "202610/01/2609.33218v1-scope-wm-scoped-computation-for-efficient-visual-world-models",
+      "title": "Scope-WM: Scoped Computation for Efficient Visual World Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过作用域潜变量计算与token稀疏化实现高效视觉世界模型",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.33464v1",
+      "route": "202610/01/2609.33464v1-videas-distilling-explicit-action-semantics-from-demonstration-videos-for-world-models-via-prior-guided-simulation",
+      "title": "VIDEAS: Distilling Explicit Action Semantics from Demonstration Videos for World Models via Prior-Guided Simulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将视频蒸馏为离散动作轨迹与显式动作语义以构建世界模型",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.33575v1",
+      "route": "202610/01/2609.33575v1-slip-vla-single-step-latent-imagination-for-policy-learning-in-vision-language-action-models",
+      "title": "SLIP-VLA: Single-Step Latent Imagination for Policy Learning in Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "单步潜在想象预测未来状态",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.34159v1",
+      "route": "202610/01/2609.34159v1-worldgraph-graph-native-world-modeling",
+      "title": "WorldGraph: Graph-Native World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将演化图本身作为世界动态的图原生世界建模",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.29892v1",
+      "route": "202610/01/2609.29892v1-qwen-planner-agent-a-closed-loop-ai-for-ai-framework-for-real-world-mobile-planner-agents",
+      "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向长时程移动规划智能体的闭环AI-for-AI框架",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.30818v1",
+      "route": "202610/01/2609.30818v1-evaluation-is-all-you-need-for-multi-modal-autonomous-driving",
+      "title": "Evaluation Is All You Need for Multi-Modal Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶的多模态轨迹规划与评估",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.34300v1",
+      "route": "202610/01/2609.34300v1-when-world-models-lie-adaptive-safety-analysis-under-wrong-imaginations",
+      "title": "When World Models Lie: Adaptive Safety Analysis Under Wrong Imaginations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "世界模型出错时面向机器人系统的自适应潜在空间安全分析",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.34387v2",
+      "route": "202610/01/2609.34387v2-car-vla-complexity-aware-and-risk-adaptive-reasoning-for-autonomous-driving",
+      "title": "CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "av-research"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向驾驶视觉-语言-动作模型的复杂度感知与风险自适应推理",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    },
+    {
+      "paper_id": "2609.34511v1",
+      "route": "202610/01/2609.34511v1-halo-enhancing-time-series-generation-via-hyperspherical-latents-and-masked-autoregressive-modeling",
+      "title": "HALO: Enhancing Time Series Generation via Hyperspherical Latents and Masked AutoregRessive Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "离散隐表示与自回归下一词元建模",
+      "first_seen_at": "2026-10-01 23:36:33 UTC",
+      "updated_at": "2026-10-01 23:36:33 UTC"
+    }
+  ]
+}

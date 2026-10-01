@@ -1,0 +1,616 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-01T23:27:14.488902+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 15,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2609.33244v1",
+      "source": "arxiv",
+      "title": "ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents",
+      "abstract": "Large Language Model (LLM) agents increasingly rely on external memory to support long-horizon reasoning and decision making. Existing memory systems typically retrieve historical trajectories or summaries as independent context fragments, overlooking the procedural dependencies underlying multi-step execution. As memory scales, such flat retrieval introduces context fragmentation and cross-task interference, leading to structurally inconsistent reasoning trajectories. We propose ActiveMem, a hierarchical memory framework that recursively organizes agent experiences into dependency-aware latent execution trees. ActiveMem abstracts trajectories into reusable subtask nodes while explicitly preserving execution transitions, enabling coherent reasoning-path retrieval conditioned on the current execution state. To support continual adaptation, ActiveMem further learns dynamic memory expansion, retrieval, and pruning policies through reinforcement learning. Experiments across various agent benchmarks demonstrate that ActiveMem consistently improves task completion, reasoning stability, and memory efficiency over existing memory-based agents. Moreover, ActiveMem enables compact open-weight models to achieve competitive performance with substantially larger proprietary systems.",
+      "authors": [
+        "Song-Li Wu",
+        "Jingyi Wang",
+        "Zhaocheng Du",
+        "Weinan Gan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-27T05:30:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.33244v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Hierarchical memory framework organizing agent experience into dependency-aware latent trees",
+      "llm_evidence_cn": "将智能体经验组织为依赖感知潜在树的分层记忆框架",
+      "llm_evidence": "将智能体经验组织为依赖感知潜在树的分层记忆框架",
+      "canonical_evidence": "将智能体经验组织为依赖感知潜在树的分层记忆框架",
+      "llm_tldr_en": "LLM agents rely on external memory but flat retrieval ignores procedural dependencies, causing fragmented reasoning. ActiveMem is a hierarchical memory framework that organizes experiences into dependency-aware latent execution trees with reusable subtask nodes and preserved transitions, improving coherent long-horizon reasoning.",
+      "llm_tldr_cn": "LLM智能体日益依赖外部记忆支撑长时程推理，但现有记忆系统把历史轨迹或摘要作为独立上下文片段检索，忽略多步执行的程序性依赖，导致上下文碎片化与跨任务干扰。本文提出ActiveMem，一种分层记忆框架，将智能体经验递归组织为依赖感知的潜在执行树，把轨迹抽象为可复用子任务节点并显式保留执行转移。该结构支持一致的推理路径检索，从而提升长时程智能体的记忆复用与决策一致性。",
+      "llm_tldr": "LLM智能体日益依赖外部记忆支撑长时程推理，但现有记忆系统把历史轨迹或摘要作为独立上下文片段检索，忽略多步执行的程序性依赖，导致上下文碎片化与跨任务干扰。本文提出ActiveMem，一种分层记忆框架，将智能体经验递归组织为依赖感知的潜在执行树，把轨迹抽象为可复用子任务节点并显式保留执行转移。该结构支持一致的推理路径检索，从而提升长时程智能体的记忆复用与决策一致性。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.32921v1",
+      "source": "arxiv",
+      "title": "Adaptive Latent Capacity for World Models",
+      "abstract": "We introduce Adaptive LeWorldModel (ALeWM), a world model based on a joint-embedding predictive architecture (JEPA) that learns to concentrate predictive information in compact prefixes of a wide latent representation. To encourage this ordering, ALeWM learns a sequence-conditioned distribution over prefix lengths and trains the predictor to estimate the full next embedding from a sampled input prefix. As standard anti-collapse objectives encourage variation across latent coordinates and do not organize them by predictive importance, we also introduce MixSIGReg. MixSIGReg regularizes the masked embeddings against a prior-weighted mixture with Gaussian active prefixes and zeros in the remaining coordinates. As a result, the ALeWM objective encourages early coordinates to retain information useful for prediction and recursive planning. Our analysis shows that the mixture distribution used by MixSIGReg assigns higher variance to earlier coordinate blocks and lower variance to later ones. In addition, we show that, under specified assumptions, prediction error is minimized by placing the information most useful for prediction in earlier blocks. Empirically, we study the behavior of ALeWM in a controlled dynamical system with known state variables and in goal-conditioned visual control. We show that ALeWM consistently achieves higher mean success rates than tuned fixed-width LeWM, with lower planning capacity on average.",
+      "authors": [
+        "Idan Achituve",
+        "Lior Dikstein",
+        "Idit Diamant",
+        "Arnon Netzer",
+        "Hai Victor Habi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-26T20:16:33+00:00",
+      "link": "https://arxiv.org/pdf/2609.32921v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "JEPA world model with adaptive latent capacity for prediction",
+      "llm_evidence_cn": "具有自适应隐容量的JEPA世界模型预测",
+      "llm_evidence": "具有自适应隐容量的JEPA世界模型预测",
+      "canonical_evidence": "具有自适应隐容量的JEPA世界模型预测",
+      "llm_tldr_en": "ALeWM is a JEPA-based world model that concentrates predictive information in compact prefixes of a wide latent, learning a prefix-length distribution and using MixSIGReg to organize coordinates by predictive importance.",
+      "llm_tldr_cn": "标准反坍缩目标只鼓励隐坐标变化，却不按预测重要性组织它们，导致世界模型的隐表示容量利用低效。作者提出自适应LeWorldModel（ALeWM），基于联合嵌入预测架构JEPA，学习前缀长度的条件分布并训练预测器仅用采样的输入前缀估计完整下一嵌入，使预测信息集中到紧凑前缀。配合MixSIGReg正则，方法促使靠前坐标保留更多可预测信息，为隐动力学世界模型的高效表示组织提供了新机制。",
+      "llm_tldr": "标准反坍缩目标只鼓励隐坐标变化，却不按预测重要性组织它们，导致世界模型的隐表示容量利用低效。作者提出自适应LeWorldModel（ALeWM），基于联合嵌入预测架构JEPA，学习前缀长度的条件分布并训练预测器仅用采样的输入前缀估计完整下一嵌入，使预测信息集中到紧凑前缀。配合MixSIGReg正则，方法促使靠前坐标保留更多可预测信息，为隐动力学世界模型的高效表示组织提供了新机制。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.33497v1",
+      "source": "arxiv",
+      "title": "Hamiltonian JEPA: Action-Conditioned World Models with an Inherited Control State",
+      "abstract": "Planning from pixels needs more than a latent space that is stable and predictable. The state the planner scores must also be organized by how actions move the system. Joint-embedding predictive architectures (JEPAs) avoid pixel reconstruction by predicting future representations, but existing action-conditioned JEPAs ask one embedding to serve both perception and control. We introduce H-JEPA, which separates the two. A wide perceptual code is regularized toward a well-scaled isotropic geometry with a Bures-Wasserstein prior, and a fixed orthonormal slice of that code is the control state, which inherits the code's covariance without any objective of its own. The state evolves under phase-conditioned dissipative port-Hamiltonian dynamics whose input port has orthonormal columns. Port-inverse consistency (PIC) reads the executed action back through the transpose of that port. We show that this readout is exactly the rollout error projected onto the port directions, so PIC is a parameter-free reweighting of prediction error and not an auxiliary action decoder. Untying the readout from the port breaks this identity and loses half of the gain. H-JEPA matches or exceeds reconstruction-free baselines, including the action-decoding Delta-JEPA, on four pixel-based control benchmarks after at most $10$ training epochs, and its largest gain is on OGB-Cube ($91.9$ against $79.3$ percent). Ablations on PushT and OGB-Cube separate the contributions of the structured predictor, PIC, the prediction horizon, the state rank, and the anti-collapse prior.",
+      "authors": [
+        "Tamim Zoabi",
+        "Ameen Ali",
+        "Lior Wolf"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-27T12:05:41+00:00",
+      "link": "https://arxiv.org/pdf/2609.33497v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "action-conditioned world model with structured latent control state for planning",
+      "llm_evidence_cn": "具有结构化潜在控制状态的动作条件世界模型用于规划",
+      "llm_evidence": "具有结构化潜在控制状态的动作条件世界模型用于规划",
+      "canonical_evidence": "具有结构化潜在控制状态的动作条件世界模型用于规划",
+      "llm_tldr_en": "H-JEPA separates perception and control in action-conditioned world models, regularizing a perceptual code and deriving a control state evolved by port-Hamiltonian dynamics for better planning.",
+      "llm_tldr_cn": "现有动作条件JEPA让同一嵌入同时承担感知与控制，难以支撑基于像素的规划。本文提出H-JEPA，将宽感知码经Bures-Wasserstein先验正则化，并从中取固定正交切片作为继承协方差的控制状态，使其在相位条件耗散端口哈密顿动力学下演化。该分离设计提升了状态的可预测性与规划适用性，为动作条件世界模型提供了新结构。",
+      "llm_tldr": "现有动作条件JEPA让同一嵌入同时承担感知与控制，难以支撑基于像素的规划。本文提出H-JEPA，将宽感知码经Bures-Wasserstein先验正则化，并从中取固定正交切片作为继承协方差的控制状态，使其在相位条件耗散端口哈密顿动力学下演化。该分离设计提升了状态的可预测性与规划适用性，为动作条件世界模型提供了新结构。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.32367v1",
+      "source": "arxiv",
+      "title": "STRIDE: State-Transition Representation via Increment Dynamics and Evolution",
+      "abstract": "We introduce STRIDE (State-Transition Representation via Increment Dynamics and Evolution), which defines states through derivative fingerprints and learns local functions for state transitions (qpairs), recasting continuous forecasting as transition prediction. Trailing convolution windows estimate local joint-transition frequencies, whose lagged differences form a high-dimensional increment trajectory. Proper orthogonal decomposition (POD) gives coordinate paths, jointly forecast by sparse dynamics with memory. Recombining their forecasts and applying history-anchored inversion recovers future transition distributions; sampled state paths select local functions to generate continuous forecasts. Three-seed experiments compare STRIDE against fourteen baselines across nine benchmark families. Five independent Markov and hidden-state baselines cover all 230 evaluated tasks, with 220 complete whole-horizon pairs. Against these comparators, system-weighted late-Energy win fractions range from 73.6% to 78.5% on 190 multi-step pairs; against DLinear, the fraction is 77.3% on 72 paired multi-step tasks. Matched controls examine the intermediate representation. On 64 independently initialized Aizawa trajectories, late-Energy reductions against four matched controls range from approximately 24% to 56%, with all four prespecified contrasts passing Holm correction. These results connect transition-statistic prediction to continuous probabilistic forecasting, with substantial long-horizon gains in the matched Aizawa study.",
+      "authors": [
+        "Yuchen Xiong",
+        "Siming Huang",
+        "Jianfeng Sun"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-26T08:44:11+00:00",
+      "link": "https://arxiv.org/pdf/2609.32367v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "latent dynamics and state-transition representation for continuous forecasting",
+      "llm_evidence_cn": "用于连续预测的潜在动力学与状态转移表示",
+      "llm_evidence": "用于连续预测的潜在动力学与状态转移表示",
+      "canonical_evidence": "用于连续预测的潜在动力学与状态转移表示",
+      "llm_tldr_en": "STRIDE recasts continuous forecasting as state-transition prediction, defining states via derivative fingerprints and forecasting increment trajectories with POD and sparse dynamics, validated against four baselines.",
+      "llm_tldr_cn": "本文针对连续预测中状态表示与转移结构分离的问题，提出STRIDE，用导数指纹定义状态并学习局部状态转移函数，通过拖尾卷积窗估计局部联合转移频率，用POD提取坐标路径并由带记忆的稀疏动力学联合预测增量轨迹。三组随机种子实验与四个基线对比验证了该转移表示的有效性，为连续预测提供新范式。",
+      "llm_tldr": "本文针对连续预测中状态表示与转移结构分离的问题，提出STRIDE，用导数指纹定义状态并学习局部状态转移函数，通过拖尾卷积窗估计局部联合转移频率，用POD提取坐标路径并由带记忆的稀疏动力学联合预测增量轨迹。三组随机种子实验与四个基线对比验证了该转移表示的有效性，为连续预测提供新范式。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.29892v1",
+      "source": "arxiv",
+      "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
+      "abstract": "The rapid progression of large language models is extending AI from passive content generation into the active workflows of engineering and scientific discovery. This shift raises a compelling question: can AI be both the object of development and an active participant in building next-generation AI systems? We explore this question by building Qwen-Planner-Agent within a closed-loop AI-for-AI framework for scalable development and iterative improvement. Mobile planning offers a demanding test of this approach: complex, long-horizon tasks challenge agent reliability, while costly real-device interaction limits development scalability. The framework connects data production, model training, and deployment through a shared action-feedback-verification contract. (i) AI for Data builds a human-gated agentic data flywheel in which specialized agents construct tasks, collect interaction trajectories, curate and balance training data, and use training feedback to guide subsequent data generation. (ii) AI for Training combines a supervised planning cold start with hybrid-environment online agentic reinforcement learning, where we introduce Competence-Aware Reward-and-Advantage Engineering (CARE) to reduce reasoning and tool-use costs while preserving task performance. (iii) AI drives model--harness co-evolution through an execution-evidence-driven loop that orchestrates memory, skills, and tools at runtime and feeds structured action feedback and preserved failure traces back into coordinated model and harness adaptation. Qwen-Planner-Agent achieves the best overall performance among all evaluated models and systems on MobilePA-Bench, improving over its base model across tool use, memory, skills, and sub-agent coordination. Further evaluations of our model show improvements across non-mobile agentic benchmarks while largely preserving general capabilities.",
+      "authors": [
+        "Tingyu Qu",
+        "Weigao Sun",
+        "Yuecheng Liu",
+        "Yucheng Zhao",
+        "Yi Zhu",
+        "Yifeng Ding",
+        "Qiyi Wang",
+        "Sihan Cao",
+        "Pengkun Jiao",
+        "Hanlei Xie",
+        "Xiongwei Wu",
+        "Qichao Wang",
+        "Haodong Zhang",
+        "Jiajun Liu",
+        "Yuhao Wang",
+        "Yuqing Xie",
+        "Junpeng Zhao",
+        "Long Chen",
+        "Ming Ma",
+        "Sihan Yang",
+        "Ziwang Zhao",
+        "Yanhao Jia",
+        "Liangquan Gong",
+        "Feida Zhu",
+        "Yiran Zhong",
+        "Steven Hoi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-24T14:38:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.29892v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Closed-loop AI-for-AI framework for long-horizon mobile planner agents",
+      "llm_evidence_cn": "面向长时程移动规划智能体的闭环AI-for-AI框架",
+      "llm_evidence": "面向长时程移动规划智能体的闭环AI-for-AI框架",
+      "canonical_evidence": "面向长时程移动规划智能体的闭环AI-for-AI框架",
+      "llm_tldr_en": "LLM agents struggle with long-horizon mobile planning and costly real-device interaction. Qwen-Planner-Agent is a closed-loop AI-for-AI framework linking data production, training and deployment via shared action feedback, enabling scalable iterative development of real-world planner agents.",
+      "llm_tldr_cn": "大语言模型正从被动内容生成走向工程与科学发现的主动流程，但移动规划这类长时程任务对智能体可靠性要求高、真机交互成本大，限制开发扩展。本文提出Qwen-Planner-Agent，在闭环AI-for-AI框架中把数据生产、模型训练与部署通过共享动作反馈连接起来。该框架面向真实移动规划智能体，旨在实现可扩展的开发与迭代改进。其意义在于探索AI既作为开发对象又作为系统构建参与者的闭环范式。",
+      "llm_tldr": "大语言模型正从被动内容生成走向工程与科学发现的主动流程，但移动规划这类长时程任务对智能体可靠性要求高、真机交互成本大，限制开发扩展。本文提出Qwen-Planner-Agent，在闭环AI-for-AI框架中把数据生产、模型训练与部署通过共享动作反馈连接起来。该框架面向真实移动规划智能体，旨在实现可扩展的开发与迭代改进。其意义在于探索AI既作为开发对象又作为系统构建参与者的闭环范式。",
+      "llm_tags": [
+        "query:agent-memory:composite"
+      ],
+      "matched_query_tag": "query:agent-memory:composite",
+      "matched_query_text": "Papers central to 帮我检索 2025 年 6 月至今最新的 LLM-based Agent / Agentic AI 论文，重点关注具有新方法或新架构的工作，包括：agent memory / long-term memory、self-evolving agents、reinforcement learning for agents、planning & reasoning、tool use、computer-use / GUI agents、multi-agent、long-horizon agents、world model / embodied agents、agent evaluation & benchmarks。, especially work that connects or combines: memory mechanism for LLM-based agents that stores, organizes and retrieves experience across episodes; hierarchical or multi-level memory architecture for LLM agents; memory management operations such as writing, updating, forgetting and reflecting in agent memory systems; planning algorithms and reasoning strategies for autonomous agents; tool use and function calling in LLM agents; world models for embodied and decision-making agents; agent memory systems that improve performance by reusing past experience rather than extending context length; Find recent papers on agent memory and long term memory mechanisms in LLM based agents; Retrieve papers on self evolving agents and reinforcement learning for agent training; Search for new agent architectures, planning, reasoning, and tool use methods.",
+      "matched_requirement_id": "req-composite-agent-memory",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.33148v1",
+      "source": "arxiv",
+      "title": "DroneWAM: Efficient World Action Model for Drone Visual Navigation",
+      "abstract": "World-action models give visual navigation agents a way to anticipate how candidate actions will change future observations and to act from the predicted consequences. For drones, this capability must operate under tight accuracy and efficiency constraints. We present DroneWAM, an efficient world-action model for drone visual navigation. DroneWAM adopts a JEPA-based architecture to model future states directly in representation space, avoiding the cost of explicit future image generation. A pretrained Resampler further compresses dense encoder features into fewer latent tokens, reducing the computation repeated at each imagined step. We also introduce adaptive rollout, where a preference-trained Gate adaptively allocates prediction depth according to the current scene. To support learning under richer aerial motion, we construct DroneNav-6D, a simulated visual navigation dataset with synchronized RGB observations, 6-DoF flight trajectories, control commands, and randomized wind disturbances. On DroneNav-6D, DroneWAM achieves the best trajectory accuracy among the compared methods. Adaptive rollout further reduces the average prediction depth from 8 to 4.58 while improving trajectory accuracy, demonstrating that predictive computation can be allocated more effectively across scenes. \\href{https://github.com/1e12Leon/DroneWAM}{Codes and data} will be released.",
+      "authors": [
+        "Liang Yao",
+        "Fan Liu",
+        "Hongbo Lu",
+        "Wei Xu",
+        "Jianyu Jiang",
+        "Yijun Shen",
+        "Chuanyi Zhang",
+        "Pai Peng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-27T03:21:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.33148v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "JEPA world-action model predicting future states in latent representation space",
+      "llm_evidence_cn": "基于JEPA的世界动作模型在潜在表示空间预测未来状态",
+      "llm_evidence": "基于JEPA的世界动作模型在潜在表示空间预测未来状态",
+      "canonical_evidence": "基于JEPA的世界动作模型在潜在表示空间预测未来状态",
+      "llm_tldr_en": "DroneWAM builds a JEPA-based world-action model that predicts future observations in latent space, using a pretrained Resampler to compress features into fewer tokens and an adaptive rollout gate for efficient drone navigation.",
+      "llm_tldr_cn": "无人机视觉导航需要在精度与效率约束下预判动作后果。DroneWAM 采用 JEPA 架构直接在表示空间建模未来状态，避免显式生成未来图像，并用预训练 Resampler 将稠密特征压缩为少量潜在 token，降低每步想象的计算量。作者还引入自适应 rollout，通过偏好训练的 Gate 按置信度分配预测深度。实验表明该方法在无人机导航任务上兼顾效率与准确性，为高效世界动作模型提供了新思路。",
+      "llm_tldr": "无人机视觉导航需要在精度与效率约束下预判动作后果。DroneWAM 采用 JEPA 架构直接在表示空间建模未来状态，避免显式生成未来图像，并用预训练 Resampler 将稠密特征压缩为少量潜在 token，降低每步想象的计算量。作者还引入自适应 rollout，通过偏好训练的 Gate 按置信度分配预测深度。实验表明该方法在无人机导航任务上兼顾效率与准确性，为高效世界动作模型提供了新思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.30818v1",
+      "source": "arxiv",
+      "title": "Evaluation Is All You Need for Multi-Modal Autonomous Driving",
+      "abstract": "Multi-modal planning is promising for autonomous driving by representing multiple plausible behaviors in ambiguous and long-tail scenarios. Existing methods mainly focus on improving trajectory multi-modality, enhancing trajectory representations, or reshaping the candidate distribution. Nevertheless, we identify a pronounced generation-evaluation asymmetry in multi-modal planning: despite strong oracle performance, existing planners often fail to reliably select the best available candidate, leaving substantial planning potential unrealized. To address this challenge, we propose iDriveVLA, a multi-modal planning framework that improves the candidate trajectory space while enabling more reliable and context-aware trajectory evaluation. Specifically, iDriveVLA introduces a unified trajectory evaluator comprising a Safety-aware Scorer for quality and risk estimation, together with a VLM-guided Modulator for scene-adaptive criterion weighting. We further develop an oracle-aligned progressive training strategy consisting of candidate imitation pretraining, candidate space refinement, and semantic ranking alignment. On the public NAVSIM v1 leaderboard, iDriveVLA achieves a new state-of-the-art performance of 94.95 PDMS, surpassing the human-expert reference.",
+      "authors": [
+        "Zeyu He",
+        "Shiqi Liu",
+        "Ke Chen",
+        "Yun Yan",
+        "Jinzi Wu",
+        "Dianqiao Lei",
+        "Sirui Wang",
+        "ShuRui Peng",
+        "Tao Chen",
+        "Zhuo Huang",
+        "Yu Wu",
+        "Yadong Shao",
+        "Zhichao Li",
+        "Ke Sun",
+        "Yang Guan",
+        "Keqiang Li",
+        "Shengbo Eben Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-09-25T04:56:15+00:00",
+      "link": "https://arxiv.org/pdf/2609.30818v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-modal trajectory planning and evaluation for autonomous driving",
+      "llm_evidence_cn": "面向自动驾驶的多模态轨迹规划与评估",
+      "llm_evidence": "面向自动驾驶的多模态轨迹规划与评估",
+      "canonical_evidence": "面向自动驾驶的多模态轨迹规划与评估",
+      "llm_tldr_en": "iDriveVLA addresses the generation-evaluation asymmetry in multi-modal driving planning by improving the candidate trajectory space and enabling more reliable context-aware trajectory evaluation.",
+      "llm_tldr_cn": "多模态规划在自动驾驶模糊与长尾场景中能表达多种可能行为，但现有方法存在明显的生成-评估不对称：预言机性能虽强，规划器却难以可靠选出最优候选。本文提出iDriveVLA框架，在改善候选轨迹空间的同时引入更具上下文感知的轨迹评估机制。该工作揭示了多模态规划中被忽视的评估瓶颈，为提升自动驾驶规划的实际性能提供了新思路。",
+      "llm_tldr": "多模态规划在自动驾驶模糊与长尾场景中能表达多种可能行为，但现有方法存在明显的生成-评估不对称：预言机性能虽强，规划器却难以可靠选出最优候选。本文提出iDriveVLA框架，在改善候选轨迹空间的同时引入更具上下文感知的轨迹评估机制。该工作揭示了多模态规划中被忽视的评估瓶颈，为提升自动驾驶规划的实际性能提供了新思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.33218v1",
+      "source": "arxiv",
+      "title": "Scope-WM: Scoped Computation for Efficient Visual World Models",
+      "abstract": "Visual world models enable robotic planning by predicting future observations, but dense latent-state propagation and sample-intensive trajectory optimization incur high inference latency and peak memory usage, limiting real-time deployment on resource-constrained platforms. Existing sparse world-model acceleration methods either rely on unguided token sparsification, which may discard planning-relevant information and restrict achievable sparsity, or introduce heavy auxiliary modules and cumbersome multi-stage training pipelines. In this work, we present Scope-WM, an efficient visual world model that scopes computation to prediction-relevant latent regions and promising action sequences. Scope-WM distills prediction relevance into a lightweight action-conditioned selector and applies full dynamics prediction only to a compact subset of selected tokens. It updates the remaining tokens using a compact summary of foreground states and their changes, allowing the background to perceive foreground dynamics without costly token-to-token interactions. During planning, Scope-WM preserves and reuses high-quality action sequences discovered during the initial MPC search, focusing subsequent search under reduced rollout budgets. The resulting pipeline requires only a one-off selector distillation followed by a single joint training stage for the sparse world model. On the challenging Push-T task, Scope-WM reduces peak GPU memory usage and planning time to $18.1\\%$ and $14.3\\%$ of those of dense DINO-WM, respectively, corresponding to a $6.97\\times$ planning speedup, while maintaining competitive task performance. Further evaluations across five diverse visual planning tasks demonstrate the general applicability of Scope-WM. Code is available at https://github.com/ChunZheng2022/Scope-WM.",
+      "authors": [
+        "Chunzheng Li",
+        "Zesheng Jia",
+        "Hongda Zhang",
+        "Jiaying Tang",
+        "Yuntian Wang",
+        "Siao Liu",
+        "Jin Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-09-27T04:57:41+00:00",
+      "link": "https://arxiv.org/pdf/2609.33218v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "efficient visual world model with scoped latent computation and token sparsification",
+      "llm_evidence_cn": "通过作用域潜变量计算与token稀疏化实现高效视觉世界模型",
+      "llm_evidence": "通过作用域潜变量计算与token稀疏化实现高效视觉世界模型",
+      "canonical_evidence": "通过作用域潜变量计算与token稀疏化实现高效视觉世界模型",
+      "llm_tldr_en": "Presents Scope-WM, an efficient visual world model that scopes computation to prediction-relevant latent regions and promising action sequences, avoiding unguided token sparsification and heavy auxiliary modules.",
+      "llm_tldr_cn": "该文针对视觉世界模型因稠密潜状态传播与样本密集轨迹优化而推理延迟高、内存占用大，难以在资源受限平台上实时部署的问题，提出Scope-WM。它把预测相关性蒸馏为轻量的动作条件模块，将计算聚焦于与预测相关的潜区域和有前景的动作序列，避免无指导的token稀疏化丢失规划信息，也无需沉重的辅助模块与多阶段训练。该工作为机器人规划中的高效世界模型推理提供了新思路。",
+      "llm_tldr": "该文针对视觉世界模型因稠密潜状态传播与样本密集轨迹优化而推理延迟高、内存占用大，难以在资源受限平台上实时部署的问题，提出Scope-WM。它把预测相关性蒸馏为轻量的动作条件模块，将计算聚焦于与预测相关的潜区域和有前景的动作序列，避免无指导的token稀疏化丢失规划信息，也无需沉重的辅助模块与多阶段训练。该工作为机器人规划中的高效世界模型推理提供了新思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.34300v1",
+      "source": "arxiv",
+      "title": "When World Models Lie: Adaptive Safety Analysis Under Wrong Imaginations",
+      "abstract": "World models offer a powerful substrate for safety reasoning in high-dimensional robotic systems, but they are also fallible: their predictions can be biased, miscalibrated, or confidently wrong. This creates a central challenge for latent-space safety filters, which often learn Hamilton-Jacobi safety value functions on the dynamics of a world model. If the world model is incorrect, the resulting value function can inherit its errors and produce overconfident safety estimates. Existing latent safety filters often rely on auxiliary signals such as ensemble disagreement or value-target consistency residuals for adaptation, but these signals can remain small even when the world model's predictions deviate from observations. We propose an adaptive latent safety filter that calibrates safety reasoning using directly observed world-model error. Our method uses Adaptive Conformal Inference to construct online uncertainty sets from discrepancies between predicted and observation-inferred latent states, then evaluates safety pessimistically by minimizing the learned value function over these sets. This allows the filter to remain minimally conservative when the world model is accurate, while becoming more cautious when observations reveal model mismatch. We provide a finite-time coverage guarantee for the adaptive uncertainty radius. Through simulation and hardware experiments, we show that our method significantly reduces failures relative to state-of-the-art latent safety filters while preserving task completion.",
+      "authors": [
+        "John Cao",
+        "Somil Bansal"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "eess.SY"
+      ],
+      "published": "2026-09-28T04:44:24+00:00",
+      "link": "https://arxiv.org/pdf/2609.34300v1",
+      "tags": [
+        "keyword:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Adaptive latent-space safety analysis when world models are wrong in robotic systems",
+      "llm_evidence_cn": "世界模型出错时面向机器人系统的自适应潜在空间安全分析",
+      "llm_evidence": "世界模型出错时面向机器人系统的自适应潜在空间安全分析",
+      "canonical_evidence": "世界模型出错时面向机器人系统的自适应潜在空间安全分析",
+      "llm_tldr_en": "World models enable safety reasoning but are fallible, so latent safety filters can inherit their errors and become overconfident. This work proposes an adaptive latent safety analysis method, noting that auxiliary signals like ensemble disagreement can stay small even when world model predictions deviate from observations.",
+      "llm_tldr_cn": "世界模型为高维机器人系统的安全推理提供了强大基础，但其预测可能有偏、失准甚至自信地出错，使在潜在空间学习Hamilton-Jacobi安全值函数的滤波器继承误差并产生过度自信的安全估计。现有潜在安全滤波器常依赖集成分歧或值-目标一致性残差等辅助信号进行自适应，但这些信号在世界模型预测偏离观测时可能依然很小。本文提出一种自适应潜在安全分析方法，强调在世界模型不可靠时进行自适应安全分析的必要性。",
+      "llm_tldr": "世界模型为高维机器人系统的安全推理提供了强大基础，但其预测可能有偏、失准甚至自信地出错，使在潜在空间学习Hamilton-Jacobi安全值函数的滤波器继承误差并产生过度自信的安全估计。现有潜在安全滤波器常依赖集成分歧或值-目标一致性残差等辅助信号进行自适应，但这些信号在世界模型预测偏离观测时可能依然很小。本文提出一种自适应潜在安全分析方法，强调在世界模型不可靠时进行自适应安全分析的必要性。",
+      "llm_tags": [
+        "query:world-models:composite"
+      ],
+      "matched_query_tag": "query:world-models:composite",
+      "matched_query_text": "Papers central to 近3年与自动驾驶/交通场景中表示学习、tokenization、预测性世界建模、运动/轨迹建模、世界模型与仿真、表示可迁移性相关的论文；也涵盖机器人/视频世界模型、空间智能、多模态世界表示等相邻工作。, especially work that connects or combines: world model tokenizer; motion tokenization; driving world model; world model for autonomous driving and traffic simulation; latent dynamics models for predicting future states; discrete latent representations using VQ-VAE and related methods; Predicting future driving scene states in discrete token or latent space using autoregressive transformers or latent dynamics models; Learning semantic, geometric and dynamic representations of driving scenes for predictive world modeling; learning compact latent or token representations for predicting future driving scenes; representation learning for traffic agents that supports multiple downstream tasks like forecasting and planning.",
+      "matched_requirement_id": "req-composite-world-models",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.33464v1",
+      "source": "arxiv",
+      "title": "VIDEAS: Distilling Explicit Action Semantics from Demonstration Videos for World Models via Prior-Guided Simulation",
+      "abstract": "World models learn internal representations of environment dynamics to predict future states, enabling agents to optimize action plans without physical interactions. However, developing world models that genuinely internalize underlying causal physical laws to explicitly reason about action preconditions and subsequent state transitions remains an open challenge. In this paper, we propose VIDEAS, a data distillation framework that transforms continuous physical dynamics from operational videos into explicit action semantics for foundation models. Specifically, it deconstructs visual demonstrations into discrete action trajectories and utilizes advanced vision-language models (VLMs) to extract structured knowledge encapsulating action preconditions and effects. To ensure physical consistency, we introduce a prior-guided trajectory simulation mechanism grounded within a text-based environment to rigorously validate the extracted knowledge. Notably, we incorporate negative trajectories to enrich knowledge completeness and enhance data diversity to mitigate cognitive bias. Furthermore, we present VIDEAS-WM, an 8B/9B-parameter suite of language-based world models trained on 34K high-quality samples derived from AgiBot-World dataset. Extensive experiments demonstrate that VIDEAS-WM establishes state-of-the-art performance in high-level embodied action semantic reasoning, exhibiting profound physical understanding and robust generalization across unseen scenarios.",
+      "authors": [
+        "Jianan Wang",
+        "Haoquan Zhai",
+        "Siyang Zhang",
+        "Bin Li",
+        "Juan Chen",
+        "Jingtao Qi",
+        "Zhuo Zhang",
+        "Enze Wang",
+        "Haoxiang Jin",
+        "Chen Qian"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-27T11:19:17+00:00",
+      "link": "https://arxiv.org/pdf/2609.33464v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "distills videos into discrete action trajectories and explicit action semantics for world models",
+      "llm_evidence_cn": "将视频蒸馏为离散动作轨迹与显式动作语义以构建世界模型",
+      "llm_evidence": "将视频蒸馏为离散动作轨迹与显式动作语义以构建世界模型",
+      "canonical_evidence": "将视频蒸馏为离散动作轨迹与显式动作语义以构建世界模型",
+      "llm_tldr_en": "VIDEAS distills continuous physical dynamics from demonstration videos into discrete action trajectories and structured action semantics for world models.",
+      "llm_tldr_cn": "世界模型学习环境动态的内部表示以预测未来状态，但真正内化因果物理规律、显式推理动作前提与状态转移仍是难题。作者提出 VIDEAS 数据蒸馏框架，将操作视频中的连续物理动态拆解为离散动作轨迹，并借助视觉语言模型提取结构化动作知识。该框架通过先验引导仿真把显式动作语义注入基础模型。工作为世界模型提供了一种从视频获取可迁移动作表示的新途径。",
+      "llm_tldr": "世界模型学习环境动态的内部表示以预测未来状态，但真正内化因果物理规律、显式推理动作前提与状态转移仍是难题。作者提出 VIDEAS 数据蒸馏框架，将操作视频中的连续物理动态拆解为离散动作轨迹，并借助视觉语言模型提取结构化动作知识。该框架通过先验引导仿真把显式动作语义注入基础模型。工作为世界模型提供了一种从视频获取可迁移动作表示的新途径。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "motion tokenization",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.34387v2",
+      "source": "arxiv",
+      "title": "CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving",
+      "abstract": "Existing adaptive reasoning methods for driving Vision-Language-Action (VLA) models primarily focus on whether to reason, overlooking how reasoning should differ across driving situations. Our key insight is that while scene complexity informs reasoning depth, dynamic risk is equally critical for deciding how to reason in time-critical situations. We therefore propose CAR-VLA, a unified driving VLA model that jointly considers scene complexity and dynamic risk to guide reasoning depth, urgency, and focus. CAR-VLA maps four complexity--risk categories to three reasoning modes: \\textit{Fast Intuition} for direct trajectory generation in simple low-risk scenes, \\textit{Slow Thinking} for deliberate reasoning in complex low-risk scenes, and \\textit{Reflex Response} for compact, hazard-focused reasoning in high-risk scenes regardless of complexity. Rather than merely shortening deliberation, Reflex Response centers reasoning on the most critical hazard and the immediate safe response. We train CAR-VLA through progressive supervised learning that links scene assessment, reasoning-mode selection, and trajectory generation, followed by reasoning-augmented reinforcement learning to improve driving quality and reasoning behavior. Experiments on NAVSIM v1(91.1 PDMS), NAVSIM v2(90.3 EPDMS), and Navhard(35.0 EPDMS) demonstrate competitive driving performance. Qualitative comparisons on navtest and in-house high-risk scenarios further illustrate risk-aware reasoning and hazard-responsive trajectory generation. The code for this paper will be released publicly at: https://github.com/chenxl124578/CAR-VLA.git",
+      "authors": [
+        "Xiaolei Chen",
+        "Zhuolin He",
+        "Yuxuan Liang",
+        "Xu Li",
+        "Haotian Chen",
+        "Fan Shi",
+        "Mengyang Zhao",
+        "Wenjuan Meng",
+        "Zisheng Chen",
+        "Zhihao Zhu",
+        "Zhounan Jin",
+        "Hengli Wang",
+        "Qingfan Wang",
+        "Jiamei Liang",
+        "Bin Li",
+        "Xiangyang Xue"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-28T06:03:13+00:00",
+      "link": "https://arxiv.org/pdf/2609.34387v2",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Complexity-aware and risk-adaptive reasoning for driving vision-language-action models",
+      "llm_evidence_cn": "面向驾驶视觉-语言-动作模型的复杂度感知与风险自适应推理",
+      "llm_evidence": "面向驾驶视觉-语言-动作模型的复杂度感知与风险自适应推理",
+      "canonical_evidence": "面向驾驶视觉-语言-动作模型的复杂度感知与风险自适应推理",
+      "llm_tldr_en": "Adaptive reasoning for driving VLAs focuses on whether to reason, not how. CAR-VLA jointly considers scene complexity and dynamic risk to guide reasoning depth, urgency and focus, mapping four complexity-risk categories to modes like Fast Intuition and Slow Thinking for time-critical driving decisions.",
+      "llm_tldr_cn": "现有驾驶视觉-语言-动作模型的自适应推理主要关注是否推理，却忽略不同驾驶情境下应如何推理。本文提出CAR-VLA，统一考虑场景复杂度与动态风险，共同引导推理深度、紧迫性与关注点，将四类复杂度-风险情形映射到快速直觉、慢思考等三种推理模式。模型在简单低风险场景直接生成轨迹，在复杂高风险场景进行审慎推理。该工作为时间敏感的自动驾驶决策提供了风险自适应的推理框架。",
+      "llm_tldr": "现有驾驶视觉-语言-动作模型的自适应推理主要关注是否推理，却忽略不同驾驶情境下应如何推理。本文提出CAR-VLA，统一考虑场景复杂度与动态风险，共同引导推理深度、紧迫性与关注点，将四类复杂度-风险情形映射到快速直觉、慢思考等三种推理模式。模型在简单低风险场景直接生成轨迹，在复杂高风险场景进行审慎推理。该工作为时间敏感的自动驾驶决策提供了风险自适应的推理框架。",
+      "llm_tags": [
+        "query:av-research:composite"
+      ],
+      "matched_query_tag": "query:av-research:composite",
+      "matched_query_text": "Papers central to 帮我查找国内外主流自动驾驶公司的技术论文, especially work that connects or combines: research papers on self-driving technology from industry; technical papers from global autonomous driving companies; machine learning research for autonomous driving; technical papers published by mainstream autonomous driving companies worldwide; research publications from leading self driving technology companies in China and abroad; academic and technical papers authored by autonomous vehicle companies.",
+      "matched_requirement_id": "req-composite-av-research",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.33575v1",
+      "source": "arxiv",
+      "title": "SLIP-VLA: Single-Step Latent Imagination for Policy Learning in Vision-Language-Action Models",
+      "abstract": "Vision-Language-Action models are increasingly effective for robotic manipulation, yet most predict actions directly from current observations without explicitly modeling future scene evolution. Recent methods introduce future prediction to improve action generation, but dense future modeling often requires expensive iterative denoising, while one-step alternatives can underperform their multi-step counterparts. To reconcile efficient future modeling with strong action performance, we present SLIP-VLA, a policy learning framework that equips VLA models with a Single-Step Latent Imagination for future-aware action prediction. SLIP-VLA obtains temporally dense future latent representations with a single denoising update, and we improve the perceptual sufficiency of these representations by aligning intermediate latents with future geometric and semantic features. We further improve their control sufficiency through action-conditioned latent world modeling and inverse dynamics modeling, explicitly coupling latent transitions with robot actions. SLIP-VLA achieves state-of-the-art performance across diverse simulation benchmarks and real-world manipulation tasks, while its single-step latent imagination takes only 12 ms.",
+      "authors": [
+        "Tianfu Li",
+        "Haoxuan Xu",
+        "Wenbo Chen",
+        "Haitian Li",
+        "Changchuan Yang",
+        "Xinhu Zheng",
+        "Jun Ma",
+        "Yuan Liu",
+        "Lujia Wang",
+        "Haoang Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-27T13:53:29+00:00",
+      "link": "https://arxiv.org/pdf/2609.33575v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "single-step latent imagination for future-aware action prediction",
+      "llm_evidence_cn": "单步潜在想象预测未来状态",
+      "llm_evidence": "单步潜在想象预测未来状态",
+      "canonical_evidence": "单步潜在想象预测未来状态",
+      "llm_tldr_en": "SLIP-VLA equips vision-language-action models with single-step latent imagination to obtain dense future latent representations for future-aware action prediction without costly iterative denoising.",
+      "llm_tldr_cn": "现有视觉-语言-动作模型多直接从当前观测预测动作，未显式建模未来场景演化；引入未来预测的方法又往往依赖昂贵的迭代去噪，而单步替代方案性能不足。本文提出 SLIP-VLA，通过单次去噪更新获得时间稠密的未来潜在表示，用于未来感知的动作预测，从而兼顾高效未来建模与强动作性能。该框架为机器人策略学习提供了轻量的潜在想象机制。",
+      "llm_tldr": "现有视觉-语言-动作模型多直接从当前观测预测动作，未显式建模未来场景演化；引入未来预测的方法又往往依赖昂贵的迭代去噪，而单步替代方案性能不足。本文提出 SLIP-VLA，通过单次去噪更新获得时间稠密的未来潜在表示，用于未来感知的动作预测，从而兼顾高效未来建模与强动作性能。该框架为机器人策略学习提供了轻量的潜在想象机制。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.34511v1",
+      "source": "arxiv",
+      "title": "HALO: Enhancing Time Series Generation via Hyperspherical Latents and Masked AutoregRessive Modeling",
+      "abstract": "Most existing time series generators rely on a two-stage modeling paradigm: the first stage learns discrete latent representations of time series; the second stage performs autoregressive modeling on these discrete latents through next token prediction. However, this paradigm suffers from two stage-specific limitations: the first stage can lead to information loss when discretizing continuous time series, while the second stage is prone to error accumulation during autoregressive generation. To address these limitations, our core idea is to perform generative modeling in a continuous latent space with a more efficient autoregressive framework. We propose HALO, which enhances time series generation via Hyperspherical Latents and Masked Autoregressive modeling to achieve this goal by tackling two key bottlenecks: (1) variance and scale heterogeneity of continuous latent representations; (2) the difficulty of balancing generation efficiency with temporal correlation modeling. HALO first introduces a hyperspherical VAE that constrains continuous latents to a fixed-radius hyperspherical shell, effectively stabilizing the numerical fluctuations of continuous latent representations. Secondly, we develop a masked autoregressive model that balances parallel decoding and temporal correlation learning, substantially reducing the number of inference steps required for generation and improving generation stability. Our extensive experiments demonstrate that HALO achieves state-of-the-art generation performance while offering significantly improved inference efficiency over existing advanced baselines.",
+      "authors": [
+        "Chunyi Hou",
+        "Xiangfei Qiu",
+        "Hanyin Cheng",
+        "Yutong Li",
+        "Bin Yang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-28T07:52:52+00:00",
+      "link": "https://arxiv.org/pdf/2609.34511v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "discrete latent representation with autoregressive next-token modeling",
+      "llm_evidence_cn": "离散隐表示与自回归下一词元建模",
+      "llm_evidence": "离散隐表示与自回归下一词元建模",
+      "canonical_evidence": "离散隐表示与自回归下一词元建模",
+      "llm_tldr_en": "HALO critiques the two-stage discrete-latent plus autoregressive time series generation paradigm and instead models generation in a continuous hyperspherical latent space with a more efficient autoregressive framework.",
+      "llm_tldr_cn": "主流时间序列生成采用两阶段范式：先学离散隐表示，再对离散隐变量做自回归下一词元预测。作者指出该范式存在离散化信息损失与自回归误差累积两大缺陷，提出HALO，在连续超球隐空间中结合更高效的自回归建模来完成生成。方法在多个时间序列生成任务上缓解了信息损失与误差累积问题，为隐空间序列生成提供了替代离散token化的思路。",
+      "llm_tldr": "主流时间序列生成采用两阶段范式：先学离散隐表示，再对离散隐变量做自回归下一词元预测。作者指出该范式存在离散化信息损失与自回归误差累积两大缺陷，提出HALO，在连续超球隐空间中结合更高效的自回归建模来完成生成。方法在多个时间序列生成任务上缓解了信息损失与误差累积问题，为隐空间序列生成提供了替代离散token化的思路。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "discrete latent representations using VQ-VAE and related methods",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.34159v1",
+      "source": "arxiv",
+      "title": "WorldGraph: Graph-Native World Modeling",
+      "abstract": "World models infer latent states of an environment to capture its underlying dynamics and predict future evolution. Many real-world environments, however, are inherently relational and observed as evolving graphs, where entities, relations, and their properties change over time. Prior graph-related world models use graph structures to organize internal states or support task-specific reasoning, rather than treating an evolving graph itself as the modeled world. We instead study graph world modeling (GWM), where graph evolution itself constitutes the world dynamics. We formulate graph world modeling over observed graph evolution, latent graph states, and heterogeneous graph-transition predictions. Based on this formulation, we construct GWM-Zero, a benchmark covering node-, edge-, and graph-level transitions over eight temporal graph datasets. We propose WorldGraph, which combines a state-aware graph transformer for multi-granularity structural and transition-conditioned evolution modeling with transition-aware GRPO using dynamic grouping and structure-aware verifiable rewards. Extensive experiments on GWM-Zero show that WorldGraph consistently outperforms representative graph representation, temporal graph learning, graph pretraining, and graph world-model baselines across all three transition granularities.",
+      "authors": [
+        "Zezhong Ding",
+        "Yipeng Li",
+        "Xike Xie"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-28T02:37:32+00:00",
+      "link": "https://arxiv.org/pdf/2609.34159v1",
+      "tags": [
+        "keyword:world-models",
+        "query:world-models"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "graph-native world modeling treating evolving graph as world dynamics",
+      "llm_evidence_cn": "将演化图本身作为世界动态的图原生世界建模",
+      "llm_evidence": "将演化图本身作为世界动态的图原生世界建模",
+      "canonical_evidence": "将演化图本身作为世界动态的图原生世界建模",
+      "llm_tldr_en": "Formulates graph world modeling where graph evolution itself constitutes world dynamics, with latent graph states and heterogeneous graph-transition predictions, plus the GWM-Zero benchmark.",
+      "llm_tldr_cn": "该文指出许多真实环境本质上是关系性的并以演化图形式呈现，而既有图相关世界模型仅用图结构组织内部状态或支持特定推理，未把演化图本身当作被建模的世界。作者提出图世界建模（GWM），将图演化视为世界动态，形式化观测图演化、潜图状态与异构图转移预测。基于此构建了覆盖节点、边等任务的GWM-Zero基准，为图结构动态的预测性建模提供了新范式。",
+      "llm_tldr": "该文指出许多真实环境本质上是关系性的并以演化图形式呈现，而既有图相关世界模型仅用图结构组织内部状态或支持特定推理，未把演化图本身当作被建模的世界。作者提出图世界建模（GWM），将图演化视为世界动态，形式化观测图演化、潜图状态与异构图转移预测。基于此构建了覆盖节点、边等任务的GWM-Zero基准，为图结构动态的预测性建模提供了新范式。",
+      "llm_tags": [
+        "query:world-models"
+      ],
+      "matched_query_tag": "query:world-models",
+      "matched_query_text": "latent dynamics models for predicting future states",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
