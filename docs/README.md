@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-01</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-02</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-01 23:36:33 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-02 23:28:10 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,10 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-10-01日报完成14篇筛选，精读3篇、速读11篇，ActiveMem以9.0分领跑。</p>
-<p>最值得看的是长时程智能体的动态潜在记忆树，以及世界模型的自适应潜在容量。</p>
-<p>普通读者优先精读9.0分ActiveMem，再按兴趣扫速读里的世界模型效率与无人机视觉导航。</p>
+<p>今日共生成 17 篇推荐（精读 6 篇，速读 11 篇）</p>
+<p>精读：《ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents》（9.0/10）, 《World4Scorer: Outcome-Grounded World Modeling for Autonomous Driving》（9.0/10）</p>
+<p>速读：《Bilinear World Models: Learning Representations with Structured Dynamics for Efficient Control》（8.0/10）, 《Abductive World Modeling via Causal Representation Learning》（8.0/10）, 《ReWAM: Reciprocal World Action Models for Interactive Autonomous Driving》（8.0/10）</p>
+<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -80,12 +81,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents">ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Latent Capacity for World Models">Adaptive Latent Capacity for World Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hamiltonian JEPA: Action-Conditioned World Models with an Inherited Control State">Hamiltonian JEPA: Action-Conditioned World Models with an Inherited Control State</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents">ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="World4Scorer: Outcome-Grounded World Modeling for Autonomous Driving">World4Scorer: Outcome-Grounded World Modeling for Autonomous Driving</span></li><li><span class="dpr-home-dashboard-paper-title" title="V2X-WAM: A Cooperative World Action Model for End-to-End Autonomous Driving">V2X-WAM: A Cooperative World Action Model for End-to-End Autonomous Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>2</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>5</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -96,9 +97,9 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="STRIDE: State-Transition Representation via Increment Dynamics and Evolution">STRIDE: State-Transition Representation via Increment Dynamics and Evolution</span></li><li><span class="dpr-home-dashboard-paper-title" title="DroneWAM: Efficient World Action Model for Drone Visual Navigation">DroneWAM: Efficient World Action Model for Drone Visual Navigation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Scope-WM: Scoped Computation for Efficient Visual World Models">Scope-WM: Scoped Computation for Efficient Visual World Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Bilinear World Models: Learning Representations with Structured Dynamics for Efficient Control">Bilinear World Models: Learning Representations with Structured Dynamics for Efficient Control</span></li><li><span class="dpr-home-dashboard-paper-title" title="Abductive World Modeling via Causal Representation Learning">Abductive World Modeling via Causal Representation Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="ReWAM: Reciprocal World Action Models for Interactive Autonomous Driving">ReWAM: Reciprocal World Action Models for Interactive Autonomous Driving</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>9</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span><span class="dpr-home-dashboard-tag">av-research <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">world-models <strong>10</strong></span><span class="dpr-home-dashboard-tag">agent-memory <strong>1</strong></span></div>
 </section>
 </div>
 

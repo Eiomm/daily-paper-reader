@@ -1,0 +1,281 @@
+{
+  "date": "20261002",
+  "date_label": "",
+  "generated_at": "2026-10-02 23:28:10 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.33244v1",
+      "route": "202610/02/2609.33244v1-activemem-dynamic-latent-memory-trees-for-long-horizon-agents",
+      "title": "ActiveMem: Dynamic Latent Memory Trees for Long-Horizon Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长时程LLM智能体的层次化潜在记忆树",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.36438v1",
+      "route": "202610/02/2609.36438v1-world4scorer-outcome-grounded-world-modeling-for-autonomous-driving",
+      "title": "World4Scorer: Outcome-Grounded World Modeling for Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "轨迹条件JEPA式世界模型为自动驾驶规划打分",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.37098v2",
+      "route": "202610/02/2609.37098v2-v2x-wam-a-cooperative-world-action-model-for-end-to-end-autonomous-driving",
+      "title": "V2X-WAM: A Cooperative World Action Model for End-to-End Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "耦合场景理解与未来世界推理的协同世界动作模型",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.37970v1",
+      "route": "202610/02/2609.37970v1-physwam-physically-consistent-world-action-model-for-autonomous-driving",
+      "title": "PhysWAM: Physically Consistent World Action Model for Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向自动驾驶的统一世界动作模型，强调几何一致性",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2610.00686v1",
+      "route": "202610/02/2610.00686v1-semantok-predictable-semantic-tokens-for-efficient-autoregressive-video-generation",
+      "title": "SemanTok: Predictable Semantic Tokens for Efficient Autoregressive Video Generation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向世界模型的语义灵活视频分词器",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2610.01942v1",
+      "route": "202610/02/2610.01942v1-latent-foresight-end-to-end-learning-predictable-representations-for-latent-world-models",
+      "title": "Latent-Foresight: End-to-End Learning Predictable Representations for Latent World Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "端到端学习潜在世界模型的可预测表示",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.36305v1",
+      "route": "202610/02/2609.36305v1-bilinear-world-models-learning-representations-with-structured-dynamics-for-efficient-control",
+      "title": "Bilinear World Models: Learning Representations with Structured Dynamics for Efficient Control",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "具有结构化双线性参数化的潜在动力学世界模型",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.36985v1",
+      "route": "202610/02/2609.36985v1-abductive-world-modeling-via-causal-representation-learning",
+      "title": "Abductive World Modeling via Causal Representation Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向结构化世界建模的因果表示学习",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.39245v1",
+      "route": "202610/02/2609.39245v1-rewam-reciprocal-world-action-models-for-interactive-autonomous-driving",
+      "title": "ReWAM: Reciprocal World Action Models for Interactive Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向交互式自动驾驶的博弈论世界动作模型",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2610.00575v1",
+      "route": "202610/02/2610.00575v1-token-world-world-modeling-in-vision-language-model-token-space-for-robot-manipulation",
+      "title": "Token-World: World Modeling in Vision-Language Model Token Space for Robot Manipulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在紧凑VLM token空间中进行世界建模与自回归动态预测",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.35469v1",
+      "route": "202610/02/2609.35469v1-rethinking-causal-action-tokenization-with-conditional-annealing-in-flow-matching",
+      "title": "Rethinking Causal Action Tokenization with Conditional Annealing in Flow Matching",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向自回归运动分词的因果动作分词器",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.38641v1",
+      "route": "202610/02/2609.38641v1-vision-language-action-autonomous-driving-agent-with-language-based-memory",
+      "title": "Vision-Language-Action Autonomous Driving Agent with Language-based Memory",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agent-memory"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "具备语言化长期记忆的VLA驾驶智能体",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.38927v1",
+      "route": "202610/02/2609.38927v1-world-as-graph-relational-world-modeling-through-latent-space-graphs",
+      "title": "World-as-Graph: Relational World Modeling Through Latent Space Graphs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于图的物体中心世界模型与JEPA式预测表征学习",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.40129v1",
+      "route": "202610/02/2609.40129v1-vr-jepa-learning-contrastive-state-latent-guidance-for-generation-based-video-reasoning",
+      "title": "VR-JEPA: Learning Contrastive-State Latent Guidance for Generation-based Video Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用V-JEPA预测器引导潜在视觉状态动力学进行视频推理",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.30557v1",
+      "route": "202610/02/2609.30557v1-auditing-latent-space-monitors-for-autonomous-driving",
+      "title": "Auditing Latent-Space Monitors for Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "审计自动驾驶任务中的潜在空间失效监控器",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.34715v1",
+      "route": "202610/02/2609.34715v1-pde-jepa-predictive-representation-learning-of-latent-dynamics-modeling-for-parametric-pdes",
+      "title": "PDE-JEPA: Predictive Representation Learning of Latent Dynamics Modeling for Parametric PDEs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "潜动力学的预测性表示学习",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    },
+    {
+      "paper_id": "2609.35560v1",
+      "route": "202610/02/2609.35560v1-worldplay2-extending-real-time-interactive-world-models-in-control-and-horizon",
+      "title": "WorldPlay2: Extending Real-Time Interactive World Models in Control and Horizon",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "兼具长时一致性与控制的交互式世界模型",
+      "first_seen_at": "2026-10-02 23:28:10 UTC",
+      "updated_at": "2026-10-02 23:28:10 UTC"
+    }
+  ]
+}
