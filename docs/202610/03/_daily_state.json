@@ -1,0 +1,41 @@
+{
+  "date": "20261003",
+  "date_label": "",
+  "generated_at": "2026-10-03 22:47:33 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.00722v1",
+      "route": "202610/03/2610.00722v1-jepa-ttt-persistent-test-time-training-of-latent-world-models-for-planning-under-dynamics-shifts",
+      "title": "JEPA-TTT: Persistent Test-Time Training of Latent World Models for Planning under Dynamics Shifts",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向规划的潜动力学世界模型测试时自适应",
+      "first_seen_at": "2026-10-03 22:47:33 UTC",
+      "updated_at": "2026-10-03 22:47:33 UTC"
+    },
+    {
+      "paper_id": "2610.00899v1",
+      "route": "202610/03/2610.00899v1-toast-stochastic-robot-action-tokenization-for-autoregressive-vision-language-action-models",
+      "title": "TOAST: Stochastic Robot Action Tokenization for Autoregressive Vision-Language-Action Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "world-models"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将连续运动离散为token的随机动作分词",
+      "first_seen_at": "2026-10-03 22:47:33 UTC",
+      "updated_at": "2026-10-03 22:47:33 UTC"
+    }
+  ]
+}

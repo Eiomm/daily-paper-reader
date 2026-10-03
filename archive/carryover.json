@@ -1,101 +1,12 @@
 {
-  "generated_at": "2026-10-02T23:16:11.730728+00:00",
-  "updated_date": "20261002",
+  "generated_at": "2026-10-03T22:45:12.293495+00:00",
+  "updated_date": "20261003",
   "carryover_days": 9,
   "tag_states": {
     "world-models": {
-      "updated_date": "20261002",
+      "updated_date": "20261003",
       "carryover_days": 9,
-      "items": [
-        {
-          "id": "2610.00722v1",
-          "source": "arxiv",
-          "title": "JEPA-TTT: Persistent Test-Time Training of Latent World Models for Planning under Dynamics Shifts",
-          "abstract": "World models enable agents to plan by predicting future states of the environment, but their predictions can become unreliable when test-time dynamics differ from those seen during training. We present JEPA-TTT, which adapts the latent dynamics predictor of a pretrained action-conditioned Joint-Embedding Predictive Architecture world model throughout test time. Self-supervised updates accumulate across episodes, while the visual encoder and reward head remain fixed, preserving the pretrained representation and task objective. Planning requires neither a goal image nor online environment reward. JEPA-TTT uses dense replay, which forms prediction windows at every temporal offset, retains them in a growing buffer, and samples minibatches from that buffer for predictor updates. Across eight dynamics shifts in four continuous-control environments, JEPA-TTT improves planning on every shift. After 500 test-time episodes, it reduces autoregressive latent prediction error by 83% on average and improves planning performance by 153% over the frozen JEPA world model. These results show that persistent self-supervised test-time training can adapt a pretrained latent world model under changed dynamics.",
-          "authors": [
-            "Zheyuan Zhang",
-            "Suyu Ye",
-            "Nakul Agarwal",
-            "Hossein Nourkhiz Mahjoub",
-            "Ehsan Moradi Pari",
-            "Daniel Khashabi",
-            "Tianmin Shu",
-            "Vaishnav Tadiparthi"
-          ],
-          "primary_category": "cs.LG",
-          "categories": [
-            "cs.LG"
-          ],
-          "published": "2026-09-30T21:13:59+00:00",
-          "link": "https://arxiv.org/pdf/2610.00722v1",
-          "tags": [
-            "keyword:world-models",
-            "query:world-models"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "test-time adaptation of latent dynamics world model for planning",
-          "llm_evidence_cn": "面向规划的潜动力学世界模型测试时自适应",
-          "llm_evidence": "面向规划的潜动力学世界模型测试时自适应",
-          "canonical_evidence": "面向规划的潜动力学世界模型测试时自适应",
-          "llm_tldr_en": "JEPA-TTT persistently adapts the latent dynamics predictor of a pretrained JEPA world model at test time via self-supervised updates and dense replay, enabling robust planning under dynamics shifts.",
-          "llm_tldr_cn": "潜空间世界模型依赖预测未来状态进行规划，但当测试时动态与训练分布不一致时预测会变得不可靠。本文提出JEPA-TTT，在测试过程中持续自适应预训练动作条件JEPA世界模型的潜动力学预测器，同时固定视觉编码器与奖励头以保持预训练表示，并采用密集回放构建预测窗口。自监督更新跨回合累积，规划无需目标图像或在线奖励，显著提升了动态漂移下的规划稳健性。",
-          "llm_tldr": "潜空间世界模型依赖预测未来状态进行规划，但当测试时动态与训练分布不一致时预测会变得不可靠。本文提出JEPA-TTT，在测试过程中持续自适应预训练动作条件JEPA世界模型的潜动力学预测器，同时固定视觉编码器与奖励头以保持预训练表示，并采用密集回放构建预测窗口。自监督更新跨回合累积，规划无需目标图像或在线奖励，显著提升了动态漂移下的规划稳健性。",
-          "llm_tags": [
-            "query:world-models"
-          ],
-          "matched_query_tag": "query:world-models",
-          "matched_query_text": "latent dynamics models for predicting future states",
-          "matched_requirement_id": "req-5",
-          "selection_source": "carryover_cache",
-          "paper_id": "2610.00722v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2610.00899v1",
-          "source": "arxiv",
-          "title": "TOAST: Stochastic Robot Action Tokenization for Autoregressive Vision-Language-Action Models",
-          "abstract": "Autoregressive Vision-Language-Action models often represent continuous robot actions as discrete token sequences, enabling action prediction with standard next-token objectives. FAST has substantially improved this representation by compactly encoding action containing diverse temporal frequencies into relatively few tokens. However, while such compression reduces the number of action tokens required for autoregressive prediction, it does not necessarily improve the efficiency of policy learning from limited demonstrations. In particular, FAST typically assigns a single deterministic tokenization to each quantized action sequence, although multiple token sequences can represent and decode to the same robot motion. We investigate whether exploiting this representational redundancy can improve policy learning. In this paper, we propose TOkenization of Action sequences with STochastic sampling (TOAST), a stochastic action tokenization method that samples alternative tokenizations of the same quantized action sequence during policy training. This diversifies the discrete supervision while preserving the underlying robot action and requires no additional demonstrations. Experiments on LIBERO show that TOAST consistently improves over its deterministic counterpart, with the improvement increasing as training data decreases, achieving a 6.8 point gain in success rate when only 1/16 of training data is available. Across four real-robot manipulation tasks, TOAST further improves mean success rate by 15.8 points over the deterministic counterpart. These results demonstrate the effectiveness of stochastic action tokenization for autoregressive robot policy learning, particularly when training data are limited.",
-          "authors": [
-            "Keisuke Shirai",
-            "Tomohiro Motoda",
-            "Hanbit Oh",
-            "Ryoichi Nakajo",
-            "Roman Mykhailyshyn",
-            "Ryo Hanai",
-            "Shotaro Miwa",
-            "Yukiyasu Domae"
-          ],
-          "primary_category": "cs.RO",
-          "categories": [
-            "cs.RO",
-            "cs.AI",
-            "cs.LG"
-          ],
-          "published": "2026-10-01T01:28:33+00:00",
-          "link": "https://arxiv.org/pdf/2610.00899v1",
-          "tags": [
-            "keyword:world-models",
-            "query:world-models"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "stochastic robot action tokenization representing continuous motion as discrete tokens",
-          "llm_evidence_cn": "将连续运动离散为token的随机动作分词",
-          "llm_evidence": "将连续运动离散为token的随机动作分词",
-          "canonical_evidence": "将连续运动离散为token的随机动作分词",
-          "llm_tldr_en": "TOAST introduces stochastic robot action tokenization for autoregressive vision-language-action models, exploiting the many-to-one mapping between token sequences and motions to improve policy learning from limited demonstrations.",
-          "llm_tldr_cn": "针对自回归视觉-语言-动作模型将连续动作离散为token、而FAST等确定性分词未提升有限示教下策略学习效率的问题，本文提出随机机器人动作分词方法TOAST。该方法利用同一机器人运动可由多条token序列表示与解码的多样性，缓解确定性分词带来的表示局限。实验表明随机分词能更有效地支持自回归策略学习。该工作凸显了动作分词中多对一映射对自回归动作建模的重要价值。",
-          "llm_tldr": "针对自回归视觉-语言-动作模型将连续动作离散为token、而FAST等确定性分词未提升有限示教下策略学习效率的问题，本文提出随机机器人动作分词方法TOAST。该方法利用同一机器人运动可由多条token序列表示与解码的多样性，缓解确定性分词带来的表示局限。实验表明随机分词能更有效地支持自回归策略学习。该工作凸显了动作分词中多对一映射对自回归动作建模的重要价值。",
-          "llm_tags": [
-            "query:world-models"
-          ],
-          "matched_query_tag": "query:world-models",
-          "matched_query_text": "motion tokenization",
-          "matched_requirement_id": "req-2",
-          "selection_source": "carryover_cache",
-          "paper_id": "2610.00899v1",
-          "carry_days": 1
-        }
-      ]
+      "items": []
     },
     "av-research": {
       "updated_date": "20260910",
